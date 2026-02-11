@@ -137,21 +137,13 @@ export const useStore = create<StoreState>((set, get) => ({
     let dataSource: 'supabase' | 'sample' = 'sample';
 
     if (isSupabaseConfigured()) {
-      try {
-        const result = await fetchPublishedBanks();
-        console.log('Supabase fetch result:', { success: result.success, count: result.banks.length, error: result.error });
-        if (result.success && result.banks.length > 0) {
-          const supabaseBanks = result.banks.map(transformDBBank);
-          allBanks = [...supabaseBanks, ...sampleBanks];
-          dataSource = 'supabase';
-        } else if (result.error) {
-          console.error('Supabase error:', result.error);
-        }
-      } catch (err) {
-        console.error('Supabase fetch/transform error:', err);
+      const result = await fetchPublishedBanks();
+      if (result.success && result.banks.length > 0) {
+        allBanks = result.banks.map(transformDBBank);
+        dataSource = 'supabase';
+      } else if (result.error) {
+        console.error('Supabase error:', result.error);
       }
-    } else {
-      console.log('Supabase not configured, URL:', import.meta.env.VITE_SUPABASE_URL ? 'set' : 'missing');
     }
 
     set({
