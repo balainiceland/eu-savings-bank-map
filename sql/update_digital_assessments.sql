@@ -1,26 +1,6 @@
 -- Update digital feature maturity levels with research-backed assessments
 -- Run this in Supabase SQL Editor
 
--- Helper: update a bank's digital features + recompute score
--- Arguments: bank name, mobile, open_banking, onboarding, ai_chatbot, devops_cloud
-
-DO $$
-DECLARE
-  points_map jsonb := '{"none": 0, "basic": 1, "intermediate": 2, "advanced": 3}';
-
-  TYPE assessment IS RECORD (
-    bank_name TEXT,
-    mobile TEXT,
-    open_banking TEXT,
-    onboarding TEXT,
-    ai_chatbot TEXT,
-    devops_cloud TEXT
-  );
-BEGIN
-  -- We'll use a series of UPDATE blocks instead
-  NULL;
-END $$;
-
 -- Sparkasse KölnBonn: advanced/basic/advanced/intermediate/intermediate = 3+1+3+2+2=11 → 73
 UPDATE digital_features SET maturity_level = 'advanced', present = true
   WHERE bank_id = (SELECT id FROM banks WHERE name = 'Sparkasse KölnBonn') AND category = 'mobile_banking';
