@@ -195,7 +195,7 @@ export default function MapContainer() {
           {dataSource === 'supabase' ? (
             <span className="text-esb-green">● Live + Demo data</span>
           ) : (
-            <span className="text-esb-royal">● Demo data</span>
+            <span className="text-esb-royal">● Demo data {import.meta.env.VITE_SUPABASE_URL ? '(URL set)' : '(no env vars)'}</span>
           )}
         </div>
       )}
