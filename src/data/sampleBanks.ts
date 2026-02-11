@@ -214,27 +214,27 @@ export const sampleBanks: Bank[] = [
   // Norway (additional SpareBank 1)
   makeBank('no-ostlandet', 'SpareBank 1 Østlandet', 'Norway', 'NO', 'Hamar',
     60.7945, 11.0680,
-    { parentGroup: 'SpareBank 1 Alliance', website: 'https://www.sparebank1.no/ostlandet', totalAssets: 20000, customerCount: 350, employeeCount: 1200, branchCount: 50, foundedYear: 1845, reportingYear: 2024 },
+    { parentGroup: 'SpareBank 1 Alliance', website: 'https://www.sparebank1.no/ostlandet', totalAssets: 18003, customerCount: 350, employeeCount: 1100, branchCount: 37, foundedYear: 1845, reportingYear: 2024 },
     ['advanced', 'intermediate', 'intermediate', 'intermediate', 'advanced'],
   ),
   makeBank('no-nord-norge', 'SpareBank 1 Nord-Norge', 'Norway', 'NO', 'Tromsø',
-    69.6492, 18.9553,
-    { parentGroup: 'SpareBank 1 Alliance', website: 'https://www.sparebank1.no/nord-norge', totalAssets: 15000, customerCount: 250, employeeCount: 800, branchCount: 90, foundedYear: 1836, reportingYear: 2024 },
-    ['advanced', 'intermediate', 'intermediate', 'basic', 'intermediate'],
+    69.6496, 18.9560,
+    { parentGroup: 'SpareBank 1 Alliance', website: 'https://www.sparebank1.no/nord-norge', totalAssets: 11622, customerCount: 290, employeeCount: 760, branchCount: 90, foundedYear: 1836, reportingYear: 2024 },
+    ['advanced', 'intermediate', 'intermediate', 'intermediate', 'advanced'],
   ),
 
   // Sweden (additional)
   makeBank('se-lansforsakringar', 'Länsförsäkringar Bank', 'Sweden', 'SE', 'Stockholm',
-    59.3365, 18.0636,
-    { parentGroup: 'Länsförsäkringar Alliance', website: 'https://www.lansforsakringar.se', totalAssets: 22000, customerCount: 400, employeeCount: 517, branchCount: 130, foundedYear: 1996, reportingYear: 2024 },
-    ['advanced', 'intermediate', 'intermediate', 'basic', 'intermediate'],
+    59.3293, 18.0686,
+    { parentGroup: 'Länsförsäkringar Alliance', website: 'https://www.lansforsakringar.se', totalAssets: 21703, customerCount: 3900, depositVolume: 13478, loanVolume: 35043, employeeCount: 517, branchCount: 119, foundedYear: 1996, reportingYear: 2024 },
+    ['advanced', 'advanced', 'intermediate', 'intermediate', 'intermediate'],
   ),
 
   // Finland (additional)
   makeBank('fi-op', 'OP Financial Group', 'Finland', 'FI', 'Helsinki',
-    60.1699, 24.9384,
-    { website: 'https://www.op.fi', totalAssets: 160000, customerCount: 2000, employeeCount: 12000, branchCount: 350, foundedYear: 1902, reportingYear: 2024, featured: true },
-    ['advanced', 'advanced', 'advanced', 'intermediate', 'advanced'],
+    60.1920, 24.9580,
+    { website: 'https://www.op.fi', totalAssets: 160000, customerCount: 2100, depositVolume: 77700, loanVolume: 98900, employeeCount: 13000, branchCount: 180, foundedYear: 1902, reportingYear: 2024, featured: true },
+    ['advanced', 'advanced', 'advanced', 'advanced', 'intermediate'],
   ),
 
   // Spain (additional)
