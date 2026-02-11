@@ -1,0 +1,5 @@
+name,country,country_code,city,address,latitude,longitude,parent_group,website,founded_year,total_assets_millions_eur,customer_count_thousands,deposit_volume_millions_eur,loan_volume_millions_eur,employee_count,branch_count,reporting_year,mobile_banking,mobile_banking_evidence,open_banking,open_banking_evidence,digital_onboarding,digital_onboarding_evidence,ai_chatbot,ai_chatbot_evidence,devops_cloud,devops_cloud_evidence,featured
+Example Savings Bank,Germany,DE,Munich,Brienner Str. 20,48.1451,11.5820,Sparkassen-Finanzgruppe,https://www.example-sparkasse.de,1850,25000,800,18000,15000,3200,75,2024,advanced,https://apps.apple.com/app/example,basic,https://developer.example.de,intermediate,https://www.example-sparkasse.de/online-konto,intermediate,https://www.example-sparkasse.de/chatbot,intermediate,,false
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
