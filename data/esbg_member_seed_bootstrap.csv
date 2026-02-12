@@ -1,0 +1,25 @@
+country,country_code,member_entity,entity_type,verification_status,source_url,access_date,notes
+Albania,AL,Banka Kombetare Tregtare (BKT),bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Listed in publicly available ESBG member list mirrors; verify against official ESBG members page when accessible.
+Austria,AT,Österreichischer Sparkassenverband,association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Austrian savings banks association listed as ESBG member.
+Belgium,BE,Coordination of Belgian Savings and Network Banks,association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Belgian coordination body listed in mirrors.
+Czech Republic,CZ,Česká spořitelna,bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Direct bank member listed in mirrors.
+Denmark,DK,Lokale Pengeinstitutter,association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Danish local banks association listed in mirrors.
+Finland,FI,Säästöpankkiliitto,association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Finnish savings banks association listed in mirrors.
+France,FR,Groupe BPCE,bank_group,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,French member listed in mirrors.
+France,FR,Fédération Nationale des Caisses d’Epargne (FNCE),association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,French savings banks federation listed in mirrors.
+Germany,DE,Deutscher Sparkassen- und Giroverband (DSGV),association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,German savings banks association listed in mirrors.
+Hungary,HU,OTP Bank Nyrt,bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Hungarian member listed in mirrors.
+Iceland,IS,Samband íslenskra sparisjóða,association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Icelandic savings banks association listed in mirrors.
+Italy,IT,Associazione di Fondazioni e di Casse di Risparmio SpA (ACRI),association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Italian association listed in mirrors.
+Luxembourg,LU,Banque et Caisse d’Epargne de l’Etat (BCEE / Spuerkeess),bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Luxembourg member listed in mirrors.
+Malta,MT,Bank of Valletta Group,bank_group,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Maltese member listed in mirrors.
+Netherlands,NL,SNS Bank (de Volksbank),bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Dutch member listed in mirrors.
+Norway,NO,Finance Norway (FNO),association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Norwegian member listed in mirrors.
+Portugal,PT,Caixa Geral de Depósitos,bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Portuguese member listed in mirrors.
+Portugal,PT,Montepio,bank_group,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Portuguese member listed in mirrors.
+Slovakia,SK,Slovenská sporiteľňa,bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Slovak member listed in mirrors.
+Spain,ES,CaixaBank,bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Spanish member listed in mirrors.
+Spain,ES,CECA (Confederación Española de Cajas de Ahorros),association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Spanish confederation listed in mirrors.
+Sweden,SE,Sparbankernas Riksförbund,association,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Swedish savings banks association listed in mirrors.
+Sweden,SE,Swedbank,bank,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Swedish member listed in mirrors.
+United Kingdom,GB,Lloyds Banking Group,bank_group,to_verify,https://en.wikipedia.org/wiki/European_Savings_and_Retail_Banks_Group,2026-02-12,Listed in mirrors; needs confirmation against current official ESBG roster.

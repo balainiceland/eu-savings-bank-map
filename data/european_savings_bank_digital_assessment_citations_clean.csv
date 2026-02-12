@@ -1,0 +1,71 @@
+bank_name,country,field,value,source_url,source_type,access_date,verification_status,notes
+CaixaBank,Spain,digital_score,93,https://www.caixabank.es,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Groupe BPCE (Caisse d'Epargne network),France,digital_score,60,https://www.groupebpce.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Erste Group (Sparkassen),Austria,digital_score,87,https://www.erstegroup.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Sparkassen-Finanzgruppe,Germany,digital_score,53,https://www.sparkasse.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),Luxembourg,digital_score,53,https://www.spuerkeess.lu,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Ceska sporitelna,Czech Republic,digital_score,73,https://www.csas.cz,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Slovenska sporitelna,Slovakia,digital_score,60,https://www.slsp.sk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Savings Banks Group (Saastopankki),Finland,digital_score,60,https://www.saastopankki.fi,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+SpareBank 1 Alliance,Norway,digital_score,67,https://www.sparebank1.no,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Swedbank and Savings Banks,Sweden,digital_score,73,https://www.swedbank.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+OTP Bank,Hungary,digital_score,47,https://www.otpbank.hu,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Caixa Geral de Depositos,Portugal,digital_score,53,https://www.cgd.pt,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banco Montepio,Portugal,digital_score,47,https://www.bancomontepio.pt,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+de Volksbank,Netherlands,digital_score,53,https://www.devolksbank.nl,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Rabobank,Netherlands,digital_score,67,https://www.rabobank.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Raiffeisen Bank International,Austria,digital_score,53,https://www.rbinternational.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Raiffeisen Switzerland,Switzerland,digital_score,47,https://www.raiffeisen.ch,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+OP Financial Group,Finland,digital_score,60,https://www.op.fi,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Nationwide Building Society,United Kingdom,digital_score,60,https://www.nationwide.co.uk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Coventry Building Society,United Kingdom,digital_score,47,https://www.coventrybuildingsociety.co.uk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Skipton Building Society,United Kingdom,digital_score,47,https://www.skipton.co.uk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Yorkshire Building Society,United Kingdom,digital_score,47,https://www.ybs.co.uk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Principality Building Society,United Kingdom,digital_score,47,https://www.principality.co.uk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Bank of Valletta,Malta,digital_score,60,https://www.bov.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Aktia Bank,Finland,digital_score,47,https://www.aktia.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banca Popolare di Sondrio,Italy,digital_score,40,https://www.popso.it,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Sparkasse KoelnBonn,Germany,digital_score,53,https://www.sparkasse-koelnbonn.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Hamburger Sparkasse (Haspa),Germany,digital_score,53,https://www.haspa.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Ibercaja Banco,Spain,digital_score,53,https://www.ibercaja.es,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Kutxabank,Spain,digital_score,60,https://www.kutxabank.es,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Unicaja Banco,Spain,digital_score,53,https://www.unicajabanco.es,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+ABANCA,Spain,digital_score,60,https://www.abanca.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Cajamar Caja Rural,Spain,digital_score,47,https://www.cajamar.es,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Credit Mutuel Alliance Federale,France,digital_score,73,https://www.creditmutuel.fr,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Credit Agricole Group,France,digital_score,67,https://www.credit-agricole.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+BCC Iccrea Group,Italy,digital_score,47,https://www.gruppobcciccrea.it,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Cassa Centrale Banca Group,Italy,digital_score,47,https://www.cassacentrale.it,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Nykredit,Denmark,digital_score,53,https://www.nykredit.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Bank Norwegian (Nordax Group),Norway,digital_score,53,https://www.banknorwegian.no,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banca Transilvania,Romania,digital_score,67,https://www.bancatransilvania.ro,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+CEC Bank,Romania,digital_score,33,https://www.cec.ro,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+DZ Bank Group,Germany,digital_score,47,https://www.dzbank.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Berliner Volksbank,Germany,digital_score,47,https://www.berliner-volksbank.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+GLS Bank,Germany,digital_score,47,https://www.gls.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Raiffeisenlandesbank Oberosterreich,Austria,digital_score,47,https://www.rlbooe.at,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Raiffeisenlandesbank NO-Wien,Austria,digital_score,47,https://www.raiffeisenbank.at,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Raiffeisen-Landesbank Steiermark,Austria,digital_score,40,https://www.rlbstmk.at,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+de Volksbank (SNS),Netherlands,digital_score,53,https://www.snsbank.nl,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Triodos Bank,Netherlands,digital_score,53,https://www.triodos.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banca Popolare di Bari,Italy,digital_score,27,https://www.popolarebari.it,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banque Raiffeisen,Luxembourg,digital_score,47,https://www.raiffeisen.lu,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Sparkasse Hannover,Germany,digital_score,53,https://www.sparkasse-hannover.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Kreissparkasse Koeln,Germany,digital_score,53,https://www.ksk-koeln.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Frankfurter Sparkasse,Germany,digital_score,53,https://www.frankfurter-sparkasse.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Berliner Sparkasse,Germany,digital_score,53,https://www.berliner-sparkasse.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Stadtsparkasse Duesseldorf,Germany,digital_score,53,https://www.sskduesseldorf.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Sparkasse Bremen,Germany,digital_score,53,https://www.sparkasse-bremen.de,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+SpareBank 1 SR-Bank,Norway,digital_score,67,https://www.sr-bank.no,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+SpareBank 1 SMN,Norway,digital_score,67,https://www.sparebank1.no/nb/smn,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+SpareBank 1 Nord-Norge,Norway,digital_score,67,https://www.sparebank1.no/nb/nord-norge,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Sparebanken Vest,Norway,digital_score,47,https://www.spv.no,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Sparebanken Sor,Norway,digital_score,47,https://www.sor.no,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Lansforsakringar Bank,Sweden,digital_score,47,https://www.lansforsakringar.se,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Leeds Building Society,United Kingdom,digital_score,47,https://www.leedsbuildingsociety.co.uk,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+KBC Brussels,Belgium,digital_score,87,https://www.kbcbrussels.be,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Belfius Bank,Belgium,digital_score,67,https://www.belfius.be,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Banca di Asti,Italy,digital_score,27,https://www.bancadiasti.it,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Caja Rural de Navarra,Spain,digital_score,47,https://www.cajaruraldenavarra.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Laboral Kutxa,Spain,digital_score,47,https://www.laboralkutxa.com,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.
+Nova Ljubljanska Banka (NLB),Slovenia,digital_score,60,https://www.nlb.si,computed_from_maturity_fields,2026-02-11,pending_source_validation,Generated evidence removed pending strict source validation.

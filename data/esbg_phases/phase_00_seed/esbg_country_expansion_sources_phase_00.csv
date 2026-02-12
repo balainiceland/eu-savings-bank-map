@@ -1,0 +1,17 @@
+country,country_code,expected_bank_count_hint,primary_source_url,access_date,notes
+ESBG network aggregate,EU/EEA,859,https://www.imagebrochure.dsgv.de/internationalisation.html,2026-02-12,Provides ESBG aggregate scale benchmark.
+Germany,DE,,https://www.dsgv.de/sparkassen-finanzgruppe/unsere-sparkassen.html,2026-02-12,Use DSGV Sparkassen locator/list to enumerate individual Sparkassen.
+Spain,ES,,https://www.ceca.es/entidades-asociadas/,2026-02-12,Use CECA member entities to enumerate cajas/savings institutions.
+France,FR,,https://www.federation.caisse-epargne.fr/,2026-02-12,Use FNCE/Caisse d’Epargne regional banks to enumerate entities.
+Norway,NO,,https://www.sparebankforeningen.no,2026-02-12,Use SpareBank association lists to enumerate member savings banks.
+Sweden,SE,,https://sparbankerna.se/om-oss/medlemmar/,2026-02-12,Use Sparbankernas Riksförbund member list.
+Austria,AT,,https://www.sparkasse.at/sgruppe,2026-02-12,Use s Gruppe / Sparkassen Austria member institutions.
+Finland,FI,,https://www.saastopankki.fi/en/savingsbanksgroup,2026-02-12,Use Savings Banks Group structure/member banks.
+Italy,IT,,https://www.acri.it/casse-di-risparmio/,2026-02-12,Use ACRI and group structures for savings-bank entities.
+Portugal,PT,,https://www.cgd.pt,2026-02-12,Start with CGD + Montepio + member associations for expansions.
+Luxembourg,LU,,https://www.spuerkeess.lu,2026-02-12,Direct member institution.
+Netherlands,NL,,https://www.snsbank.nl,2026-02-12,Direct member institution.
+Malta,MT,,https://www.bov.com,2026-02-12,Direct member institution.
+Czech Republic,CZ,,https://www.csas.cz,2026-02-12,Direct member institution.
+Slovakia,SK,,https://www.slsp.sk,2026-02-12,Direct member institution.
+Hungary,HU,,https://www.otpbank.hu,2026-02-12,Direct member institution.

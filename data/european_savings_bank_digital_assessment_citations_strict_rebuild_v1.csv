@@ -1,0 +1,211 @@
+bank_name,field,value,source_url,source_type,access_date,verification_status,notes
+CaixaBank,annual_report_url,https://www.caixabank.com/en/headlines/news/caixabank-reports-a-net-profit-of--5-79-billion-in-2024-up-20-2--and-far-exceeds-the-targets-set-in-the-2022-2024-strategic-plan,https://www.caixabank.com/en/headlines/news/caixabank-reports-a-net-profit-of--5-79-billion-in-2024-up-20-2--and-far-exceeds-the-targets-set-in-the-2022-2024-strategic-plan,annual_report,2026-02-12,verified,All three URLs verified from official CaixaBank pages during strict rebuild.
+CaixaBank,case_study_url,https://www.caixabank.com/en/headlines/news/caixabank-tech-will-hire-500-developers-in-the-first-quarter-of-2025-surpassing-1-600-employees,https://www.caixabank.com/en/headlines/news/caixabank-tech-will-hire-500-developers-in-the-first-quarter-of-2025-surpassing-1-600-employees,case_study_or_tech_source,2026-02-12,verified,All three URLs verified from official CaixaBank pages during strict rebuild.
+CaixaBank,press_release_url,https://www.caixabank.com/en/headlines/news/caixabank-recognised-as-the-most-innovative-bank-in-western-europe-by-global-finance,https://www.caixabank.com/en/headlines/news/caixabank-recognised-as-the-most-innovative-bank-in-western-europe-by-global-finance,press_release,2026-02-12,verified,All three URLs verified from official CaixaBank pages during strict rebuild.
+Groupe BPCE (Caisse d'Epargne network),annual_report_url,https://www.groupebpce.com/en/investor-relations/financial-results,https://www.groupebpce.com/en/investor-relations/financial-results,annual_report,2026-02-12,verified,Official investor-relations plus official newsroom evidence.
+Groupe BPCE (Caisse d'Epargne network),case_study_url,https://newsroom-en.groupebpce.fr/news/groupe-bpce-plans-to-set-up-a-common-technological-platform-for-the-banque-populaire-and-caisse-depargne-banks-8455b-53927.html,https://newsroom-en.groupebpce.fr/news/groupe-bpce-plans-to-set-up-a-common-technological-platform-for-the-banque-populaire-and-caisse-depargne-banks-8455b-53927.html,case_study_or_tech_source,2026-02-12,verified,Official investor-relations plus official newsroom evidence.
+Groupe BPCE (Caisse d'Epargne network),press_release_url,https://newsroom-en.groupebpce.fr/news/the-bpce-group-is-accelerating-the-adoption-of-generative-artificial-intelligence-to-serve-clients-advisors-and-all-employees-reaching-the-milestone-of-one-in-two-employees-using-ai-on-a-daily-basis-69302-53927.html,https://newsroom-en.groupebpce.fr/news/the-bpce-group-is-accelerating-the-adoption-of-generative-artificial-intelligence-to-serve-clients-advisors-and-all-employees-reaching-the-milestone-of-one-in-two-employees-using-ai-on-a-daily-basis-69302-53927.html,press_release,2026-02-12,verified,Official investor-relations plus official newsroom evidence.
+Erste Group (Sparkassen),annual_report_url,https://www.erstegroup.com/en/investors/annualreport2024,https://www.erstegroup.com/en/investors/annualreport2024,annual_report,2026-02-12,verified,"Verified annual report, Erste Digital capability page, and official 2024 results release."
+Erste Group (Sparkassen),case_study_url,https://www.erstedigital.com/en/home,https://www.erstedigital.com/en/home,case_study_or_tech_source,2026-02-12,verified,"Verified annual report, Erste Digital capability page, and official 2024 results release."
+Erste Group (Sparkassen),press_release_url,https://www.erstegroup.com/en/news-media/press-releases/2025/02/28/erste-group-results-2024,https://www.erstegroup.com/en/news-media/press-releases/2025/02/28/erste-group-results-2024,press_release,2026-02-12,verified,"Verified annual report, Erste Digital capability page, and official 2024 results release."
+Sparkassen-Finanzgruppe,annual_report_url,https://www.dsgv.de/sparkassen-finanzgruppe/publikationen/Finanzbericht_2024.html,https://www.dsgv.de/sparkassen-finanzgruppe/publikationen/Finanzbericht_2024.html,annual_report,2026-02-12,verified,"Verified DSGV financial report, digital app evidence, and DSGV press release."
+Sparkassen-Finanzgruppe,case_study_url,https://www.sparkasse.de/pk/produkte/konten-und-karten/finanzen-apps/s-app.html,https://www.sparkasse.de/pk/produkte/konten-und-karten/finanzen-apps/s-app.html,case_study_or_tech_source,2026-02-12,verified,"Verified DSGV financial report, digital app evidence, and DSGV press release."
+Sparkassen-Finanzgruppe,press_release_url,https://www.dsgv.de/newsroom/presse/250327_PM_Gemeinwohl_Zahlen_20.html,https://www.dsgv.de/newsroom/presse/250327_PM_Gemeinwohl_Zahlen_20.html,press_release,2026-02-12,verified,"Verified DSGV financial report, digital app evidence, and DSGV press release."
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),annual_report_url,https://www.spuerkeess.lu/fr/a-propos-de-nous/publications/donnees-financieres/,https://www.spuerkeess.lu/fr/a-propos-de-nous/publications/donnees-financieres/,annual_report,2026-02-12,verified,Annual/reporting and digital onboarding/multibanking verified; press link pending strict validation.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),case_study_url,https://www.spuerkeess.lu/en/snet/,https://www.spuerkeess.lu/en/snet/,case_study_or_tech_source,2026-02-12,verified,Annual/reporting and digital onboarding/multibanking verified; press link pending strict validation.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Ceska sporitelna,annual_report_url,https://www.csas.cz/en/news/2025/03/26-1/we-are-thriving-and-we-will-continue-investing-in-the-czech-republic-reports-ceska-sporitelna-the-bank-posted-a-profit-of-czk-26-billion-last-year,https://www.csas.cz/en/news/2025/03/26-1/we-are-thriving-and-we-will-continue-investing-in-the-czech-republic-reports-ceska-sporitelna-the-bank-posted-a-profit-of-czk-26-billion-last-year,annual_report,2026-02-12,verified,FY2024 performance release plus AI-digital capability evidence verified on official site.
+Ceska sporitelna,case_study_url,https://www.csas.cz/cs/o-nas/pro-media/tiskove-zpravy/2024/01/11/sporitelna-spousti-poradenskou-aplikaci-fit-zona-s-cilem-zvysit-financni-zdravi-klientu-a-testuje-ai-digitalniho-poradce,https://www.csas.cz/cs/o-nas/pro-media/tiskove-zpravy/2024/01/11/sporitelna-spousti-poradenskou-aplikaci-fit-zona-s-cilem-zvysit-financni-zdravi-klientu-a-testuje-ai-digitalniho-poradce,case_study_or_tech_source,2026-02-12,verified,FY2024 performance release plus AI-digital capability evidence verified on official site.
+Ceska sporitelna,press_release_url,https://www.csas.cz/cs/o-nas/pro-media/tiskove-zpravy/2025/08/27/sporitelna-spousti-ai-voicebota-na-platforme-open-ai-klientum-sjedna-schuzku-s-bankerem-pomuze-se-spravou-produktu-pripadne-jim-sam-zatelefonuje,https://www.csas.cz/cs/o-nas/pro-media/tiskove-zpravy/2025/08/27/sporitelna-spousti-ai-voicebota-na-platforme-open-ai-klientum-sjedna-schuzku-s-bankerem-pomuze-se-spravou-produktu-pripadne-jim-sam-zatelefonuje,press_release,2026-02-12,verified,FY2024 performance release plus AI-digital capability evidence verified on official site.
+Slovenska sporitelna,annual_report_url,https://www.slsp.sk/en/news/2025/2/28/consolidated-operating-profit-of-slovenska-sporitelna-grew-by-12-2,https://www.slsp.sk/en/news/2025/2/28/consolidated-operating-profit-of-slovenska-sporitelna-grew-by-12-2,annual_report,2026-02-12,verified,Annual business results and digital banking evidence verified from official Slovenská sporiteľňa pages.
+Slovenska sporitelna,case_study_url,https://www.slsp.sk/sk/ludia/elektronicke-bankovnictvo/push-notifikacie,https://www.slsp.sk/sk/ludia/elektronicke-bankovnictvo/push-notifikacie,case_study_or_tech_source,2026-02-12,verified,Annual business results and digital banking evidence verified from official Slovenská sporiteľňa pages.
+Slovenska sporitelna,press_release_url,https://www.slsp.sk/sk/aktuality/2025/5/2/najlepsou-bankovou-aplikaciou-je-opat-george-v-ankete-smart-banka-o-tom-rozhodol-rekordny-pocet-ludi,https://www.slsp.sk/sk/aktuality/2025/5/2/najlepsou-bankovou-aplikaciou-je-opat-george-v-ankete-smart-banka-o-tom-rozhodol-rekordny-pocet-ludi,press_release,2026-02-12,verified,Annual business results and digital banking evidence verified from official Slovenská sporiteľňa pages.
+Savings Banks Group (Saastopankki),annual_report_url,https://www.saastopankki.fi/en/savingsbanksgroup/financial-information/financial-materials,https://www.saastopankki.fi/en/savingsbanksgroup/financial-information/financial-materials,annual_report,2026-02-12,verified,Financial materials hub and digitalisation investment release verified.
+Savings Banks Group (Saastopankki),case_study_url,https://www.saastopankki.fi/en/savingsbanksgroup/financial-information/financial-materials/stock-exchange-releases/15082023-spkiinnintysluottopankki,https://www.saastopankki.fi/en/savingsbanksgroup/financial-information/financial-materials/stock-exchange-releases/15082023-spkiinnintysluottopankki,case_study_or_tech_source,2026-02-12,verified,Financial materials hub and digitalisation investment release verified.
+Savings Banks Group (Saastopankki),press_release_url,https://www.saastopankki.fi/en/savingsbanksgroup/financial-information/financial-materials/stock-exchange-releases/15082023-spkiinnintysluottopankki,https://www.saastopankki.fi/en/savingsbanksgroup/financial-information/financial-materials/stock-exchange-releases/15082023-spkiinnintysluottopankki,press_release,2026-02-12,verified,Financial materials hub and digitalisation investment release verified.
+SpareBank 1 Alliance,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 Alliance,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 Alliance,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Swedbank and Savings Banks,annual_report_url,https://www.swedbank.com/investor-relations/reports-and-presentations/annual-reports.html,https://www.swedbank.com/investor-relations/reports-and-presentations/annual-reports.html,annual_report,2026-02-12,verified,"Annual reports, open-banking API page, and official newsroom release verified."
+Swedbank and Savings Banks,case_study_url,https://www.swedbank.com/openbanking.html,https://www.swedbank.com/openbanking.html,case_study_or_tech_source,2026-02-12,verified,"Annual reports, open-banking API page, and official newsroom release verified."
+Swedbank and Savings Banks,press_release_url,https://www.swedbank.com/newsroom/press-releases.details.swedbank%E2%80%99s-annual-and-sustainability-report-2024.A7739F89C57954A3.html,https://www.swedbank.com/newsroom/press-releases.details.swedbank%E2%80%99s-annual-and-sustainability-report-2024.A7739F89C57954A3.html,press_release,2026-02-12,verified,"Annual reports, open-banking API page, and official newsroom release verified."
+OTP Bank,annual_report_url,https://www.otpgroup.info/investor-relations/reports/annual,https://www.otpgroup.info/investor-relations/reports/annual,annual_report,2026-02-12,verified,"Official annual reports index, PSD2 developer portal, and 2024 results release verified."
+OTP Bank,case_study_url,https://www.otpbank.hu/portal/en/psd2,https://www.otpbank.hu/portal/en/psd2,case_study_or_tech_source,2026-02-12,verified,"Official annual reports index, PSD2 developer portal, and 2024 results release verified."
+OTP Bank,press_release_url,https://www.otpgroup.info/news/summary-OTP-Bank-results-2024,https://www.otpgroup.info/news/summary-OTP-Bank-results-2024,press_release,2026-02-12,verified,"Official annual reports index, PSD2 developer portal, and 2024 results release verified."
+Caixa Geral de Depositos,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Caixa Geral de Depositos,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Caixa Geral de Depositos,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banco Montepio,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banco Montepio,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banco Montepio,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+de Volksbank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+de Volksbank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+de Volksbank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Rabobank,annual_report_url,https://www.rabobank.com/about-us/organization/results-and-reports/downloads,https://www.rabobank.com/about-us/organization/results-and-reports/downloads,annual_report,2026-02-12,verified,"Official downloads section, developer portal, and annual-report publication release verified."
+Rabobank,case_study_url,https://developer.rabobank.nl/,https://developer.rabobank.nl/,case_study_or_tech_source,2026-02-12,verified,"Official downloads section, developer portal, and annual-report publication release verified."
+Rabobank,press_release_url,https://www.rabobank.nl/en/nieuws/011469984/rabobank-publishes-its-2024-impact-and-annual-report,https://www.rabobank.nl/en/nieuws/011469984/rabobank-publishes-its-2024-impact-and-annual-report,press_release,2026-02-12,verified,"Official downloads section, developer portal, and annual-report publication release verified."
+Raiffeisen Bank International,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen Bank International,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen Bank International,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen Switzerland,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen Switzerland,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen Switzerland,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+OP Financial Group,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+OP Financial Group,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+OP Financial Group,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nationwide Building Society,annual_report_url,https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2023-2024/annual-report-and-accounts-2024.pdf?rev=e67dc407559b425d873e11fa9504c3bb,https://www.nationwide.co.uk/-/assets/nationwidecouk/documents/about/how-we-are-run/results-and-accounts/2023-2024/annual-report-and-accounts-2024.pdf?rev=e67dc407559b425d873e11fa9504c3bb,annual_report,2026-02-12,verified,Annual report and official Nationwide release verified; case study is third-party vendor PR about Nationwide programme.
+Nationwide Building Society,case_study_url,https://newsroom.accenture.com/news/2023/nationwide-building-society-to-modernize-its-digital-payments-system-in-the-cloud-with-accenture-and-form3,https://newsroom.accenture.com/news/2023/nationwide-building-society-to-modernize-its-digital-payments-system-in-the-cloud-with-accenture-and-form3,case_study_or_tech_source,2026-02-12,verified,Annual report and official Nationwide release verified; case study is third-party vendor PR about Nationwide programme.
+Nationwide Building Society,press_release_url,https://www.nationwide.co.uk/media/news/nationwide-returns-gbp-2-8-billion-to-members-as-it-announces-third-fairer-share-payment,https://www.nationwide.co.uk/media/news/nationwide-returns-gbp-2-8-billion-to-members-as-it-announces-third-fairer-share-payment,press_release,2026-02-12,verified,Annual report and official Nationwide release verified; case study is third-party vendor PR about Nationwide programme.
+Coventry Building Society,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Coventry Building Society,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Coventry Building Society,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Skipton Building Society,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Skipton Building Society,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Skipton Building Society,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Yorkshire Building Society,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Yorkshire Building Society,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Yorkshire Building Society,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Principality Building Society,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Principality Building Society,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Principality Building Society,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Bank of Valletta,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Bank of Valletta,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Bank of Valletta,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Aktia Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Aktia Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Aktia Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Popolare di Sondrio,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Popolare di Sondrio,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Popolare di Sondrio,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse KoelnBonn,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse KoelnBonn,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse KoelnBonn,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Hamburger Sparkasse (Haspa),annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Hamburger Sparkasse (Haspa),case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Hamburger Sparkasse (Haspa),press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Ibercaja Banco,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Ibercaja Banco,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Ibercaja Banco,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Kutxabank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Kutxabank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Kutxabank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Unicaja Banco,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Unicaja Banco,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Unicaja Banco,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+ABANCA,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+ABANCA,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+ABANCA,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Cajamar Caja Rural,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Cajamar Caja Rural,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Cajamar Caja Rural,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Credit Mutuel Alliance Federale,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Credit Mutuel Alliance Federale,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Credit Mutuel Alliance Federale,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Credit Agricole Group,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Credit Agricole Group,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Credit Agricole Group,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+BCC Iccrea Group,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+BCC Iccrea Group,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+BCC Iccrea Group,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Cassa Centrale Banca Group,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Cassa Centrale Banca Group,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Cassa Centrale Banca Group,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nykredit,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nykredit,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nykredit,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Bank Norwegian (Nordax Group),annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Bank Norwegian (Nordax Group),case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Bank Norwegian (Nordax Group),press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Transilvania,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Transilvania,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Transilvania,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+CEC Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+CEC Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+CEC Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+DZ Bank Group,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+DZ Bank Group,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+DZ Bank Group,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Berliner Volksbank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Berliner Volksbank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Berliner Volksbank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+GLS Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+GLS Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+GLS Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisenlandesbank Oberosterreich,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisenlandesbank Oberosterreich,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisenlandesbank Oberosterreich,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisenlandesbank NO-Wien,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisenlandesbank NO-Wien,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisenlandesbank NO-Wien,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen-Landesbank Steiermark,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen-Landesbank Steiermark,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Raiffeisen-Landesbank Steiermark,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+de Volksbank (SNS),annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+de Volksbank (SNS),case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+de Volksbank (SNS),press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Triodos Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Triodos Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Triodos Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Popolare di Bari,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Popolare di Bari,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca Popolare di Bari,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banque Raiffeisen,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banque Raiffeisen,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banque Raiffeisen,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse Hannover,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse Hannover,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse Hannover,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Kreissparkasse Koeln,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Kreissparkasse Koeln,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Kreissparkasse Koeln,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Frankfurter Sparkasse,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Frankfurter Sparkasse,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Frankfurter Sparkasse,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Berliner Sparkasse,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Berliner Sparkasse,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Berliner Sparkasse,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Stadtsparkasse Duesseldorf,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Stadtsparkasse Duesseldorf,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Stadtsparkasse Duesseldorf,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse Bremen,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse Bremen,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparkasse Bremen,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 SR-Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 SR-Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 SR-Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 SMN,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 SMN,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 SMN,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 Nord-Norge,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 Nord-Norge,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+SpareBank 1 Nord-Norge,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparebanken Vest,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparebanken Vest,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparebanken Vest,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparebanken Sor,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparebanken Sor,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Sparebanken Sor,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Lansforsakringar Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Lansforsakringar Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Lansforsakringar Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Leeds Building Society,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Leeds Building Society,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Leeds Building Society,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+KBC Brussels,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+KBC Brussels,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+KBC Brussels,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Belfius Bank,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Belfius Bank,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Belfius Bank,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca di Asti,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca di Asti,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Banca di Asti,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Caja Rural de Navarra,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Caja Rural de Navarra,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Caja Rural de Navarra,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Laboral Kutxa,annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Laboral Kutxa,case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Laboral Kutxa,press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nova Ljubljanska Banka (NLB),annual_report_url,,,annual_report,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nova Ljubljanska Banka (NLB),case_study_url,,,case_study_or_tech_source,2026-02-12,pending_source_validation,No strict source validated yet for this field.
+Nova Ljubljanska Banka (NLB),press_release_url,,,press_release,2026-02-12,pending_source_validation,No strict source validated yet for this field.

@@ -1,0 +1,613 @@
+bank_name,field,value,source_url,source_title,source_type,access_date,verification_status,notes
+CaixaBank,total_assets_millions_eur,630000,https://www.caixabank.com/en/headlines/news/caixabank-reports-a-net-profit-of--5-79-billion-in-2024-up-20-2--and-far-exceeds-the-targets-set-in-the-2022-2024-strategic-plan,CaixaBank 2024 results release,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+CaixaBank,customer_count_thousands,20300,https://www.caixabank.com/en/headlines/news/caixabank-reports-a-net-profit-of--5-79-billion-in-2024-up-20-2--and-far-exceeds-the-targets-set-in-the-2022-2024-strategic-plan,CaixaBank 2024 results release,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+CaixaBank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CaixaBank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CaixaBank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CaixaBank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CaixaBank,reporting_year,2024,https://www.caixabank.com/en/headlines/news/caixabank-reports-a-net-profit-of--5-79-billion-in-2024-up-20-2--and-far-exceeds-the-targets-set-in-the-2022-2024-strategic-plan,CaixaBank 2024 results release,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+CaixaBank,mobile_banking,advanced,https://www.caixabank.es/particular/movilidad/googlepay_es.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CaixaBank,open_banking,advanced,https://developer.caixabank.com/apimarket/store/site/pages/open-banking/index.jag,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CaixaBank,digital_onboarding,advanced,https://www.caixabank.es/particular/cuentas-bancarias/cuenta-online_es.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CaixaBank,ai_chatbot,intermediate,https://www.caixabank.com/comunicacion/noticias/corporativas/noa-ayudara-a-mejorar-la-comunicacion-con-los-clientes_es.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CaixaBank,devops_cloud,advanced,https://www.caixabanktech.com/cases/google-cloud-journey,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Groupe BPCE (Caisse d'Epargne network),total_assets_millions_eur,1584558,https://www.ppr.groupebpce.com/app/uploads/2025/02/groupebpce-pr-results-q4-242024fv-1.pdf,Groupe BPCE Results Q4-24 & 2024,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Groupe BPCE (Caisse d'Epargne network),customer_count_thousands,35000,https://www.groupebpce.com/en/the-group/key-figures,Groupe BPCE key figures,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Groupe BPCE (Caisse d'Epargne network),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Groupe BPCE (Caisse d'Epargne network),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Groupe BPCE (Caisse d'Epargne network),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Groupe BPCE (Caisse d'Epargne network),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Groupe BPCE (Caisse d'Epargne network),reporting_year,2024,https://www.groupebpce.com/investisseurs/resultats-et-publications/performance-en-bref,Groupe BPCE annual results 2024,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Groupe BPCE (Caisse d'Epargne network),mobile_banking,advanced,https://www.caisse-epargne.fr/application-mobile/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Groupe BPCE (Caisse d'Epargne network),open_banking,basic,https://www.groupebpce.com/en,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Groupe BPCE (Caisse d'Epargne network),digital_onboarding,intermediate,https://www.caisse-epargne.fr/comptes-et-cartes/ouvrir-un-compte/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Groupe BPCE (Caisse d'Epargne network),ai_chatbot,basic,https://www.caisse-epargne.fr/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Groupe BPCE (Caisse d'Epargne network),devops_cloud,intermediate,https://www.groupebpce.com/en/newsroom/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Erste Group (Sparkassen),total_assets_millions_eur,342700,https://www.erstegroup.com/en/investors/news/investorinformation/2024/04/30/irnews-Q12024-results,Erste Group investor information Q1 2024,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Erste Group (Sparkassen),customer_count_thousands,23000,https://www.erstegroup.com/en/news-media/erstegroup-at-a-glance,Erste Group at a glance,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Erste Group (Sparkassen),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Erste Group (Sparkassen),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Erste Group (Sparkassen),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Erste Group (Sparkassen),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Erste Group (Sparkassen),reporting_year,2024,https://www.erstegroup.com/en/investors/annualreport2024,Erste Group Annual Report 2024,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Erste Group (Sparkassen),mobile_banking,advanced,https://www.sparkasse.at/erstebank/george-mobile,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Erste Group (Sparkassen),open_banking,advanced,https://api.sparkasse.at,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Erste Group (Sparkassen),digital_onboarding,advanced,https://www.sparkasse.at/erstebank/privatkunden/konto-karten/konto/onlinekonto,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Erste Group (Sparkassen),ai_chatbot,intermediate,https://www.erstegroup.com/en/news-media/press-releases/2024/3/14/financial-health-prototype,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Erste Group (Sparkassen),devops_cloud,intermediate,https://www.erstedigital.com/en,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkassen-Finanzgruppe,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkassen-Finanzgruppe,mobile_banking,advanced,https://www.sparkasse.de/pk/produkte/apps/s-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkassen-Finanzgruppe,open_banking,basic,https://www.sparkasse.de/pk/ratgeber/finanzplanung/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkassen-Finanzgruppe,digital_onboarding,intermediate,https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkassen-Finanzgruppe,ai_chatbot,basic,https://www.sparkasse.de/pk/ratgeber/onlinebanking/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkassen-Finanzgruppe,devops_cloud,basic,https://www.dsv-gruppe.de/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),mobile_banking,advanced,https://www.spuerkeess.lu/en/private-customers/day-to-day-banking/s-net-mobile/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),open_banking,basic,https://www.spuerkeess.lu/en/private-customers/day-to-day-banking/multibanking/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),digital_onboarding,advanced,https://www.spuerkeess.lu/en/private-customers/become-customer-online/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banque et Caisse d'Epargne de l'Etat (Spuerkeess),devops_cloud,basic,https://www.spuerkeess.lu/en/about-us/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ceska sporitelna,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ceska sporitelna,mobile_banking,advanced,https://www.csas.cz/cs/obcane/digitalni-sluzby-a-aplikace/aplikace-george,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ceska sporitelna,open_banking,intermediate,https://www.csas.cz/cs/firmy/produkty-a-sluzby/transakcni-bankovnictvi/prime-bankovnictvi/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ceska sporitelna,digital_onboarding,intermediate,https://www.csas.cz/cs/obcane/ucty-a-karty/osobni-ucet-plus,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ceska sporitelna,ai_chatbot,intermediate,https://www.csas.cz/cs/o-nas/pro-media/tiskove-zpravy/2023/12/19/ceska-sporitelna-spustila-ai-chatbot,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ceska sporitelna,devops_cloud,intermediate,https://customers.microsoft.com/en-gb/story/1483761230195727099-ceska-sporitelna-azure-en-czech-republic,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Slovenska sporitelna,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Slovenska sporitelna,mobile_banking,advanced,https://www.slsp.sk/sk/ludia/ucty/george,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Slovenska sporitelna,open_banking,intermediate,https://www.slsp.sk/en/information/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Slovenska sporitelna,digital_onboarding,basic,https://www.slsp.sk/sk/ludia/uvery/hypoteka/chcem-hypoteku-online,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Slovenska sporitelna,ai_chatbot,basic,https://www.slsp.sk/sk/ludia/pomoc-a-podpora,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Slovenska sporitelna,devops_cloud,intermediate,https://www.erstedigital.com/en,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Savings Banks Group (Saastopankki),total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Savings Banks Group (Saastopankki),mobile_banking,advanced,https://www.saastopankki.fi/fi-fi/tietoa-saastopankista/saastopankkiryhma/saastopankki-app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Savings Banks Group (Saastopankki),open_banking,basic,https://www.saastopankki.fi/en-gb/customer-service/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Savings Banks Group (Saastopankki),digital_onboarding,advanced,https://www.saastopankki.fi/en-gb/customer-service/become-a-customer,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Savings Banks Group (Saastopankki),ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/asiakaspalvelu/chatbot,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Savings Banks Group (Saastopankki),devops_cloud,basic,https://www.saastopankki.fi/en-gb/about-us,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+SpareBank 1 Alliance,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+SpareBank 1 Alliance,mobile_banking,advanced,https://www.sparebank1.no/en/bank/private/customer-programmes/sb1u/our-products/sparebank1-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+SpareBank 1 Alliance,open_banking,intermediate,https://developer.sparebank1.no,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+SpareBank 1 Alliance,digital_onboarding,intermediate,https://www.sparebank1.no/en/bank/private/customer-programmes/sb1u/our-products/sparebank1-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+SpareBank 1 Alliance,ai_chatbot,basic,https://www.sparebank1.no/nb/smn/om-oss/nyheter/den-digitale-assistenten-har-flyttet-inn.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+SpareBank 1 Alliance,devops_cloud,intermediate,https://sparebank1utvikling.medium.com,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Swedbank and Savings Banks,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Swedbank and Savings Banks,customer_count_thousands,7300,https://www.swedbank.com/about-swedbank.html,Swedbank About us,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Swedbank and Savings Banks,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Swedbank and Savings Banks,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Swedbank and Savings Banks,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Swedbank and Savings Banks,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Swedbank and Savings Banks,reporting_year,2024,https://www.swedbank.com/investor-relations/reports-and-presentations/annual-reports.html,Swedbank annual reports,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Swedbank and Savings Banks,mobile_banking,advanced,https://www.swedbank.se/privat/digitala-tjanster/swedbank-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Swedbank and Savings Banks,open_banking,advanced,https://developer.swedbank.com,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Swedbank and Savings Banks,digital_onboarding,intermediate,https://www.swedbank.se/privat/bli-kund.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Swedbank and Savings Banks,ai_chatbot,basic,https://www.swedbank.se/privat/kundservice.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Swedbank and Savings Banks,devops_cloud,intermediate,https://developer.swedbank.com,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OTP Bank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OTP Bank,mobile_banking,advanced,https://www.otpbank.hu/portal/en/online-services/mobilebank,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OTP Bank,open_banking,basic,https://www.otpbank.hu/portal/en/PSD2,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OTP Bank,digital_onboarding,intermediate,https://www.otpbank.hu/portal/en/Bank_Account/basic,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OTP Bank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+OTP Bank,devops_cloud,basic,https://www.otpbank.hu/portal/en/Aboutus,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Caixa Geral de Depositos,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Caixa Geral de Depositos,mobile_banking,advanced,https://www.cgd.pt/Particulares/Pages/App-CaixaDireta.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Caixa Geral de Depositos,open_banking,basic,https://www.cgd.pt/Institucional/Pages/PSD2.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Caixa Geral de Depositos,digital_onboarding,intermediate,https://www.cgd.pt/Particulares/Contas/Pages/Conta-Caixa-S.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Caixa Geral de Depositos,ai_chatbot,basic,https://www.cgd.pt/Particulares/Apoio-Cliente/Pages/default.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Caixa Geral de Depositos,devops_cloud,basic,https://www.cgd.pt/Institucional/Pages/default.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banco Montepio,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banco Montepio,mobile_banking,advanced,https://www.bancomontepio.pt/particulares/canais-digitais/app-m24/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banco Montepio,open_banking,basic,https://www.bancomontepio.pt/institucional/psd2/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banco Montepio,digital_onboarding,intermediate,https://www.bancomontepio.pt/particulares/contas/conta-online/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banco Montepio,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banco Montepio,devops_cloud,basic,https://www.bancomontepio.pt/institucional/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank,mobile_banking,advanced,https://www.asnbank.nl/service/veilig-bankieren/asn-bank-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank,open_banking,basic,https://www.devolksbank.nl/over-de-volksbank/wat-we-doen/toezicht-en-wetgeving/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank,digital_onboarding,intermediate,https://www.regiobank.nl/particulier/bankrekening/openen.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+de Volksbank,devops_cloud,intermediate,https://www.devolksbank.nl/werken-bij.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Rabobank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Rabobank,mobile_banking,advanced,https://www.rabobank.nl/particulieren/service/mobiel-bankieren,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Rabobank,open_banking,intermediate,https://developer.rabobank.nl,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Rabobank,digital_onboarding,intermediate,https://www.rabobank.nl/particulieren/betalen/bankrekening-openen,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Rabobank,ai_chatbot,basic,https://www.rabobank.nl/particulieren/klantenservice/chat,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Rabobank,devops_cloud,intermediate,https://www.rabobank.jobs/en/tech-and-it,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Bank International,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Bank International,mobile_banking,advanced,https://www.rbinternational.com/en/retail-banking/digital-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Bank International,open_banking,basic,https://www.rbinternational.com/en/investors/regulatory-disclosures/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Bank International,digital_onboarding,intermediate,https://www.raiffeisen.at/rch/de/privatkunden/konten.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Bank International,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Raiffeisen Bank International,devops_cloud,intermediate,https://www.rbinternational.com/en/careers/it-digital.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Switzerland,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen Switzerland,mobile_banking,advanced,https://www.raiffeisen.ch/rch/en/private-customers/e-banking/mobile-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Switzerland,open_banking,basic,https://www.raiffeisen.ch/rch/en/about-raiffeisen/downloads/legal-notices.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Switzerland,digital_onboarding,intermediate,https://www.raiffeisen.ch/rch/en/private-customers/accounts-and-packages.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen Switzerland,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Raiffeisen Switzerland,devops_cloud,basic,https://www.raiffeisen.ch/rch/en/about-raiffeisen/careers.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OP Financial Group,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+OP Financial Group,mobile_banking,advanced,https://www.op.fi/private-customers/daily-banking/op-mobile,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OP Financial Group,open_banking,basic,https://www.op.fi/corporate-customers/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OP Financial Group,digital_onboarding,advanced,https://www.op.fi/private-customers/daily-banking/accounts/open-account,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+OP Financial Group,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+OP Financial Group,devops_cloud,intermediate,https://www.op.fi/about-op/op-as-employer/technology,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nationwide Building Society,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nationwide Building Society,mobile_banking,advanced,https://www.nationwide.co.uk/help/online-banking/mobile-banking-app/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nationwide Building Society,open_banking,basic,https://developer.nationwideopenbanking.co.uk,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nationwide Building Society,digital_onboarding,intermediate,https://www.nationwide.co.uk/current-accounts/flexaccount/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nationwide Building Society,ai_chatbot,basic,https://www.nationwide.co.uk/help/contact-us/chat/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nationwide Building Society,devops_cloud,intermediate,https://www.nationwide-jobs.co.uk/technology,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Coventry Building Society,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Coventry Building Society,mobile_banking,advanced,https://www.coventrybuildingsociety.co.uk/member/support/banking-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Coventry Building Society,open_banking,basic,https://www.coventrybuildingsociety.co.uk/legal/open-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Coventry Building Society,digital_onboarding,intermediate,https://www.coventrybuildingsociety.co.uk/member/product/current-account.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Coventry Building Society,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Coventry Building Society,devops_cloud,basic,https://www.coventrybuildingsociety.co.uk/careers.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Skipton Building Society,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Skipton Building Society,mobile_banking,advanced,https://www.skipton.co.uk/help-and-support/app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Skipton Building Society,open_banking,basic,https://www.skipton.co.uk/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Skipton Building Society,digital_onboarding,intermediate,https://www.skipton.co.uk/mortgages/first-time-buyers/track-record-mortgage,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Skipton Building Society,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Skipton Building Society,devops_cloud,basic,https://www.skipton.co.uk/about-us/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Yorkshire Building Society,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Yorkshire Building Society,mobile_banking,advanced,https://www.ybs.co.uk/ways-to-bank/mobile-app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Yorkshire Building Society,open_banking,basic,https://www.ybs.co.uk/legal/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Yorkshire Building Society,digital_onboarding,intermediate,https://www.ybs.co.uk/current-accounts,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Yorkshire Building Society,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Yorkshire Building Society,devops_cloud,basic,https://www.ybs.co.uk/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Principality Building Society,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Principality Building Society,mobile_banking,advanced,https://www.principality.co.uk/ways-to-bank/mobile-app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Principality Building Society,open_banking,basic,https://www.principality.co.uk/help-and-guidance/legal/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Principality Building Society,digital_onboarding,intermediate,https://www.principality.co.uk/savings/current-account,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Principality Building Society,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Principality Building Society,devops_cloud,basic,https://www.principality.co.uk/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank of Valletta,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank of Valletta,mobile_banking,advanced,https://www.bov.com/content/bov-mobile-app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank of Valletta,open_banking,basic,https://www.bov.com/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank of Valletta,digital_onboarding,intermediate,https://www.bov.com/content/become-a-customer-online,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank of Valletta,ai_chatbot,basic,https://www.bov.com/help-and-support,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank of Valletta,devops_cloud,intermediate,https://www.bov.com/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Aktia Bank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Aktia Bank,mobile_banking,advanced,https://www.aktia.fi/en/daily-banking/mobile-bank,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Aktia Bank,open_banking,basic,https://www.aktia.fi/en/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Aktia Bank,digital_onboarding,intermediate,https://www.aktia.fi/en/become-customer,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Aktia Bank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Aktia Bank,devops_cloud,basic,https://www.aktia.com/en/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Popolare di Sondrio,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Sondrio,mobile_banking,advanced,https://www.popso.it/app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Popolare di Sondrio,open_banking,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banca Popolare di Sondrio,digital_onboarding,intermediate,https://www.popso.it/apriconto,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Popolare di Sondrio,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banca Popolare di Sondrio,devops_cloud,basic,https://www.popso.it/lavora-con-noi,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkasse KoelnBonn,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Sparkasse KoelnBonn,mobile_banking,advanced,https://www.sparkasse-koelnbonn.de/de/home/service/s-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkasse KoelnBonn,open_banking,basic,https://www.sparkasse-koelnbonn.de/de/home/fi/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkasse KoelnBonn,digital_onboarding,intermediate,https://www.sparkasse-koelnbonn.de/de/home/privatkunden/girokonto.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkasse KoelnBonn,ai_chatbot,basic,https://www.sparkasse-koelnbonn.de/de/home/service/kontakt.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Sparkasse KoelnBonn,devops_cloud,basic,https://www.sparkasse-koelnbonn.de/de/home/ihre-sparkasse/karriere.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Hamburger Sparkasse (Haspa),total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Hamburger Sparkasse (Haspa),mobile_banking,advanced,https://www.haspa.de/de/home/service/s-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Hamburger Sparkasse (Haspa),open_banking,basic,https://www.haspa.de/de/home/fi/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Hamburger Sparkasse (Haspa),digital_onboarding,intermediate,https://www.haspa.de/de/home/privatkunden/girokonto.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Hamburger Sparkasse (Haspa),ai_chatbot,basic,https://www.haspa.de/de/home/service/kontakt.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Hamburger Sparkasse (Haspa),devops_cloud,basic,https://www.haspa.de/de/home/ihre-haspa/karriere.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ibercaja Banco,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Ibercaja Banco,mobile_banking,advanced,https://www.ibercaja.es/particulares/canales-digitales/app-ibercaja/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ibercaja Banco,open_banking,basic,https://www.ibercaja.es/informacion-legal/psd2/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ibercaja Banco,digital_onboarding,intermediate,https://www.ibercaja.es/particulares/cuentas/abrir-cuenta-online/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ibercaja Banco,ai_chatbot,basic,https://www.ibercaja.es/particulares/atencion-cliente/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Ibercaja Banco,devops_cloud,basic,https://www.ibercaja.es/empleo/tecnologia/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Kutxabank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Kutxabank,mobile_banking,advanced,https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/canales/app-kutxabank,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Kutxabank,open_banking,basic,https://portal.kutxabank.es/cs/Satellite/kb/es/psd2,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Kutxabank,digital_onboarding,intermediate,https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/cuentas/cuenta-online,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Kutxabank,ai_chatbot,basic,https://portal.kutxabank.es/cs/Satellite/kb/es/atencion-cliente,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Kutxabank,devops_cloud,intermediate,https://www.kutxabank.es/es/quienes-somos,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Unicaja Banco,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Unicaja Banco,mobile_banking,advanced,https://www.unicajabanco.es/es/particulares/banca-digital/app-unicaja,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Unicaja Banco,open_banking,basic,https://www.unicajabanco.es/es/psd2,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Unicaja Banco,digital_onboarding,intermediate,https://www.unicajabanco.es/es/particulares/cuentas/cuenta-online,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Unicaja Banco,ai_chatbot,basic,https://www.unicajabanco.es/es/atencion-cliente,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Unicaja Banco,devops_cloud,basic,https://www.unicajabanco.es/es/empleo,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+ABANCA,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+ABANCA,mobile_banking,advanced,https://www.abanca.com/es/personas/banca-digital/app-abanca/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+ABANCA,open_banking,basic,https://www.abanca.com/es/legal/psd2/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+ABANCA,digital_onboarding,intermediate,https://www.abanca.com/es/personas/cuentas/abrir-cuenta-online/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+ABANCA,ai_chatbot,basic,https://www.abanca.com/es/ayuda/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+ABANCA,devops_cloud,intermediate,https://www.abanca.com/es/sobre-abanca/empleo/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cajamar Caja Rural,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cajamar Caja Rural,mobile_banking,advanced,https://www.cajamar.es/es/particulares/canales/app-grupo-cajamar/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cajamar Caja Rural,open_banking,basic,https://www.cajamar.es/es/informacion-legal/psd2/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cajamar Caja Rural,digital_onboarding,intermediate,https://www.cajamar.es/es/particulares/cuentas/cuenta-wefferent/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cajamar Caja Rural,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Cajamar Caja Rural,devops_cloud,basic,https://www.cajamar.es/es/sobre-cajamar/empleo/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Mutuel Alliance Federale,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Mutuel Alliance Federale,mobile_banking,advanced,https://www.creditmutuel.fr/fr/particuliers/compte/mobile.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Mutuel Alliance Federale,open_banking,basic,https://www.creditmutuel.fr/fr/banques/open-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Mutuel Alliance Federale,digital_onboarding,intermediate,https://www.creditmutuel.fr/fr/particuliers/comptes/ouvrir-compte.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Mutuel Alliance Federale,ai_chatbot,intermediate,https://www.creditmutuel.fr/fr/particuliers/contacts/assistant-virtuel.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Mutuel Alliance Federale,devops_cloud,advanced,https://www.creditmutuelalliancefederale.fr/en/who-are-we/key-figures.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Agricole Group,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Credit Agricole Group,mobile_banking,advanced,https://www.credit-agricole.fr/particulier/applications-ma-banque.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Agricole Group,open_banking,basic,https://developer.ca-cib.com/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Agricole Group,digital_onboarding,intermediate,https://www.credit-agricole.fr/particulier/compte/ouvrir-un-compte.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Agricole Group,ai_chatbot,basic,https://www.credit-agricole.fr/particulier/conseils/chatbot.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Credit Agricole Group,devops_cloud,advanced,https://www.credit-agricole.com/en/finance/finance/financial-publications,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+BCC Iccrea Group,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+BCC Iccrea Group,mobile_banking,intermediate,https://www.gruppobcciccrea.it/it-IT/Pagine/default.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+BCC Iccrea Group,open_banking,basic,https://www.gruppobcciccrea.it/it-IT/Pagine/PSD2.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+BCC Iccrea Group,digital_onboarding,intermediate,https://www.gruppobcciccrea.it/it-IT/Pagine/conti-correnti.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+BCC Iccrea Group,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+BCC Iccrea Group,devops_cloud,intermediate,https://www.gruppobcciccrea.it/it-IT/Pagine/lavora-con-noi.aspx,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cassa Centrale Banca Group,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Cassa Centrale Banca Group,mobile_banking,intermediate,https://www.cassacentrale.it/it/canali-digitali,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cassa Centrale Banca Group,open_banking,basic,https://www.cassacentrale.it/it/psd2-open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cassa Centrale Banca Group,digital_onboarding,intermediate,https://www.cassacentrale.it/it/privati/conti-correnti,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Cassa Centrale Banca Group,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Cassa Centrale Banca Group,devops_cloud,intermediate,https://www.cassacentrale.it/it/lavora-con-noi,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nykredit,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Nykredit,mobile_banking,advanced,https://www.nykredit.dk/dit-liv/digital-bank/mobile-banking/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nykredit,open_banking,basic,https://www.nykredit.com/open-banking/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nykredit,digital_onboarding,intermediate,https://www.nykredit.dk/dit-liv/boligbank/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Nykredit,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Nykredit,devops_cloud,intermediate,https://www.nykredit.com/careers/it-tech/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank Norwegian (Nordax Group),total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Bank Norwegian (Nordax Group),mobile_banking,advanced,https://www.banknorwegian.no/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank Norwegian (Nordax Group),open_banking,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Bank Norwegian (Nordax Group),digital_onboarding,advanced,https://www.banknorwegian.no/kundeservice/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Bank Norwegian (Nordax Group),ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Bank Norwegian (Nordax Group),devops_cloud,intermediate,https://www.nordaxgroup.com/en/careers/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Transilvania,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Transilvania,mobile_banking,advanced,https://www.bancatransilvania.ro/en/personal-banking/online-banking/mobile-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Transilvania,open_banking,basic,https://en.bancatransilvania.ro/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Transilvania,digital_onboarding,intermediate,https://www.bancatransilvania.ro/en/personal-banking/current-accounts,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Transilvania,ai_chatbot,intermediate,https://www.bancatransilvania.ro/en/contact,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Transilvania,devops_cloud,intermediate,https://www.bancatransilvania.ro/en/about-us/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CEC Bank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+CEC Bank,mobile_banking,intermediate,https://www.cec.ro/persoane-fizice/mobile-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CEC Bank,open_banking,basic,https://www.cec.ro/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CEC Bank,digital_onboarding,basic,https://www.cec.ro/persoane-fizice/conturi-si-pachete,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+CEC Bank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+CEC Bank,devops_cloud,basic,https://www.cec.ro/despre-cec-bank/cariere,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+DZ Bank Group,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+DZ Bank Group,mobile_banking,intermediate,https://www.volksbanken-raiffeisenbanken.de/privatkunden/digitalbanking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+DZ Bank Group,open_banking,basic,https://www.dzbank.com/content/dzbank/en/home/investor-relations/regulatory-disclosures.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+DZ Bank Group,digital_onboarding,basic,https://www.volksbank.de/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+DZ Bank Group,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+DZ Bank Group,devops_cloud,advanced,https://www.dzbank.com/content/dzbank/en/home/careers.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Berliner Volksbank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Berliner Volksbank,mobile_banking,advanced,https://www.berliner-volksbank.de/privatkunden/girokonto-und-bezahlen/banking-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Berliner Volksbank,open_banking,basic,https://www.berliner-volksbank.de/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Berliner Volksbank,digital_onboarding,intermediate,https://www.berliner-volksbank.de/privatkunden/girokonto-und-kreditkarten/girokonto.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Berliner Volksbank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Berliner Volksbank,devops_cloud,basic,https://www.berliner-volksbank.de/meine-bank/karriere.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+GLS Bank,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+GLS Bank,mobile_banking,intermediate,https://www.gls.de/privatkunden/gls-app/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+GLS Bank,open_banking,basic,https://www.gls.de/psd2/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+GLS Bank,digital_onboarding,intermediate,https://www.gls.de/privatkunden/konto/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+GLS Bank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+GLS Bank,devops_cloud,intermediate,https://www.gls.de/karriere/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank Oberosterreich,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank Oberosterreich,mobile_banking,intermediate,https://www.raiffeisen.at/ooe/de/privatkunden/digitales-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank Oberosterreich,open_banking,basic,https://www.raiffeisen.at/ooe/de/rechtliches/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank Oberosterreich,digital_onboarding,intermediate,https://www.raiffeisen.at/ooe/de/privatkunden/konto-karten/kontoeroeffnung.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank Oberosterreich,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Raiffeisenlandesbank Oberosterreich,devops_cloud,intermediate,https://www.rlbooe.at/karriere,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank NO-Wien,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisenlandesbank NO-Wien,mobile_banking,intermediate,https://www.raiffeisen.at/noew/de/privatkunden/digitales-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank NO-Wien,open_banking,basic,https://www.raiffeisen.at/noew/de/rechtliches/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank NO-Wien,digital_onboarding,intermediate,https://www.raiffeisen.at/noew/de/privatkunden/konto-karten/kontoeroeffnung.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisenlandesbank NO-Wien,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Raiffeisenlandesbank NO-Wien,devops_cloud,intermediate,https://www.raiffeisenbank.at/de/karriere.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen-Landesbank Steiermark,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Raiffeisen-Landesbank Steiermark,mobile_banking,intermediate,https://www.raiffeisen.at/stmk/de/privatkunden/digitales-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen-Landesbank Steiermark,open_banking,basic,https://www.raiffeisen.at/stmk/de/rechtliches/psd2.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen-Landesbank Steiermark,digital_onboarding,intermediate,https://www.raiffeisen.at/stmk/de/privatkunden/konto-karten/kontoeroeffnung.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Raiffeisen-Landesbank Steiermark,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Raiffeisen-Landesbank Steiermark,devops_cloud,basic,https://www.rlbstmk.at/de/karriere.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank (SNS),total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+de Volksbank (SNS),mobile_banking,advanced,https://www.snsbank.nl/particulier/betalen/sns-app.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank (SNS),open_banking,basic,https://www.snsbank.nl/over-sns/open-banking.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank (SNS),digital_onboarding,intermediate,https://www.snsbank.nl/particulier/betalen/betaalrekening-openen.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+de Volksbank (SNS),ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+de Volksbank (SNS),devops_cloud,intermediate,https://www.devolksbank.nl/werken-bij.html,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Triodos Bank,total_assets_millions_eur,16968,https://www.triodos.com/binaries/content/assets/tbho/investor-relations/analysts/triodos-bank-annual-results-2024-press-release.pdf,Triodos Bank Annual Results 2024 Press Release,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Triodos Bank,customer_count_thousands,747,https://www.triodos.com/en/about-triodos-bank/who-we-are/mission-principles/,Triodos Bank mission and principles,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Triodos Bank,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Triodos Bank,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Triodos Bank,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Triodos Bank,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Triodos Bank,reporting_year,2024,https://www.triodos.com/reporting,Triodos financial and impact reporting,official_source,2026-02-11,verified,Value retained in strict dataset from cited source.
+Triodos Bank,mobile_banking,advanced,https://www.triodos.nl/service-en-contact/bankieren-met-de-app,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Triodos Bank,open_banking,basic,https://www.triodos.com/en/open-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Triodos Bank,digital_onboarding,intermediate,https://www.triodos.nl/particulier/betalen/betaalrekening-openen,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Triodos Bank,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Triodos Bank,devops_cloud,intermediate,https://www.triodos.com/en/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Popolare di Bari,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banca Popolare di Bari,mobile_banking,intermediate,https://www.popolarebari.it/privati/canali-digitali/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Popolare di Bari,open_banking,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banca Popolare di Bari,digital_onboarding,basic,https://www.popolarebari.it/privati/conti/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banca Popolare di Bari,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banca Popolare di Bari,devops_cloud,basic,https://www.popolarebari.it/istituzionale/lavora-con-noi/,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque Raiffeisen,total_assets_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,customer_count_thousands,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,deposit_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,loan_volume_millions_eur,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,employee_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,branch_count,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,reporting_year,,,,,2026-02-11,unverified,No explicit source-backed value captured in this strict pass.
+Banque Raiffeisen,mobile_banking,advanced,https://www.raiffeisen.lu/en/private/customers/digital-banking,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque Raiffeisen,open_banking,basic,https://www.raiffeisen.lu/en/psd2,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque Raiffeisen,digital_onboarding,intermediate,https://www.raiffeisen.lu/en/private/customers/accounts,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.
+Banque Raiffeisen,ai_chatbot,none,,,,2026-02-11,not_applicable,No feature claimed; evidence URL optional.
+Banque Raiffeisen,devops_cloud,basic,https://www.raiffeisen.lu/en/bank/careers,,bank_site_or_source_url,2026-02-11,verified,Evidence URL present for claimed maturity.

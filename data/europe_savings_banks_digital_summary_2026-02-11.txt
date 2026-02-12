@@ -1,0 +1,35 @@
+European Savings Banks Digital Capability Enrichment
+Generated: 2026-02-11
+
+Scope
+- Enriched 10 major savings-bank institutions/networks in Europe.
+- Captured requested fields: address, digital competitiveness rank (country-level IMD 2025), mobile app, open banking/APIs, digital onboarding, AI/chatbot support, DevOps/cloud expertise.
+- Maintained explicit Unknown/Partial values where direct evidence was not found in this pass.
+
+Method
+1. Entity selection focused on major savings-bank institutions/networks with clear public documentation.
+2. Country digital competitiveness rank sourced from IMD World Digital Competitiveness Ranking 2025.
+3. Capability evidence collected from official bank websites, developer portals, and institutional tech communications.
+4. Confidence assigned by source quality and directness:
+   - High: official feature page, official developer portal, official ranking table.
+   - Medium: official newsroom or reputable engineering/vendor case study.
+   - Low/Partial: indirect evidence (e.g., multibanking implying open-banking enablement).
+
+Key Observations
+- Mobile apps are universal across sampled savings-bank institutions.
+- Open banking/API readiness is strong among digitally mature groups (CaixaBank, Erste/Sparkasse Austria, SpareBank 1, Swedbank, Savings Banks Group Finland).
+- AI/chatbot support is present in multiple institutions but inconsistently disclosed.
+- DevOps/cloud expertise is often under-documented publicly even where modernization likely exists.
+
+Coverage Gap vs "All Savings Banks in Europe"
+- Europe contains a very large number of local/regional savings banks (especially Sparkassen/Sparebanken structures), so this dataset is a high-quality first tranche, not yet a full census.
+- To complete full coverage, the next pass should expand country-by-country via regulator/association lists and then enrich each legal entity.
+
+Output Files
+- europe_savings_banks_digital_enriched_2026-02-11.csv
+- europe_savings_banks_digital_citation_log_2026-02-11.csv
+- europe_savings_banks_digital_summary_2026-02-11.txt
+
+Geocoding readiness
+- Added normalized address components: address_line1, city, postal_code, country_code_iso2.
+- Added geocode_query (deterministic single-line query) and geocode_ready flag.

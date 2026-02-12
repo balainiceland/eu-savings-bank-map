@@ -1,0 +1,223 @@
+country,country_code,bank_name,city,website,parent_group,source_url,access_date,status,notes
+Spain,ES,CaixaBank,Valencia,https://www.caixabank.es,,https://www.caixabank.es,2026-02-12,enriched_existing,From existing enriched dataset.
+France,FR,Groupe BPCE (Caisse d'Epargne network),Paris,https://www.groupebpce.com,BPCE,https://www.groupebpce.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Austria,AT,Erste Group (Sparkassen),Vienna,https://www.erstegroup.com,Erste Group / Sparkassen,https://www.erstegroup.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Sparkassen-Finanzgruppe,Berlin,https://www.sparkasse.de,Sparkassen-Finanzgruppe,https://www.sparkasse.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Luxembourg,LU,Banque et Caisse d'Epargne de l'Etat (Spuerkeess),Luxembourg,https://www.spuerkeess.lu,,https://www.spuerkeess.lu,2026-02-12,enriched_existing,From existing enriched dataset.
+Czech Republic,CZ,Ceska sporitelna,Prague,https://www.csas.cz,Erste Group,https://www.csas.cz,2026-02-12,enriched_existing,From existing enriched dataset.
+Slovakia,SK,Slovenska sporitelna,Bratislava,https://www.slsp.sk,Erste Group,https://www.slsp.sk,2026-02-12,enriched_existing,From existing enriched dataset.
+Finland,FI,Savings Banks Group (Saastopankki),Helsinki,https://www.saastopankki.fi,Savings Banks Group,https://www.saastopankki.fi,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,SpareBank 1 Alliance,Oslo,https://www.sparebank1.no,SpareBank 1 Alliance,https://www.sparebank1.no,2026-02-12,enriched_existing,From existing enriched dataset.
+Sweden,SE,Swedbank and Savings Banks,Sundbyberg,https://www.swedbank.com,Sparbankerna + Swedbank,https://www.swedbank.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Hungary,HU,OTP Bank,Budapest,https://www.otpbank.hu,OTP Group,https://www.otpbank.hu,2026-02-12,enriched_existing,From existing enriched dataset.
+Portugal,PT,Caixa Geral de Depositos,Lisbon,https://www.cgd.pt,,https://www.cgd.pt,2026-02-12,enriched_existing,From existing enriched dataset.
+Portugal,PT,Banco Montepio,Lisbon,https://www.bancomontepio.pt,Associacao Mutualista Montepio,https://www.bancomontepio.pt,2026-02-12,enriched_existing,From existing enriched dataset.
+Netherlands,NL,de Volksbank,Utrecht,https://www.devolksbank.nl,,https://www.devolksbank.nl,2026-02-12,enriched_existing,From existing enriched dataset.
+Netherlands,NL,Rabobank,Utrecht,https://www.rabobank.com,Cooperative Rabobank,https://www.rabobank.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Austria,AT,Raiffeisen Bank International,Vienna,https://www.rbinternational.com,Raiffeisen,https://www.rbinternational.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Switzerland,CH,Raiffeisen Switzerland,St. Gallen,https://www.raiffeisen.ch,Raiffeisen Group,https://www.raiffeisen.ch,2026-02-12,enriched_existing,From existing enriched dataset.
+Finland,FI,OP Financial Group,Helsinki,https://www.op.fi,OP Cooperative,https://www.op.fi,2026-02-12,enriched_existing,From existing enriched dataset.
+United Kingdom,GB,Nationwide Building Society,Swindon,https://www.nationwide.co.uk,,https://www.nationwide.co.uk,2026-02-12,enriched_existing,From existing enriched dataset.
+United Kingdom,GB,Coventry Building Society,Coventry,https://www.coventrybuildingsociety.co.uk,,https://www.coventrybuildingsociety.co.uk,2026-02-12,enriched_existing,From existing enriched dataset.
+United Kingdom,GB,Skipton Building Society,Skipton,https://www.skipton.co.uk,,https://www.skipton.co.uk,2026-02-12,enriched_existing,From existing enriched dataset.
+United Kingdom,GB,Yorkshire Building Society,Bradford,https://www.ybs.co.uk,,https://www.ybs.co.uk,2026-02-12,enriched_existing,From existing enriched dataset.
+United Kingdom,GB,Principality Building Society,Cardiff,https://www.principality.co.uk,,https://www.principality.co.uk,2026-02-12,enriched_existing,From existing enriched dataset.
+Malta,MT,Bank of Valletta,Valletta,https://www.bov.com,,https://www.bov.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Finland,FI,Aktia Bank,Helsinki,https://www.aktia.com,,https://www.aktia.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Italy,IT,Banca Popolare di Sondrio,Sondrio,https://www.popso.it,,https://www.popso.it,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Sparkasse KoelnBonn,Cologne,https://www.sparkasse-koelnbonn.de,Sparkassen-Finanzgruppe,https://www.sparkasse-koelnbonn.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Hamburger Sparkasse (Haspa),Hamburg,https://www.haspa.de,Sparkassen-Finanzgruppe,https://www.haspa.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,Ibercaja Banco,Zaragoza,https://www.ibercaja.es,Ibercaja Group,https://www.ibercaja.es,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,Kutxabank,Bilbao,https://www.kutxabank.es,Kutxabank Group,https://www.kutxabank.es,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,Unicaja Banco,Malaga,https://www.unicajabanco.es,Fundacion Unicaja,https://www.unicajabanco.es,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,ABANCA,A Coruna,https://www.abanca.com,ABANCA Corporacion Bancaria,https://www.abanca.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,Cajamar Caja Rural,Almeria,https://www.cajamar.es,Grupo Cooperativo Cajamar,https://www.cajamar.es,2026-02-12,enriched_existing,From existing enriched dataset.
+France,FR,Credit Mutuel Alliance Federale,Strasbourg,https://www.creditmutuel.fr,Credit Mutuel,https://www.creditmutuel.fr,2026-02-12,enriched_existing,From existing enriched dataset.
+France,FR,Credit Agricole Group,Paris,https://www.credit-agricole.com,Credit Agricole,https://www.credit-agricole.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Italy,IT,BCC Iccrea Group,Rome,https://www.gruppobcciccrea.it,Iccrea Banca,https://www.gruppobcciccrea.it,2026-02-12,enriched_existing,From existing enriched dataset.
+Italy,IT,Cassa Centrale Banca Group,Trento,https://www.cassacentrale.it,Cassa Centrale Banca,https://www.cassacentrale.it,2026-02-12,enriched_existing,From existing enriched dataset.
+Denmark,DK,Nykredit,Copenhagen,https://www.nykredit.com,Nykredit Group,https://www.nykredit.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,Bank Norwegian (Nordax Group),Fornebu,https://www.banknorwegian.no,Nordax Bank,https://www.banknorwegian.no,2026-02-12,enriched_existing,From existing enriched dataset.
+Romania,RO,Banca Transilvania,Cluj-Napoca,https://www.bancatransilvania.ro,BT Group,https://www.bancatransilvania.ro,2026-02-12,enriched_existing,From existing enriched dataset.
+Romania,RO,CEC Bank,Bucharest,https://www.cec.ro,Romanian State,https://www.cec.ro,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,DZ Bank Group,Frankfurt,https://www.dzbank.com,German Cooperative Financial Network,https://www.dzbank.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Berliner Volksbank,Berlin,https://www.berliner-volksbank.de,BVR,https://www.berliner-volksbank.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,GLS Bank,Bochum,https://www.gls.de,Cooperative GLS Gemeinschaftsbank,https://www.gls.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Austria,AT,Raiffeisenlandesbank Oberosterreich,Linz,https://www.rlbooe.at,Raiffeisen Banking Group Austria,https://www.rlbooe.at,2026-02-12,enriched_existing,From existing enriched dataset.
+Austria,AT,Raiffeisenlandesbank NO-Wien,Vienna,https://www.raiffeisenbank.at,Raiffeisen Banking Group Austria,https://www.raiffeisenbank.at,2026-02-12,enriched_existing,From existing enriched dataset.
+Austria,AT,Raiffeisen-Landesbank Steiermark,Graz,https://www.rlbstmk.at,Raiffeisen Banking Group Austria,https://www.rlbstmk.at,2026-02-12,enriched_existing,From existing enriched dataset.
+Netherlands,NL,de Volksbank (SNS),Utrecht,https://www.snsbank.nl,de Volksbank,https://www.snsbank.nl,2026-02-12,enriched_existing,From existing enriched dataset.
+Netherlands,NL,Triodos Bank,Driebergen-Rijsenburg,https://www.triodos.com,Triodos Group,https://www.triodos.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Italy,IT,Banca Popolare di Bari,Bari,https://www.popolarebari.it,MCC Group,https://www.popolarebari.it,2026-02-12,enriched_existing,From existing enriched dataset.
+Luxembourg,LU,Banque Raiffeisen,Leudelange,https://www.raiffeisen.lu,Raiffeisen Luxembourg,https://www.raiffeisen.lu,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Sparkasse Hannover,Hannover,https://www.sparkasse-hannover.de,Sparkassen-Finanzgruppe,https://www.sparkasse-hannover.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Kreissparkasse Koeln,Cologne,https://www.ksk-koeln.de,Sparkassen-Finanzgruppe,https://www.ksk-koeln.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Frankfurter Sparkasse,Frankfurt,https://www.frankfurter-sparkasse.de,Helaba / Sparkassen-Finanzgruppe,https://www.frankfurter-sparkasse.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Berliner Sparkasse,Berlin,https://www.berliner-sparkasse.de,Sparkassen-Finanzgruppe,https://www.berliner-sparkasse.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Stadtsparkasse Duesseldorf,Duesseldorf,https://www.sskduesseldorf.de,Sparkassen-Finanzgruppe,https://www.sskduesseldorf.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Germany,DE,Sparkasse Bremen,Bremen,https://www.sparkasse-bremen.de,Sparkassen-Finanzgruppe,https://www.sparkasse-bremen.de,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,SpareBank 1 SR-Bank,Stavanger,https://www.sr-bank.no,SpareBank 1 Alliance,https://www.sr-bank.no,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,SpareBank 1 SMN,Trondheim,https://www.sparebank1.no/nb/smn,SpareBank 1 Alliance,https://www.sparebank1.no/nb/smn,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,SpareBank 1 Nord-Norge,Tromso,https://www.sparebank1.no/nb/nord-norge,SpareBank 1 Alliance,https://www.sparebank1.no/nb/nord-norge,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,Sparebanken Vest,Bergen,https://www.spv.no,,https://www.spv.no,2026-02-12,enriched_existing,From existing enriched dataset.
+Norway,NO,Sparebanken Sor,Kristiansand,https://www.sor.no,,https://www.sor.no,2026-02-12,enriched_existing,From existing enriched dataset.
+Sweden,SE,Lansforsakringar Bank,Stockholm,https://www.lansforsakringar.se,Lansforsakringar AB,https://www.lansforsakringar.se,2026-02-12,enriched_existing,From existing enriched dataset.
+United Kingdom,GB,Leeds Building Society,Leeds,https://www.leedsbuildingsociety.co.uk,,https://www.leedsbuildingsociety.co.uk,2026-02-12,enriched_existing,From existing enriched dataset.
+Belgium,BE,KBC Brussels,Brussels,https://www.kbcbrussels.be,KBC Group,https://www.kbcbrussels.be,2026-02-12,enriched_existing,From existing enriched dataset.
+Belgium,BE,Belfius Bank,Brussels,https://www.belfius.be,,https://www.belfius.be,2026-02-12,enriched_existing,From existing enriched dataset.
+Italy,IT,Banca di Asti,Asti,https://www.bancadiasti.it,,https://www.bancadiasti.it,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,Caja Rural de Navarra,Pamplona,https://www.cajaruraldenavarra.com,Grupo Caja Rural,https://www.cajaruraldenavarra.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Spain,ES,Laboral Kutxa,Mondragon,https://www.laboralkutxa.com,,https://www.laboralkutxa.com,2026-02-12,enriched_existing,From existing enriched dataset.
+Slovenia,SI,Nova Ljubljanska Banka (NLB),Ljubljana,https://www.nlb.si,,https://www.nlb.si,2026-02-12,enriched_existing,From existing enriched dataset.
+Sweden,SE,Bjursås Sparbank,,https://www.bjursassparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Dalslands Sparbank,,https://www.dalsbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Ekeby Sparbank,,https://www.ekebysparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Falkenbergs Sparbank,,https://www.falkenbergssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Fryksdalens Sparbank,,https://www.fryksdalenssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Hälsinglands Sparbank,,https://www.halsinglandssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Häradssparbanken Mönsterås,,https://www.haradssparbanken.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Högsby Sparbank,,https://www.hogsbysparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Ivetofta Sparbank i Bromölla,,https://www.ivetoftasparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Kinda Ydre Sparbank,,https://www.kindaydresparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Laholms Sparbank,,https://www.laholmssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Lekebergs Sparbank,,https://www.lekebergssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Leksands Sparbank,,https://www.leksandssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Lönneberga-Tuna-Vena Sparbank,,https://www.ltvsparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Markaryds Sparbank,,https://www.markarydssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Mjöbäcks Sparbank,,https://www.mjobackssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Norrbärke Sparbank,,https://www.norrbarke-sparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Orusts Sparbank,,https://www.orustsparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Roslagens Sparbank,,https://www.roslagenssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sala Sparbank,,https://www.salasparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sidensjö Sparbank,,https://www.sidensjosparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Skurups Sparbank,,https://www.skurupssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Snapphanebygdens Sparbank,,https://www.snapphanebygdenssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Bergslagen,,https://www.sparbankenbergslagen.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Boken,,https://www.sparbankenboken.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Alingsås,,https://www.sparbankenalingsas.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Eken,,https://www.sparbankeneken.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Gotland,,https://www.sparbankengotland.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Göinge,,https://www.sparbankengoinge.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken i Enköping,,https://www.sparbankenenkoping.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken i Karlshamn,,https://www.sparbankenikarlshamn.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Lidköping,,https://www.sparbankenlidkoping.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Nord,,https://www.sparbankennord.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Skaraborg,,https://www.sparbankenskaraborg.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Skåne,,https://www.sparbankenskane.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Spira,,https://www.tjustbanken.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Tranemo,,https://www.sparbankentranemo.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Tanum,,https://www.sparbankentanum.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Sjuhärad,,https://sparbankensjuharad.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sparbanken Mälardalen,,https://www.sparbankenmalardalen.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sörmlands Sparbank,,https://www.sormlandssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Södra Hestra Sparbank,,https://www.sodrahestrasparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Sölvesborg-Mjällby Sparbank,,https://www.smsparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Tidaholms Sparbank,,https://www.tidaholms-sparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Tjörns Sparbank,,https://www.tjorns-sparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Ulricehamns Sparbank,,https://www.ulricehamnssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Valdemarsviks Sparbank,,https://www.valdemarsvikssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Vadstena Sparbank,,https://www.vadstenasparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Westra Wermlands Sparbank,,https://www.wwsparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Varbergs Sparbank,,https://www.varbergssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Vimmerby Sparbank,,https://www.vimmerbysparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Virserums Sparbank,,https://www.virserumssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Ålems Sparbank,,https://www.alemssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Åse Viste Sparbank,,https://www.aseochvisteharadssparbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Sweden,SE,Ölands Bank,,https://www.olandsbank.se,Sparbankernas Riksförbund,https://sparbankerna.se/om-sparbankerna/sparbanker.html,2026-02-12,enumerated,Member listed on Sparbankernas Riksförbund page.
+Germany,DE,Sparkasse Aachen,Aachen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Ostalb,Aalen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Westmünsterland,Ahaus,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Altbayern,Aichach,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Altenburger Land,Altenburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Amberg-Sulzbach,Amberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Erzgebirgssparkasse,Annaberg-Buchholz,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Ansbach,Ansbach,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Aschaffenburg Miltenberg,Aschaffenburg/Miltenberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Attendorn-Lennestadt-Kirchhundem,Attendorn,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Stadtsparkasse Augsburg,Augsburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Aurich-Norden,Aurich/Norden,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Rhein-Haardt,Bad Dürkheim,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Bad Hersfeld-Rotenburg,Bad Hersfeld,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Taunus Sparkasse,Bad Homburg vor der Höhe,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Bad Kissingen,Bad Kissingen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Rhein-Nahe,Bad Kreuznach,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Westerwald-Sieg,Bad Marienberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Ahrweiler,Bad Neuenahr-Ahrweiler,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Bad Neustadt a. d. Saale,Bad Neustadt an der Saale,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Bad Oeynhausen - Porta Westfalica,Bad Oeynhausen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Holstein,Bad Oldesloe,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Stadtsparkasse Bad Pyrmont,Bad Pyrmont,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Berchtesgadener Land,Bad Reichenhall,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Bad Tölz-Wolfratshausen,Bad Tölz,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Baden-Baden Gaggenau,Baden-Baden,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Ostsächsische Sparkasse Dresden,Dresden,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Dortmund,Dortmund,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Duisburg,Duisburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Stadtsparkasse Düsseldorf,Düsseldorf,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Düsseldorf,Düsseldorf,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Oder-Spree,Frankfurt (Oder),,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Mittelsachsen,Freiberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Freiburg-Nördlicher Breisgau,Freiburg im Breisgau,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Freising Moosburg,Freising,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Freudenstadt,Freudenstadt,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Oberhessen,Friedberg (Hessen),,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Fulda,Fulda,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Fürth,Fürth,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Gelsenkirchen,Gelsenkirchen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse an Ennepe und Ruhr,Gevelsberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Kaiserslautern,Kaiserslautern,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Karlsruhe,Karlsruhe,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kasseler Sparkasse,Kassel,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Förde Sparkasse,Kiel,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Köln,Köln,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse KölnBonn,Köln,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Krefeld,Krefeld,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Leverkusen,Leverkusen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Limburg,Limburg an der Lahn,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Lörrach-Rheinfelden,Lörrach,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Ludwigsburg,Ludwigsburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Lüneburg,Lüneburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Magdeburg,Magdeburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Rheinhessen Sparkasse,Mainz,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Rhein Neckar Nord,Mannheim,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Marburg-Biedenkopf,Marburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Passau,Passau,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Pforzheim Calw,Pforzheim,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Uckermark,Prenzlau,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Mittelbrandenburgische Sparkasse in Potsdam,Potsdam,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Saarbrücken,Saarbrücken,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Saarlouis,Saarlouis,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Stadtsparkasse Schwedt,Schwedt/Oder,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Schweinfurt-Haßberge,Schweinfurt,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Mecklenburg-Schwerin,Schwerin,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Siegen,Siegen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Hohenzollerische Landesbank Kreissparkasse Sigmaringen,Sigmaringen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Hegau-Bodensee,Singen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Stadt-Sparkasse Solingen,Solingen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Sonneberg,Sonneberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Stade,Stade,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Niederbayern-Mitte,Straubing,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Märkisch-Oderland,Strausberg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Diepholz,Syke,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Traunstein-Trostberg,Traunstein,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Trier,Trier,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Tübingen,Tübingen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Ulm,Ulm,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Hilden-Ratingen-Velbert,Velbert,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Verden,Verden (Aller),,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Schwarzwald-Baar,Villingen-Schwenningen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Kreissparkasse Waiblingen,Waiblingen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Hochrhein,Waldshut-Tiengen,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Müritz-Sparkasse,Waren (Müritz),,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Oberpfalz Nord,Weiden in der Oberpfalz,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Nassauische Sparkasse,Wiesbaden,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Mecklenburg-Nordwest,Wismar,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Stadtsparkasse Wuppertal,Wuppertal,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Mainfranken Würzburg,Würzburg,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Burgenlandkreis,Zeitz,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Rotenburg Osterholz,Zeven,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Oberlausitz-Niederschlesien,Zittau,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Germany,DE,Sparkasse Zwickau,Zwickau,,Sparkassen-Finanzgruppe,https://de.wikipedia.org/wiki/Liste_der_Sparkassen_in_Deutschland,2026-02-12,enumerated,Extracted from “Bestehende Sparkassen” table.
+Spain,ES,Caixa Ontinyent,Ontinyent,https://www.caixaontinyent.es,CECA,https://www.ceca.es/notas-prensa/las-entidades-asociadas-a-ceca-alcanzan-un-preacuerdo-de-convenio-colectivo-para-los-proximos-tres-anos/,2026-02-12,enumerated,Named as CECA-associated entity in CECA communication.
+Spain,ES,Caixa Pollença (Colonya),Pollença,https://www.colonya.es,CECA,https://www.ceca.es/notas-prensa/las-entidades-asociadas-a-ceca-alcanzan-un-preacuerdo-de-convenio-colectivo-para-los-proximos-tres-anos/,2026-02-12,enumerated,Named as CECA-associated entity in CECA communication.
+Spain,ES,Cecabank,Madrid,https://www.cecabank.es,CECA,https://www.ceca.es/notas-prensa/las-entidades-asociadas-a-ceca-alcanzan-un-preacuerdo-de-convenio-colectivo-para-los-proximos-tres-anos/,2026-02-12,enumerated,Named as CECA-associated entity in CECA communication.
