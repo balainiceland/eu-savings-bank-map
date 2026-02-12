@@ -20,10 +20,10 @@ export default function FilterPanel() {
       <div className="p-4 border-b-2 border-black flex items-center justify-between">
         <h2 className="font-bold text-black">Filters</h2>
         <div className="flex items-center gap-1">
-          <button onClick={resetFilters} className="p-1.5 hover:bg-esb-mint/30 rounded-lg" title="Reset">
+          <button onClick={resetFilters} className="p-1.5 hover:bg-esb-mint rounded-lg transition-colors" aria-label="Reset filters">
             <RotateCcw className="w-4 h-4 text-gray-500" />
           </button>
-          <button onClick={toggleFilterPanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
+          <button onClick={toggleFilterPanel} className="p-1.5 hover:bg-esb-mint rounded-lg transition-colors" aria-label="Close filters">
             <X className="w-4 h-4 text-gray-500" />
           </button>
         </div>

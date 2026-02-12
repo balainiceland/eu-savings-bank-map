@@ -24,7 +24,7 @@ export default function BenchmarksPanel() {
           <BarChart3 className="w-5 h-5 text-esb-royal" />
           <h2 className="font-bold text-black">Country Benchmarks</h2>
         </div>
-        <button onClick={toggleBenchmarksPanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
+        <button onClick={toggleBenchmarksPanel} className="p-1.5 hover:bg-esb-mint rounded-lg transition-colors" aria-label="Close benchmarks">
           <X className="w-4 h-4 text-gray-500" />
         </button>
       </div>
@@ -71,7 +71,7 @@ export default function BenchmarksPanel() {
           <h3 className="text-sm font-bold text-black mb-2">Country Details</h3>
           <div className="space-y-2">
             {countryBenchmarks.map(cb => (
-              <div key={cb.country} className="bg-esb-gold/50 rounded-lg p-3 border border-black">
+              <div key={cb.country} className="bg-esb-gold rounded-lg p-3 border-2 border-black">
                 <div className="flex items-center justify-between mb-1">
                   <div className="font-medium text-sm text-black">{cb.country}</div>
                   <div className="flex items-center gap-2">

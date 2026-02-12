@@ -42,7 +42,7 @@ export default function ComparePanel() {
           <button onClick={clearCompare} className="text-xs text-gray-500 hover:text-esb-red font-bold">
             Clear all
           </button>
-          <button onClick={toggleComparePanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
+          <button onClick={toggleComparePanel} className="p-1.5 hover:bg-esb-mint rounded-lg transition-colors" aria-label="Close compare">
             <X className="w-4 h-4 text-gray-500" />
           </button>
         </div>
@@ -52,7 +52,7 @@ export default function ComparePanel() {
         {/* Bank cards row */}
         <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${compareBanks.length}, 1fr)` }}>
           {compareBanks.map((bank: Bank, i: number) => (
-            <div key={bank.id} className="border-2 border-black rounded-lg p-3 relative shadow-indo" style={{ backgroundColor: `${COMPARE_COLORS[i]}20` }}>
+            <div key={bank.id} className="border-2 border-black rounded-lg p-3 relative shadow-indo bg-white" style={{ borderLeftColor: COMPARE_COLORS[i], borderLeftWidth: 4 }}>
               <button
                 onClick={() => removeFromCompare(bank.id)}
                 className="absolute top-2 right-2 p-1 hover:bg-gray-100 rounded"
@@ -86,7 +86,7 @@ export default function ComparePanel() {
             <h3 className="text-sm font-bold text-black mb-2">Digital Capability Comparison</h3>
             <ResponsiveContainer width="100%" height={250}>
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="65%">
-                <PolarGrid stroke="#000" strokeOpacity={0.15} />
+                <PolarGrid stroke="#000" strokeOpacity={0.3} />
                 <PolarAngleAxis
                   dataKey="category"
                   tick={(props) => {
@@ -126,7 +126,7 @@ export default function ComparePanel() {
               </RadarChart>
             </ResponsiveContainer>
             {selectedRadarIdx !== null && radarData[selectedRadarIdx] && (
-              <div className="mt-2 bg-esb-gold/50 rounded-lg p-2.5 text-xs border border-black">
+              <div className="mt-2 bg-esb-gold rounded-lg p-2.5 text-xs border-2 border-black">
                 <div className="flex items-center justify-between mb-1">
                   <span className="font-bold text-black">
                     {(radarData[selectedRadarIdx].category as string).replace('\n/', ' /')}
@@ -140,7 +140,7 @@ export default function ComparePanel() {
                   const evidenceUrl = radarData[selectedRadarIdx][`evidence${i}`] as string | undefined;
                   return (
                     <div key={bank.id} className="flex items-center gap-1.5 mt-1">
-                      <span className="w-2 h-2 rounded-full shrink-0 border border-black" style={{ backgroundColor: COMPARE_COLORS[i] }} />
+                      <span className="w-2.5 h-2.5 rounded-full shrink-0 border-2 border-black" style={{ backgroundColor: COMPARE_COLORS[i] }} />
                       <span className="text-black font-medium">{bank.name}:</span>
                       <span className="text-gray-500">{levelLabel}</span>
                       {evidenceUrl && (

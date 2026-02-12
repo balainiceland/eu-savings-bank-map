@@ -26,11 +26,14 @@ export default {
       },
       borderRadius: {
         'indo': '24px',
+        'indo-sm': '12px',
       },
       boxShadow: {
         'indo': '4px 4px 0 #000',
-        'indo-md': '6px 6px 0 #000',
+        'indo-md': '4px 4px 0 #000',
         'indo-lg': '8px 8px 0 #000',
+        'indo-hover': '2px 2px 0 #000',
+        'indo-active': '0 0 0 #000',
       },
     },
   },

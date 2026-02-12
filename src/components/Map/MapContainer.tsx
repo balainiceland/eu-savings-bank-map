@@ -41,7 +41,7 @@ const createMarkerIcon = (score: number, featured: boolean = false) => {
         background-color: ${color};
         border: 2px solid #000;
         border-radius: 50%;
-        box-shadow: 2px 2px 0 #000;
+        box-shadow: 4px 4px 0 #000;
         ${featured ? 'animation: pulse 2s infinite;' : ''}
       "></div>
     `,
@@ -149,7 +149,7 @@ export default function MapContainer() {
                 background-color: #21e9c5; color: #000;
                 border: 2px solid #000; border-radius: 24px;
                 cursor: pointer; font-size: 12px; font-weight: 800;
-                box-shadow: 2px 2px 0 #000;
+                box-shadow: 4px 4px 0 #000;
               "
             >View Details</button>
           </div>

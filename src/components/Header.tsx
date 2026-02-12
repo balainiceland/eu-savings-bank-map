@@ -39,33 +39,33 @@ export default function Header() {
       <div className="flex items-center gap-2">
         <button
           onClick={toggleFilterPanel}
-          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors"
-          title="Filters"
+          className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors"
+          aria-label="Toggle filters"
         >
           <Filter className="w-5 h-5" />
         </button>
         <button
           onClick={toggleRankingsPanel}
-          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors"
-          title="Rankings"
+          className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors"
+          aria-label="Toggle rankings"
         >
           <Trophy className="w-5 h-5" />
         </button>
         <button
           onClick={toggleBenchmarksPanel}
-          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors"
-          title="Benchmarks"
+          className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors"
+          aria-label="Toggle benchmarks"
         >
           <BarChart3 className="w-5 h-5" />
         </button>
         <button
           onClick={toggleComparePanel}
-          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors relative"
-          title="Compare"
+          className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors relative"
+          aria-label="Toggle compare"
         >
           <GitCompareArrows className="w-5 h-5" />
           {compareBanks.length > 0 && (
-            <span className="absolute -top-1 -right-1 bg-esb-royal text-black text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
+            <span className="absolute -top-1 -right-1 bg-esb-royal text-black text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-black">
               {compareBanks.length}
             </span>
           )}

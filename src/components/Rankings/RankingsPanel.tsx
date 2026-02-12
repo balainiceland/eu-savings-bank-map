@@ -54,7 +54,7 @@ export default function RankingsPanel() {
           <h2 className="font-bold text-black">Rankings</h2>
           <span className="text-xs text-gray-400">({sorted.length} banks)</span>
         </div>
-        <button onClick={toggleRankingsPanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
+        <button onClick={toggleRankingsPanel} className="p-1.5 hover:bg-esb-mint rounded-lg transition-colors" aria-label="Close rankings">
           <X className="w-4 h-4 text-gray-500" />
         </button>
       </div>
@@ -62,7 +62,7 @@ export default function RankingsPanel() {
       {/* Table */}
       <div className="overflow-y-auto flex-1">
         <table className="w-full">
-          <thead className="bg-esb-gold sticky top-0">
+          <thead className="bg-esb-gold sticky top-0 border-b-2 border-black">
             <tr>
               <th className="px-3 py-2 text-left text-xs font-bold text-black uppercase w-8">#</th>
               <th className="px-3 py-2 text-left text-xs font-bold text-black uppercase">Bank</th>
@@ -71,14 +71,14 @@ export default function RankingsPanel() {
               <SortHeader field="customerCount" label="Customers" />
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-200">
             {sorted.map((bank: Bank, index: number) => (
               <tr
                 key={bank.id}
-                className="hover:bg-esb-mint/30 cursor-pointer transition-colors"
+                className="hover:bg-esb-mint cursor-pointer transition-colors"
                 onClick={() => setSelectedBank(bank)}
               >
-                <td className="px-3 py-2.5 text-sm text-gray-400 font-mono">{index + 1}</td>
+                <td className="px-3 py-2.5 text-sm text-gray-500 font-mono font-bold">{index + 1}</td>
                 <td className="px-3 py-2.5">
                   <div className="text-sm font-medium text-black">{bank.name}</div>
                   <div className="text-xs text-gray-400">{bank.country}</div>

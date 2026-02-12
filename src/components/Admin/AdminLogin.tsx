@@ -76,7 +76,7 @@ export default function AdminLogin() {
           </div>
 
           {error && (
-            <div className="text-sm text-black bg-esb-red/30 border border-black px-3 py-2 rounded-lg">{error}</div>
+            <div className="text-sm text-black bg-esb-red border-2 border-black px-3 py-2 rounded-lg">{error}</div>
           )}
 
           <button

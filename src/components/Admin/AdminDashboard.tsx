@@ -204,7 +204,7 @@ export default function AdminDashboard() {
                 key={t}
                 onClick={() => setTab(t)}
                 className={`px-4 py-1.5 text-sm rounded-md font-bold transition-colors ${
-                  tab === t ? 'bg-esb-royal text-black' : 'text-gray-600 hover:bg-esb-mint/30'
+                  tab === t ? 'bg-esb-royal text-black' : 'text-gray-600 hover:bg-esb-mint'
                 }`}
               >
                 {t === 'settings' ? <Settings className="w-4 h-4" /> : t.charAt(0).toUpperCase() + t.slice(1)}
@@ -212,7 +212,7 @@ export default function AdminDashboard() {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={loadBanks} className="p-2 hover:bg-esb-mint/30 rounded-lg border-2 border-black" title="Refresh">
+            <button onClick={loadBanks} className="p-2 hover:bg-esb-mint rounded-lg border-2 border-black" title="Refresh">
               <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
             </button>
             <button
@@ -260,9 +260,9 @@ export default function AdminDashboard() {
                       <th className="px-4 py-3 text-right text-xs font-bold text-black uppercase">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-200">
                     {filteredBanks.map(bank => (
-                      <tr key={bank.id} className="hover:bg-esb-mint/20">
+                      <tr key={bank.id} className="hover:bg-esb-mint transition-colors">
                         <td className="px-4 py-3">
                           <div className="font-bold text-sm text-black">{bank.name}</div>
                           <div className="text-xs text-gray-400">{bank.city ? `${bank.city}, ` : ''}{bank.country}</div>
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
                           <div className="text-xs text-gray-400">{formatCustomers(bank.customer_count)}</div>
                         </td>
                         <td className="px-4 py-3">
-                          <span className={`text-xs px-2 py-1 rounded-full font-bold border border-black ${
+                          <span className={`text-xs px-2 py-1 rounded-full font-bold border-2 border-black ${
                             bank.status === 'published'
                               ? 'bg-esb-green text-black'
                               : 'bg-esb-amber text-black'
@@ -293,22 +293,22 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex items-center justify-end gap-1">
-                            <button onClick={() => setEditingBank(bank)} className="p-1.5 hover:bg-esb-mint/30 rounded" title="Edit">
+                            <button onClick={() => setEditingBank(bank)} className="p-1.5 hover:bg-esb-mint rounded" title="Edit">
                               <Edit2 className="w-4 h-4 text-gray-500" />
                             </button>
-                            <button onClick={() => handleToggleFeatured(bank.id, bank.featured)} className="p-1.5 hover:bg-esb-mint/30 rounded" title="Toggle featured">
+                            <button onClick={() => handleToggleFeatured(bank.id, bank.featured)} className="p-1.5 hover:bg-esb-mint rounded" title="Toggle featured">
                               {bank.featured ? <Star className="w-4 h-4 text-esb-royal fill-current" /> : <StarOff className="w-4 h-4 text-gray-300" />}
                             </button>
                             {bank.status === 'draft' ? (
-                              <button onClick={() => handlePublish(bank.id)} className="px-2 py-1 text-xs bg-esb-green text-black border border-black rounded font-bold hover:opacity-80">
+                              <button onClick={() => handlePublish(bank.id)} className="px-2 py-1 text-xs bg-esb-green text-black border-2 border-black rounded font-bold hover:translate-x-px hover:translate-y-px transition-transform">
                                 Publish
                               </button>
                             ) : (
-                              <button onClick={() => handleUnpublish(bank.id)} className="px-2 py-1 text-xs bg-esb-amber text-black border border-black rounded font-bold hover:opacity-80">
+                              <button onClick={() => handleUnpublish(bank.id)} className="px-2 py-1 text-xs bg-esb-amber text-black border-2 border-black rounded font-bold hover:translate-x-px hover:translate-y-px transition-transform">
                                 Unpublish
                               </button>
                             )}
-                            <button onClick={() => handleDelete(bank.id)} className="p-1.5 hover:bg-esb-red/30 rounded" title="Delete">
+                            <button onClick={() => handleDelete(bank.id)} className="p-1.5 hover:bg-esb-red rounded" title="Delete">
                               <Trash2 className="w-4 h-4 text-red-400" />
                             </button>
                           </div>

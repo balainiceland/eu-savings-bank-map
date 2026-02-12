@@ -116,7 +116,7 @@ export default function BankEditor({ bank, onSave, onCancel }: BankEditorProps) 
           {bank ? 'Edit Bank' : 'Add New Bank'}
         </h2>
         <div className="flex items-center gap-2">
-          <button type="button" onClick={onCancel} className="px-3 py-1.5 text-sm text-gray-600 hover:bg-esb-mint/30 rounded-lg border-2 border-black">
+          <button type="button" onClick={onCancel} className="px-3 py-1.5 text-sm text-gray-600 hover:bg-esb-mint rounded-lg border-2 border-black transition-colors">
             <X className="w-4 h-4 inline mr-1" />Cancel
           </button>
           <button type="submit" className="indo-btn indo-btn-teal text-sm">
@@ -221,8 +221,8 @@ export default function BankEditor({ bank, onSave, onCancel }: BankEditorProps) 
                     key={level}
                     className={`flex flex-col items-center p-2 rounded-lg border-2 cursor-pointer text-center transition-colors ${
                       featureLevels[category] === level
-                        ? 'border-black bg-esb-royal/30'
-                        : 'border-gray-200 hover:bg-esb-mint/20'
+                        ? 'border-black bg-esb-mint shadow-indo'
+                        : 'border-gray-200 hover:bg-esb-mint hover:border-black'
                     }`}
                   >
                     <input

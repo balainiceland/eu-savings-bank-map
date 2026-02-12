@@ -45,7 +45,7 @@ export default function AdminSettings() {
       </h2>
 
       {error && (
-        <div className="mb-4 text-sm text-black bg-esb-red/30 border border-black px-3 py-2 rounded-lg">{error}</div>
+        <div className="mb-4 text-sm text-black bg-esb-red border-2 border-black px-3 py-2 rounded-lg">{error}</div>
       )}
 
       <form onSubmit={handleAdd} className="flex gap-2 mb-6">
@@ -66,12 +66,12 @@ export default function AdminSettings() {
       ) : (
         <div className="space-y-2">
           {admins.map(admin => (
-            <div key={admin.id} className="flex items-center justify-between bg-esb-mint/30 rounded-lg px-4 py-3 border border-black">
+            <div key={admin.id} className="flex items-center justify-between bg-esb-mint rounded-lg px-4 py-3 border-2 border-black">
               <div>
                 <div className="text-sm font-bold text-black">{admin.email}</div>
                 <div className="text-xs text-gray-400">Added {new Date(admin.created_at).toLocaleDateString()}</div>
               </div>
-              <button onClick={() => handleRemove(admin.email)} className="p-1.5 hover:bg-esb-red/30 rounded" title="Remove">
+              <button onClick={() => handleRemove(admin.email)} className="p-1.5 hover:bg-esb-red rounded transition-colors" title="Remove">
                 <Trash2 className="w-4 h-4 text-red-400" />
               </button>
             </div>

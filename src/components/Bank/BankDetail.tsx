@@ -48,7 +48,7 @@ export default function BankDetail() {
               <p className="text-xs text-gray-400 mt-0.5">{bank.parentGroup}</p>
             )}
           </div>
-          <button onClick={closeDetailPanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
+          <button onClick={closeDetailPanel} className="p-1.5 hover:bg-esb-mint rounded-lg transition-colors" aria-label="Close details">
             <X className="w-5 h-5 text-gray-400" />
           </button>
         </div>
@@ -64,7 +64,7 @@ export default function BankDetail() {
           {!isInCompare && compareBanks.length < 4 && (
             <button
               onClick={() => addToCompare(bank)}
-              className="ml-auto p-2 hover:bg-esb-mint/30 rounded-lg text-esb-royal"
+              className="ml-auto p-2 hover:bg-esb-mint rounded-lg text-esb-royal transition-colors"
               title="Add to compare"
             >
               <GitCompareArrows className="w-4 h-4" />
@@ -78,7 +78,7 @@ export default function BankDetail() {
         <h3 className="text-sm font-bold text-black mb-2">Digital Capabilities</h3>
         <ResponsiveContainer width="100%" height={220}>
           <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="70%">
-            <PolarGrid stroke="#000" strokeOpacity={0.15} />
+            <PolarGrid stroke="#000" strokeOpacity={0.3} />
             <PolarAngleAxis
               dataKey="category"
               tick={(props) => {
@@ -113,7 +113,7 @@ export default function BankDetail() {
           </RadarChart>
         </ResponsiveContainer>
         {selectedRadarIdx !== null && radarData[selectedRadarIdx] && (
-          <div className="mt-2 bg-esb-mint rounded-lg p-2 text-xs border border-black flex items-center justify-between">
+          <div className="mt-2 bg-esb-mint rounded-lg p-2 text-xs border-2 border-black flex items-center justify-between">
             <div>
               <span className="font-bold text-black">{radarData[selectedRadarIdx].category.replace('\n/', ' /')}</span>
               <span className="text-gray-500 ml-2">{radarData[selectedRadarIdx].levelLabel}</span>
@@ -154,7 +154,7 @@ export default function BankDetail() {
                     {[1, 2, 3].map(i => (
                       <div
                         key={i}
-                        className="w-3 h-3 rounded-sm border border-black"
+                        className="w-3 h-3 rounded-sm border-2 border-black"
                         style={{
                           backgroundColor: i <= points ? '#21e9c5' : '#e5e7eb',
                         }}
@@ -221,7 +221,7 @@ export default function BankDetail() {
 
 function MetricCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-esb-mint rounded-lg p-2.5 border border-black">
+    <div className="bg-esb-mint rounded-lg p-2.5 border-2 border-black shadow-indo">
       <div className="flex items-center gap-1.5 text-gray-500 mb-1">
         {icon}
         <span className="text-xs">{label}</span>
