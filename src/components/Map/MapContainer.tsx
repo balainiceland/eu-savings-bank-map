@@ -120,14 +120,14 @@ export default function MapContainer() {
         });
 
         const popupContent = `
-          <div style="min-width: 220px; font-family: 'Space Grotesk', system-ui, sans-serif;">
-            <h3 style="margin: 0 0 4px 0; font-size: 14px; color: #000; font-weight: 800;">${bank.name}</h3>
-            <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">
+          <div style="width: 260px; padding: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; box-sizing: border-box;">
+            <h3 style="margin: 0 0 4px 0; font-size: 14px; color: #000; font-weight: 800; word-wrap: break-word; line-height: 1.3;">${bank.name}</h3>
+            <p style="margin: 0 0 12px 0; font-size: 12px; color: #666;">
               ${bank.city ? bank.city + ', ' : ''}${bank.country}
             </p>
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
               <div style="
-                width: 40px; height: 40px; border-radius: 50%;
+                width: 40px; height: 40px; min-width: 40px; border-radius: 50%;
                 background-color: ${getScoreColor(bank.digitalScore)};
                 border: 2px solid #000;
                 display: flex; align-items: center; justify-content: center;
@@ -138,7 +138,7 @@ export default function MapContainer() {
                 <div style="font-size: 10px; color: #999;">Digital Score</div>
               </div>
             </div>
-            <div style="display: flex; gap: 12px; font-size: 11px; color: #666; margin-bottom: 8px;">
+            <div style="display: flex; gap: 12px; font-size: 11px; color: #666; margin-bottom: 12px;">
               <div><strong>AUM:</strong> ${formatAssets(bank.totalAssets)}</div>
               <div><strong>Customers:</strong> ${formatCustomers(bank.customerCount)}</div>
             </div>
@@ -155,7 +155,7 @@ export default function MapContainer() {
           </div>
         `;
 
-        marker.bindPopup(popupContent);
+        marker.bindPopup(popupContent, { maxWidth: 300, minWidth: 260 });
         markersRef.current?.addLayer(marker);
       });
   }, [filteredBanks]);
