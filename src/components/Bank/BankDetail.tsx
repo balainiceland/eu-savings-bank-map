@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { X, ExternalLink, GitCompareArrows, Building2, Users, Coins, Calendar } from 'lucide-react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 import { useStore } from '../../hooks/useStore';
 import { DIGITAL_CATEGORY_LABELS, MATURITY_LABELS, MATURITY_POINTS, formatAssets, formatCustomers } from '../../types';
 import type { DigitalCategory } from '../../types';
@@ -11,6 +12,8 @@ export default function BankDetail() {
   const closeDetailPanel = useStore(state => state.closeDetailPanel);
   const addToCompare = useStore(state => state.addToCompare);
   const compareBanks = useStore(state => state.compareBanks);
+
+  const [selectedRadarIdx, setSelectedRadarIdx] = useState<number | null>(null);
 
   if (!isOpen || !selectedBank) return null;
 
@@ -76,9 +79,30 @@ export default function BankDetail() {
         <ResponsiveContainer width="100%" height={220}>
           <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="70%">
             <PolarGrid stroke="#e5e7eb" />
-            <PolarAngleAxis dataKey="category" tick={{ fontSize: 10, fill: '#6b7280' }} />
+            <PolarAngleAxis
+              dataKey="category"
+              tick={(props) => {
+                const { x, y, payload, textAnchor } = props as { x: number; y: number; payload: { index: number; value: string }; textAnchor: string };
+                const lines = String(payload.value).split('\n');
+                const anchor = textAnchor as 'start' | 'middle' | 'end';
+                return (
+                  <text
+                    x={x} y={y}
+                    textAnchor={anchor}
+                    fontSize={10}
+                    fill={selectedRadarIdx === payload.index ? '#2E5090' : '#6b7280'}
+                    fontWeight={selectedRadarIdx === payload.index ? 'bold' : 'normal'}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setSelectedRadarIdx(prev => prev === payload.index ? null : payload.index)}
+                  >
+                    {lines.map((line: string, i: number) => (
+                      <tspan key={i} x={x} dy={i === 0 ? 0 : 12}>{line}</tspan>
+                    ))}
+                  </text>
+                );
+              }}
+            />
             <PolarRadiusAxis angle={90} domain={[0, 3]} tick={{ fontSize: 9 }} tickCount={4} />
-            <Tooltip content={<RadarTooltip />} />
             <Radar
               name="Score"
               dataKey="score"
@@ -88,6 +112,29 @@ export default function BankDetail() {
             />
           </RadarChart>
         </ResponsiveContainer>
+        {selectedRadarIdx !== null && radarData[selectedRadarIdx] && (
+          <div className="mt-2 bg-gray-50 rounded-lg p-2 text-xs flex items-center justify-between">
+            <div>
+              <span className="font-semibold text-esb-navy">{radarData[selectedRadarIdx].category.replace('\n/', ' /')}</span>
+              <span className="text-gray-500 ml-2">{radarData[selectedRadarIdx].levelLabel}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              {radarData[selectedRadarIdx].evidenceUrl && (
+                <a
+                  href={radarData[selectedRadarIdx].evidenceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 inline-flex items-center gap-1"
+                >
+                  Evidence <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
+              <button onClick={() => setSelectedRadarIdx(null)} className="p-0.5 hover:bg-gray-200 rounded">
+                <X className="w-3 h-3 text-gray-400" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Digital Features Detail */}
@@ -168,27 +215,6 @@ export default function BankDetail() {
           </a>
         )}
       </div>
-    </div>
-  );
-}
-
-function RadarTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload: { category: string; levelLabel: string; evidenceUrl?: string } }> }) {
-  if (!active || !payload?.length) return null;
-  const data = payload[0].payload;
-  return (
-    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-2.5 text-xs max-w-[200px]">
-      <div className="font-semibold text-esb-navy">{data.category.replace('\n/', ' /')}</div>
-      <div className="text-gray-600 mt-0.5">{data.levelLabel}</div>
-      {data.evidenceUrl && (
-        <a
-          href={data.evidenceUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:text-blue-700 mt-1 inline-flex items-center gap-1"
-        >
-          View evidence <ExternalLink className="w-2.5 h-2.5" />
-        </a>
-      )}
     </div>
   );
 }

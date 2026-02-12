@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { X, Trash2, ExternalLink } from 'lucide-react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Legend } from 'recharts';
 import { useStore } from '../../hooks/useStore';
 import { DIGITAL_CATEGORY_LABELS, MATURITY_LABELS, MATURITY_POINTS, formatAssets, formatCustomers, getScoreColor, getScoreTierLabel } from '../../types';
 import type { Bank, DigitalCategory } from '../../types';
@@ -12,6 +13,7 @@ export default function ComparePanel() {
   const compareBanks = useStore(state => state.compareBanks);
   const removeFromCompare = useStore(state => state.removeFromCompare);
   const clearCompare = useStore(state => state.clearCompare);
+  const [selectedRadarIdx, setSelectedRadarIdx] = useState<number | null>(null);
 
   if (!isOpen || compareBanks.length === 0) return null;
 
@@ -85,9 +87,30 @@ export default function ComparePanel() {
             <ResponsiveContainer width="100%" height={250}>
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="65%">
                 <PolarGrid stroke="#e5e7eb" />
-                <PolarAngleAxis dataKey="category" tick={{ fontSize: 10, fill: '#6b7280' }} />
+                <PolarAngleAxis
+                  dataKey="category"
+                  tick={(props) => {
+                    const { x, y, payload, textAnchor } = props as { x: number; y: number; payload: { index: number; value: string }; textAnchor: string };
+                    const lines = String(payload.value).split('\n');
+                    const anchor = textAnchor as 'start' | 'middle' | 'end';
+                    return (
+                      <text
+                        x={x} y={y}
+                        textAnchor={anchor}
+                        fontSize={10}
+                        fill={selectedRadarIdx === payload.index ? '#2E5090' : '#6b7280'}
+                        fontWeight={selectedRadarIdx === payload.index ? 'bold' : 'normal'}
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => setSelectedRadarIdx(prev => prev === payload.index ? null : payload.index)}
+                      >
+                        {lines.map((line: string, i: number) => (
+                          <tspan key={i} x={x} dy={i === 0 ? 0 : 12}>{line}</tspan>
+                        ))}
+                      </text>
+                    );
+                  }}
+                />
                 <PolarRadiusAxis angle={90} domain={[0, 3]} tick={{ fontSize: 9 }} tickCount={4} />
-                <Tooltip content={<CompareRadarTooltip banks={compareBanks} />} />
                 {compareBanks.map((_bank: Bank, i: number) => (
                   <Radar
                     key={i}
@@ -101,6 +124,39 @@ export default function ComparePanel() {
                 <Legend wrapperStyle={{ fontSize: 11 }} />
               </RadarChart>
             </ResponsiveContainer>
+            {selectedRadarIdx !== null && radarData[selectedRadarIdx] && (
+              <div className="mt-2 bg-gray-50 rounded-lg p-2.5 text-xs">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="font-semibold text-esb-navy">
+                    {(radarData[selectedRadarIdx].category as string).replace('\n/', ' /')}
+                  </span>
+                  <button onClick={() => setSelectedRadarIdx(null)} className="p-0.5 hover:bg-gray-200 rounded">
+                    <X className="w-3 h-3 text-gray-400" />
+                  </button>
+                </div>
+                {compareBanks.map((bank, i) => {
+                  const levelLabel = radarData[selectedRadarIdx][`level${i}`] as string;
+                  const evidenceUrl = radarData[selectedRadarIdx][`evidence${i}`] as string | undefined;
+                  return (
+                    <div key={bank.id} className="flex items-center gap-1.5 mt-1">
+                      <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: COMPARE_COLORS[i] }} />
+                      <span className="text-gray-700">{bank.name}:</span>
+                      <span className="text-gray-500">{levelLabel}</span>
+                      {evidenceUrl && (
+                        <a
+                          href={evidenceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-1 text-blue-500 hover:text-blue-700 inline-flex items-center gap-0.5"
+                        >
+                          <ExternalLink className="w-2.5 h-2.5" />
+                        </a>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -108,36 +164,3 @@ export default function ComparePanel() {
   );
 }
 
-function CompareRadarTooltip({ active, payload, banks }: { active?: boolean; payload?: Array<{ payload: Record<string, unknown> }>; banks: Bank[] }) {
-  if (!active || !payload?.length) return null;
-  const data = payload[0].payload;
-  const category = (data.category as string).replace('\n/', ' /');
-  return (
-    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-2.5 text-xs max-w-[250px]">
-      <div className="font-semibold text-esb-navy mb-1">{category}</div>
-      {banks.map((bank, i) => {
-        const levelLabel = data[`level${i}`] as string;
-        const evidenceUrl = data[`evidence${i}`] as string | undefined;
-        return (
-          <div key={bank.id} className="flex items-start gap-1.5 mt-1">
-            <span className="w-2 h-2 rounded-full mt-0.5 shrink-0" style={{ backgroundColor: COMPARE_COLORS[i] }} />
-            <div>
-              <span className="text-gray-700">{bank.name}: </span>
-              <span className="text-gray-500">{levelLabel}</span>
-              {evidenceUrl && (
-                <a
-                  href={evidenceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ml-1 text-blue-500 hover:text-blue-700 inline-flex items-center gap-0.5"
-                >
-                  <ExternalLink className="w-2.5 h-2.5" />
-                </a>
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}

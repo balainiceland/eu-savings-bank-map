@@ -45,7 +45,7 @@ const initialFilters: FilterState = {
   search: '',
   country: null,
   scoreRange: [0, 100],
-  aumRange: [0, 1000000],
+  aumRange: [0, 3000000],
   customerRange: [0, 100000],
 };
 
