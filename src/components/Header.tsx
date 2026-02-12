@@ -10,28 +10,28 @@ export default function Header() {
   const { totalBanks, totalCountries, averageScore } = useStatistics();
 
   return (
-    <header className="bg-esb-navy text-white px-4 py-3 flex items-center justify-between z-50 relative">
+    <header className="bg-white text-black px-4 py-3 flex items-center justify-between z-50 relative border-b-2 border-black">
       <div className="flex items-center gap-3">
-        <Landmark className="w-6 h-6 text-esb-gold" />
+        <Landmark className="w-6 h-6 text-esb-royal" />
         <div>
           <h1 className="text-lg font-bold leading-tight">European Savings Bank Map</h1>
-          <p className="text-xs text-gray-300">Digital Competitiveness Rankings</p>
+          <p className="text-xs text-gray-500">Digital Competitiveness Rankings</p>
         </div>
       </div>
 
       {/* Stats */}
       <div className="hidden md:flex items-center gap-6 text-sm">
         <div className="text-center">
-          <div className="font-bold text-esb-gold">{totalBanks}</div>
-          <div className="text-xs text-gray-300">Banks</div>
+          <div className="font-bold text-esb-royal">{totalBanks}</div>
+          <div className="text-xs text-gray-500">Banks</div>
         </div>
         <div className="text-center">
-          <div className="font-bold text-esb-sky">{totalCountries}</div>
-          <div className="text-xs text-gray-300">Countries</div>
+          <div className="font-bold text-esb-green">{totalCountries}</div>
+          <div className="text-xs text-gray-500">Countries</div>
         </div>
         <div className="text-center">
-          <div className="font-bold text-esb-green">{averageScore}</div>
-          <div className="text-xs text-gray-300">Avg Score</div>
+          <div className="font-bold text-esb-amber">{averageScore}</div>
+          <div className="text-xs text-gray-500">Avg Score</div>
         </div>
       </div>
 
@@ -39,33 +39,33 @@ export default function Header() {
       <div className="flex items-center gap-2">
         <button
           onClick={toggleFilterPanel}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors"
           title="Filters"
         >
           <Filter className="w-5 h-5" />
         </button>
         <button
           onClick={toggleRankingsPanel}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors"
           title="Rankings"
         >
           <Trophy className="w-5 h-5" />
         </button>
         <button
           onClick={toggleBenchmarksPanel}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors"
           title="Benchmarks"
         >
           <BarChart3 className="w-5 h-5" />
         </button>
         <button
           onClick={toggleComparePanel}
-          className="p-2 hover:bg-white/10 rounded-lg transition-colors relative"
+          className="p-2 hover:bg-esb-mint/50 rounded-lg transition-colors relative"
           title="Compare"
         >
           <GitCompareArrows className="w-5 h-5" />
           {compareBanks.length > 0 && (
-            <span className="absolute -top-1 -right-1 bg-esb-gold text-esb-navy text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
+            <span className="absolute -top-1 -right-1 bg-esb-royal text-black text-xs w-4 h-4 rounded-full flex items-center justify-center font-bold">
               {compareBanks.length}
             </span>
           )}

@@ -27,10 +27,10 @@ export default function AdminLogin() {
 
   if (!isSupabaseConfigured()) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center">
-          <Landmark className="w-12 h-12 text-esb-gold mx-auto mb-4" />
-          <h1 className="text-xl font-bold text-esb-navy mb-2">Admin Dashboard</h1>
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <div className="bg-white rounded-indo border-2 border-black shadow-indo-md p-8 max-w-md w-full text-center">
+          <Landmark className="w-12 h-12 text-esb-royal mx-auto mb-4" />
+          <h1 className="text-xl font-bold text-black mb-2">Admin Dashboard</h1>
           <p className="text-gray-500 text-sm">
             Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables to enable admin features.
           </p>
@@ -41,11 +41,11 @@ export default function AdminLogin() {
 
   if (sent) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center">
-          <Mail className="w-12 h-12 text-esb-blue mx-auto mb-4" />
-          <h1 className="text-xl font-bold text-esb-navy mb-2">Check your email</h1>
-          <p className="text-gray-500 text-sm">
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <div className="bg-esb-mint rounded-indo border-2 border-black shadow-indo-md p-8 max-w-md w-full text-center">
+          <Mail className="w-12 h-12 text-black mx-auto mb-4" />
+          <h1 className="text-xl font-bold text-black mb-2">Check your email</h1>
+          <p className="text-gray-600 text-sm">
             We sent a magic link to <strong>{email}</strong>. Click the link in the email to sign in.
           </p>
         </div>
@@ -54,35 +54,35 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="bg-white rounded-indo border-2 border-black shadow-indo-md p-8 max-w-md w-full">
         <div className="text-center mb-6">
-          <Landmark className="w-12 h-12 text-esb-gold mx-auto mb-3" />
-          <h1 className="text-xl font-bold text-esb-navy">Admin Login</h1>
+          <Landmark className="w-12 h-12 text-esb-royal mx-auto mb-3" />
+          <h1 className="text-xl font-bold text-black">Admin Login</h1>
           <p className="text-sm text-gray-500 mt-1">European Savings Bank Map</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-black mb-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@example.com"
               required
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-esb-blue/30 focus:border-esb-blue"
+              className="w-full px-4 py-2.5 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-esb-royal/30 focus:border-esb-royal"
             />
           </div>
 
           {error && (
-            <div className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</div>
+            <div className="text-sm text-black bg-esb-red/30 border border-black px-3 py-2 rounded-lg">{error}</div>
           )}
 
           <button
             type="submit"
             disabled={loading || !email}
-            className="w-full py-2.5 bg-esb-royal text-white rounded-lg font-medium hover:bg-esb-navy transition-colors disabled:opacity-50"
+            className="indo-btn indo-btn-teal w-full justify-center py-2.5 text-sm disabled:opacity-50"
           >
             {loading ? 'Sending...' : 'Send Magic Link'}
           </button>

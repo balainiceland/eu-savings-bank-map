@@ -30,7 +30,6 @@ L.Icon.Default.mergeOptions({
 const createMarkerIcon = (score: number, featured: boolean = false) => {
   const color = getScoreColor(score);
   const size = featured ? 16 : 12;
-  const borderWidth = featured ? 3 : 2;
 
   return L.divIcon({
     className: 'custom-marker',
@@ -40,14 +39,14 @@ const createMarkerIcon = (score: number, featured: boolean = false) => {
         width: ${size}px;
         height: ${size}px;
         background-color: ${color};
-        border: ${borderWidth}px solid white;
+        border: 2px solid #000;
         border-radius: 50%;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: 2px 2px 0 #000;
         ${featured ? 'animation: pulse 2s infinite;' : ''}
       "></div>
     `,
-    iconSize: [size + borderWidth * 2 + 6, size + borderWidth * 2 + 6],
-    iconAnchor: [(size + borderWidth * 2) / 2, (size + borderWidth * 2) / 2],
+    iconSize: [size + 10, size + 10],
+    iconAnchor: [(size + 4) / 2, (size + 4) / 2],
   });
 };
 
@@ -121,8 +120,8 @@ export default function MapContainer() {
         });
 
         const popupContent = `
-          <div style="min-width: 220px; font-family: system-ui, sans-serif;">
-            <h3 style="margin: 0 0 4px 0; font-size: 14px; color: #1B2A4A;">${bank.name}</h3>
+          <div style="min-width: 220px; font-family: 'Space Grotesk', system-ui, sans-serif;">
+            <h3 style="margin: 0 0 4px 0; font-size: 14px; color: #000; font-weight: 800;">${bank.name}</h3>
             <p style="margin: 0 0 8px 0; font-size: 12px; color: #666;">
               ${bank.city ? bank.city + ', ' : ''}${bank.country}
             </p>
@@ -130,11 +129,12 @@ export default function MapContainer() {
               <div style="
                 width: 40px; height: 40px; border-radius: 50%;
                 background-color: ${getScoreColor(bank.digitalScore)};
+                border: 2px solid #000;
                 display: flex; align-items: center; justify-content: center;
-                color: white; font-weight: bold; font-size: 12px;
+                color: #000; font-weight: 800; font-size: 12px;
               ">${bank.digitalScore}</div>
               <div>
-                <div style="font-size: 11px; font-weight: 600; color: ${getScoreColor(bank.digitalScore)};">${getScoreTierLabel(bank.digitalScore)}</div>
+                <div style="font-size: 11px; font-weight: 800; color: #000;">${getScoreTierLabel(bank.digitalScore)}</div>
                 <div style="font-size: 10px; color: #999;">Digital Score</div>
               </div>
             </div>
@@ -146,9 +146,10 @@ export default function MapContainer() {
               onclick="window.dispatchEvent(new CustomEvent('selectBank', { detail: '${bank.id}' }))"
               style="
                 width: 100%; padding: 8px;
-                background-color: #2E5090; color: white;
-                border: none; border-radius: 4px;
-                cursor: pointer; font-size: 12px; font-weight: 500;
+                background-color: #21e9c5; color: #000;
+                border: 2px solid #000; border-radius: 24px;
+                cursor: pointer; font-size: 12px; font-weight: 800;
+                box-shadow: 2px 2px 0 #000;
               "
             >View Details</button>
           </div>
@@ -178,20 +179,20 @@ export default function MapContainer() {
       {isLoading && (
         <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-[1000]">
           <div className="text-center">
-            <div className="w-12 h-12 border-4 border-esb-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-esb-navy font-medium">Loading banks...</p>
+            <div className="w-12 h-12 border-4 border-esb-royal border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-black font-bold">Loading banks...</p>
           </div>
         </div>
       )}
 
       {error && (
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-esb-red text-white px-4 py-2 rounded-lg shadow-lg z-[1000]">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-esb-red text-black border-2 border-black px-4 py-2 rounded-indo shadow-indo z-[1000] font-bold">
           {error}
         </div>
       )}
 
       {!isLoading && (
-        <div className="absolute bottom-4 right-4 bg-white/90 text-xs px-3 py-1.5 rounded-full shadow z-[1000]">
+        <div className="absolute bottom-4 right-4 bg-white text-xs px-3 py-1.5 rounded-full border-2 border-black shadow-indo z-[1000] font-bold">
           {dataSource === 'supabase' ? (
             <span className="text-esb-green">● Live + Demo data</span>
           ) : (

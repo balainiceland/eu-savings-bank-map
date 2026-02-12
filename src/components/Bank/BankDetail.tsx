@@ -35,12 +35,12 @@ export default function BankDetail() {
   });
 
   return (
-    <div className="absolute top-4 right-4 bg-white rounded-xl shadow-lg z-[1000] w-96 max-h-[calc(100vh-120px)] overflow-y-auto panel-slide-right">
+    <div className="absolute top-4 right-4 bg-white rounded-indo border-2 border-black shadow-indo-md z-[1000] w-96 max-h-[calc(100vh-120px)] overflow-y-auto panel-slide-right">
       {/* Header */}
-      <div className="p-4 border-b border-gray-100">
+      <div className="p-4 border-b-2 border-black">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <h2 className="font-bold text-esb-navy text-lg leading-tight">{bank.name}</h2>
+            <h2 className="font-bold text-black text-lg leading-tight">{bank.name}</h2>
             <p className="text-sm text-gray-500 mt-0.5">
               {bank.city ? `${bank.city}, ` : ''}{bank.country}
             </p>
@@ -48,14 +48,14 @@ export default function BankDetail() {
               <p className="text-xs text-gray-400 mt-0.5">{bank.parentGroup}</p>
             )}
           </div>
-          <button onClick={closeDetailPanel} className="p-1.5 hover:bg-gray-100 rounded-lg">
+          <button onClick={closeDetailPanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
             <X className="w-5 h-5 text-gray-400" />
           </button>
         </div>
 
         <div className="flex items-center gap-3 mt-3">
           <div
-            className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
+            className="w-12 h-12 rounded-full flex items-center justify-center text-black font-bold text-lg border-2 border-black"
             style={{ backgroundColor: `${getScoreColorImport(bank.digitalScore)}` }}
           >
             {bank.digitalScore}
@@ -64,7 +64,7 @@ export default function BankDetail() {
           {!isInCompare && compareBanks.length < 4 && (
             <button
               onClick={() => addToCompare(bank)}
-              className="ml-auto p-2 hover:bg-gray-100 rounded-lg text-esb-royal"
+              className="ml-auto p-2 hover:bg-esb-mint/30 rounded-lg text-esb-royal"
               title="Add to compare"
             >
               <GitCompareArrows className="w-4 h-4" />
@@ -74,11 +74,11 @@ export default function BankDetail() {
       </div>
 
       {/* Radar Chart */}
-      <div className="p-4 border-b border-gray-100">
-        <h3 className="text-sm font-semibold text-esb-navy mb-2">Digital Capabilities</h3>
+      <div className="p-4 border-b-2 border-black">
+        <h3 className="text-sm font-bold text-black mb-2">Digital Capabilities</h3>
         <ResponsiveContainer width="100%" height={220}>
           <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="70%">
-            <PolarGrid stroke="#e5e7eb" />
+            <PolarGrid stroke="#000" strokeOpacity={0.15} />
             <PolarAngleAxis
               dataKey="category"
               tick={(props) => {
@@ -90,7 +90,7 @@ export default function BankDetail() {
                     x={x} y={y}
                     textAnchor={anchor}
                     fontSize={10}
-                    fill={selectedRadarIdx === payload.index ? '#2E5090' : '#6b7280'}
+                    fill={selectedRadarIdx === payload.index ? '#000' : '#6b7280'}
                     fontWeight={selectedRadarIdx === payload.index ? 'bold' : 'normal'}
                     style={{ cursor: 'pointer' }}
                     onClick={() => setSelectedRadarIdx(prev => prev === payload.index ? null : payload.index)}
@@ -106,16 +106,16 @@ export default function BankDetail() {
             <Radar
               name="Score"
               dataKey="score"
-              stroke="#2E5090"
-              fill="#3B82F6"
-              fillOpacity={0.3}
+              stroke="#000"
+              fill="#21e9c5"
+              fillOpacity={0.4}
             />
           </RadarChart>
         </ResponsiveContainer>
         {selectedRadarIdx !== null && radarData[selectedRadarIdx] && (
-          <div className="mt-2 bg-gray-50 rounded-lg p-2 text-xs flex items-center justify-between">
+          <div className="mt-2 bg-esb-mint rounded-lg p-2 text-xs border border-black flex items-center justify-between">
             <div>
-              <span className="font-semibold text-esb-navy">{radarData[selectedRadarIdx].category.replace('\n/', ' /')}</span>
+              <span className="font-bold text-black">{radarData[selectedRadarIdx].category.replace('\n/', ' /')}</span>
               <span className="text-gray-500 ml-2">{radarData[selectedRadarIdx].levelLabel}</span>
             </div>
             <div className="flex items-center gap-2">
@@ -124,7 +124,7 @@ export default function BankDetail() {
                   href={radarData[selectedRadarIdx].evidenceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-700 inline-flex items-center gap-1"
+                  className="text-black hover:text-esb-royal inline-flex items-center gap-1"
                 >
                   Evidence <ExternalLink className="w-3 h-3" />
                 </a>
@@ -138,8 +138,8 @@ export default function BankDetail() {
       </div>
 
       {/* Digital Features Detail */}
-      <div className="p-4 border-b border-gray-100">
-        <h3 className="text-sm font-semibold text-esb-navy mb-2">Feature Breakdown</h3>
+      <div className="p-4 border-b-2 border-black">
+        <h3 className="text-sm font-bold text-black mb-2">Feature Breakdown</h3>
         <div className="space-y-2">
           {(Object.keys(DIGITAL_CATEGORY_LABELS) as DigitalCategory[]).map(category => {
             const feature = bank.digitalFeatures.find(f => f.category === category);
@@ -154,9 +154,9 @@ export default function BankDetail() {
                     {[1, 2, 3].map(i => (
                       <div
                         key={i}
-                        className="w-3 h-3 rounded-sm"
+                        className="w-3 h-3 rounded-sm border border-black"
                         style={{
-                          backgroundColor: i <= points ? '#3B82F6' : '#e5e7eb',
+                          backgroundColor: i <= points ? '#21e9c5' : '#e5e7eb',
                         }}
                       />
                     ))}
@@ -168,7 +168,7 @@ export default function BankDetail() {
                       target="_blank"
                       rel="noopener noreferrer"
                       title="View evidence"
-                      className="text-gray-400 hover:text-blue-500 transition-colors"
+                      className="text-gray-400 hover:text-esb-royal transition-colors"
                     >
                       <ExternalLink className="w-3 h-3" />
                     </a>
@@ -183,8 +183,8 @@ export default function BankDetail() {
       </div>
 
       {/* Financial Metrics */}
-      <div className="p-4 border-b border-gray-100">
-        <h3 className="text-sm font-semibold text-esb-navy mb-2">Financial Overview</h3>
+      <div className="p-4 border-b-2 border-black">
+        <h3 className="text-sm font-bold text-black mb-2">Financial Overview</h3>
         <div className="grid grid-cols-2 gap-3">
           <MetricCard icon={<Coins className="w-4 h-4" />} label="Total Assets" value={formatAssets(bank.totalAssets)} />
           <MetricCard icon={<Users className="w-4 h-4" />} label="Customers" value={formatCustomers(bank.customerCount)} />
@@ -208,7 +208,7 @@ export default function BankDetail() {
             href={bank.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-esb-royal hover:text-esb-blue"
+            className="flex items-center gap-1 text-esb-royal hover:text-black font-bold"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             Website
@@ -221,20 +221,19 @@ export default function BankDetail() {
 
 function MetricCard({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-gray-50 rounded-lg p-2.5">
-      <div className="flex items-center gap-1.5 text-gray-400 mb-1">
+    <div className="bg-esb-mint rounded-lg p-2.5 border border-black">
+      <div className="flex items-center gap-1.5 text-gray-500 mb-1">
         {icon}
         <span className="text-xs">{label}</span>
       </div>
-      <div className="font-semibold text-esb-navy text-sm">{value}</div>
+      <div className="font-bold text-black text-sm">{value}</div>
     </div>
   );
 }
 
-// Re-import needed since we can't use getScoreColor directly in JSX template literals easily
 function getScoreColorImport(score: number): string {
-  if (score >= 80) return '#10B981';
-  if (score >= 60) return '#3B82F6';
-  if (score >= 40) return '#F59E0B';
-  return '#EF4444';
+  if (score >= 80) return '#00ffb2';
+  if (score >= 60) return '#21e9c5';
+  if (score >= 40) return '#fd88fd';
+  return '#e0b8ff';
 }

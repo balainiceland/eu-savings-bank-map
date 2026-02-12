@@ -39,13 +39,13 @@ export default function AdminSettings() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
-      <h2 className="text-lg font-bold text-esb-navy mb-4 flex items-center gap-2">
+    <div className="bg-white rounded-lg border-2 border-black shadow-indo p-6">
+      <h2 className="text-lg font-bold text-black mb-4 flex items-center gap-2">
         <UserPlus className="w-5 h-5" /> Admin Users
       </h2>
 
       {error && (
-        <div className="mb-4 text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">{error}</div>
+        <div className="mb-4 text-sm text-black bg-esb-red/30 border border-black px-3 py-2 rounded-lg">{error}</div>
       )}
 
       <form onSubmit={handleAdd} className="flex gap-2 mb-6">
@@ -54,9 +54,9 @@ export default function AdminSettings() {
           value={newEmail}
           onChange={e => setNewEmail(e.target.value)}
           placeholder="admin@example.com"
-          className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-esb-blue/30"
+          className="flex-1 px-3 py-2 border-2 border-black rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-esb-royal/30"
         />
-        <button type="submit" className="flex items-center gap-1 px-4 py-2 bg-esb-royal text-white text-sm rounded-lg hover:bg-esb-navy">
+        <button type="submit" className="indo-btn indo-btn-teal text-sm">
           <Plus className="w-4 h-4" /> Add
         </button>
       </form>
@@ -66,12 +66,12 @@ export default function AdminSettings() {
       ) : (
         <div className="space-y-2">
           {admins.map(admin => (
-            <div key={admin.id} className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-3">
+            <div key={admin.id} className="flex items-center justify-between bg-esb-mint/30 rounded-lg px-4 py-3 border border-black">
               <div>
-                <div className="text-sm font-medium text-esb-navy">{admin.email}</div>
+                <div className="text-sm font-bold text-black">{admin.email}</div>
                 <div className="text-xs text-gray-400">Added {new Date(admin.created_at).toLocaleDateString()}</div>
               </div>
-              <button onClick={() => handleRemove(admin.email)} className="p-1.5 hover:bg-red-50 rounded" title="Remove">
+              <button onClick={() => handleRemove(admin.email)} className="p-1.5 hover:bg-esb-red/30 rounded" title="Remove">
                 <Trash2 className="w-4 h-4 text-red-400" />
               </button>
             </div>

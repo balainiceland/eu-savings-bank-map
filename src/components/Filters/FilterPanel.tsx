@@ -16,14 +16,14 @@ export default function FilterPanel() {
   const countries = [...new Set(banks.map(b => b.country))].sort();
 
   return (
-    <div className="absolute top-4 left-4 bg-white rounded-xl shadow-lg z-[1000] w-72 max-h-[calc(100vh-120px)] overflow-y-auto panel-slide-left">
-      <div className="p-4 border-b border-gray-100 flex items-center justify-between">
-        <h2 className="font-semibold text-esb-navy">Filters</h2>
+    <div className="absolute top-4 left-4 bg-white rounded-indo border-2 border-black shadow-indo-md z-[1000] w-72 max-h-[calc(100vh-120px)] overflow-y-auto panel-slide-left">
+      <div className="p-4 border-b-2 border-black flex items-center justify-between">
+        <h2 className="font-bold text-black">Filters</h2>
         <div className="flex items-center gap-1">
-          <button onClick={resetFilters} className="p-1.5 hover:bg-gray-100 rounded-lg" title="Reset">
+          <button onClick={resetFilters} className="p-1.5 hover:bg-esb-mint/30 rounded-lg" title="Reset">
             <RotateCcw className="w-4 h-4 text-gray-500" />
           </button>
-          <button onClick={toggleFilterPanel} className="p-1.5 hover:bg-gray-100 rounded-lg">
+          <button onClick={toggleFilterPanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
             <X className="w-4 h-4 text-gray-500" />
           </button>
         </div>
@@ -39,7 +39,7 @@ export default function FilterPanel() {
               placeholder="Search banks..."
               value={filters.search}
               onChange={(e) => setFilters({ search: e.target.value })}
-              className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-esb-blue/30 focus:border-esb-blue"
+              className="w-full pl-9 pr-3 py-2 border-2 border-black rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-esb-royal/30 focus:border-esb-royal"
             />
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function FilterPanel() {
           <select
             value={filters.country || ''}
             onChange={(e) => setFilters({ country: e.target.value || null })}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-esb-blue/30 focus:border-esb-blue"
+            className="w-full px-3 py-2 border-2 border-black rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-esb-royal/30 focus:border-esb-royal"
           >
             <option value="">All Countries</option>
             {countries.map(c => {
@@ -90,7 +90,7 @@ export default function FilterPanel() {
         </div>
 
         {/* Results count */}
-        <div className="text-xs text-gray-500 pt-2 border-t border-gray-100">
+        <div className="text-xs text-gray-500 pt-2 border-t-2 border-black">
           Showing {filteredBanks.length} of {banks.length} banks
         </div>
       </div>

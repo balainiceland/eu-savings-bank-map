@@ -24,16 +24,16 @@ export default function DigitalBadge({ score, size = 'md' }: DigitalBadgeProps) 
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full font-medium ${sizeClasses[size]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full font-bold ${sizeClasses[size]}`}
       style={{
-        backgroundColor: `${color}15`,
-        color: color,
-        border: `1px solid ${color}40`,
+        backgroundColor: color,
+        color: '#000',
+        border: '2px solid #000',
       }}
       title={`Digital Score: ${score}/100 — ${label}`}
       data-tier={tier}
     >
-      <span className={`${dotSize[size]} rounded-full`} style={{ backgroundColor: color }} />
+      <span className={`${dotSize[size]} rounded-full`} style={{ backgroundColor: '#000' }} />
       {label}
     </span>
   );

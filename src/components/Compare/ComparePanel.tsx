@@ -5,7 +5,7 @@ import { useStore } from '../../hooks/useStore';
 import { DIGITAL_CATEGORY_LABELS, MATURITY_LABELS, MATURITY_POINTS, formatAssets, formatCustomers, getScoreColor, getScoreTierLabel } from '../../types';
 import type { Bank, DigitalCategory } from '../../types';
 
-const COMPARE_COLORS = ['#2E5090', '#10B981', '#F59E0B', '#EF4444'];
+const COMPARE_COLORS = ['#21e9c5', '#00ffb2', '#fd88fd', '#e0b8ff'];
 
 export default function ComparePanel() {
   const isOpen = useStore(state => state.isComparePanelOpen);
@@ -34,15 +34,15 @@ export default function ComparePanel() {
   });
 
   return (
-    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-xl shadow-lg z-[1000] w-[700px] max-h-[60vh] overflow-hidden flex flex-col">
+    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-indo border-2 border-black shadow-indo-md z-[1000] w-[700px] max-h-[60vh] overflow-hidden flex flex-col">
       {/* Header */}
-      <div className="p-4 border-b border-gray-100 flex items-center justify-between shrink-0">
-        <h2 className="font-semibold text-esb-navy">Compare Banks ({compareBanks.length}/4)</h2>
+      <div className="p-4 border-b-2 border-black flex items-center justify-between shrink-0">
+        <h2 className="font-bold text-black">Compare Banks ({compareBanks.length}/4)</h2>
         <div className="flex items-center gap-2">
-          <button onClick={clearCompare} className="text-xs text-gray-500 hover:text-esb-red">
+          <button onClick={clearCompare} className="text-xs text-gray-500 hover:text-esb-red font-bold">
             Clear all
           </button>
-          <button onClick={toggleComparePanel} className="p-1.5 hover:bg-gray-100 rounded-lg">
+          <button onClick={toggleComparePanel} className="p-1.5 hover:bg-esb-mint/30 rounded-lg">
             <X className="w-4 h-4 text-gray-500" />
           </button>
         </div>
@@ -52,23 +52,23 @@ export default function ComparePanel() {
         {/* Bank cards row */}
         <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${compareBanks.length}, 1fr)` }}>
           {compareBanks.map((bank: Bank, i: number) => (
-            <div key={bank.id} className="border rounded-lg p-3 relative" style={{ borderColor: COMPARE_COLORS[i] }}>
+            <div key={bank.id} className="border-2 border-black rounded-lg p-3 relative shadow-indo" style={{ backgroundColor: `${COMPARE_COLORS[i]}20` }}>
               <button
                 onClick={() => removeFromCompare(bank.id)}
                 className="absolute top-2 right-2 p-1 hover:bg-gray-100 rounded"
               >
                 <Trash2 className="w-3 h-3 text-gray-400" />
               </button>
-              <div className="text-sm font-semibold text-esb-navy leading-tight">{bank.name}</div>
+              <div className="text-sm font-bold text-black leading-tight">{bank.name}</div>
               <div className="text-xs text-gray-400">{bank.country}</div>
               <div className="flex items-center gap-2 mt-2">
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-black text-xs font-bold border-2 border-black"
                   style={{ backgroundColor: getScoreColor(bank.digitalScore) }}
                 >
                   {bank.digitalScore}
                 </div>
-                <span className="text-xs" style={{ color: getScoreColor(bank.digitalScore) }}>
+                <span className="text-xs font-bold" style={{ color: getScoreColor(bank.digitalScore) }}>
                   {getScoreTierLabel(bank.digitalScore)}
                 </span>
               </div>
@@ -83,10 +83,10 @@ export default function ComparePanel() {
         {/* Radar overlay */}
         {compareBanks.length >= 2 && (
           <div className="mt-4">
-            <h3 className="text-sm font-semibold text-esb-navy mb-2">Digital Capability Comparison</h3>
+            <h3 className="text-sm font-bold text-black mb-2">Digital Capability Comparison</h3>
             <ResponsiveContainer width="100%" height={250}>
               <RadarChart data={radarData} cx="50%" cy="50%" outerRadius="65%">
-                <PolarGrid stroke="#e5e7eb" />
+                <PolarGrid stroke="#000" strokeOpacity={0.15} />
                 <PolarAngleAxis
                   dataKey="category"
                   tick={(props) => {
@@ -98,7 +98,7 @@ export default function ComparePanel() {
                         x={x} y={y}
                         textAnchor={anchor}
                         fontSize={10}
-                        fill={selectedRadarIdx === payload.index ? '#2E5090' : '#6b7280'}
+                        fill={selectedRadarIdx === payload.index ? '#000' : '#6b7280'}
                         fontWeight={selectedRadarIdx === payload.index ? 'bold' : 'normal'}
                         style={{ cursor: 'pointer' }}
                         onClick={() => setSelectedRadarIdx(prev => prev === payload.index ? null : payload.index)}
@@ -118,16 +118,17 @@ export default function ComparePanel() {
                     dataKey={`bank${i}`}
                     stroke={COMPARE_COLORS[i]}
                     fill={COMPARE_COLORS[i]}
-                    fillOpacity={0.1}
+                    fillOpacity={0.15}
+                    strokeWidth={2}
                   />
                 ))}
                 <Legend wrapperStyle={{ fontSize: 11 }} />
               </RadarChart>
             </ResponsiveContainer>
             {selectedRadarIdx !== null && radarData[selectedRadarIdx] && (
-              <div className="mt-2 bg-gray-50 rounded-lg p-2.5 text-xs">
+              <div className="mt-2 bg-esb-gold/50 rounded-lg p-2.5 text-xs border border-black">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-semibold text-esb-navy">
+                  <span className="font-bold text-black">
                     {(radarData[selectedRadarIdx].category as string).replace('\n/', ' /')}
                   </span>
                   <button onClick={() => setSelectedRadarIdx(null)} className="p-0.5 hover:bg-gray-200 rounded">
@@ -139,15 +140,15 @@ export default function ComparePanel() {
                   const evidenceUrl = radarData[selectedRadarIdx][`evidence${i}`] as string | undefined;
                   return (
                     <div key={bank.id} className="flex items-center gap-1.5 mt-1">
-                      <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: COMPARE_COLORS[i] }} />
-                      <span className="text-gray-700">{bank.name}:</span>
+                      <span className="w-2 h-2 rounded-full shrink-0 border border-black" style={{ backgroundColor: COMPARE_COLORS[i] }} />
+                      <span className="text-black font-medium">{bank.name}:</span>
                       <span className="text-gray-500">{levelLabel}</span>
                       {evidenceUrl && (
                         <a
                           href={evidenceUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="ml-1 text-blue-500 hover:text-blue-700 inline-flex items-center gap-0.5"
+                          className="ml-1 text-black hover:text-esb-royal inline-flex items-center gap-0.5"
                         >
                           <ExternalLink className="w-2.5 h-2.5" />
                         </a>
@@ -163,4 +164,3 @@ export default function ComparePanel() {
     </div>
   );
 }
-

@@ -165,11 +165,15 @@ export function getScoreTierLabel(score: number): string {
 export function getScoreColor(score: number): string {
   const tier = getScoreTier(score);
   switch (tier) {
-    case 'leader': return '#10B981';   // green
-    case 'advanced': return '#3B82F6'; // blue
-    case 'developing': return '#F59E0B'; // amber
-    case 'nascent': return '#EF4444';  // red
+    case 'leader': return '#00ffb2';   // indo green
+    case 'advanced': return '#21e9c5'; // indo teal
+    case 'developing': return '#fd88fd'; // indo pink
+    case 'nascent': return '#e0b8ff';  // indo purple
   }
+}
+
+export function getScoreTextColor(_score: number): string {
+  return '#000000'; // all indo tier colors are light — always use black text
 }
 
 export function getScoreBgClass(score: number): string {
