@@ -148,9 +148,9 @@ export default function ComparePanel() {
                           href={evidenceUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="ml-1 text-black hover:text-esb-royal inline-flex items-center gap-0.5"
+                          className="ml-1 text-esb-royal hover:text-black inline-flex items-center gap-0.5 font-bold"
                         >
-                          <ExternalLink className="w-2.5 h-2.5" />
+                          <ExternalLink className="w-3 h-3" />
                         </a>
                       )}
                     </div>

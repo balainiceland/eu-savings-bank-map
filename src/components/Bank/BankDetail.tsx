@@ -124,9 +124,9 @@ export default function BankDetail() {
                   href={radarData[selectedRadarIdx].evidenceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black hover:text-esb-royal inline-flex items-center gap-1"
+                  className="text-esb-royal hover:text-black inline-flex items-center gap-1 font-bold underline"
                 >
-                  Evidence <ExternalLink className="w-3 h-3" />
+                  Evidence <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}
               <button onClick={() => setSelectedRadarIdx(null)} className="p-0.5 hover:bg-gray-200 rounded">
@@ -168,12 +168,12 @@ export default function BankDetail() {
                       target="_blank"
                       rel="noopener noreferrer"
                       title="View evidence"
-                      className="text-gray-400 hover:text-esb-royal transition-colors"
+                      className="text-esb-royal hover:text-black transition-colors font-bold"
                     >
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   ) : (
-                    <span className="w-3" />
+                    <span className="w-3.5" />
                   )}
                 </div>
               </div>
