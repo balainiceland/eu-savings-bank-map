@@ -1,5 +1,5 @@
 import { X, ExternalLink, GitCompareArrows, Building2, Users, Coins, Calendar } from 'lucide-react';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import { useStore } from '../../hooks/useStore';
 import { DIGITAL_CATEGORY_LABELS, MATURITY_LABELS, MATURITY_POINTS, formatAssets, formatCustomers } from '../../types';
 import type { DigitalCategory } from '../../types';
@@ -20,11 +20,14 @@ export default function BankDetail() {
   // Prepare radar chart data
   const radarData = (Object.keys(DIGITAL_CATEGORY_LABELS) as DigitalCategory[]).map(category => {
     const feature = bank.digitalFeatures.find(f => f.category === category);
+    const level = feature?.maturityLevel || 'none';
     const points = feature ? MATURITY_POINTS[feature.maturityLevel] : 0;
     return {
       category: DIGITAL_CATEGORY_LABELS[category].replace(' / ', '\n/'),
       score: points,
       fullMark: 3,
+      levelLabel: MATURITY_LABELS[level],
+      evidenceUrl: feature?.evidenceUrl,
     };
   });
 
@@ -75,6 +78,7 @@ export default function BankDetail() {
             <PolarGrid stroke="#e5e7eb" />
             <PolarAngleAxis dataKey="category" tick={{ fontSize: 10, fill: '#6b7280' }} />
             <PolarRadiusAxis angle={90} domain={[0, 3]} tick={{ fontSize: 9 }} tickCount={4} />
+            <Tooltip content={<RadarTooltip />} />
             <Radar
               name="Score"
               dataKey="score"
@@ -111,6 +115,19 @@ export default function BankDetail() {
                     ))}
                   </div>
                   <span className="text-xs text-gray-500 w-20 text-right">{MATURITY_LABELS[level]}</span>
+                  {feature?.evidenceUrl ? (
+                    <a
+                      href={feature.evidenceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="View evidence"
+                      className="text-gray-400 hover:text-blue-500 transition-colors"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ) : (
+                    <span className="w-3" />
+                  )}
                 </div>
               </div>
             );
@@ -151,6 +168,27 @@ export default function BankDetail() {
           </a>
         )}
       </div>
+    </div>
+  );
+}
+
+function RadarTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload: { category: string; levelLabel: string; evidenceUrl?: string } }> }) {
+  if (!active || !payload?.length) return null;
+  const data = payload[0].payload;
+  return (
+    <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-2.5 text-xs max-w-[200px]">
+      <div className="font-semibold text-esb-navy">{data.category.replace('\n/', ' /')}</div>
+      <div className="text-gray-600 mt-0.5">{data.levelLabel}</div>
+      {data.evidenceUrl && (
+        <a
+          href={data.evidenceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:text-blue-700 mt-1 inline-flex items-center gap-1"
+        >
+          View evidence <ExternalLink className="w-2.5 h-2.5" />
+        </a>
+      )}
     </div>
   );
 }
