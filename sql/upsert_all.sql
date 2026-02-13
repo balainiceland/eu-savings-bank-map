@@ -1507,37 +1507,37 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 84. Erzgebirgssparkasse — score 100
+-- 84. Erzgebirgssparkasse — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Erzgebirgssparkasse', 'Germany', 'DE', 'Annaberg-Buchholz', 50.5788781, 13.0106108, 'Sparkassen-Finanzgruppe', 1840, 5954, 5060, 3561, 689, 71, 2024, 100, 'published', false)
+  VALUES ('Erzgebirgssparkasse', 'Germany', 'DE', 'Annaberg-Buchholz', 50.5788781, 13.0106108, 'Sparkassen-Finanzgruppe', 1840, 5954, 5060, 3561, 689, 71, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 85. Förde Sparkasse — score 100
+-- 85. Förde Sparkasse — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Förde Sparkasse', 'Germany', 'DE', 'Kiel', 54.3227085, 10.135555, 'Sparkassen-Finanzgruppe', 1796, 9108, 7228, 6571, 1200, 58, 2024, 100, 'published', false)
+  VALUES ('Förde Sparkasse', 'Germany', 'DE', 'Kiel', 54.3227085, 10.135555, 'Sparkassen-Finanzgruppe', 1796, 9108, 7228, 6571, 1200, 58, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -1597,109 +1597,109 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 89. Hohenzollerische Landesbank Kreissparkasse Sigmaringen — score 100
+-- 89. Hohenzollerische Landesbank Kreissparkasse Sigmaringen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Hohenzollerische Landesbank Kreissparkasse Sigmaringen', 'Germany', 'DE', 'Sigmaringen', 48.0869139, 9.2165039, 'Sparkassen-Finanzgruppe', 1975, 1450, 1161, 257, 16, 2024, 100, 'published', false)
+  VALUES ('Hohenzollerische Landesbank Kreissparkasse Sigmaringen', 'Germany', 'DE', 'Sigmaringen', 48.0869139, 9.2165039, 'Sparkassen-Finanzgruppe', 1975, 1450, 1161, 257, 16, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 90. Kasseler Sparkasse — score 100
+-- 90. Kasseler Sparkasse — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kasseler Sparkasse', 'Germany', 'DE', 'Kassel', 51.3157833, 9.4978479, 'Sparkassen-Finanzgruppe', 1832, 6698, 200, 5375, 4162, 902, 29, 2024, 100, 'published', false)
+  VALUES ('Kasseler Sparkasse', 'Germany', 'DE', 'Kassel', 51.3157833, 9.4978479, 'Sparkassen-Finanzgruppe', 1832, 6698, 200, 5375, 4162, 902, 29, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 91. Kreissparkasse Ahrweiler — score 100
+-- 91. Kreissparkasse Ahrweiler — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Ahrweiler', 'Germany', 'DE', 'Bad Neuenahr-Ahrweiler', 50.5444551, 7.1186671, 'Sparkassen-Finanzgruppe', 2736, 2165, 2010, 391, 26, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Ahrweiler', 'Germany', 'DE', 'Bad Neuenahr-Ahrweiler', 50.5444551, 7.1186671, 'Sparkassen-Finanzgruppe', 2736, 2165, 2010, 391, 26, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 92. Kreissparkasse Diepholz — score 100
+-- 92. Kreissparkasse Diepholz — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Diepholz', 'Germany', 'DE', 'Syke', 52.9131332, 8.8198737, 'Sparkassen-Finanzgruppe', 1865, 7324, 4836, 5916, 961, 35, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Diepholz', 'Germany', 'DE', 'Syke', 52.9131332, 8.8198737, 'Sparkassen-Finanzgruppe', 1865, 7324, 4836, 5916, 961, 35, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 93. Kreissparkasse Düsseldorf — score 100
+-- 93. Kreissparkasse Düsseldorf — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Düsseldorf', 'Germany', 'DE', 'Düsseldorf', 51.2254018, 6.7763137, 'Sparkassen-Finanzgruppe', 1905, 3190, 2660, 2231, 491, 17, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Düsseldorf', 'Germany', 'DE', 'Düsseldorf', 51.2254018, 6.7763137, 'Sparkassen-Finanzgruppe', 1905, 3190, 2660, 2231, 491, 17, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 94. Kreissparkasse Freudenstadt — score 100
+-- 94. Kreissparkasse Freudenstadt — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Freudenstadt', 'Germany', 'DE', 'Freudenstadt', 48.4637727, 8.4111727, 'Sparkassen-Finanzgruppe', 1834, 2317, 1745, 1326, 297, 21, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Freudenstadt', 'Germany', 'DE', 'Freudenstadt', 48.4637727, 8.4111727, 'Sparkassen-Finanzgruppe', 1834, 2317, 1745, 1326, 297, 21, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -1723,235 +1723,235 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 96. Kreissparkasse Köln — score 100
+-- 96. Kreissparkasse Köln — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Köln', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 1853, 29644, 1000, 23030, 23589, 116, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Köln', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 1853, 29644, 1000, 23030, 23589, 116, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 97. Kreissparkasse Limburg — score 100
+-- 97. Kreissparkasse Limburg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Limburg', 'Germany', 'DE', 'Limburg an der Lahn', 50.3880447, 8.063531, 'Sparkassen-Finanzgruppe', 1854, 1827, 1427, 1078, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Limburg', 'Germany', 'DE', 'Limburg an der Lahn', 50.3880447, 8.063531, 'Sparkassen-Finanzgruppe', 1854, 1827, 1427, 1078, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 98. Kreissparkasse Ludwigsburg — score 100
+-- 98. Kreissparkasse Ludwigsburg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Ludwigsburg', 'Germany', 'DE', 'Ludwigsburg', 48.8953937, 9.1895147, 'Sparkassen-Finanzgruppe', 1852, 12890, 9400, 7222, 1454, 91, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Ludwigsburg', 'Germany', 'DE', 'Ludwigsburg', 48.8953937, 9.1895147, 'Sparkassen-Finanzgruppe', 1852, 12890, 9400, 7222, 1454, 91, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 99. Kreissparkasse Ostalb — score 100
+-- 99. Kreissparkasse Ostalb — score 47
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Ostalb', 'Germany', 'DE', 'Aalen', 48.8375607, 10.0929593, 'Sparkassen-Finanzgruppe', 1852, 6658, 4927, 4185, 867, 54, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Ostalb', 'Germany', 'DE', 'Aalen', 48.8375607, 10.0929593, 'Sparkassen-Finanzgruppe', 1852, 6658, 4927, 4185, 867, 54, 2024, 47, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.ksk-ostalb.de/de/home/sofa-banking/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 100. Kreissparkasse Saarlouis — score 100
+-- 100. Kreissparkasse Saarlouis — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Saarlouis', 'Germany', 'DE', 'Saarlouis', 49.3164661, 6.749846, 'Sparkassen-Finanzgruppe', 1857, 4605, 3567, 3368, 760, 60, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Saarlouis', 'Germany', 'DE', 'Saarlouis', 49.3164661, 6.749846, 'Sparkassen-Finanzgruppe', 1857, 4605, 3567, 3368, 760, 60, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 101. Kreissparkasse Stade — score 100
+-- 101. Kreissparkasse Stade — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Stade', 'Germany', 'DE', 'Stade', 53.599794, 9.475438, 'Sparkassen-Finanzgruppe', 1843, 2300, 1464, 1764, 360, 19, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Stade', 'Germany', 'DE', 'Stade', 53.599794, 9.475438, 'Sparkassen-Finanzgruppe', 1843, 2300, 1464, 1764, 360, 19, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 102. Kreissparkasse Traunstein-Trostberg — score 100
+-- 102. Kreissparkasse Traunstein-Trostberg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Traunstein-Trostberg', 'Germany', 'DE', 'Traunstein', 47.8695272, 12.6484621, 'Sparkassen-Finanzgruppe', 1863, 2769, 90, 2214, 1940, 406, 30, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Traunstein-Trostberg', 'Germany', 'DE', 'Traunstein', 47.8695272, 12.6484621, 'Sparkassen-Finanzgruppe', 1863, 2769, 90, 2214, 1940, 406, 30, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 103. Kreissparkasse Tübingen — score 100
+-- 103. Kreissparkasse Tübingen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Tübingen', 'Germany', 'DE', 'Tübingen', 48.5203263, 9.053596, 'Sparkassen-Finanzgruppe', 1854, 6576, 4612, 4865, 875, 53, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Tübingen', 'Germany', 'DE', 'Tübingen', 48.5203263, 9.053596, 'Sparkassen-Finanzgruppe', 1854, 6576, 4612, 4865, 875, 53, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 104. Kreissparkasse Verden — score 100
+-- 104. Kreissparkasse Verden — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Verden', 'Germany', 'DE', 'Verden (Aller)', 52.9410676, 9.2354716, 'Sparkassen-Finanzgruppe', 1834, 3670, 2627, 2891, 483, 26, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Verden', 'Germany', 'DE', 'Verden (Aller)', 52.9410676, 9.2354716, 'Sparkassen-Finanzgruppe', 1834, 3670, 2627, 2891, 483, 26, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 105. Kreissparkasse Waiblingen — score 100
+-- 105. Kreissparkasse Waiblingen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Waiblingen', 'Germany', 'DE', 'Waiblingen', 48.8325659, 9.3163822, 'Sparkassen-Finanzgruppe', 1880, 11054, 7778, 8469, 1344, 66, 2024, 100, 'published', false)
+  VALUES ('Kreissparkasse Waiblingen', 'Germany', 'DE', 'Waiblingen', 48.8325659, 9.3163822, 'Sparkassen-Finanzgruppe', 1880, 11054, 7778, 8469, 1344, 66, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 106. Mittelbrandenburgische Sparkasse in Potsdam — score 100
+-- 106. Mittelbrandenburgische Sparkasse in Potsdam — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Mittelbrandenburgische Sparkasse in Potsdam', 'Germany', 'DE', 'Potsdam', 52.4009309, 13.0591397, 'Sparkassen-Finanzgruppe', 1840, 16800, 750, 14027, 7875, 1450, 130, 2024, 100, 'published', false)
+  VALUES ('Mittelbrandenburgische Sparkasse in Potsdam', 'Germany', 'DE', 'Potsdam', 52.4009309, 13.0591397, 'Sparkassen-Finanzgruppe', 1840, 16800, 750, 14027, 7875, 1450, 130, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 107. Müritz-Sparkasse — score 100
+-- 107. Müritz-Sparkasse — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Müritz-Sparkasse', 'Germany', 'DE', 'Waren (Müritz)', 53.5156249, 12.6850606, 'Sparkassen-Finanzgruppe', 1839, 1054, 901, 464, 2023, 100, 'published', false)
+  VALUES ('Müritz-Sparkasse', 'Germany', 'DE', 'Waren (Müritz)', 53.5156249, 12.6850606, 'Sparkassen-Finanzgruppe', 1839, 1054, 901, 464, 2023, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 108. Nassauische Sparkasse — score 100
+-- 108. Nassauische Sparkasse — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Nassauische Sparkasse', 'Germany', 'DE', 'Wiesbaden', 50.0820384, 8.2416556, 'Sparkassen-Finanzgruppe', 1840, 12422, 10880, 1626, 101, 2024, 100, 'published', false)
+  VALUES ('Nassauische Sparkasse', 'Germany', 'DE', 'Wiesbaden', 50.0820384, 8.2416556, 'Sparkassen-Finanzgruppe', 1840, 12422, 10880, 1626, 101, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -1975,325 +1975,325 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 110. Ostsächsische Sparkasse Dresden — score 100
+-- 110. Ostsächsische Sparkasse Dresden — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Ostsächsische Sparkasse Dresden', 'Germany', 'DE', 'Dresden', 51.0493286, 13.7381437, 'Sparkassen-Finanzgruppe', 1821, 16000, 600, 13425, 9028, 2000, 77, 2024, 100, 'published', false)
+  VALUES ('Ostsächsische Sparkasse Dresden', 'Germany', 'DE', 'Dresden', 51.0493286, 13.7381437, 'Sparkassen-Finanzgruppe', 1821, 16000, 600, 13425, 9028, 2000, 77, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 111. Rheinhessen Sparkasse — score 100
+-- 111. Rheinhessen Sparkasse — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Rheinhessen Sparkasse', 'Germany', 'DE', 'Mainz', 49.9995205, 8.2736253, 'Sparkassen-Finanzgruppe', 1827, 6725, 270, 5413, 4724, 800, 2024, 100, 'published', false)
+  VALUES ('Rheinhessen Sparkasse', 'Germany', 'DE', 'Mainz', 49.9995205, 8.2736253, 'Sparkassen-Finanzgruppe', 1827, 6725, 270, 5413, 4724, 800, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 112. Sparkasse Aachen — score 100
+-- 112. Sparkasse Aachen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Aachen', 'Germany', 'DE', 'Aachen', 50.776351, 6.083862, 'Sparkassen-Finanzgruppe', 1885, 14900, 11521, 10383, 1668, 85, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Aachen', 'Germany', 'DE', 'Aachen', 50.776351, 6.083862, 'Sparkassen-Finanzgruppe', 1885, 14900, 11521, 10383, 1668, 85, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 113. Sparkasse Altbayern — score 100
+-- 113. Sparkasse Altbayern — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Altbayern', 'Germany', 'DE', 'Aichach', 48.4591478, 11.1309953, 'Sparkassen-Finanzgruppe', 2025, 3100, 500, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Altbayern', 'Germany', 'DE', 'Aichach', 48.4591478, 11.1309953, 'Sparkassen-Finanzgruppe', 2025, 3100, 500, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 114. Sparkasse Altenburger Land — score 100
+-- 114. Sparkasse Altenburger Land — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Altenburger Land', 'Germany', 'DE', 'Altenburg', 50.9852411, 12.4340988, 'Sparkassen-Finanzgruppe', 1824, 1198, 1016, 487, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Altenburger Land', 'Germany', 'DE', 'Altenburg', 50.9852411, 12.4340988, 'Sparkassen-Finanzgruppe', 1824, 1198, 1016, 487, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 115. Sparkasse Amberg-Sulzbach — score 100
+-- 115. Sparkasse Amberg-Sulzbach — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Amberg-Sulzbach', 'Germany', 'DE', 'Amberg', 49.4543662, 11.8474021, 'Sparkassen-Finanzgruppe', 2000, 1789, 1562, 365, 18, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Amberg-Sulzbach', 'Germany', 'DE', 'Amberg', 49.4543662, 11.8474021, 'Sparkassen-Finanzgruppe', 2000, 1789, 1562, 365, 18, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 116. Sparkasse an Ennepe und Ruhr — score 100
+-- 116. Sparkasse an Ennepe und Ruhr — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse an Ennepe und Ruhr', 'Germany', 'DE', 'Gevelsberg', 51.3207417, 7.3404792, 'Sparkassen-Finanzgruppe', 2787, 2154, 1855, 2024, 100, 'published', false)
+  VALUES ('Sparkasse an Ennepe und Ruhr', 'Germany', 'DE', 'Gevelsberg', 51.3207417, 7.3404792, 'Sparkassen-Finanzgruppe', 2787, 2154, 1855, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 117. Sparkasse Ansbach — score 100
+-- 117. Sparkasse Ansbach — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Ansbach', 'Germany', 'DE', 'Ansbach', 49.2888745, 10.5597693, 'Sparkassen-Finanzgruppe', 5724, 4399, 2926, 714, 41, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Ansbach', 'Germany', 'DE', 'Ansbach', 49.2888745, 10.5597693, 'Sparkassen-Finanzgruppe', 5724, 4399, 2926, 714, 41, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 118. Sparkasse Aschaffenburg Miltenberg — score 100
+-- 118. Sparkasse Aschaffenburg Miltenberg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Aschaffenburg Miltenberg', 'Germany', 'DE', 'Aschaffenburg/Miltenberg', 49.9794964, 9.145168, 'Sparkassen-Finanzgruppe', 7700, 6402, 5363, 1065, 66, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Aschaffenburg Miltenberg', 'Germany', 'DE', 'Aschaffenburg/Miltenberg', 49.9794964, 9.145168, 'Sparkassen-Finanzgruppe', 7700, 6402, 5363, 1065, 66, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 119. Sparkasse Attendorn-Lennestadt-Kirchhundem — score 100
+-- 119. Sparkasse Attendorn-Lennestadt-Kirchhundem — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Attendorn-Lennestadt-Kirchhundem', 'Germany', 'DE', 'Attendorn', 51.1250541, 7.9010992, 'Sparkassen-Finanzgruppe', 1993, 1382, 877, 692, 181, 12, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Attendorn-Lennestadt-Kirchhundem', 'Germany', 'DE', 'Attendorn', 51.1250541, 7.9010992, 'Sparkassen-Finanzgruppe', 1993, 1382, 877, 692, 181, 12, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 120. Sparkasse Aurich-Norden — score 100
+-- 120. Sparkasse Aurich-Norden — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Aurich-Norden', 'Germany', 'DE', 'Aurich/Norden', 53.6270653, 7.1629737, 'Sparkassen-Finanzgruppe', 1840, 2924, 2086, 2311, 423, 34, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Aurich-Norden', 'Germany', 'DE', 'Aurich/Norden', 53.6270653, 7.1629737, 'Sparkassen-Finanzgruppe', 1840, 2924, 2086, 2311, 423, 34, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 121. Sparkasse Bad Hersfeld-Rotenburg — score 100
+-- 121. Sparkasse Bad Hersfeld-Rotenburg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Hersfeld-Rotenburg', 'Germany', 'DE', 'Bad Hersfeld', 50.8604177, 9.6767709, 'Sparkassen-Finanzgruppe', 1825, 1815, 1331, 383, 32, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Bad Hersfeld-Rotenburg', 'Germany', 'DE', 'Bad Hersfeld', 50.8604177, 9.6767709, 'Sparkassen-Finanzgruppe', 1825, 1815, 1331, 383, 32, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 122. Sparkasse Bad Kissingen — score 100
+-- 122. Sparkasse Bad Kissingen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Kissingen', 'Germany', 'DE', 'Bad Kissingen', 50.1999412, 10.0767379, 'Sparkassen-Finanzgruppe', 1600, 46, 1444, 909, 273, 14, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Bad Kissingen', 'Germany', 'DE', 'Bad Kissingen', 50.1999412, 10.0767379, 'Sparkassen-Finanzgruppe', 1600, 46, 1444, 909, 273, 14, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 123. Sparkasse Bad Neustadt a. d. Saale — score 100
+-- 123. Sparkasse Bad Neustadt a. d. Saale — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Neustadt a. d. Saale', 'Germany', 'DE', 'Bad Neustadt an der Saale', 50.322637, 10.2164873, 'Sparkassen-Finanzgruppe', 1647, 1247, 758, 273, 14, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Bad Neustadt a. d. Saale', 'Germany', 'DE', 'Bad Neustadt an der Saale', 50.322637, 10.2164873, 'Sparkassen-Finanzgruppe', 1647, 1247, 758, 273, 14, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 124. Sparkasse Bad Oeynhausen - Porta Westfalica — score 100
+-- 124. Sparkasse Bad Oeynhausen - Porta Westfalica — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Oeynhausen - Porta Westfalica', 'Germany', 'DE', 'Bad Oeynhausen', 52.2014399, 8.7981244, 'Sparkassen-Finanzgruppe', 1843, 1651, 1282, 1017, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Bad Oeynhausen - Porta Westfalica', 'Germany', 'DE', 'Bad Oeynhausen', 52.2014399, 8.7981244, 'Sparkassen-Finanzgruppe', 1843, 1651, 1282, 1017, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 125. Sparkasse Bad Tölz-Wolfratshausen — score 100
+-- 125. Sparkasse Bad Tölz-Wolfratshausen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Tölz-Wolfratshausen', 'Germany', 'DE', 'Bad Tölz', 47.7610013, 11.559607, 'Sparkassen-Finanzgruppe', 1858, 3234, 2446, 2301, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Bad Tölz-Wolfratshausen', 'Germany', 'DE', 'Bad Tölz', 47.7610013, 11.559607, 'Sparkassen-Finanzgruppe', 1858, 3234, 2446, 2301, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 126. Sparkasse Baden-Baden Gaggenau — score 100
+-- 126. Sparkasse Baden-Baden Gaggenau — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Baden-Baden Gaggenau', 'Germany', 'DE', 'Baden-Baden', 48.7610716, 8.239959, 'Sparkassen-Finanzgruppe', 2009, 2000, 1821, 1406, 336, 17, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Baden-Baden Gaggenau', 'Germany', 'DE', 'Baden-Baden', 48.7610716, 8.239959, 'Sparkassen-Finanzgruppe', 2009, 2000, 1821, 1406, 336, 17, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 127. Sparkasse Berchtesgadener Land — score 100
+-- 127. Sparkasse Berchtesgadener Land — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Berchtesgadener Land', 'Germany', 'DE', 'Bad Reichenhall', 47.7222676, 12.8760923, 'Sparkassen-Finanzgruppe', 1843, 2128, 1690, 1342, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Berchtesgadener Land', 'Germany', 'DE', 'Bad Reichenhall', 47.7222676, 12.8760923, 'Sparkassen-Finanzgruppe', 1843, 2128, 1690, 1342, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -2317,145 +2317,145 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 129. Sparkasse Burgenlandkreis — score 100
+-- 129. Sparkasse Burgenlandkreis — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Burgenlandkreis', 'Germany', 'DE', 'Zeitz', 51.0491637, 12.1349991, 'Sparkassen-Finanzgruppe', 1997, 2953, 2515, 1658, 396, 31, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Burgenlandkreis', 'Germany', 'DE', 'Zeitz', 51.0491637, 12.1349991, 'Sparkassen-Finanzgruppe', 1997, 2953, 2515, 1658, 396, 31, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 130. Sparkasse Dortmund — score 100
+-- 130. Sparkasse Dortmund — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Dortmund', 'Germany', 'DE', 'Dortmund', 51.5142273, 7.4652789, 'Sparkassen-Finanzgruppe', 1841, 12100, 360, 8651, 8456, 1525, 19, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Dortmund', 'Germany', 'DE', 'Dortmund', 51.5142273, 7.4652789, 'Sparkassen-Finanzgruppe', 1841, 12100, 360, 8651, 8456, 1525, 19, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 131. Sparkasse Duisburg — score 100
+-- 131. Sparkasse Duisburg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Duisburg', 'Germany', 'DE', 'Duisburg', 51.434999, 6.759562, 'Sparkassen-Finanzgruppe', 1844, 7035, 5405, 5130, 1069, 41, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Duisburg', 'Germany', 'DE', 'Duisburg', 51.434999, 6.759562, 'Sparkassen-Finanzgruppe', 1844, 7035, 5405, 5130, 1069, 41, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 132. Sparkasse Freiburg-Nördlicher Breisgau — score 100
+-- 132. Sparkasse Freiburg-Nördlicher Breisgau — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Freiburg-Nördlicher Breisgau', 'Germany', 'DE', 'Freiburg im Breisgau', 47.9960901, 7.8494005, 'Sparkassen-Finanzgruppe', 1825, 8515, 6195, 6263, 1000, 60, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Freiburg-Nördlicher Breisgau', 'Germany', 'DE', 'Freiburg im Breisgau', 47.9960901, 7.8494005, 'Sparkassen-Finanzgruppe', 1825, 8515, 6195, 6263, 1000, 60, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 133. Sparkasse Freising Moosburg — score 100
+-- 133. Sparkasse Freising Moosburg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Freising Moosburg', 'Germany', 'DE', 'Freising', 48.4008273, 11.7439565, 'Sparkassen-Finanzgruppe', 2022, 2787, 2207, 1842, 405, 26, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Freising Moosburg', 'Germany', 'DE', 'Freising', 48.4008273, 11.7439565, 'Sparkassen-Finanzgruppe', 2022, 2787, 2207, 1842, 405, 26, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 134. Sparkasse Fulda — score 100
+-- 134. Sparkasse Fulda — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Fulda', 'Germany', 'DE', 'Fulda', 50.5542328, 9.6770448, 'Sparkassen-Finanzgruppe', 1998, 4251, 150, 3438, 2283, 680, 37, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Fulda', 'Germany', 'DE', 'Fulda', 50.5542328, 9.6770448, 'Sparkassen-Finanzgruppe', 1998, 4251, 150, 3438, 2283, 680, 37, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 135. Sparkasse Fürth — score 100
+-- 135. Sparkasse Fürth — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Fürth', 'Germany', 'DE', 'Fürth', 49.4885711, 10.9587203, 'Sparkassen-Finanzgruppe', 1827, 4288, 3280, 2708, 600, 31, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Fürth', 'Germany', 'DE', 'Fürth', 49.4885711, 10.9587203, 'Sparkassen-Finanzgruppe', 1827, 4288, 3280, 2708, 600, 31, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 136. Sparkasse Gelsenkirchen — score 100
+-- 136. Sparkasse Gelsenkirchen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Gelsenkirchen', 'Germany', 'DE', 'Gelsenkirchen', 51.5110321, 7.0960124, 'Sparkassen-Finanzgruppe', 1869, 3779, 2971, 2311, 645, 27, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Gelsenkirchen', 'Germany', 'DE', 'Gelsenkirchen', 51.5110321, 7.0960124, 'Sparkassen-Finanzgruppe', 1869, 3779, 2971, 2311, 645, 27, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -2479,109 +2479,109 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 138. Sparkasse Hegau-Bodensee — score 100
+-- 138. Sparkasse Hegau-Bodensee — score 47
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Hegau-Bodensee', 'Germany', 'DE', 'Singen', 47.7617515, 8.8348709, 'Sparkassen-Finanzgruppe', 2016, 4130, 2623, 2829, 496, 22, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Hegau-Bodensee', 'Germany', 'DE', 'Singen', 47.7617515, 8.8348709, 'Sparkassen-Finanzgruppe', 2016, 4130, 2623, 2829, 496, 22, 2024, 47, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-bodensee.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 139. Sparkasse Hilden-Ratingen-Velbert — score 100
+-- 139. Sparkasse Hilden-Ratingen-Velbert — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Hilden-Ratingen-Velbert', 'Germany', 'DE', 'Velbert', 51.3406713, 7.0439912, 'Sparkassen-Finanzgruppe', 2003, 4205, 3510, 3146, 583, 21, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Hilden-Ratingen-Velbert', 'Germany', 'DE', 'Velbert', 51.3406713, 7.0439912, 'Sparkassen-Finanzgruppe', 2003, 4205, 3510, 3146, 583, 21, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 140. Sparkasse Hochrhein — score 100
+-- 140. Sparkasse Hochrhein — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Hochrhein', 'Germany', 'DE', 'Waldshut-Tiengen', 47.6281754, 8.2408579, 'Sparkassen-Finanzgruppe', 1856, 3700, 100, 2742, 2628, 485, 28, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Hochrhein', 'Germany', 'DE', 'Waldshut-Tiengen', 47.6281754, 8.2408579, 'Sparkassen-Finanzgruppe', 1856, 3700, 100, 2742, 2628, 485, 28, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 141. Sparkasse Holstein — score 100
+-- 141. Sparkasse Holstein — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Holstein', 'Germany', 'DE', 'Bad Oldesloe', 53.8096562, 10.3733692, 'Sparkassen-Finanzgruppe', 1824, 9444, 7038, 7731, 948, 56, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Holstein', 'Germany', 'DE', 'Bad Oldesloe', 53.8096562, 10.3733692, 'Sparkassen-Finanzgruppe', 1824, 9444, 7038, 7731, 948, 56, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 142. Sparkasse Kaiserslautern — score 100
+-- 142. Sparkasse Kaiserslautern — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Kaiserslautern', 'Germany', 'DE', 'Kaiserslautern', 49.4432174, 7.7689951, 'Sparkassen-Finanzgruppe', 1836, 5762, 4251, 4163, 780, 53, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Kaiserslautern', 'Germany', 'DE', 'Kaiserslautern', 49.4432174, 7.7689951, 'Sparkassen-Finanzgruppe', 1836, 5762, 4251, 4163, 780, 53, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 143. Sparkasse Karlsruhe — score 100
+-- 143. Sparkasse Karlsruhe — score 47
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Karlsruhe', 'Germany', 'DE', 'Karlsruhe', 49.0068705, 8.4034195, 'Sparkassen-Finanzgruppe', 1812, 11973, 8793, 9091, 1294, 66, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Karlsruhe', 'Germany', 'DE', 'Karlsruhe', 49.0068705, 8.4034195, 'Sparkassen-Finanzgruppe', 1812, 11973, 8793, 9091, 1294, 66, 2024, 47, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse-karlsruhe.de/de/home/aktionen/psd2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -2605,361 +2605,361 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 145. Sparkasse KölnBonn — score 100
+-- 145. Sparkasse KölnBonn — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse KölnBonn', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 2005, 28100, 1000, 23238, 21553, 3474, 50, 2024, 100, 'published', false)
+  VALUES ('Sparkasse KölnBonn', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 2005, 28100, 1000, 23238, 21553, 3474, 50, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 146. Sparkasse Krefeld — score 100
+-- 146. Sparkasse Krefeld — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Krefeld', 'Germany', 'DE', 'Krefeld', 51.3331205, 6.5623343, 'Sparkassen-Finanzgruppe', 1840, 10342, 7724, 6507, 1366, 51, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Krefeld', 'Germany', 'DE', 'Krefeld', 51.3331205, 6.5623343, 'Sparkassen-Finanzgruppe', 1840, 10342, 7724, 6507, 1366, 51, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 147. Sparkasse Leverkusen — score 100
+-- 147. Sparkasse Leverkusen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Leverkusen', 'Germany', 'DE', 'Leverkusen', 51.0324743, 6.9881194, 'Sparkassen-Finanzgruppe', 1844, 4446, 3450, 3765, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Leverkusen', 'Germany', 'DE', 'Leverkusen', 51.0324743, 6.9881194, 'Sparkassen-Finanzgruppe', 1844, 4446, 3450, 3765, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 148. Sparkasse Lörrach-Rheinfelden — score 100
+-- 148. Sparkasse Lörrach-Rheinfelden — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Lörrach-Rheinfelden', 'Germany', 'DE', 'Lörrach', 47.6120896, 7.6607218, 'Sparkassen-Finanzgruppe', 1834, 3417, 2030, 2544, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Lörrach-Rheinfelden', 'Germany', 'DE', 'Lörrach', 47.6120896, 7.6607218, 'Sparkassen-Finanzgruppe', 1834, 3417, 2030, 2544, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 149. Sparkasse Lüneburg — score 100
+-- 149. Sparkasse Lüneburg — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Lüneburg', 'Germany', 'DE', 'Lüneburg', 53.248706, 10.407855, 'Sparkassen-Finanzgruppe', 1990, 3361, 2681, 2345, 541, 33, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Lüneburg', 'Germany', 'DE', 'Lüneburg', 53.248706, 10.407855, 'Sparkassen-Finanzgruppe', 1990, 3361, 2681, 2345, 541, 33, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 150. Sparkasse Magdeburg — score 100
+-- 150. Sparkasse Magdeburg — score 47
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Magdeburg', 'Germany', 'DE', 'Magdeburg', 52.1314783, 11.6400789, 'Sparkassen-Finanzgruppe', 4216, 3668, 1774, 522, 34, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Magdeburg', 'Germany', 'DE', 'Magdeburg', 52.1314783, 11.6400789, 'Sparkassen-Finanzgruppe', 4216, 3668, 1774, 522, 34, 2024, 47, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse-magdeburg.de/de/home/privatkunden/girokonto/girokonto-online.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 151. Sparkasse Mainfranken Würzburg — score 100
+-- 151. Sparkasse Mainfranken Würzburg — score 47
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mainfranken Würzburg', 'Germany', 'DE', 'Würzburg', 49.7933723, 9.9309779, 'Sparkassen-Finanzgruppe', 1822, 10709, 8675, 7268, 1388, 84, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Mainfranken Würzburg', 'Germany', 'DE', 'Würzburg', 49.7933723, 9.9309779, 'Sparkassen-Finanzgruppe', 1822, 10709, 8675, 7268, 1388, 84, 2024, 47, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-mainfranken.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 152. Sparkasse Marburg-Biedenkopf — score 100
+-- 152. Sparkasse Marburg-Biedenkopf — score 47
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Marburg-Biedenkopf', 'Germany', 'DE', 'Marburg', 50.8090106, 8.7704695, 'Sparkassen-Finanzgruppe', 1832, 4600, 3816, 3146, 810, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Marburg-Biedenkopf', 'Germany', 'DE', 'Marburg', 50.8090106, 8.7704695, 'Sparkassen-Finanzgruppe', 1832, 4600, 3816, 3146, 810, 2024, 47, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.skmb.de/de/home/service/linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 153. Sparkasse Märkisch-Oderland — score 100
+-- 153. Sparkasse Märkisch-Oderland — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Märkisch-Oderland', 'Germany', 'DE', 'Strausberg', 52.5588942, 13.9042481, 'Sparkassen-Finanzgruppe', 1994, 2481, 2135, 789, 241, 31, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Märkisch-Oderland', 'Germany', 'DE', 'Strausberg', 52.5588942, 13.9042481, 'Sparkassen-Finanzgruppe', 1994, 2481, 2135, 789, 241, 31, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 154. Sparkasse Mecklenburg-Nordwest — score 100
+-- 154. Sparkasse Mecklenburg-Nordwest — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mecklenburg-Nordwest', 'Germany', 'DE', 'Wismar', 53.8909832, 11.4647932, 'Sparkassen-Finanzgruppe', 1824, 1844, 1622, 1004, 239, 21, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Mecklenburg-Nordwest', 'Germany', 'DE', 'Wismar', 53.8909832, 11.4647932, 'Sparkassen-Finanzgruppe', 1824, 1844, 1622, 1004, 239, 21, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 155. Sparkasse Mecklenburg-Schwerin — score 100
+-- 155. Sparkasse Mecklenburg-Schwerin — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mecklenburg-Schwerin', 'Germany', 'DE', 'Schwerin', 53.6288297, 11.4148038, 'Sparkassen-Finanzgruppe', 1821, 3289, 2621, 2286, 509, 22, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Mecklenburg-Schwerin', 'Germany', 'DE', 'Schwerin', 53.6288297, 11.4148038, 'Sparkassen-Finanzgruppe', 1821, 3289, 2621, 2286, 509, 22, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 156. Sparkasse Mittelsachsen — score 100
+-- 156. Sparkasse Mittelsachsen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mittelsachsen', 'Germany', 'DE', 'Freiberg', 50.9169415, 13.3428889, 'Sparkassen-Finanzgruppe', 1823, 3736, 3287, 1645, 387, 36, 2023, 100, 'published', false)
+  VALUES ('Sparkasse Mittelsachsen', 'Germany', 'DE', 'Freiberg', 50.9169415, 13.3428889, 'Sparkassen-Finanzgruppe', 1823, 3736, 3287, 1645, 387, 36, 2023, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 157. Sparkasse Niederbayern-Mitte — score 100
+-- 157. Sparkasse Niederbayern-Mitte — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Niederbayern-Mitte', 'Germany', 'DE', 'Straubing', 48.8839157, 12.5955773, 'Sparkassen-Finanzgruppe', 5571, 3914, 4237, 635, 41, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Niederbayern-Mitte', 'Germany', 'DE', 'Straubing', 48.8839157, 12.5955773, 'Sparkassen-Finanzgruppe', 5571, 3914, 4237, 635, 41, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 158. Sparkasse Oberhessen — score 100
+-- 158. Sparkasse Oberhessen — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oberhessen', 'Germany', 'DE', 'Friedberg (Hessen)', 50.328272, 8.747636, 'Sparkassen-Finanzgruppe', 6265, 5005, 4650, 852, 51, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Oberhessen', 'Germany', 'DE', 'Friedberg (Hessen)', 50.328272, 8.747636, 'Sparkassen-Finanzgruppe', 6265, 5005, 4650, 852, 51, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 159. Sparkasse Oberlausitz-Niederschlesien — score 100
+-- 159. Sparkasse Oberlausitz-Niederschlesien — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oberlausitz-Niederschlesien', 'Germany', 'DE', 'Zittau', 50.8960964, 14.8064807, 'Sparkassen-Finanzgruppe', 4602, 227, 3880, 1440, 236, 35, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Oberlausitz-Niederschlesien', 'Germany', 'DE', 'Zittau', 50.8960964, 14.8064807, 'Sparkassen-Finanzgruppe', 4602, 227, 3880, 1440, 236, 35, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 160. Sparkasse Oberpfalz Nord — score 100
+-- 160. Sparkasse Oberpfalz Nord — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oberpfalz Nord', 'Germany', 'DE', 'Weiden in der Oberpfalz', 49.6752749, 12.1631636, 'Sparkassen-Finanzgruppe', 2005, 1900, 1616, 1259, 325, 15, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Oberpfalz Nord', 'Germany', 'DE', 'Weiden in der Oberpfalz', 49.6752749, 12.1631636, 'Sparkassen-Finanzgruppe', 2005, 1900, 1616, 1259, 325, 15, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 161. Sparkasse Oder-Spree — score 100
+-- 161. Sparkasse Oder-Spree — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oder-Spree', 'Germany', 'DE', 'Frankfurt (Oder)', 52.3412273, 14.549452, 'Sparkassen-Finanzgruppe', 3895, 3335, 1556, 411, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Oder-Spree', 'Germany', 'DE', 'Frankfurt (Oder)', 52.3412273, 14.549452, 'Sparkassen-Finanzgruppe', 3895, 3335, 1556, 411, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 162. Sparkasse Passau — score 100
+-- 162. Sparkasse Passau — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Passau', 'Germany', 'DE', 'Passau', 48.5748229, 13.4609744, 'Sparkassen-Finanzgruppe', 1825, 3870, 100, 3133, 2659, 563, 30, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Passau', 'Germany', 'DE', 'Passau', 48.5748229, 13.4609744, 'Sparkassen-Finanzgruppe', 1825, 3870, 100, 3133, 2659, 563, 30, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 163. Sparkasse Pforzheim Calw — score 100
+-- 163. Sparkasse Pforzheim Calw — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Pforzheim Calw', 'Germany', 'DE', 'Pforzheim', 48.890934, 8.7025509, 'Sparkassen-Finanzgruppe', 1834, 17400, 370, 11106, 11213, 1897, 78, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Pforzheim Calw', 'Germany', 'DE', 'Pforzheim', 48.890934, 8.7025509, 'Sparkassen-Finanzgruppe', 1834, 17400, 370, 11106, 11213, 1897, 78, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
   evidence_url = EXCLUDED.evidence_url;
 
--- 164. Sparkasse Rhein Neckar Nord — score 100
+-- 164. Sparkasse Rhein Neckar Nord — score 33
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Rhein Neckar Nord', 'Germany', 'DE', 'Mannheim', 49.4892913, 8.4673098, 'Sparkassen-Finanzgruppe', 1822, 5825, 3896, 4251, 700, 36, 2024, 100, 'published', false)
+  VALUES ('Sparkasse Rhein Neckar Nord', 'Germany', 'DE', 'Mannheim', 49.4892913, 8.4673098, 'Sparkassen-Finanzgruppe', 1822, 5825, 3896, 4251, 700, 36, 2024, 33, 'published', false)
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
-  ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/us/app/sparkasse-ihre-mobile-filiale/id320599923'),
-  ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
-  ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto/konto-eroeffnen.html'),
-  ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/chatbot-linda.html'),
-  ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.f-i.de/loesungen/das-machen-wir')
+  ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
+  ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
 ON CONFLICT (bank_id, category) DO UPDATE SET
   present = EXCLUDED.present,
   maturity_level = EXCLUDED.maturity_level,
@@ -3226,7 +3226,7 @@ WITH b AS (
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/finanzen-apps/s-app.html'),
-  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps/psd-2.html'),
+  ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.dsv-gruppe.de/')
