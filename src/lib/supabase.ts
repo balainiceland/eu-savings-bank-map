@@ -122,15 +122,16 @@ export async function fetchPublishedBanks(): Promise<{
 // (392 banks × 5 features = 1960 rows)
 async function attachFeatures(client: SupabaseClient, banks: BankFromDB[]): Promise<BankFromDB[]> {
   const bankIds = banks.map((b: BankFromDB) => b.id);
-  const BATCH = 300;
+  // Supabase server-side max is 1000 rows; .limit() can't exceed it.
+  // 100 banks × 5 features = 500 rows per batch (safely under 1000).
+  const BATCH = 100;
   let allFeatures: DigitalFeatureFromDB[] = [];
   for (let i = 0; i < bankIds.length; i += BATCH) {
     const batch = bankIds.slice(i, i + BATCH);
     const { data: features, error } = await client
       .from('digital_features')
       .select('*')
-      .in('bank_id', batch)
-      .limit(2000);
+      .in('bank_id', batch);
     if (error) throw error;
     allFeatures = allFeatures.concat(features || []);
   }
