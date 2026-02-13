@@ -7,7 +7,7 @@ export default function Header() {
   const toggleComparePanel = useStore(state => state.toggleComparePanel);
   const toggleBenchmarksPanel = useStore(state => state.toggleBenchmarksPanel);
   const compareBanks = useStore(state => state.compareBanks);
-  const { totalBanks, totalCountries, averageScore } = useStatistics();
+  const { totalBanks, totalCountries, averageScore, banksWithDeposits, totalDepositsTrillion } = useStatistics();
 
   return (
     <header className="bg-white text-black px-4 py-3 flex items-center justify-between z-50 relative border-b-2 border-black">
@@ -32,6 +32,14 @@ export default function Header() {
         <div className="text-center">
           <div className="font-bold text-esb-amber">{averageScore}</div>
           <div className="text-xs text-gray-500">Avg Score</div>
+        </div>
+        <div className="text-center">
+          <div className="font-bold text-esb-royal">{totalDepositsTrillion.toFixed(1)}T</div>
+          <div className="text-xs text-gray-500">Deposits EUR</div>
+        </div>
+        <div className="text-center">
+          <div className="font-bold text-esb-green">{banksWithDeposits}</div>
+          <div className="text-xs text-gray-500">With Data</div>
         </div>
       </div>
 

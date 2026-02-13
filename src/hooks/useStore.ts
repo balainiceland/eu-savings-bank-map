@@ -201,7 +201,9 @@ export const useStatistics = () => {
   const averageScore = banks.length > 0
     ? Math.round(banks.reduce((sum, b) => sum + b.digitalScore, 0) / banks.length)
     : 0;
-  return { totalBanks, totalCountries, averageScore };
+  const banksWithDeposits = banks.filter(b => b.depositVolume && b.depositVolume > 0).length;
+  const totalDepositsTrillion = banks.reduce((sum, b) => sum + (b.depositVolume || 0), 0) / 1_000_000;
+  return { totalBanks, totalCountries, averageScore, banksWithDeposits, totalDepositsTrillion };
 };
 
 export interface CountryBenchmark {
