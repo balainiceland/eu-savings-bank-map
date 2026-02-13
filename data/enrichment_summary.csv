@@ -1,0 +1,200 @@
+name,country,country_code,city,website,mobile_banking,mobile_banking_evidence,open_banking,open_banking_evidence,digital_onboarding,digital_onboarding_evidence,ai_chatbot,ai_chatbot_evidence,devops_cloud,devops_cloud_evidence,digital_score
+Raiffeisen Bank Albania,Albania,AL,Tirana,https://www.raiffeisen.al,intermediate,https://apps.apple.com/al/app/raiffeisen-on/id1194478857?uo=4,basic,https://www.raiffeisen.al,none,,none,,none,,20
+Allgemeine Sparkasse Oberosterreich,Austria,AT,Linz,https://www.sparkasse.at/oberoesterreich,none,,none,,basic,https://www.sparkasse.at/oberoesterreich,basic,https://www.sparkasse.at/oberoesterreich,none,,13
+Dornbirner Sparkasse,Austria,AT,Dornbirn,https://www.sparkasse.at/dornbirn,none,,basic,https://www.sparkasse.at/dornbirn,basic,https://www.sparkasse.at/dornbirn,basic,https://www.sparkasse.at/dornbirn,none,,20
+Karntner Sparkasse,Austria,AT,Klagenfurt,https://www.sparkasse.at/kaernten,none,,basic,https://www.sparkasse.at/kaernten,basic,https://www.sparkasse.at/kaernten,basic,https://www.sparkasse.at/kaernten,none,,20
+Kremser Bank und Sparkassen,Austria,AT,Krems an der Donau,https://www.sparkasse.at/kremsersparkasse,none,,none,,none,,none,,none,,0
+Lienzer Sparkasse,Austria,AT,Lienz,https://www.sparkasse.at/lienz,none,,none,,basic,https://www.sparkasse.at/lienz,basic,https://www.sparkasse.at/lienz,none,,13
+Salzburger Sparkasse,Austria,AT,Salzburg,https://www.sparkasse.at/salzburg,none,,basic,https://www.sparkasse.at/salzburg,basic,https://www.sparkasse.at/salzburg,basic,https://www.sparkasse.at/salzburg,none,,20
+Sparkasse Baden,Austria,AT,Baden,https://www.sparkasse.at/baden,none,,basic,https://www.sparkasse.at/baden,basic,https://www.sparkasse.at/baden,basic,https://www.sparkasse.at/baden,none,,20
+Sparkasse Bludenz,Austria,AT,Bludenz,https://www.sparkasse.at/bludenz,none,,basic,https://www.sparkasse.at/bludenz,basic,https://www.sparkasse.at/bludenz,basic,https://www.sparkasse.at/bludenz,none,,20
+Sparkasse Bregenz,Austria,AT,Bregenz,https://www.sparkasse.at/bregenz,none,,basic,https://www.sparkasse.at/bregenz,basic,https://www.sparkasse.at/bregenz,basic,https://www.sparkasse.at/bregenz,none,,20
+Sparkasse der Stadt Amstetten,Austria,AT,Amstetten,https://www.sparkasse.at/amstetten,basic,https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4,basic,https://www.sparkasse.at/amstetten,basic,https://www.sparkasse.at/amstetten,basic,https://www.sparkasse.at/amstetten,none,,27
+Sparkasse der Stadt Feldkirch,Austria,AT,Feldkirch,https://www.sparkasse.at/feldkirch,basic,https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4,basic,https://www.sparkasse.at/feldkirch,basic,https://www.sparkasse.at/feldkirch,basic,https://www.sparkasse.at/feldkirch,none,,27
+Sparkasse der Stadt Kitzbuhel,Austria,AT,Kitzbuhel,https://www.sparkasse.at/kitzbuehel,basic,https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4,basic,https://www.sparkasse.at/kitzbuehel,basic,https://www.sparkasse.at/kitzbuehel,basic,https://www.sparkasse.at/kitzbuehel,none,,27
+Sparkasse Eferding-Peuerbach-Waizenkirchen,Austria,AT,Eferding,https://www.sparkasse.at/eferding,none,,none,,none,,none,,none,,0
+Sparkasse Hainburg-Bruck-Neusiedl,Austria,AT,Hainburg an der Donau,https://www.sparkasse.at/hainburg,none,,basic,https://www.sparkasse.at/hainburg,basic,https://www.sparkasse.at/hainburg,basic,https://www.sparkasse.at/hainburg,none,,20
+Sparkasse Hartberg-Vorau,Austria,AT,Hartberg,https://www.sparkasse.at/hartberg-vorau,none,,none,,none,,none,,none,,0
+Sparkasse Horn-Ravelsbach-Kirchberg,Austria,AT,Horn,https://www.sparkasse.at/horn,none,,basic,https://www.sparkasse.at/horn,basic,https://www.sparkasse.at/horn,basic,https://www.sparkasse.at/horn,none,,20
+Sparkasse Imst,Austria,AT,Imst,https://www.sparkasse.at/imst,none,,none,,basic,https://www.sparkasse.at/imst,basic,https://www.sparkasse.at/imst,none,,13
+Sparkasse Korneuburg,Austria,AT,Korneuburg,https://www.sparkasse.at/korneuburg,none,,none,,basic,https://www.sparkasse.at/korneuburg,basic,https://www.sparkasse.at/korneuburg,none,,13
+Sparkasse Kremstal-Pyhrn,Austria,AT,Kirchdorf an der Krems,https://www.sparkasse.at/kremstal-pyhrn,none,,none,,none,,none,,none,,0
+Sparkasse Kufstein,Austria,AT,Kufstein,https://www.sparkasse.at/kufstein,none,,basic,https://www.sparkasse.at/kufstein,basic,https://www.sparkasse.at/kufstein,basic,https://www.sparkasse.at/kufstein,none,,20
+Sparkasse Muhlviertel-West,Austria,AT,Rohrbach,https://www.sparkasse.at/muehlviertel-west,none,,none,,none,,none,,none,,0
+Sparkasse Neunkirchen,Austria,AT,Neunkirchen,https://www.sparkasse.at/neunkirchen,none,,basic,https://www.sparkasse.at/neunkirchen,basic,https://www.sparkasse.at/neunkirchen,basic,https://www.sparkasse.at/neunkirchen,none,,20
+Sparkasse Niederosterreich Mitte West,Austria,AT,Sankt Polten,https://www.sparkasse.at/noe-mitte-west,none,,none,,none,,none,,none,,0
+Sparkasse Reutte,Austria,AT,Reutte,https://www.sparkasse.at/reutte,none,,basic,https://www.sparkasse.at/reutte,none,,basic,https://www.sparkasse.at/reutte,none,,13
+Sparkasse Salzkammergut,Austria,AT,Bad Ischl,https://www.sparkasse.at/salzkammergut,none,,basic,https://www.sparkasse.at/salzkammergut,basic,https://www.sparkasse.at/salzkammergut,basic,https://www.sparkasse.at/salzkammergut,none,,20
+Sparkasse Schwaz,Austria,AT,Schwaz,https://www.sparkasse.at/schwaz,none,,basic,https://www.sparkasse.at/schwaz,basic,https://www.sparkasse.at/schwaz,basic,https://www.sparkasse.at/schwaz,none,,20
+Steiermarkische Sparkasse,Austria,AT,Graz,https://www.sparkasse.at/steiermaerkische,none,,basic,https://www.sparkasse.at/steiermaerkische,basic,https://www.sparkasse.at/steiermaerkische,basic,https://www.sparkasse.at/steiermaerkische,none,,20
+Tiroler Sparkasse,Austria,AT,Innsbruck,https://www.sparkasse.at/tirol,none,,basic,https://www.sparkasse.at/tirol,basic,https://www.sparkasse.at/tirol,basic,https://www.sparkasse.at/tirol,none,,20
+Waldviertler Sparkasse von 1842,Austria,AT,Waidhofen an der Thaya,https://www.sparkasse.at/waldviertler,none,,none,,none,,none,,none,,0
+Wiener Neustadter Sparkasse,Austria,AT,Wiener Neustadt,https://www.sparkasse.at/wiener-neustaedter,none,,none,,none,,none,,none,,0
+Argenta,Belgium,BE,Antwerp,https://www.argenta.be,advanced,https://apps.apple.com/be/app/argenta-banking/id893585833?uo=4,basic,https://www.argenta.be,none,,none,,none,,27
+Crelan,Belgium,BE,Brussels,https://www.crelan.be,intermediate,https://apps.apple.com/be/app/crelan-mobile-app/id893189359?uo=4,none,,none,,none,,none,,13
+Fio banka,Czech Republic,CZ,Prague,https://www.fio.cz,advanced,https://apps.apple.com/cz/app/fio-smartbanking-cz/id1451236597?uo=4,none,,none,,none,,none,,20
+MONETA Money Bank,Czech Republic,CZ,Prague,https://www.moneta.cz,advanced,https://apps.apple.com/cz/app/moneta-smart-banka/id1122443334?uo=4,none,,none,,none,,none,,20
+Arbejdernes Landsbank,Denmark,DK,Copenhagen,https://www.al-bank.dk,advanced,https://apps.apple.com/dk/app/al-bank/id421357586?uo=4,basic,https://www.al-bank.dk,none,,none,,none,,27
+Danske Andelskassers Bank,Denmark,DK,Aarhus,https://www.dab.dk,intermediate,https://apps.apple.com/dk/app/andelskassen/id421361046?uo=4,basic,https://www.dab.dk,none,,basic,https://www.dab.dk,none,,27
+Middelfart Sparekasse,Denmark,DK,Middelfart,https://www.middelfart-sparekasse.dk,advanced,https://apps.apple.com/dk/app/mobilbank-middelfartsparekasse/id1466762662?uo=4,none,,none,,none,,none,,20
+Sparekassen Kronjylland,Denmark,DK,Randers,https://www.sparekassenkronjylland.dk,advanced,https://apps.apple.com/dk/app/sparkron-mobilbank/id1512972558?uo=4,none,,none,,none,,none,,20
+Aito Saastopankki,Finland,FI,Tampere,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/aito-saastopankki,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/aito-saastopankki,none,,7
+Avain Saastopankki,Finland,FI,Kauhava,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/avain-saastopankki,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/avain-saastopankki,none,,7
+Helmi Saastopankki,Finland,FI,Lahti,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/helmi-saastopankki,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/helmi-saastopankki,none,,7
+Lammin Saastopankki,Finland,FI,Hameenlinna,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lammin-saastopankki,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lammin-saastopankki,none,,7
+Lansi-Uudenmaan Saastopankki,Finland,FI,Lohja,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lansi-uudenmaan-saastopankki,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lansi-uudenmaan-saastopankki,none,,7
+Nooa Saastopankki,Finland,FI,Helsinki,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/nooa-saastopankki,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/nooa-saastopankki,none,,7
+Saastopankki Optia,Finland,FI,Iisalmi,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/saastopankki-optia,none,,none,,none,,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/saastopankki-optia,none,,7
+Caisse d'Epargne Aquitaine Poitou-Charentes,France,FR,Bordeaux,https://www.caisse-epargne.fr/aquitaine-poitou-charentes/,none,,basic,https://www.caisse-epargne.fr/aquitaine-poitou-charentes/,basic,https://www.caisse-epargne.fr/aquitaine-poitou-charentes/,none,,none,,13
+Caisse d'Epargne Auvergne et Limousin,France,FR,Clermont-Ferrand,https://www.caisse-epargne.fr/auvergne-limousin/,none,,basic,https://www.caisse-epargne.fr/auvergne-limousin/,basic,https://www.caisse-epargne.fr/auvergne-limousin/,none,,none,,13
+Caisse d'Epargne Bourgogne Franche-Comte,France,FR,Dijon,https://www.caisse-epargne.fr/bourgogne-franche-comte/,none,,basic,https://www.caisse-epargne.fr/bourgogne-franche-comte/,basic,https://www.caisse-epargne.fr/bourgogne-franche-comte/,none,,none,,13
+Caisse d'Epargne Bretagne Pays de Loire,France,FR,Rennes,https://www.caisse-epargne.fr/bretagne-pays-de-loire/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/bretagne-pays-de-loire/,basic,https://www.caisse-epargne.fr/bretagne-pays-de-loire/,none,,none,,33
+Caisse d'Epargne CEPAC,France,FR,Marseille,https://www.caisse-epargne.fr/cepac/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/cepac/,basic,https://www.caisse-epargne.fr/cepac/,none,,none,,33
+Caisse d'Epargne Cote d'Azur,France,FR,Nice,https://www.caisse-epargne.fr/cote-d-azur/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/cote-d-azur/,basic,https://www.caisse-epargne.fr/cote-d-azur/,none,,none,,33
+Caisse d'Epargne Grand Est Europe,France,FR,Strasbourg,https://www.caisse-epargne.fr/grand-est-europe/,none,,basic,https://www.caisse-epargne.fr/grand-est-europe/,basic,https://www.caisse-epargne.fr/grand-est-europe/,none,,none,,13
+Caisse d'Epargne Hauts de France,France,FR,Lille,https://www.caisse-epargne.fr/hauts-de-france/,none,,basic,https://www.caisse-epargne.fr/hauts-de-france/,basic,https://www.caisse-epargne.fr/hauts-de-france/,none,,none,,13
+Caisse d'Epargne Ile-de-France,France,FR,Paris,https://www.caisse-epargne.fr/ile-de-france/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/ile-de-france/,basic,https://www.caisse-epargne.fr/ile-de-france/,none,,none,,33
+Caisse d'Epargne Languedoc Roussillon,France,FR,Montpellier,https://www.caisse-epargne.fr/languedoc-roussillon/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/languedoc-roussillon/,basic,https://www.caisse-epargne.fr/languedoc-roussillon/,none,,none,,33
+Caisse d'Epargne Loire Centre,France,FR,Orleans,https://www.caisse-epargne.fr/loire-centre/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/loire-centre/,basic,https://www.caisse-epargne.fr/loire-centre/,none,,none,,33
+Caisse d'Epargne Loire Drome Ardeche,France,FR,Saint-Etienne,https://www.caisse-epargne.fr/loire-drome-ardeche/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/loire-drome-ardeche/,basic,https://www.caisse-epargne.fr/loire-drome-ardeche/,none,,none,,33
+Caisse d'Epargne Midi-Pyrenees,France,FR,Toulouse,https://www.caisse-epargne.fr/midi-pyrenees/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/midi-pyrenees/,basic,https://www.caisse-epargne.fr/midi-pyrenees/,none,,none,,33
+Caisse d'Epargne Normandie,France,FR,Rouen,https://www.caisse-epargne.fr/normandie/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/normandie/,basic,https://www.caisse-epargne.fr/normandie/,none,,none,,33
+Caisse d'Epargne Rhone Alpes,France,FR,Lyon,https://www.caisse-epargne.fr/rhone-alpes/,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4,basic,https://www.caisse-epargne.fr/rhone-alpes/,basic,https://www.caisse-epargne.fr/rhone-alpes/,none,,none,,33
+MagNet Bank,Hungary,HU,Budapest,https://www.magnetbank.hu,advanced,https://apps.apple.com/hu/app/magnet-bank/id807556458?uo=4,none,,none,,none,,none,,20
+Arion banki,Iceland,IS,Reykjavik,https://www.arionbanki.is,intermediate,https://apps.apple.com/is/app/arion-banki/id542642049?uo=4,basic,https://www.arionbanki.is,none,,none,,none,,20
+Islandsbanki,Iceland,IS,Reykjavik,https://www.islandsbanki.is,intermediate,https://apps.apple.com/is/app/%C3%ADslandsbanki/id1316447943?uo=4,none,,none,,basic,https://www.islandsbanki.is,none,,20
+Landsbankinn,Iceland,IS,Reykjavik,https://www.landsbankinn.is,intermediate,https://apps.apple.com/is/app/landsbankinn/id1235523584?uo=4,basic,https://www.landsbankinn.is,none,,none,,none,,20
+Banca Agricola Popolare di Ragusa,Italy,IT,Ragusa,https://www.bafrr.it,advanced,https://apps.apple.com/it/app/baps-mobile/id1513956933?uo=4,none,,none,,none,,none,,20
+Banca Cassa di Risparmio di Savigliano,Italy,IT,Savigliano,https://www.bancacrs.it,none,,intermediate,https://www.bancacrs.it,none,,none,,none,,13
+Banca d'Alba,Italy,IT,Alba,https://www.bancadalba.it,none,,none,,none,,none,,none,,0
+Banca del Piemonte,Italy,IT,Turin,https://www.bfrfrancese.it,advanced,https://apps.apple.com/it/app/bpnow-mobile/id1589265077?uo=4,none,,none,,none,,none,,20
+Banca di Cividale,Italy,IT,Cividale del Friuli,https://www.civibank.it,advanced,https://apps.apple.com/it/app/civibank-on/id1517868418?uo=4,basic,https://www.civibank.it,none,,none,,none,,27
+Banca di Credito Popolare,Italy,IT,Torre del Greco,https://www.bfrp.it,advanced,https://apps.apple.com/it/app/you-bcp/id1517871126?uo=4,none,,none,,none,,none,,20
+Banca di Piacenza,Italy,IT,Piacenza,https://www.bancadipiacenza.it,basic,https://apps.apple.com/it/app/banca-di-piacenza/id1536421231?uo=4,intermediate,https://www.bancadipiacenza.it,none,,none,,none,,20
+Banca Popolare del Lazio,Italy,IT,Velletri,https://www.bfrfrancese.it,intermediate,https://apps.apple.com/it/app/bplazio/id1513133871?uo=4,none,,none,,none,,none,,13
+Banca Popolare di Puglia e Basilicata,Italy,IT,Altamura,https://www.bfrs.it,intermediate,https://apps.apple.com/it/app/bppb-privati/id6444260930?uo=4,none,,none,,none,,none,,13
+Banca Popolare Pugliese,Italy,IT,Matino,https://www.bfrfrancese.it,advanced,https://apps.apple.com/it/app/bpp/id1509923984?uo=4,none,,none,,none,,none,,20
+Banca Valsabbina,Italy,IT,Vestone,https://www.bfrfrancese.it,intermediate,https://apps.apple.com/it/app/la-valsabbinapp/id904977013?uo=4,none,,none,,none,,none,,13
+Banco di Sardegna,Italy,IT,Sassari,https://www.bancosardegna.it,none,,basic,https://www.bancosardegna.it,none,,none,,none,,7
+BCC di Roma,Italy,IT,Rome,https://www.bfrfrancese.it,basic,https://apps.apple.com/us/app/noisoci-bcc-roma/id6740815874?uo=4,none,,none,,none,,none,,7
+Cassa di Risparmio di Cento,Italy,IT,Cento,https://www.cfrcentro.it,none,,none,,none,,none,,none,,0
+Cassa di Risparmio di Fermo,Italy,IT,Fermo,https://www.carifermo.it,advanced,https://apps.apple.com/it/app/carifermo-mobile/id1513132799?uo=4,basic,https://www.carifermo.it,none,,none,,none,,27
+Cassa di Risparmio di Orvieto,Italy,IT,Orvieto,https://www.crorvieto.it,none,,none,,none,,none,,none,,0
+Cassa di Risparmio di Volterra,Italy,IT,Volterra,https://www.cfrv.it,advanced,https://apps.apple.com/it/app/crv-mobile-banking/id811245816?uo=4,none,,none,,none,,none,,20
+Credito Emiliano (CREDEM),Italy,IT,Reggio Emilia,https://www.credem.it,advanced,https://apps.apple.com/it/app/credem-banca-per-privati/id441187556?uo=4,basic,https://www.credem.it,basic,https://www.credem.it,none,,none,,33
+Emil Banca Credito Cooperativo,Italy,IT,Bologna,https://www.emilbanca.it,intermediate,https://apps.apple.com/it/app/per-te-emil-banca/id1452589017?uo=4,intermediate,https://www.emilbanca.it,none,,none,,none,,27
+La Cassa di Ravenna,Italy,IT,Ravenna,https://www.lacassa.com,advanced,https://apps.apple.com/it/app/la-cassa-di-ravenna-s-p-a/id1536426526?uo=4,intermediate,https://www.lacassa.com,none,,none,,none,,33
+Raiffeisen Landesbank Sudtirol,Italy,IT,Bolzano,https://www.raiffeisen.it,none,,basic,https://www.raiffeisen.it,none,,none,,none,,7
+Sparkasse - Cassa di Risparmio di Bolzano,Italy,IT,Bolzano,https://www.sparkasse.it,advanced,https://apps.apple.com/it/app/sparkasse-on/id1552230892?uo=4,basic,https://www.sparkasse.it,none,,none,,none,,27
+Aurskog Sparebank,Norway,NO,Aurskog,https://www.aurskog-sparebank.no,none,,none,,none,,basic,https://www.aurskog-sparebank.no,none,,7
+Bien Sparebank,Norway,NO,Drammen,https://www.bien.no,none,,none,,none,,basic,https://www.bien.no,none,,7
+Cultura Sparebank,Norway,NO,Oslo,https://www.markup.no,intermediate,https://apps.apple.com/no/app/culturabank/id1599145758?uo=4,none,,none,,none,,none,,13
+Drangedal Sparebank,Norway,NO,Drangedal,https://www.drangedalsparebank.no,intermediate,https://apps.apple.com/no/app/drangedal-mobilbank/id1566086393?uo=4,basic,https://www.drangedalsparebank.no,none,,basic,https://www.drangedalsparebank.no,none,,27
+Eidsberg Sparebank,Norway,NO,Mysen,https://www.eidsbergsparebank.no,none,,none,,none,,none,,none,,0
+Etne Sparebank,Norway,NO,Etne,https://www.etnesparebank.no,none,,none,,none,,none,,none,,0
+Fana Sparebank,Norway,NO,Bergen,https://www.fana-sparebank.no,advanced,https://apps.apple.com/no/app/fana-sparebank-mobilbank/id1311411778?uo=4,none,,none,,none,,none,,20
+Flekkefjord Sparebank,Norway,NO,Flekkefjord,https://www.flekkefjordsparebank.no,intermediate,https://apps.apple.com/no/app/flekkefjord-sparebank/id1250056275?uo=4,intermediate,https://www.flekkefjordsparebank.no,none,,basic,https://www.flekkefjordsparebank.no,none,,33
+Grue Sparebank,Norway,NO,Kirkenær,https://www.gruesparebank.no,none,,none,,none,,basic,https://www.gruesparebank.no,none,,7
+Haltdalen Sparebank,Norway,NO,Haltdalen,https://www.haltdalensparebank.no,none,,none,,none,,basic,https://www.haltdalensparebank.no,none,,7
+Haugesund Sparebank,Norway,NO,Haugesund,https://www.haugesund-sparebank.no,none,,none,,none,,basic,https://www.haugesund-sparebank.no,none,,7
+Helgeland Sparebank,Norway,NO,Mosjoen,https://www.helgeland-sparebank.no,none,,none,,none,,none,,none,,0
+Hjartdal og Gransherad Sparebank,Norway,NO,Hjartdal,https://www.hjartdalsparebank.no,none,,none,,none,,none,,none,,0
+Indre Sogn Sparebank,Norway,NO,Laerdal,https://www.issb.no,none,,none,,none,,none,,none,,0
+Jaeren Sparebank,Norway,NO,Bryne,https://www.jaerensparebank.no,none,,none,,none,,basic,https://www.jaerensparebank.no,none,,7
+Kvinesdal Sparebank,Norway,NO,Kvinesdal,https://www.kvinesdalsparebank.no,none,,none,,none,,basic,https://www.kvinesdalsparebank.no,none,,7
+Lillesands Sparebank,Norway,NO,Lillesand,https://www.lillesandssparebank.no,intermediate,https://apps.apple.com/no/app/lillesands-sparebank-mobilbank/id1250056474?uo=4,none,,none,,none,,none,,13
+Luster Sparebank,Norway,NO,Gaupne,https://www.lustersparebank.no,intermediate,https://apps.apple.com/no/app/luster-sparebank-mobilbank/id1250056635?uo=4,basic,https://www.lustersparebank.no,none,,basic,https://www.lustersparebank.no,none,,27
+Marker Sparebank,Norway,NO,Orje,https://www.markersparebank.no,none,,none,,none,,none,,none,,0
+Melhus Sparebank,Norway,NO,Melhus,https://www.melhussparebank.no,none,,none,,none,,none,,none,,0
+Odal Sparebank,Norway,NO,Sand,https://www.odalsparebank.no,none,,none,,none,,none,,none,,0
+Ofoten Sparebank,Norway,NO,Narvik,https://www.ofotensparebank.no,none,,basic,https://www.ofotensparebank.no,none,,none,,none,,7
+Orkla Sparebank,Norway,NO,Orkanger,https://www.orklasparebank.no,none,,none,,none,,basic,https://www.orklasparebank.no,none,,7
+Sandnes Sparebank,Norway,NO,Sandnes,https://www.sandnes-sparebank.no,none,,none,,none,,none,,none,,0
+Selbu Sparebank,Norway,NO,Selbu,https://www.selbusparebank.no,advanced,https://apps.apple.com/no/app/selbu-mobilbank/id1566086560?uo=4,basic,https://www.selbusparebank.no,none,,basic,https://www.selbusparebank.no,none,,33
+Skagerrak Sparebank,Norway,NO,Kragero,https://www.skagerraksparebank.no,none,,none,,none,,basic,https://www.skagerraksparebank.no,none,,7
+Skudenes og Aakra Sparebank,Norway,NO,Skudeneshavn,https://www.sassparebank.no,none,,none,,none,,none,,none,,0
+SpareBank 1 BV,Norway,NO,Tonsberg,https://www.sparebank1.no/bv,advanced,https://apps.apple.com/no/app/sparebank-1-bedrift/id522078287?uo=4,basic,https://www.sparebank1.no/bv,none,,basic,https://www.sparebank1.no/bv,none,,33
+SpareBank 1 Gudbrandsdal,Norway,NO,Lillehammer,https://www.sparebank1.no/gudbrandsdal,none,,basic,https://www.sparebank1.no/gudbrandsdal,none,,basic,https://www.sparebank1.no/gudbrandsdal,none,,13
+SpareBank 1 Hallingdal Valdres,Norway,NO,Gol,https://www.sparebank1.no/hallingdal-valdres,none,,basic,https://www.sparebank1.no/hallingdal-valdres,none,,basic,https://www.sparebank1.no/hallingdal-valdres,none,,13
+SpareBank 1 Helgeland,Norway,NO,Mo i Rana,https://www.sparebank1.no/helgeland,none,,basic,https://www.sparebank1.no/helgeland,none,,basic,https://www.sparebank1.no/helgeland,none,,13
+SpareBank 1 Lom og Skjak,Norway,NO,Lom,https://www.sparebank1.no/lom-og-skjaak,none,,basic,https://www.sparebank1.no/lom-og-skjaak,none,,basic,https://www.sparebank1.no/lom-og-skjaak,none,,13
+SpareBank 1 Modum,Norway,NO,Vikersund,https://www.sparebank1.no/modum,none,,basic,https://www.sparebank1.no/modum,none,,basic,https://www.sparebank1.no/modum,none,,13
+SpareBank 1 Nordmore,Norway,NO,Kristiansund,https://www.sparebank1.no/nordmore,none,,basic,https://www.sparebank1.no/nordmore,none,,basic,https://www.sparebank1.no/nordmore,none,,13
+SpareBank 1 Ringerike Hadeland,Norway,NO,Honefoss,https://www.sparebank1.no/ringerike-hadeland,none,,basic,https://www.sparebank1.no/ringerike-hadeland,none,,basic,https://www.sparebank1.no/ringerike-hadeland,none,,13
+SpareBank 1 Sorost-Norge,Norway,NO,Arendal,https://www.sparebank1.no/sorost-norge,none,,basic,https://www.sparebank1.no/sorost-norge,none,,basic,https://www.sparebank1.no/sorost-norge,none,,13
+SpareBank 1 Telemark,Norway,NO,Skien,https://www.sparebank1.no/telemark,none,,basic,https://www.sparebank1.no/telemark,none,,basic,https://www.sparebank1.no/telemark,none,,13
+Sparebanken Din,Norway,NO,Notodden,https://www.sparebankendin.no,basic,https://apps.apple.com/no/app/din-mobilbank/id1566086500?uo=4,basic,https://www.sparebankendin.no,none,,basic,https://www.sparebankendin.no,none,,20
+Sparebanken More,Norway,NO,Aalesund,https://www.sbmore.no,none,,basic,https://www.sbmore.no,none,,basic,https://www.sbmore.no,none,,13
+Sparebanken Narvik,Norway,NO,Narvik,https://www.sbnarvik.no,none,,none,,none,,none,,none,,0
+Sparebanken Sogn og Fjordane,Norway,NO,Forde,https://www.ssf.no,none,,basic,https://www.ssf.no,none,,basic,https://www.ssf.no,none,,13
+Stadsbygd Sparebank,Norway,NO,Stadsbygd,https://www.stadsbygdsparebank.no,basic,https://apps.apple.com/no/app/stbank/id1566086483?uo=4,none,,none,,none,,none,,7
+Sunndal Sparebank,Norway,NO,Sunndalsora,https://www.sunndal-sparebank.no,none,,none,,none,,none,,none,,0
+Tolga-Os Sparebank,Norway,NO,Tolga,https://www.tolga-os.no,basic,https://apps.apple.com/no/app/tosbank/id1566086496?uo=4,none,,none,,none,,none,,7
+Totens Sparebank,Norway,NO,Lena,https://www.totenssparebank.no,none,,none,,none,,none,,none,,0
+Trøgstad Sparebank,Norway,NO,Mysen,https://www.trogstadsparebank.no,none,,none,,none,,none,,none,,0
+Tysnes Sparebank,Norway,NO,Tysnes,https://www.tysnes-sparebank.no,none,,none,,none,,basic,https://www.tysnes-sparebank.no,none,,7
+Valle Sparebank,Norway,NO,Valle,https://www.vallesparebank.no,none,,none,,none,,none,,none,,0
+Voss Sparebank,Norway,NO,Voss,https://www.vfrb.no,intermediate,https://apps.apple.com/no/app/voss-sparebank-mobilbank/id1250065379?uo=4,none,,none,,none,,none,,13
+BCR (Banca Comerciala Romana),Romania,RO,Bucharest,https://www.bcr.ro,intermediate,https://apps.apple.com/ro/app/etoken-bcr/id691867429?uo=4,basic,https://www.bcr.ro,none,,none,,none,,20
+BRD - Groupe Societe Generale,Romania,RO,Bucharest,https://www.brd.ro,advanced,https://apps.apple.com/ro/app/you-brd/id1484062157?uo=4,basic,https://www.brd.ro,none,,none,,none,,27
+Raiffeisen Bank Romania,Romania,RO,Bucharest,https://www.raiffeisen.ro,advanced,https://apps.apple.com/ro/app/raiffeisen-smart-mobile/id1255136212?uo=4,basic,https://www.raiffeisen.ro,none,,none,,none,,27
+Prima banka Slovensko,Slovakia,SK,Bratislava,https://www.primabanka.sk,advanced,https://apps.apple.com/sk/app/pe%C5%88a%C5%BEenka/id522958758?uo=4,none,,none,,none,,none,,20
+Delavska hranilnica,Slovenia,SI,Ljubljana,https://www.defrfrancesea.si,intermediate,https://apps.apple.com/si/app/dh-denarnik/id1490853552?uo=4,none,,none,,none,,none,,13
+Caixa Ontinyent,Spain,ES,Ontinyent,https://www.caixaontinyent.es,intermediate,https://apps.apple.com/es/app/caixa-ontinyent/id891691116?uo=4,basic,https://www.caixaontinyent.es,none,,none,,none,,20
+Caixa Pollença (Colonya),Spain,ES,Pollença,https://www.colonya.es,none,,basic,https://www.colonya.es,none,,none,,none,,7
+Cecabank,Spain,ES,Madrid,https://www.cecabank.es,basic,https://apps.apple.com/es/app/cecabank/id592430215?uo=4,basic,https://www.cecabank.es,none,,none,,none,,13
+Ålems Sparbank,Sweden,SE,,https://www.alemssparbank.se,none,,basic,https://www.alemssparbank.se,none,,none,,none,,7
+Åse Viste Sparbank,Sweden,SE,,https://www.aseochvisteharadssparbank.se,none,,none,,none,,none,,none,,0
+Bjursås Sparbank,Sweden,SE,,https://www.bjursassparbank.se,none,,basic,https://www.bjursassparbank.se,none,,none,,none,,7
+Dalslands Sparbank,Sweden,SE,,https://www.dalsbank.se,none,,basic,https://www.dalsbank.se,none,,none,,none,,7
+Ekeby Sparbank,Sweden,SE,,https://www.ekebysparbank.se,none,,basic,https://www.ekebysparbank.se,none,,none,,none,,7
+Falkenbergs Sparbank,Sweden,SE,,https://www.falkenbergssparbank.se,none,,basic,https://www.falkenbergssparbank.se,none,,none,,none,,7
+Fryksdalens Sparbank,Sweden,SE,,https://www.fryksdalenssparbank.se,none,,basic,https://www.fryksdalenssparbank.se,none,,none,,none,,7
+Hälsinglands Sparbank,Sweden,SE,,https://www.halsinglandssparbank.se,none,,basic,https://www.halsinglandssparbank.se,none,,none,,none,,7
+Häradssparbanken Mönsterås,Sweden,SE,,https://www.haradssparbanken.se,none,,basic,https://www.haradssparbanken.se,none,,none,,none,,7
+Högsby Sparbank,Sweden,SE,,https://www.hogsbysparbank.se,none,,basic,https://www.hogsbysparbank.se,none,,none,,none,,7
+Ivetofta Sparbank i Bromölla,Sweden,SE,,https://www.ivetoftasparbank.se,none,,basic,https://www.ivetoftasparbank.se,none,,none,,none,,7
+Kinda Ydre Sparbank,Sweden,SE,,https://www.kindaydresparbank.se,none,,basic,https://www.kindaydresparbank.se,none,,none,,none,,7
+Laholms Sparbank,Sweden,SE,,https://www.laholmssparbank.se,none,,basic,https://www.laholmssparbank.se,none,,none,,none,,7
+Lekebergs Sparbank,Sweden,SE,,https://www.lekebergssparbank.se,none,,basic,https://www.lekebergssparbank.se,none,,none,,none,,7
+Leksands Sparbank,Sweden,SE,,https://www.leksandssparbank.se,none,,basic,https://www.leksandssparbank.se,basic,https://www.leksandssparbank.se,none,,none,,13
+Lönneberga-Tuna-Vena Sparbank,Sweden,SE,,https://www.ltvsparbank.se,none,,basic,https://www.ltvsparbank.se,none,,none,,none,,7
+Markaryds Sparbank,Sweden,SE,,https://www.markarydssparbank.se,none,,basic,https://www.markarydssparbank.se,none,,none,,none,,7
+Mjöbäcks Sparbank,Sweden,SE,,https://www.mjobackssparbank.se,none,,basic,https://www.mjobackssparbank.se,none,,none,,none,,7
+Norrbärke Sparbank,Sweden,SE,,https://www.norrbarke-sparbank.se,none,,basic,https://www.norrbarke-sparbank.se,none,,none,,none,,7
+Ölands Bank,Sweden,SE,,https://www.olandsbank.se,none,,basic,https://www.olandsbank.se,none,,none,,none,,7
+Orusts Sparbank,Sweden,SE,,https://www.orustsparbank.se,none,,basic,https://www.orustsparbank.se,none,,none,,none,,7
+Roslagens Sparbank,Sweden,SE,,https://www.roslagenssparbank.se,none,,basic,https://www.roslagenssparbank.se,none,,none,,none,,7
+Sala Sparbank,Sweden,SE,,https://www.salasparbank.se,none,,basic,https://www.salasparbank.se,none,,none,,none,,7
+Sidensjö Sparbank,Sweden,SE,,https://www.sidensjosparbank.se,none,,basic,https://www.sidensjosparbank.se,none,,none,,none,,7
+Skurups Sparbank,Sweden,SE,,https://www.skurupssparbank.se,none,,basic,https://www.skurupssparbank.se,none,,none,,none,,7
+Snapphanebygdens Sparbank,Sweden,SE,,https://www.snapphanebygdenssparbank.se,none,,basic,https://www.snapphanebygdenssparbank.se,none,,none,,none,,7
+Södra Hestra Sparbank,Sweden,SE,,https://www.sodrahestrasparbank.se,none,,basic,https://www.sodrahestrasparbank.se,none,,none,,none,,7
+Sölvesborg-Mjällby Sparbank,Sweden,SE,,https://www.smsparbank.se,none,,basic,https://www.smsparbank.se,none,,none,,none,,7
+Sörmlands Sparbank,Sweden,SE,,https://www.sormlandssparbank.se,none,,basic,https://www.sormlandssparbank.se,none,,none,,none,,7
+Sparbanken Alingsås,Sweden,SE,,https://www.sparbankenalingsas.se,none,,basic,https://www.sparbankenalingsas.se,none,,none,,none,,7
+Sparbanken Bergslagen,Sweden,SE,,https://www.sparbankenbergslagen.se,none,,basic,https://www.sparbankenbergslagen.se,none,,none,,none,,7
+Sparbanken Boken,Sweden,SE,,https://www.sparbankenboken.se,none,,basic,https://www.sparbankenboken.se,none,,none,,none,,7
+Sparbanken Eken,Sweden,SE,,https://www.sparbankeneken.se,none,,basic,https://www.sparbankeneken.se,none,,none,,none,,7
+Sparbanken Göinge,Sweden,SE,,https://www.sparbankengoinge.se,none,,basic,https://www.sparbankengoinge.se,none,,basic,https://www.sparbankengoinge.se,none,,13
+Sparbanken Gotland,Sweden,SE,,https://www.sparbankengotland.se,none,,basic,https://www.sparbankengotland.se,none,,none,,none,,7
+Sparbanken i Enköping,Sweden,SE,,https://www.sparbankenenkoping.se,none,,basic,https://www.sparbankenenkoping.se,none,,none,,none,,7
+Sparbanken i Karlshamn,Sweden,SE,,https://www.sparbankenikarlshamn.se,none,,basic,https://www.sparbankenikarlshamn.se,none,,none,,none,,7
+Sparbanken Lidköping,Sweden,SE,,https://www.sparbankenlidkoping.se,none,,basic,https://www.sparbankenlidkoping.se,none,,none,,none,,7
+Sparbanken Mälardalen,Sweden,SE,,https://www.sparbankenmalardalen.se,none,,basic,https://www.sparbankenmalardalen.se,none,,none,,none,,7
+Sparbanken Nord,Sweden,SE,,https://www.sparbankennord.se,none,,basic,https://www.sparbankennord.se,none,,none,,none,,7
+Sparbanken Sjuhärad,Sweden,SE,,https://sparbankensjuharad.se,none,,basic,https://sparbankensjuharad.se,none,,none,,none,,7
+Sparbanken Skåne,Sweden,SE,,https://www.sparbankenskane.se,none,,basic,https://www.sparbankenskane.se,none,,none,,none,,7
+Sparbanken Skaraborg,Sweden,SE,,https://www.sparbankenskaraborg.se,none,,basic,https://www.sparbankenskaraborg.se,none,,none,,none,,7
+Sparbanken Spira,Sweden,SE,,https://www.tjustbanken.se,none,,basic,https://www.tjustbanken.se,none,,none,,none,,7
+Sparbanken Tanum,Sweden,SE,,https://www.sparbankentanum.se,none,,basic,https://www.sparbankentanum.se,none,,none,,none,,7
+Sparbanken Tranemo,Sweden,SE,,https://www.sparbankentranemo.se,none,,basic,https://www.sparbankentranemo.se,none,,none,,none,,7
+Tidaholms Sparbank,Sweden,SE,,https://www.tidaholms-sparbank.se,none,,basic,https://www.tidaholms-sparbank.se,none,,none,,none,,7
+Tjörns Sparbank,Sweden,SE,,https://www.tjorns-sparbank.se,none,,basic,https://www.tjorns-sparbank.se,none,,none,,none,,7
+Ulricehamns Sparbank,Sweden,SE,,https://www.ulricehamnssparbank.se,none,,basic,https://www.ulricehamnssparbank.se,none,,none,,none,,7
+Vadstena Sparbank,Sweden,SE,,https://www.vadstenasparbank.se,none,,basic,https://www.vadstenasparbank.se,none,,none,,none,,7
+Valdemarsviks Sparbank,Sweden,SE,,https://www.valdemarsvikssparbank.se,none,,basic,https://www.valdemarsvikssparbank.se,none,,none,,none,,7
+Varbergs Sparbank,Sweden,SE,,https://www.varbergssparbank.se,none,,basic,https://www.varbergssparbank.se,none,,none,,none,,7
+Vimmerby Sparbank,Sweden,SE,,https://www.vimmerbysparbank.se,none,,basic,https://www.vimmerbysparbank.se,none,,none,,none,,7
+Virserums Sparbank,Sweden,SE,,https://www.virserumssparbank.se,none,,basic,https://www.virserumssparbank.se,none,,none,,none,,7
+Westra Wermlands Sparbank,Sweden,SE,,https://www.wwsparbank.se,none,,basic,https://www.wwsparbank.se,none,,none,,none,,7

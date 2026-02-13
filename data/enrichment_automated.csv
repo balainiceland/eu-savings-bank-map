@@ -1,0 +1,286 @@
+name,country_code,feature,maturity,evidence_url
+Raiffeisen Bank Albania,AL,mobile_banking,intermediate,https://apps.apple.com/al/app/raiffeisen-on/id1194478857?uo=4
+Raiffeisen Bank Albania,AL,open_banking,basic,https://www.raiffeisen.al
+Allgemeine Sparkasse Oberosterreich,AT,ai_chatbot,basic,https://www.sparkasse.at/oberoesterreich
+Allgemeine Sparkasse Oberosterreich,AT,digital_onboarding,basic,https://www.sparkasse.at/oberoesterreich
+Dornbirner Sparkasse,AT,open_banking,basic,https://www.sparkasse.at/dornbirn
+Dornbirner Sparkasse,AT,ai_chatbot,basic,https://www.sparkasse.at/dornbirn
+Dornbirner Sparkasse,AT,digital_onboarding,basic,https://www.sparkasse.at/dornbirn
+Karntner Sparkasse,AT,open_banking,basic,https://www.sparkasse.at/kaernten
+Karntner Sparkasse,AT,ai_chatbot,basic,https://www.sparkasse.at/kaernten
+Karntner Sparkasse,AT,digital_onboarding,basic,https://www.sparkasse.at/kaernten
+Lienzer Sparkasse,AT,ai_chatbot,basic,https://www.sparkasse.at/lienz
+Lienzer Sparkasse,AT,digital_onboarding,basic,https://www.sparkasse.at/lienz
+Salzburger Sparkasse,AT,open_banking,basic,https://www.sparkasse.at/salzburg
+Salzburger Sparkasse,AT,ai_chatbot,basic,https://www.sparkasse.at/salzburg
+Salzburger Sparkasse,AT,digital_onboarding,basic,https://www.sparkasse.at/salzburg
+Sparkasse Baden,AT,open_banking,basic,https://www.sparkasse.at/baden
+Sparkasse Baden,AT,ai_chatbot,basic,https://www.sparkasse.at/baden
+Sparkasse Baden,AT,digital_onboarding,basic,https://www.sparkasse.at/baden
+Sparkasse Bludenz,AT,open_banking,basic,https://www.sparkasse.at/bludenz
+Sparkasse Bludenz,AT,ai_chatbot,basic,https://www.sparkasse.at/bludenz
+Sparkasse Bludenz,AT,digital_onboarding,basic,https://www.sparkasse.at/bludenz
+Sparkasse Bregenz,AT,open_banking,basic,https://www.sparkasse.at/bregenz
+Sparkasse Bregenz,AT,ai_chatbot,basic,https://www.sparkasse.at/bregenz
+Sparkasse Bregenz,AT,digital_onboarding,basic,https://www.sparkasse.at/bregenz
+Sparkasse der Stadt Amstetten,AT,mobile_banking,basic,https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4
+Sparkasse der Stadt Amstetten,AT,open_banking,basic,https://www.sparkasse.at/amstetten
+Sparkasse der Stadt Amstetten,AT,ai_chatbot,basic,https://www.sparkasse.at/amstetten
+Sparkasse der Stadt Amstetten,AT,digital_onboarding,basic,https://www.sparkasse.at/amstetten
+Sparkasse der Stadt Feldkirch,AT,mobile_banking,basic,https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4
+Sparkasse der Stadt Feldkirch,AT,open_banking,basic,https://www.sparkasse.at/feldkirch
+Sparkasse der Stadt Feldkirch,AT,ai_chatbot,basic,https://www.sparkasse.at/feldkirch
+Sparkasse der Stadt Feldkirch,AT,digital_onboarding,basic,https://www.sparkasse.at/feldkirch
+Sparkasse der Stadt Kitzbuhel,AT,mobile_banking,basic,https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4
+Sparkasse der Stadt Kitzbuhel,AT,open_banking,basic,https://www.sparkasse.at/kitzbuehel
+Sparkasse der Stadt Kitzbuhel,AT,ai_chatbot,basic,https://www.sparkasse.at/kitzbuehel
+Sparkasse der Stadt Kitzbuhel,AT,digital_onboarding,basic,https://www.sparkasse.at/kitzbuehel
+Sparkasse Hainburg-Bruck-Neusiedl,AT,open_banking,basic,https://www.sparkasse.at/hainburg
+Sparkasse Hainburg-Bruck-Neusiedl,AT,ai_chatbot,basic,https://www.sparkasse.at/hainburg
+Sparkasse Hainburg-Bruck-Neusiedl,AT,digital_onboarding,basic,https://www.sparkasse.at/hainburg
+Sparkasse Horn-Ravelsbach-Kirchberg,AT,open_banking,basic,https://www.sparkasse.at/horn
+Sparkasse Horn-Ravelsbach-Kirchberg,AT,ai_chatbot,basic,https://www.sparkasse.at/horn
+Sparkasse Horn-Ravelsbach-Kirchberg,AT,digital_onboarding,basic,https://www.sparkasse.at/horn
+Sparkasse Imst,AT,ai_chatbot,basic,https://www.sparkasse.at/imst
+Sparkasse Imst,AT,digital_onboarding,basic,https://www.sparkasse.at/imst
+Sparkasse Korneuburg,AT,ai_chatbot,basic,https://www.sparkasse.at/korneuburg
+Sparkasse Korneuburg,AT,digital_onboarding,basic,https://www.sparkasse.at/korneuburg
+Sparkasse Kufstein,AT,open_banking,basic,https://www.sparkasse.at/kufstein
+Sparkasse Kufstein,AT,ai_chatbot,basic,https://www.sparkasse.at/kufstein
+Sparkasse Kufstein,AT,digital_onboarding,basic,https://www.sparkasse.at/kufstein
+Sparkasse Neunkirchen,AT,open_banking,basic,https://www.sparkasse.at/neunkirchen
+Sparkasse Neunkirchen,AT,ai_chatbot,basic,https://www.sparkasse.at/neunkirchen
+Sparkasse Neunkirchen,AT,digital_onboarding,basic,https://www.sparkasse.at/neunkirchen
+Sparkasse Reutte,AT,open_banking,basic,https://www.sparkasse.at/reutte
+Sparkasse Reutte,AT,ai_chatbot,basic,https://www.sparkasse.at/reutte
+Sparkasse Salzkammergut,AT,open_banking,basic,https://www.sparkasse.at/salzkammergut
+Sparkasse Salzkammergut,AT,ai_chatbot,basic,https://www.sparkasse.at/salzkammergut
+Sparkasse Salzkammergut,AT,digital_onboarding,basic,https://www.sparkasse.at/salzkammergut
+Sparkasse Schwaz,AT,open_banking,basic,https://www.sparkasse.at/schwaz
+Sparkasse Schwaz,AT,ai_chatbot,basic,https://www.sparkasse.at/schwaz
+Sparkasse Schwaz,AT,digital_onboarding,basic,https://www.sparkasse.at/schwaz
+Steiermarkische Sparkasse,AT,open_banking,basic,https://www.sparkasse.at/steiermaerkische
+Steiermarkische Sparkasse,AT,ai_chatbot,basic,https://www.sparkasse.at/steiermaerkische
+Steiermarkische Sparkasse,AT,digital_onboarding,basic,https://www.sparkasse.at/steiermaerkische
+Tiroler Sparkasse,AT,open_banking,basic,https://www.sparkasse.at/tirol
+Tiroler Sparkasse,AT,ai_chatbot,basic,https://www.sparkasse.at/tirol
+Tiroler Sparkasse,AT,digital_onboarding,basic,https://www.sparkasse.at/tirol
+Argenta,BE,mobile_banking,advanced,https://apps.apple.com/be/app/argenta-banking/id893585833?uo=4
+Argenta,BE,open_banking,basic,https://www.argenta.be
+Crelan,BE,mobile_banking,intermediate,https://apps.apple.com/be/app/crelan-mobile-app/id893189359?uo=4
+Fio banka,CZ,mobile_banking,advanced,https://apps.apple.com/cz/app/fio-smartbanking-cz/id1451236597?uo=4
+MONETA Money Bank,CZ,mobile_banking,advanced,https://apps.apple.com/cz/app/moneta-smart-banka/id1122443334?uo=4
+Arbejdernes Landsbank,DK,mobile_banking,advanced,https://apps.apple.com/dk/app/al-bank/id421357586?uo=4
+Arbejdernes Landsbank,DK,open_banking,basic,https://www.al-bank.dk
+Danske Andelskassers Bank,DK,mobile_banking,intermediate,https://apps.apple.com/dk/app/andelskassen/id421361046?uo=4
+Danske Andelskassers Bank,DK,open_banking,basic,https://www.dab.dk
+Danske Andelskassers Bank,DK,ai_chatbot,basic,https://www.dab.dk
+Middelfart Sparekasse,DK,mobile_banking,advanced,https://apps.apple.com/dk/app/mobilbank-middelfartsparekasse/id1466762662?uo=4
+Sparekassen Kronjylland,DK,mobile_banking,advanced,https://apps.apple.com/dk/app/sparkron-mobilbank/id1512972558?uo=4
+Aito Saastopankki,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/aito-saastopankki
+Avain Saastopankki,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/avain-saastopankki
+Helmi Saastopankki,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/helmi-saastopankki
+Lammin Saastopankki,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lammin-saastopankki
+Lansi-Uudenmaan Saastopankki,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lansi-uudenmaan-saastopankki
+Nooa Saastopankki,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/nooa-saastopankki
+Saastopankki Optia,FI,ai_chatbot,basic,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/saastopankki-optia
+Caisse d'Epargne Aquitaine Poitou-Charentes,FR,open_banking,basic,https://www.caisse-epargne.fr/aquitaine-poitou-charentes/
+Caisse d'Epargne Aquitaine Poitou-Charentes,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/aquitaine-poitou-charentes/
+Caisse d'Epargne Auvergne et Limousin,FR,open_banking,basic,https://www.caisse-epargne.fr/auvergne-limousin/
+Caisse d'Epargne Auvergne et Limousin,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/auvergne-limousin/
+Caisse d'Epargne Bourgogne Franche-Comte,FR,open_banking,basic,https://www.caisse-epargne.fr/bourgogne-franche-comte/
+Caisse d'Epargne Bourgogne Franche-Comte,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/bourgogne-franche-comte/
+Caisse d'Epargne Bretagne Pays de Loire,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Bretagne Pays de Loire,FR,open_banking,basic,https://www.caisse-epargne.fr/bretagne-pays-de-loire/
+Caisse d'Epargne Bretagne Pays de Loire,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/bretagne-pays-de-loire/
+Caisse d'Epargne CEPAC,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne CEPAC,FR,open_banking,basic,https://www.caisse-epargne.fr/cepac/
+Caisse d'Epargne CEPAC,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/cepac/
+Caisse d'Epargne Cote d'Azur,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Cote d'Azur,FR,open_banking,basic,https://www.caisse-epargne.fr/cote-d-azur/
+Caisse d'Epargne Cote d'Azur,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/cote-d-azur/
+Caisse d'Epargne Grand Est Europe,FR,open_banking,basic,https://www.caisse-epargne.fr/grand-est-europe/
+Caisse d'Epargne Grand Est Europe,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/grand-est-europe/
+Caisse d'Epargne Hauts de France,FR,open_banking,basic,https://www.caisse-epargne.fr/hauts-de-france/
+Caisse d'Epargne Hauts de France,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/hauts-de-france/
+Caisse d'Epargne Ile-de-France,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Ile-de-France,FR,open_banking,basic,https://www.caisse-epargne.fr/ile-de-france/
+Caisse d'Epargne Ile-de-France,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/ile-de-france/
+Caisse d'Epargne Languedoc Roussillon,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Languedoc Roussillon,FR,open_banking,basic,https://www.caisse-epargne.fr/languedoc-roussillon/
+Caisse d'Epargne Languedoc Roussillon,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/languedoc-roussillon/
+Caisse d'Epargne Loire Centre,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Loire Centre,FR,open_banking,basic,https://www.caisse-epargne.fr/loire-centre/
+Caisse d'Epargne Loire Centre,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/loire-centre/
+Caisse d'Epargne Loire Drome Ardeche,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Loire Drome Ardeche,FR,open_banking,basic,https://www.caisse-epargne.fr/loire-drome-ardeche/
+Caisse d'Epargne Loire Drome Ardeche,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/loire-drome-ardeche/
+Caisse d'Epargne Midi-Pyrenees,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Midi-Pyrenees,FR,open_banking,basic,https://www.caisse-epargne.fr/midi-pyrenees/
+Caisse d'Epargne Midi-Pyrenees,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/midi-pyrenees/
+Caisse d'Epargne Normandie,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Normandie,FR,open_banking,basic,https://www.caisse-epargne.fr/normandie/
+Caisse d'Epargne Normandie,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/normandie/
+Caisse d'Epargne Rhone Alpes,FR,mobile_banking,advanced,https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4
+Caisse d'Epargne Rhone Alpes,FR,open_banking,basic,https://www.caisse-epargne.fr/rhone-alpes/
+Caisse d'Epargne Rhone Alpes,FR,digital_onboarding,basic,https://www.caisse-epargne.fr/rhone-alpes/
+MagNet Bank,HU,mobile_banking,advanced,https://apps.apple.com/hu/app/magnet-bank/id807556458?uo=4
+Arion banki,IS,mobile_banking,intermediate,https://apps.apple.com/is/app/arion-banki/id542642049?uo=4
+Arion banki,IS,open_banking,basic,https://www.arionbanki.is
+Islandsbanki,IS,mobile_banking,intermediate,https://apps.apple.com/is/app/%C3%ADslandsbanki/id1316447943?uo=4
+Islandsbanki,IS,ai_chatbot,basic,https://www.islandsbanki.is
+Landsbankinn,IS,mobile_banking,intermediate,https://apps.apple.com/is/app/landsbankinn/id1235523584?uo=4
+Landsbankinn,IS,open_banking,basic,https://www.landsbankinn.is
+Banca Agricola Popolare di Ragusa,IT,mobile_banking,advanced,https://apps.apple.com/it/app/baps-mobile/id1513956933?uo=4
+Banca Cassa di Risparmio di Savigliano,IT,open_banking,intermediate,https://www.bancacrs.it
+Banca del Piemonte,IT,mobile_banking,advanced,https://apps.apple.com/it/app/bpnow-mobile/id1589265077?uo=4
+Banca di Cividale,IT,mobile_banking,advanced,https://apps.apple.com/it/app/civibank-on/id1517868418?uo=4
+Banca di Cividale,IT,open_banking,basic,https://www.civibank.it
+Banca di Credito Popolare,IT,mobile_banking,advanced,https://apps.apple.com/it/app/you-bcp/id1517871126?uo=4
+Banca di Piacenza,IT,mobile_banking,basic,https://apps.apple.com/it/app/banca-di-piacenza/id1536421231?uo=4
+Banca di Piacenza,IT,open_banking,intermediate,https://www.bancadipiacenza.it
+Banca Popolare del Lazio,IT,mobile_banking,intermediate,https://apps.apple.com/it/app/bplazio/id1513133871?uo=4
+Banca Popolare di Puglia e Basilicata,IT,mobile_banking,intermediate,https://apps.apple.com/it/app/bppb-privati/id6444260930?uo=4
+Banca Popolare Pugliese,IT,mobile_banking,advanced,https://apps.apple.com/it/app/bpp/id1509923984?uo=4
+Banca Valsabbina,IT,mobile_banking,intermediate,https://apps.apple.com/it/app/la-valsabbinapp/id904977013?uo=4
+Banco di Sardegna,IT,open_banking,basic,https://www.bancosardegna.it
+BCC di Roma,IT,mobile_banking,basic,https://apps.apple.com/us/app/noisoci-bcc-roma/id6740815874?uo=4
+Cassa di Risparmio di Fermo,IT,mobile_banking,advanced,https://apps.apple.com/it/app/carifermo-mobile/id1513132799?uo=4
+Cassa di Risparmio di Fermo,IT,open_banking,basic,https://www.carifermo.it
+Cassa di Risparmio di Volterra,IT,mobile_banking,advanced,https://apps.apple.com/it/app/crv-mobile-banking/id811245816?uo=4
+Credito Emiliano (CREDEM),IT,mobile_banking,advanced,https://apps.apple.com/it/app/credem-banca-per-privati/id441187556?uo=4
+Credito Emiliano (CREDEM),IT,open_banking,basic,https://www.credem.it
+Credito Emiliano (CREDEM),IT,digital_onboarding,basic,https://www.credem.it
+Emil Banca Credito Cooperativo,IT,mobile_banking,intermediate,https://apps.apple.com/it/app/per-te-emil-banca/id1452589017?uo=4
+Emil Banca Credito Cooperativo,IT,open_banking,intermediate,https://www.emilbanca.it
+La Cassa di Ravenna,IT,mobile_banking,advanced,https://apps.apple.com/it/app/la-cassa-di-ravenna-s-p-a/id1536426526?uo=4
+La Cassa di Ravenna,IT,open_banking,intermediate,https://www.lacassa.com
+Raiffeisen Landesbank Sudtirol,IT,open_banking,basic,https://www.raiffeisen.it
+Sparkasse - Cassa di Risparmio di Bolzano,IT,mobile_banking,advanced,https://apps.apple.com/it/app/sparkasse-on/id1552230892?uo=4
+Sparkasse - Cassa di Risparmio di Bolzano,IT,open_banking,basic,https://www.sparkasse.it
+Aurskog Sparebank,NO,ai_chatbot,basic,https://www.aurskog-sparebank.no
+Bien Sparebank,NO,ai_chatbot,basic,https://www.bien.no
+Cultura Sparebank,NO,mobile_banking,intermediate,https://apps.apple.com/no/app/culturabank/id1599145758?uo=4
+Drangedal Sparebank,NO,mobile_banking,intermediate,https://apps.apple.com/no/app/drangedal-mobilbank/id1566086393?uo=4
+Drangedal Sparebank,NO,open_banking,basic,https://www.drangedalsparebank.no
+Drangedal Sparebank,NO,ai_chatbot,basic,https://www.drangedalsparebank.no
+Fana Sparebank,NO,mobile_banking,advanced,https://apps.apple.com/no/app/fana-sparebank-mobilbank/id1311411778?uo=4
+Flekkefjord Sparebank,NO,mobile_banking,intermediate,https://apps.apple.com/no/app/flekkefjord-sparebank/id1250056275?uo=4
+Flekkefjord Sparebank,NO,open_banking,intermediate,https://www.flekkefjordsparebank.no
+Flekkefjord Sparebank,NO,ai_chatbot,basic,https://www.flekkefjordsparebank.no
+Grue Sparebank,NO,ai_chatbot,basic,https://www.gruesparebank.no
+Haltdalen Sparebank,NO,ai_chatbot,basic,https://www.haltdalensparebank.no
+Haugesund Sparebank,NO,ai_chatbot,basic,https://www.haugesund-sparebank.no
+Jaeren Sparebank,NO,ai_chatbot,basic,https://www.jaerensparebank.no
+Kvinesdal Sparebank,NO,ai_chatbot,basic,https://www.kvinesdalsparebank.no
+Lillesands Sparebank,NO,mobile_banking,intermediate,https://apps.apple.com/no/app/lillesands-sparebank-mobilbank/id1250056474?uo=4
+Luster Sparebank,NO,mobile_banking,intermediate,https://apps.apple.com/no/app/luster-sparebank-mobilbank/id1250056635?uo=4
+Luster Sparebank,NO,open_banking,basic,https://www.lustersparebank.no
+Luster Sparebank,NO,ai_chatbot,basic,https://www.lustersparebank.no
+Ofoten Sparebank,NO,open_banking,basic,https://www.ofotensparebank.no
+Orkla Sparebank,NO,ai_chatbot,basic,https://www.orklasparebank.no
+Selbu Sparebank,NO,mobile_banking,advanced,https://apps.apple.com/no/app/selbu-mobilbank/id1566086560?uo=4
+Selbu Sparebank,NO,open_banking,basic,https://www.selbusparebank.no
+Selbu Sparebank,NO,ai_chatbot,basic,https://www.selbusparebank.no
+Skagerrak Sparebank,NO,ai_chatbot,basic,https://www.skagerraksparebank.no
+SpareBank 1 BV,NO,mobile_banking,advanced,https://apps.apple.com/no/app/sparebank-1-bedrift/id522078287?uo=4
+SpareBank 1 BV,NO,open_banking,basic,https://www.sparebank1.no/bv
+SpareBank 1 BV,NO,ai_chatbot,basic,https://www.sparebank1.no/bv
+SpareBank 1 Gudbrandsdal,NO,open_banking,basic,https://www.sparebank1.no/gudbrandsdal
+SpareBank 1 Gudbrandsdal,NO,ai_chatbot,basic,https://www.sparebank1.no/gudbrandsdal
+SpareBank 1 Hallingdal Valdres,NO,open_banking,basic,https://www.sparebank1.no/hallingdal-valdres
+SpareBank 1 Hallingdal Valdres,NO,ai_chatbot,basic,https://www.sparebank1.no/hallingdal-valdres
+SpareBank 1 Helgeland,NO,open_banking,basic,https://www.sparebank1.no/helgeland
+SpareBank 1 Helgeland,NO,ai_chatbot,basic,https://www.sparebank1.no/helgeland
+SpareBank 1 Lom og Skjak,NO,open_banking,basic,https://www.sparebank1.no/lom-og-skjaak
+SpareBank 1 Lom og Skjak,NO,ai_chatbot,basic,https://www.sparebank1.no/lom-og-skjaak
+SpareBank 1 Modum,NO,open_banking,basic,https://www.sparebank1.no/modum
+SpareBank 1 Modum,NO,ai_chatbot,basic,https://www.sparebank1.no/modum
+SpareBank 1 Nordmore,NO,open_banking,basic,https://www.sparebank1.no/nordmore
+SpareBank 1 Nordmore,NO,ai_chatbot,basic,https://www.sparebank1.no/nordmore
+SpareBank 1 Ringerike Hadeland,NO,open_banking,basic,https://www.sparebank1.no/ringerike-hadeland
+SpareBank 1 Ringerike Hadeland,NO,ai_chatbot,basic,https://www.sparebank1.no/ringerike-hadeland
+SpareBank 1 Sorost-Norge,NO,open_banking,basic,https://www.sparebank1.no/sorost-norge
+SpareBank 1 Sorost-Norge,NO,ai_chatbot,basic,https://www.sparebank1.no/sorost-norge
+SpareBank 1 Telemark,NO,open_banking,basic,https://www.sparebank1.no/telemark
+SpareBank 1 Telemark,NO,ai_chatbot,basic,https://www.sparebank1.no/telemark
+Sparebanken Din,NO,mobile_banking,basic,https://apps.apple.com/no/app/din-mobilbank/id1566086500?uo=4
+Sparebanken Din,NO,open_banking,basic,https://www.sparebankendin.no
+Sparebanken Din,NO,ai_chatbot,basic,https://www.sparebankendin.no
+Sparebanken More,NO,open_banking,basic,https://www.sbmore.no
+Sparebanken More,NO,ai_chatbot,basic,https://www.sbmore.no
+Sparebanken Sogn og Fjordane,NO,open_banking,basic,https://www.ssf.no
+Sparebanken Sogn og Fjordane,NO,ai_chatbot,basic,https://www.ssf.no
+Stadsbygd Sparebank,NO,mobile_banking,basic,https://apps.apple.com/no/app/stbank/id1566086483?uo=4
+Tolga-Os Sparebank,NO,mobile_banking,basic,https://apps.apple.com/no/app/tosbank/id1566086496?uo=4
+Tysnes Sparebank,NO,ai_chatbot,basic,https://www.tysnes-sparebank.no
+Voss Sparebank,NO,mobile_banking,intermediate,https://apps.apple.com/no/app/voss-sparebank-mobilbank/id1250065379?uo=4
+BCR (Banca Comerciala Romana),RO,mobile_banking,intermediate,https://apps.apple.com/ro/app/etoken-bcr/id691867429?uo=4
+BCR (Banca Comerciala Romana),RO,open_banking,basic,https://www.bcr.ro
+BRD - Groupe Societe Generale,RO,mobile_banking,advanced,https://apps.apple.com/ro/app/you-brd/id1484062157?uo=4
+BRD - Groupe Societe Generale,RO,open_banking,basic,https://www.brd.ro
+Raiffeisen Bank Romania,RO,mobile_banking,advanced,https://apps.apple.com/ro/app/raiffeisen-smart-mobile/id1255136212?uo=4
+Raiffeisen Bank Romania,RO,open_banking,basic,https://www.raiffeisen.ro
+Prima banka Slovensko,SK,mobile_banking,advanced,https://apps.apple.com/sk/app/pe%C5%88a%C5%BEenka/id522958758?uo=4
+Delavska hranilnica,SI,mobile_banking,intermediate,https://apps.apple.com/si/app/dh-denarnik/id1490853552?uo=4
+Caixa Ontinyent,ES,mobile_banking,intermediate,https://apps.apple.com/es/app/caixa-ontinyent/id891691116?uo=4
+Caixa Ontinyent,ES,open_banking,basic,https://www.caixaontinyent.es
+Caixa Pollença (Colonya),ES,open_banking,basic,https://www.colonya.es
+Cecabank,ES,mobile_banking,basic,https://apps.apple.com/es/app/cecabank/id592430215?uo=4
+Cecabank,ES,open_banking,basic,https://www.cecabank.es
+Ålems Sparbank,SE,open_banking,basic,https://www.alemssparbank.se
+Bjursås Sparbank,SE,open_banking,basic,https://www.bjursassparbank.se
+Dalslands Sparbank,SE,open_banking,basic,https://www.dalsbank.se
+Ekeby Sparbank,SE,open_banking,basic,https://www.ekebysparbank.se
+Falkenbergs Sparbank,SE,open_banking,basic,https://www.falkenbergssparbank.se
+Fryksdalens Sparbank,SE,open_banking,basic,https://www.fryksdalenssparbank.se
+Hälsinglands Sparbank,SE,open_banking,basic,https://www.halsinglandssparbank.se
+Häradssparbanken Mönsterås,SE,open_banking,basic,https://www.haradssparbanken.se
+Högsby Sparbank,SE,open_banking,basic,https://www.hogsbysparbank.se
+Ivetofta Sparbank i Bromölla,SE,open_banking,basic,https://www.ivetoftasparbank.se
+Kinda Ydre Sparbank,SE,open_banking,basic,https://www.kindaydresparbank.se
+Laholms Sparbank,SE,open_banking,basic,https://www.laholmssparbank.se
+Lekebergs Sparbank,SE,open_banking,basic,https://www.lekebergssparbank.se
+Leksands Sparbank,SE,open_banking,basic,https://www.leksandssparbank.se
+Leksands Sparbank,SE,digital_onboarding,basic,https://www.leksandssparbank.se
+Lönneberga-Tuna-Vena Sparbank,SE,open_banking,basic,https://www.ltvsparbank.se
+Markaryds Sparbank,SE,open_banking,basic,https://www.markarydssparbank.se
+Mjöbäcks Sparbank,SE,open_banking,basic,https://www.mjobackssparbank.se
+Norrbärke Sparbank,SE,open_banking,basic,https://www.norrbarke-sparbank.se
+Ölands Bank,SE,open_banking,basic,https://www.olandsbank.se
+Orusts Sparbank,SE,open_banking,basic,https://www.orustsparbank.se
+Roslagens Sparbank,SE,open_banking,basic,https://www.roslagenssparbank.se
+Sala Sparbank,SE,open_banking,basic,https://www.salasparbank.se
+Sidensjö Sparbank,SE,open_banking,basic,https://www.sidensjosparbank.se
+Skurups Sparbank,SE,open_banking,basic,https://www.skurupssparbank.se
+Snapphanebygdens Sparbank,SE,open_banking,basic,https://www.snapphanebygdenssparbank.se
+Södra Hestra Sparbank,SE,open_banking,basic,https://www.sodrahestrasparbank.se
+Sölvesborg-Mjällby Sparbank,SE,open_banking,basic,https://www.smsparbank.se
+Sörmlands Sparbank,SE,open_banking,basic,https://www.sormlandssparbank.se
+Sparbanken Alingsås,SE,open_banking,basic,https://www.sparbankenalingsas.se
+Sparbanken Bergslagen,SE,open_banking,basic,https://www.sparbankenbergslagen.se
+Sparbanken Boken,SE,open_banking,basic,https://www.sparbankenboken.se
+Sparbanken Eken,SE,open_banking,basic,https://www.sparbankeneken.se
+Sparbanken Göinge,SE,open_banking,basic,https://www.sparbankengoinge.se
+Sparbanken Göinge,SE,ai_chatbot,basic,https://www.sparbankengoinge.se
+Sparbanken Gotland,SE,open_banking,basic,https://www.sparbankengotland.se
+Sparbanken i Enköping,SE,open_banking,basic,https://www.sparbankenenkoping.se
+Sparbanken i Karlshamn,SE,open_banking,basic,https://www.sparbankenikarlshamn.se
+Sparbanken Lidköping,SE,open_banking,basic,https://www.sparbankenlidkoping.se
+Sparbanken Mälardalen,SE,open_banking,basic,https://www.sparbankenmalardalen.se
+Sparbanken Nord,SE,open_banking,basic,https://www.sparbankennord.se
+Sparbanken Sjuhärad,SE,open_banking,basic,https://sparbankensjuharad.se
+Sparbanken Skåne,SE,open_banking,basic,https://www.sparbankenskane.se
+Sparbanken Skaraborg,SE,open_banking,basic,https://www.sparbankenskaraborg.se
+Sparbanken Spira,SE,open_banking,basic,https://www.tjustbanken.se
+Sparbanken Tanum,SE,open_banking,basic,https://www.sparbankentanum.se
+Sparbanken Tranemo,SE,open_banking,basic,https://www.sparbankentranemo.se
+Tidaholms Sparbank,SE,open_banking,basic,https://www.tidaholms-sparbank.se
+Tjörns Sparbank,SE,open_banking,basic,https://www.tjorns-sparbank.se
+Ulricehamns Sparbank,SE,open_banking,basic,https://www.ulricehamnssparbank.se
+Vadstena Sparbank,SE,open_banking,basic,https://www.vadstenasparbank.se
+Valdemarsviks Sparbank,SE,open_banking,basic,https://www.valdemarsvikssparbank.se
+Varbergs Sparbank,SE,open_banking,basic,https://www.varbergssparbank.se
+Vimmerby Sparbank,SE,open_banking,basic,https://www.vimmerbysparbank.se
+Virserums Sparbank,SE,open_banking,basic,https://www.virserumssparbank.se
+Westra Wermlands Sparbank,SE,open_banking,basic,https://www.wwsparbank.se
