@@ -105,19 +105,7 @@ export async function fetchPublishedBanks(): Promise<{
       return { success: true, banks: [] };
     }
 
-    const bankIds = banks.map((b: BankFromDB) => b.id);
-
-    const { data: features, error: featuresError } = await supabase
-      .from('digital_features')
-      .select('*')
-      .in('bank_id', bankIds);
-
-    if (featuresError) throw featuresError;
-
-    const banksWithFeatures: BankFromDB[] = banks.map((bank: BankFromDB) => ({
-      ...bank,
-      digital_features: (features || []).filter((f: DigitalFeatureFromDB) => f.bank_id === bank.id),
-    }));
+    const banksWithFeatures = await attachFeatures(supabase, banks);
 
     return { success: true, banks: banksWithFeatures };
   } catch (error) {
@@ -128,6 +116,28 @@ export async function fetchPublishedBanks(): Promise<{
       error: error instanceof Error ? error.message : 'An error occurred',
     };
   }
+}
+
+// Fetch digital_features in batches to avoid Supabase's 1000-row default limit
+// (392 banks × 5 features = 1960 rows)
+async function attachFeatures(client: SupabaseClient, banks: BankFromDB[]): Promise<BankFromDB[]> {
+  const bankIds = banks.map((b: BankFromDB) => b.id);
+  const BATCH = 300;
+  let allFeatures: DigitalFeatureFromDB[] = [];
+  for (let i = 0; i < bankIds.length; i += BATCH) {
+    const batch = bankIds.slice(i, i + BATCH);
+    const { data: features, error } = await client
+      .from('digital_features')
+      .select('*')
+      .in('bank_id', batch)
+      .limit(2000);
+    if (error) throw error;
+    allFeatures = allFeatures.concat(features || []);
+  }
+  return banks.map((bank: BankFromDB) => ({
+    ...bank,
+    digital_features: allFeatures.filter((f: DigitalFeatureFromDB) => f.bank_id === bank.id),
+  }));
 }
 
 // ==================== ADMIN FUNCTIONS ====================
@@ -153,19 +163,7 @@ export async function fetchBanksByStatus(status?: 'draft' | 'published'): Promis
       return { success: true, banks: [] };
     }
 
-    const bankIds = banks.map((b: BankFromDB) => b.id);
-
-    const { data: features, error: featuresError } = await supabase
-      .from('digital_features')
-      .select('*')
-      .in('bank_id', bankIds);
-
-    if (featuresError) throw featuresError;
-
-    const banksWithFeatures: BankFromDB[] = banks.map((bank: BankFromDB) => ({
-      ...bank,
-      digital_features: (features || []).filter((f: DigitalFeatureFromDB) => f.bank_id === bank.id),
-    }));
+    const banksWithFeatures = await attachFeatures(supabase, banks);
 
     return { success: true, banks: banksWithFeatures };
   } catch (error) {
