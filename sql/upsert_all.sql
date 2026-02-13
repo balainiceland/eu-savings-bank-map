@@ -33,9 +33,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 2. Allgemeine Sparkasse Oberosterreich — score 13
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Allgemeine Sparkasse Oberosterreich', 'Austria', 'AT', 'Linz', 48.3059078, 14.286198, 'Erste Group / Sparkassen', 'https://www.sparkasse.at/oberoesterreich', 1849, 15055, 440, 1700, 140, 2023, 13, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, customer_count, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Allgemeine Sparkasse Oberosterreich', 'Austria', 'AT', 'Linz', 48.3059078, 14.286198, 'Erste Group / Sparkassen', 'https://www.sparkasse.at/oberoesterreich', 1849, 15055, 440, 6200, 1700, 140, 2023, 13, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -591,9 +591,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 33. Steiermarkische Sparkasse — score 20
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Steiermarkische Sparkasse', 'Austria', 'AT', 'Graz', 47.0708678, 15.4382786, 'Erste Group / Sparkassen', 'https://www.sparkasse.at/steiermaerkische', 1825, 21300, 980, 2946, 233, 2023, 20, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, customer_count, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Steiermarkische Sparkasse', 'Austria', 'AT', 'Graz', 47.0708678, 15.4382786, 'Erste Group / Sparkassen', 'https://www.sparkasse.at/steiermaerkische', 1825, 21300, 980, 8700, 2946, 233, 2023, 20, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1509,9 +1509,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 84. Erzgebirgssparkasse — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Erzgebirgssparkasse', 'Germany', 'DE', 'Annaberg-Buchholz', 50.5788781, 13.0106108, 'Sparkassen-Finanzgruppe', 1840, 5954, 689, 71, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Erzgebirgssparkasse', 'Germany', 'DE', 'Annaberg-Buchholz', 50.5788781, 13.0106108, 'Sparkassen-Finanzgruppe', 1840, 5954, 5060, 3561, 689, 71, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1527,9 +1527,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 85. Förde Sparkasse — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Förde Sparkasse', 'Germany', 'DE', 'Kiel', 54.3227085, 10.135555, 'Sparkassen-Finanzgruppe', 1796, 9108, 7228, 1200, 58, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Förde Sparkasse', 'Germany', 'DE', 'Kiel', 54.3227085, 10.135555, 'Sparkassen-Finanzgruppe', 1796, 9108, 7228, 6571, 1200, 58, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1599,9 +1599,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 89. Hohenzollerische Landesbank Kreissparkasse Sigmaringen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Hohenzollerische Landesbank Kreissparkasse Sigmaringen', 'Germany', 'DE', 'Sigmaringen', 48.0869139, 9.2165039, 'Sparkassen-Finanzgruppe', 1975, 1450, 257, 16, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Hohenzollerische Landesbank Kreissparkasse Sigmaringen', 'Germany', 'DE', 'Sigmaringen', 48.0869139, 9.2165039, 'Sparkassen-Finanzgruppe', 1975, 1450, 1161, 257, 16, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1617,9 +1617,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 90. Kasseler Sparkasse — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kasseler Sparkasse', 'Germany', 'DE', 'Kassel', 51.3157833, 9.4978479, 'Sparkassen-Finanzgruppe', 1832, 6698, 200, 902, 29, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kasseler Sparkasse', 'Germany', 'DE', 'Kassel', 51.3157833, 9.4978479, 'Sparkassen-Finanzgruppe', 1832, 6698, 200, 5375, 4162, 902, 29, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1635,9 +1635,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 91. Kreissparkasse Ahrweiler — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Ahrweiler', 'Germany', 'DE', 'Bad Neuenahr-Ahrweiler', 50.5444551, 7.1186671, 'Sparkassen-Finanzgruppe', 2736, 391, 26, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Ahrweiler', 'Germany', 'DE', 'Bad Neuenahr-Ahrweiler', 50.5444551, 7.1186671, 'Sparkassen-Finanzgruppe', 2736, 2165, 2010, 391, 26, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1653,9 +1653,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 92. Kreissparkasse Diepholz — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Diepholz', 'Germany', 'DE', 'Syke', 52.9131332, 8.8198737, 'Sparkassen-Finanzgruppe', 1865, 7324, 961, 35, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Diepholz', 'Germany', 'DE', 'Syke', 52.9131332, 8.8198737, 'Sparkassen-Finanzgruppe', 1865, 7324, 4836, 5916, 961, 35, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1671,9 +1671,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 93. Kreissparkasse Düsseldorf — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Düsseldorf', 'Germany', 'DE', 'Düsseldorf', 51.2254018, 6.7763137, 'Sparkassen-Finanzgruppe', 1905, 3190, 2660, 491, 17, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Düsseldorf', 'Germany', 'DE', 'Düsseldorf', 51.2254018, 6.7763137, 'Sparkassen-Finanzgruppe', 1905, 3190, 2660, 2231, 491, 17, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1689,9 +1689,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 94. Kreissparkasse Freudenstadt — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Freudenstadt', 'Germany', 'DE', 'Freudenstadt', 48.4637727, 8.4111727, 'Sparkassen-Finanzgruppe', 1834, 2317, 1745, 297, 21, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Freudenstadt', 'Germany', 'DE', 'Freudenstadt', 48.4637727, 8.4111727, 'Sparkassen-Finanzgruppe', 1834, 2317, 1745, 1326, 297, 21, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1725,9 +1725,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 96. Kreissparkasse Köln — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Köln', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 1853, 29644, 1000, 116, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Köln', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 1853, 29644, 1000, 23030, 23589, 116, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1743,9 +1743,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 97. Kreissparkasse Limburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Limburg', 'Germany', 'DE', 'Limburg an der Lahn', 50.3880447, 8.063531, 'Sparkassen-Finanzgruppe', 1854, 1827, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Limburg', 'Germany', 'DE', 'Limburg an der Lahn', 50.3880447, 8.063531, 'Sparkassen-Finanzgruppe', 1854, 1827, 1427, 1078, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1761,9 +1761,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 98. Kreissparkasse Ludwigsburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Ludwigsburg', 'Germany', 'DE', 'Ludwigsburg', 48.8953937, 9.1895147, 'Sparkassen-Finanzgruppe', 1852, 12890, 9400, 1454, 91, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Ludwigsburg', 'Germany', 'DE', 'Ludwigsburg', 48.8953937, 9.1895147, 'Sparkassen-Finanzgruppe', 1852, 12890, 9400, 7222, 1454, 91, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1797,9 +1797,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 100. Kreissparkasse Saarlouis — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Saarlouis', 'Germany', 'DE', 'Saarlouis', 49.3164661, 6.749846, 'Sparkassen-Finanzgruppe', 1857, 4605, 3567, 760, 60, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Saarlouis', 'Germany', 'DE', 'Saarlouis', 49.3164661, 6.749846, 'Sparkassen-Finanzgruppe', 1857, 4605, 3567, 3368, 760, 60, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1815,9 +1815,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 101. Kreissparkasse Stade — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Stade', 'Germany', 'DE', 'Stade', 53.599794, 9.475438, 'Sparkassen-Finanzgruppe', 1843, 2300, 1464, 360, 19, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Stade', 'Germany', 'DE', 'Stade', 53.599794, 9.475438, 'Sparkassen-Finanzgruppe', 1843, 2300, 1464, 1764, 360, 19, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1851,9 +1851,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 103. Kreissparkasse Tübingen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Tübingen', 'Germany', 'DE', 'Tübingen', 48.5203263, 9.053596, 'Sparkassen-Finanzgruppe', 1854, 6576, 875, 53, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Tübingen', 'Germany', 'DE', 'Tübingen', 48.5203263, 9.053596, 'Sparkassen-Finanzgruppe', 1854, 6576, 4612, 4865, 875, 53, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1869,9 +1869,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 104. Kreissparkasse Verden — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Verden', 'Germany', 'DE', 'Verden (Aller)', 52.9410676, 9.2354716, 'Sparkassen-Finanzgruppe', 1834, 3670, 2627, 483, 26, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Verden', 'Germany', 'DE', 'Verden (Aller)', 52.9410676, 9.2354716, 'Sparkassen-Finanzgruppe', 1834, 3670, 2627, 2891, 483, 26, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1887,9 +1887,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 105. Kreissparkasse Waiblingen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Kreissparkasse Waiblingen', 'Germany', 'DE', 'Waiblingen', 48.8325659, 9.3163822, 'Sparkassen-Finanzgruppe', 1880, 11054, 7778, 1344, 66, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Kreissparkasse Waiblingen', 'Germany', 'DE', 'Waiblingen', 48.8325659, 9.3163822, 'Sparkassen-Finanzgruppe', 1880, 11054, 7778, 8469, 1344, 66, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1905,9 +1905,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 106. Mittelbrandenburgische Sparkasse in Potsdam — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Mittelbrandenburgische Sparkasse in Potsdam', 'Germany', 'DE', 'Potsdam', 52.4009309, 13.0591397, 'Sparkassen-Finanzgruppe', 1840, 16800, 750, 1450, 130, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Mittelbrandenburgische Sparkasse in Potsdam', 'Germany', 'DE', 'Potsdam', 52.4009309, 13.0591397, 'Sparkassen-Finanzgruppe', 1840, 16800, 750, 14027, 7875, 1450, 130, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1923,9 +1923,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 107. Müritz-Sparkasse — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Müritz-Sparkasse', 'Germany', 'DE', 'Waren (Müritz)', 53.5156249, 12.6850606, 'Sparkassen-Finanzgruppe', 1839, 1054, 2023, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Müritz-Sparkasse', 'Germany', 'DE', 'Waren (Müritz)', 53.5156249, 12.6850606, 'Sparkassen-Finanzgruppe', 1839, 1054, 901, 464, 2023, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1941,9 +1941,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 108. Nassauische Sparkasse — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Nassauische Sparkasse', 'Germany', 'DE', 'Wiesbaden', 50.0820384, 8.2416556, 'Sparkassen-Finanzgruppe', 1840, 12422, 1626, 101, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Nassauische Sparkasse', 'Germany', 'DE', 'Wiesbaden', 50.0820384, 8.2416556, 'Sparkassen-Finanzgruppe', 1840, 12422, 10880, 1626, 101, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1977,9 +1977,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 110. Ostsächsische Sparkasse Dresden — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Ostsächsische Sparkasse Dresden', 'Germany', 'DE', 'Dresden', 51.0493286, 13.7381437, 'Sparkassen-Finanzgruppe', 1821, 16000, 600, 2000, 77, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Ostsächsische Sparkasse Dresden', 'Germany', 'DE', 'Dresden', 51.0493286, 13.7381437, 'Sparkassen-Finanzgruppe', 1821, 16000, 600, 13425, 9028, 2000, 77, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -1995,9 +1995,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 111. Rheinhessen Sparkasse — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Rheinhessen Sparkasse', 'Germany', 'DE', 'Mainz', 49.9995205, 8.2736253, 'Sparkassen-Finanzgruppe', 1827, 6725, 270, 800, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Rheinhessen Sparkasse', 'Germany', 'DE', 'Mainz', 49.9995205, 8.2736253, 'Sparkassen-Finanzgruppe', 1827, 6725, 270, 5413, 4724, 800, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2013,9 +2013,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 112. Sparkasse Aachen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Aachen', 'Germany', 'DE', 'Aachen', 50.776351, 6.083862, 'Sparkassen-Finanzgruppe', 1885, 14900, 1668, 85, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Aachen', 'Germany', 'DE', 'Aachen', 50.776351, 6.083862, 'Sparkassen-Finanzgruppe', 1885, 14900, 11521, 10383, 1668, 85, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2049,9 +2049,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 114. Sparkasse Altenburger Land — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Altenburger Land', 'Germany', 'DE', 'Altenburg', 50.9852411, 12.4340988, 'Sparkassen-Finanzgruppe', 1824, 1198, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Altenburger Land', 'Germany', 'DE', 'Altenburg', 50.9852411, 12.4340988, 'Sparkassen-Finanzgruppe', 1824, 1198, 1016, 487, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2067,9 +2067,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 115. Sparkasse Amberg-Sulzbach — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Amberg-Sulzbach', 'Germany', 'DE', 'Amberg', 49.4543662, 11.8474021, 'Sparkassen-Finanzgruppe', 2000, 365, 18, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Amberg-Sulzbach', 'Germany', 'DE', 'Amberg', 49.4543662, 11.8474021, 'Sparkassen-Finanzgruppe', 2000, 1789, 1562, 365, 18, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2085,9 +2085,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 116. Sparkasse an Ennepe und Ruhr — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse an Ennepe und Ruhr', 'Germany', 'DE', 'Gevelsberg', 51.3207417, 7.3404792, 'Sparkassen-Finanzgruppe', 2787, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse an Ennepe und Ruhr', 'Germany', 'DE', 'Gevelsberg', 51.3207417, 7.3404792, 'Sparkassen-Finanzgruppe', 2787, 2154, 1855, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2103,9 +2103,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 117. Sparkasse Ansbach — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Ansbach', 'Germany', 'DE', 'Ansbach', 49.2888745, 10.5597693, 'Sparkassen-Finanzgruppe', 5724, 4399, 714, 41, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Ansbach', 'Germany', 'DE', 'Ansbach', 49.2888745, 10.5597693, 'Sparkassen-Finanzgruppe', 5724, 4399, 2926, 714, 41, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2121,9 +2121,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 118. Sparkasse Aschaffenburg Miltenberg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Aschaffenburg Miltenberg', 'Germany', 'DE', 'Aschaffenburg/Miltenberg', 49.9794964, 9.145168, 'Sparkassen-Finanzgruppe', 7700, 1065, 66, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Aschaffenburg Miltenberg', 'Germany', 'DE', 'Aschaffenburg/Miltenberg', 49.9794964, 9.145168, 'Sparkassen-Finanzgruppe', 7700, 6402, 5363, 1065, 66, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2139,9 +2139,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 119. Sparkasse Attendorn-Lennestadt-Kirchhundem — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Attendorn-Lennestadt-Kirchhundem', 'Germany', 'DE', 'Attendorn', 51.1250541, 7.9010992, 'Sparkassen-Finanzgruppe', 1993, 1382, 181, 12, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Attendorn-Lennestadt-Kirchhundem', 'Germany', 'DE', 'Attendorn', 51.1250541, 7.9010992, 'Sparkassen-Finanzgruppe', 1993, 1382, 877, 692, 181, 12, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2157,9 +2157,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 120. Sparkasse Aurich-Norden — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Aurich-Norden', 'Germany', 'DE', 'Aurich/Norden', 53.6270653, 7.1629737, 'Sparkassen-Finanzgruppe', 1840, 2924, 423, 34, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Aurich-Norden', 'Germany', 'DE', 'Aurich/Norden', 53.6270653, 7.1629737, 'Sparkassen-Finanzgruppe', 1840, 2924, 2086, 2311, 423, 34, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2175,9 +2175,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 121. Sparkasse Bad Hersfeld-Rotenburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Hersfeld-Rotenburg', 'Germany', 'DE', 'Bad Hersfeld', 50.8604177, 9.6767709, 'Sparkassen-Finanzgruppe', 1825, 383, 32, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Bad Hersfeld-Rotenburg', 'Germany', 'DE', 'Bad Hersfeld', 50.8604177, 9.6767709, 'Sparkassen-Finanzgruppe', 1825, 1815, 1331, 383, 32, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2193,9 +2193,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 122. Sparkasse Bad Kissingen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Kissingen', 'Germany', 'DE', 'Bad Kissingen', 50.1999412, 10.0767379, 'Sparkassen-Finanzgruppe', 1600, 46, 273, 14, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Bad Kissingen', 'Germany', 'DE', 'Bad Kissingen', 50.1999412, 10.0767379, 'Sparkassen-Finanzgruppe', 1600, 46, 1444, 909, 273, 14, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2211,9 +2211,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 123. Sparkasse Bad Neustadt a. d. Saale — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Neustadt a. d. Saale', 'Germany', 'DE', 'Bad Neustadt an der Saale', 50.322637, 10.2164873, 'Sparkassen-Finanzgruppe', 1647, 1247, 273, 14, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Bad Neustadt a. d. Saale', 'Germany', 'DE', 'Bad Neustadt an der Saale', 50.322637, 10.2164873, 'Sparkassen-Finanzgruppe', 1647, 1247, 758, 273, 14, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2229,9 +2229,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 124. Sparkasse Bad Oeynhausen - Porta Westfalica — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Oeynhausen - Porta Westfalica', 'Germany', 'DE', 'Bad Oeynhausen', 52.2014399, 8.7981244, 'Sparkassen-Finanzgruppe', 1843, 1651, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Bad Oeynhausen - Porta Westfalica', 'Germany', 'DE', 'Bad Oeynhausen', 52.2014399, 8.7981244, 'Sparkassen-Finanzgruppe', 1843, 1651, 1282, 1017, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2247,9 +2247,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 125. Sparkasse Bad Tölz-Wolfratshausen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Bad Tölz-Wolfratshausen', 'Germany', 'DE', 'Bad Tölz', 47.7610013, 11.559607, 'Sparkassen-Finanzgruppe', 1858, 3234, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Bad Tölz-Wolfratshausen', 'Germany', 'DE', 'Bad Tölz', 47.7610013, 11.559607, 'Sparkassen-Finanzgruppe', 1858, 3234, 2446, 2301, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2265,9 +2265,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 126. Sparkasse Baden-Baden Gaggenau — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Baden-Baden Gaggenau', 'Germany', 'DE', 'Baden-Baden', 48.7610716, 8.239959, 'Sparkassen-Finanzgruppe', 2009, 2000, 336, 17, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Baden-Baden Gaggenau', 'Germany', 'DE', 'Baden-Baden', 48.7610716, 8.239959, 'Sparkassen-Finanzgruppe', 2009, 2000, 1821, 1406, 336, 17, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2283,9 +2283,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 127. Sparkasse Berchtesgadener Land — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Berchtesgadener Land', 'Germany', 'DE', 'Bad Reichenhall', 47.7222676, 12.8760923, 'Sparkassen-Finanzgruppe', 1843, 2128, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Berchtesgadener Land', 'Germany', 'DE', 'Bad Reichenhall', 47.7222676, 12.8760923, 'Sparkassen-Finanzgruppe', 1843, 2128, 1690, 1342, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2319,9 +2319,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 129. Sparkasse Burgenlandkreis — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Burgenlandkreis', 'Germany', 'DE', 'Zeitz', 51.0491637, 12.1349991, 'Sparkassen-Finanzgruppe', 1997, 2953, 2515, 396, 31, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Burgenlandkreis', 'Germany', 'DE', 'Zeitz', 51.0491637, 12.1349991, 'Sparkassen-Finanzgruppe', 1997, 2953, 2515, 1658, 396, 31, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2337,9 +2337,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 130. Sparkasse Dortmund — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Dortmund', 'Germany', 'DE', 'Dortmund', 51.5142273, 7.4652789, 'Sparkassen-Finanzgruppe', 1841, 12100, 360, 1525, 19, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Dortmund', 'Germany', 'DE', 'Dortmund', 51.5142273, 7.4652789, 'Sparkassen-Finanzgruppe', 1841, 12100, 360, 8651, 8456, 1525, 19, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2355,9 +2355,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 131. Sparkasse Duisburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Duisburg', 'Germany', 'DE', 'Duisburg', 51.434999, 6.759562, 'Sparkassen-Finanzgruppe', 1844, 7035, 5405, 1069, 41, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Duisburg', 'Germany', 'DE', 'Duisburg', 51.434999, 6.759562, 'Sparkassen-Finanzgruppe', 1844, 7035, 5405, 5130, 1069, 41, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2373,9 +2373,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 132. Sparkasse Freiburg-Nördlicher Breisgau — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Freiburg-Nördlicher Breisgau', 'Germany', 'DE', 'Freiburg im Breisgau', 47.9960901, 7.8494005, 'Sparkassen-Finanzgruppe', 1825, 8515, 1000, 60, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Freiburg-Nördlicher Breisgau', 'Germany', 'DE', 'Freiburg im Breisgau', 47.9960901, 7.8494005, 'Sparkassen-Finanzgruppe', 1825, 8515, 6195, 6263, 1000, 60, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2391,9 +2391,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 133. Sparkasse Freising Moosburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Freising Moosburg', 'Germany', 'DE', 'Freising', 48.4008273, 11.7439565, 'Sparkassen-Finanzgruppe', 2022, 2787, 2207, 405, 26, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Freising Moosburg', 'Germany', 'DE', 'Freising', 48.4008273, 11.7439565, 'Sparkassen-Finanzgruppe', 2022, 2787, 2207, 1842, 405, 26, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2409,9 +2409,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 134. Sparkasse Fulda — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Fulda', 'Germany', 'DE', 'Fulda', 50.5542328, 9.6770448, 'Sparkassen-Finanzgruppe', 1998, 4251, 150, 680, 37, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Fulda', 'Germany', 'DE', 'Fulda', 50.5542328, 9.6770448, 'Sparkassen-Finanzgruppe', 1998, 4251, 150, 3438, 2283, 680, 37, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2427,9 +2427,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 135. Sparkasse Fürth — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Fürth', 'Germany', 'DE', 'Fürth', 49.4885711, 10.9587203, 'Sparkassen-Finanzgruppe', 1827, 4288, 600, 31, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Fürth', 'Germany', 'DE', 'Fürth', 49.4885711, 10.9587203, 'Sparkassen-Finanzgruppe', 1827, 4288, 3280, 2708, 600, 31, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2445,9 +2445,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 136. Sparkasse Gelsenkirchen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Gelsenkirchen', 'Germany', 'DE', 'Gelsenkirchen', 51.5110321, 7.0960124, 'Sparkassen-Finanzgruppe', 1869, 3779, 2971, 645, 27, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Gelsenkirchen', 'Germany', 'DE', 'Gelsenkirchen', 51.5110321, 7.0960124, 'Sparkassen-Finanzgruppe', 1869, 3779, 2971, 2311, 645, 27, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2481,9 +2481,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 138. Sparkasse Hegau-Bodensee — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Hegau-Bodensee', 'Germany', 'DE', 'Singen', 47.7617515, 8.8348709, 'Sparkassen-Finanzgruppe', 2016, 4130, 496, 22, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Hegau-Bodensee', 'Germany', 'DE', 'Singen', 47.7617515, 8.8348709, 'Sparkassen-Finanzgruppe', 2016, 4130, 2623, 2829, 496, 22, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2499,9 +2499,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 139. Sparkasse Hilden-Ratingen-Velbert — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Hilden-Ratingen-Velbert', 'Germany', 'DE', 'Velbert', 51.3406713, 7.0439912, 'Sparkassen-Finanzgruppe', 2003, 4205, 3510, 583, 21, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Hilden-Ratingen-Velbert', 'Germany', 'DE', 'Velbert', 51.3406713, 7.0439912, 'Sparkassen-Finanzgruppe', 2003, 4205, 3510, 3146, 583, 21, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2517,9 +2517,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 140. Sparkasse Hochrhein — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Hochrhein', 'Germany', 'DE', 'Waldshut-Tiengen', 47.6281754, 8.2408579, 'Sparkassen-Finanzgruppe', 1856, 3700, 100, 485, 28, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Hochrhein', 'Germany', 'DE', 'Waldshut-Tiengen', 47.6281754, 8.2408579, 'Sparkassen-Finanzgruppe', 1856, 3700, 100, 2742, 2628, 485, 28, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2535,9 +2535,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 141. Sparkasse Holstein — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Holstein', 'Germany', 'DE', 'Bad Oldesloe', 53.8096562, 10.3733692, 'Sparkassen-Finanzgruppe', 1824, 9444, 7038, 948, 56, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Holstein', 'Germany', 'DE', 'Bad Oldesloe', 53.8096562, 10.3733692, 'Sparkassen-Finanzgruppe', 1824, 9444, 7038, 7731, 948, 56, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2553,9 +2553,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 142. Sparkasse Kaiserslautern — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Kaiserslautern', 'Germany', 'DE', 'Kaiserslautern', 49.4432174, 7.7689951, 'Sparkassen-Finanzgruppe', 1836, 5762, 4251, 780, 53, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Kaiserslautern', 'Germany', 'DE', 'Kaiserslautern', 49.4432174, 7.7689951, 'Sparkassen-Finanzgruppe', 1836, 5762, 4251, 4163, 780, 53, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2571,9 +2571,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 143. Sparkasse Karlsruhe — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Karlsruhe', 'Germany', 'DE', 'Karlsruhe', 49.0068705, 8.4034195, 'Sparkassen-Finanzgruppe', 1812, 11973, 8793, 1294, 66, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Karlsruhe', 'Germany', 'DE', 'Karlsruhe', 49.0068705, 8.4034195, 'Sparkassen-Finanzgruppe', 1812, 11973, 8793, 9091, 1294, 66, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2607,9 +2607,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 145. Sparkasse KölnBonn — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse KölnBonn', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 2005, 28100, 1000, 3474, 50, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse KölnBonn', 'Germany', 'DE', 'Köln', 50.938361, 6.959974, 'Sparkassen-Finanzgruppe', 2005, 28100, 1000, 23238, 21553, 3474, 50, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2625,9 +2625,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 146. Sparkasse Krefeld — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Krefeld', 'Germany', 'DE', 'Krefeld', 51.3331205, 6.5623343, 'Sparkassen-Finanzgruppe', 1840, 10342, 7724, 1366, 51, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Krefeld', 'Germany', 'DE', 'Krefeld', 51.3331205, 6.5623343, 'Sparkassen-Finanzgruppe', 1840, 10342, 7724, 6507, 1366, 51, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2643,9 +2643,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 147. Sparkasse Leverkusen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Leverkusen', 'Germany', 'DE', 'Leverkusen', 51.0324743, 6.9881194, 'Sparkassen-Finanzgruppe', 1844, 4446, 3450, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Leverkusen', 'Germany', 'DE', 'Leverkusen', 51.0324743, 6.9881194, 'Sparkassen-Finanzgruppe', 1844, 4446, 3450, 3765, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2661,9 +2661,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 148. Sparkasse Lörrach-Rheinfelden — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Lörrach-Rheinfelden', 'Germany', 'DE', 'Lörrach', 47.6120896, 7.6607218, 'Sparkassen-Finanzgruppe', 1834, 3417, 2030, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Lörrach-Rheinfelden', 'Germany', 'DE', 'Lörrach', 47.6120896, 7.6607218, 'Sparkassen-Finanzgruppe', 1834, 3417, 2030, 2544, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2679,9 +2679,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 149. Sparkasse Lüneburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Lüneburg', 'Germany', 'DE', 'Lüneburg', 53.248706, 10.407855, 'Sparkassen-Finanzgruppe', 1990, 3361, 2681, 541, 33, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Lüneburg', 'Germany', 'DE', 'Lüneburg', 53.248706, 10.407855, 'Sparkassen-Finanzgruppe', 1990, 3361, 2681, 2345, 541, 33, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2697,9 +2697,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 150. Sparkasse Magdeburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Magdeburg', 'Germany', 'DE', 'Magdeburg', 52.1314783, 11.6400789, 'Sparkassen-Finanzgruppe', 4216, 3668, 522, 34, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Magdeburg', 'Germany', 'DE', 'Magdeburg', 52.1314783, 11.6400789, 'Sparkassen-Finanzgruppe', 4216, 3668, 1774, 522, 34, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2715,9 +2715,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 151. Sparkasse Mainfranken Würzburg — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mainfranken Würzburg', 'Germany', 'DE', 'Würzburg', 49.7933723, 9.9309779, 'Sparkassen-Finanzgruppe', 1822, 10709, 8675, 1388, 84, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Mainfranken Würzburg', 'Germany', 'DE', 'Würzburg', 49.7933723, 9.9309779, 'Sparkassen-Finanzgruppe', 1822, 10709, 8675, 7268, 1388, 84, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2733,9 +2733,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 152. Sparkasse Marburg-Biedenkopf — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Marburg-Biedenkopf', 'Germany', 'DE', 'Marburg', 50.8090106, 8.7704695, 'Sparkassen-Finanzgruppe', 1832, 4600, 810, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Marburg-Biedenkopf', 'Germany', 'DE', 'Marburg', 50.8090106, 8.7704695, 'Sparkassen-Finanzgruppe', 1832, 4600, 3816, 3146, 810, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2751,9 +2751,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 153. Sparkasse Märkisch-Oderland — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Märkisch-Oderland', 'Germany', 'DE', 'Strausberg', 52.5588942, 13.9042481, 'Sparkassen-Finanzgruppe', 1994, 2481, 241, 31, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Märkisch-Oderland', 'Germany', 'DE', 'Strausberg', 52.5588942, 13.9042481, 'Sparkassen-Finanzgruppe', 1994, 2481, 2135, 789, 241, 31, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2769,9 +2769,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 154. Sparkasse Mecklenburg-Nordwest — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mecklenburg-Nordwest', 'Germany', 'DE', 'Wismar', 53.8909832, 11.4647932, 'Sparkassen-Finanzgruppe', 1824, 1844, 1622, 239, 21, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Mecklenburg-Nordwest', 'Germany', 'DE', 'Wismar', 53.8909832, 11.4647932, 'Sparkassen-Finanzgruppe', 1824, 1844, 1622, 1004, 239, 21, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2787,9 +2787,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 155. Sparkasse Mecklenburg-Schwerin — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mecklenburg-Schwerin', 'Germany', 'DE', 'Schwerin', 53.6288297, 11.4148038, 'Sparkassen-Finanzgruppe', 1821, 3289, 2621, 509, 22, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Mecklenburg-Schwerin', 'Germany', 'DE', 'Schwerin', 53.6288297, 11.4148038, 'Sparkassen-Finanzgruppe', 1821, 3289, 2621, 2286, 509, 22, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2805,9 +2805,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 156. Sparkasse Mittelsachsen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Mittelsachsen', 'Germany', 'DE', 'Freiberg', 50.9169415, 13.3428889, 'Sparkassen-Finanzgruppe', 1823, 3736, 387, 36, 2023, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Mittelsachsen', 'Germany', 'DE', 'Freiberg', 50.9169415, 13.3428889, 'Sparkassen-Finanzgruppe', 1823, 3736, 3287, 1645, 387, 36, 2023, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2823,9 +2823,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 157. Sparkasse Niederbayern-Mitte — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Niederbayern-Mitte', 'Germany', 'DE', 'Straubing', 48.8839157, 12.5955773, 'Sparkassen-Finanzgruppe', 5571, 3914, 635, 41, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Niederbayern-Mitte', 'Germany', 'DE', 'Straubing', 48.8839157, 12.5955773, 'Sparkassen-Finanzgruppe', 5571, 3914, 4237, 635, 41, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2841,9 +2841,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 158. Sparkasse Oberhessen — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oberhessen', 'Germany', 'DE', 'Friedberg (Hessen)', 50.328272, 8.747636, 'Sparkassen-Finanzgruppe', 6265, 5005, 852, 51, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Oberhessen', 'Germany', 'DE', 'Friedberg (Hessen)', 50.328272, 8.747636, 'Sparkassen-Finanzgruppe', 6265, 5005, 4650, 852, 51, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2859,9 +2859,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 159. Sparkasse Oberlausitz-Niederschlesien — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, customer_count, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oberlausitz-Niederschlesien', 'Germany', 'DE', 'Zittau', 50.8960964, 14.8064807, 'Sparkassen-Finanzgruppe', 4602, 227, 3880, 236, 35, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Oberlausitz-Niederschlesien', 'Germany', 'DE', 'Zittau', 50.8960964, 14.8064807, 'Sparkassen-Finanzgruppe', 4602, 227, 3880, 1440, 236, 35, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2877,9 +2877,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 160. Sparkasse Oberpfalz Nord — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oberpfalz Nord', 'Germany', 'DE', 'Weiden in der Oberpfalz', 49.6752749, 12.1631636, 'Sparkassen-Finanzgruppe', 2005, 1900, 1616, 325, 15, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Oberpfalz Nord', 'Germany', 'DE', 'Weiden in der Oberpfalz', 49.6752749, 12.1631636, 'Sparkassen-Finanzgruppe', 2005, 1900, 1616, 1259, 325, 15, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2895,9 +2895,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 161. Sparkasse Oder-Spree — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Oder-Spree', 'Germany', 'DE', 'Frankfurt (Oder)', 52.3412273, 14.549452, 'Sparkassen-Finanzgruppe', 3895, 411, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Oder-Spree', 'Germany', 'DE', 'Frankfurt (Oder)', 52.3412273, 14.549452, 'Sparkassen-Finanzgruppe', 3895, 3335, 1556, 411, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2913,9 +2913,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 162. Sparkasse Passau — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Passau', 'Germany', 'DE', 'Passau', 48.5748229, 13.4609744, 'Sparkassen-Finanzgruppe', 1825, 3870, 100, 563, 30, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Passau', 'Germany', 'DE', 'Passau', 48.5748229, 13.4609744, 'Sparkassen-Finanzgruppe', 1825, 3870, 100, 3133, 2659, 563, 30, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2931,9 +2931,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 163. Sparkasse Pforzheim Calw — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Pforzheim Calw', 'Germany', 'DE', 'Pforzheim', 48.890934, 8.7025509, 'Sparkassen-Finanzgruppe', 1834, 17400, 370, 1897, 78, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Pforzheim Calw', 'Germany', 'DE', 'Pforzheim', 48.890934, 8.7025509, 'Sparkassen-Finanzgruppe', 1834, 17400, 370, 11106, 11213, 1897, 78, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2949,9 +2949,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 164. Sparkasse Rhein Neckar Nord — score 100
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Rhein Neckar Nord', 'Germany', 'DE', 'Mannheim', 49.4892913, 8.4673098, 'Sparkassen-Finanzgruppe', 1822, 5825, 3896, 700, 36, 2024, 100, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Rhein Neckar Nord', 'Germany', 'DE', 'Mannheim', 49.4892913, 8.4673098, 'Sparkassen-Finanzgruppe', 1822, 5825, 3896, 4251, 700, 36, 2024, 100, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2967,9 +2967,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 165. Sparkasse Rhein-Haardt — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Rhein-Haardt', 'Germany', 'DE', 'Bad Dürkheim', 49.4632944, 8.1705063, 'Sparkassen-Finanzgruppe', 4750, 569, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Rhein-Haardt', 'Germany', 'DE', 'Bad Dürkheim', 49.4632944, 8.1705063, 'Sparkassen-Finanzgruppe', 4750, 3623, 3652, 569, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -2985,9 +2985,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 166. Sparkasse Rhein-Nahe — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Rhein-Nahe', 'Germany', 'DE', 'Bad Kreuznach', 49.8152421, 7.9123692, 'Sparkassen-Finanzgruppe', 5442, 690, 33, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Rhein-Nahe', 'Germany', 'DE', 'Bad Kreuznach', 49.8152421, 7.9123692, 'Sparkassen-Finanzgruppe', 5442, 4194, 3836, 690, 33, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3003,9 +3003,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 167. Sparkasse Rotenburg Osterholz — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Rotenburg Osterholz', 'Germany', 'DE', 'Zeven', 53.2954396, 9.2816165, 'Sparkassen-Finanzgruppe', 2018, 4064, 654, 40, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Rotenburg Osterholz', 'Germany', 'DE', 'Zeven', 53.2954396, 9.2816165, 'Sparkassen-Finanzgruppe', 2018, 4064, 3018, 2950, 654, 40, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3021,9 +3021,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 168. Sparkasse Saarbrücken — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Saarbrücken', 'Germany', 'DE', 'Saarbrücken', 49.234362, 6.996379, 'Sparkassen-Finanzgruppe', 1898, 8055, 6069, 1097, 59, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Saarbrücken', 'Germany', 'DE', 'Saarbrücken', 49.234362, 6.996379, 'Sparkassen-Finanzgruppe', 1898, 8055, 6069, 5456, 1097, 59, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3039,9 +3039,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 169. Sparkasse Schwarzwald-Baar — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Schwarzwald-Baar', 'Germany', 'DE', 'Villingen-Schwenningen', 48.063152, 8.4929618, 'Sparkassen-Finanzgruppe', 1839, 4930, 3697, 631, 45, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Schwarzwald-Baar', 'Germany', 'DE', 'Villingen-Schwenningen', 48.063152, 8.4929618, 'Sparkassen-Finanzgruppe', 1839, 4930, 3697, 2609, 631, 45, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3057,9 +3057,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 170. Sparkasse Schweinfurt-Haßberge — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Schweinfurt-Haßberge', 'Germany', 'DE', 'Schweinfurt', 50.0499318, 10.2335087, 'Sparkassen-Finanzgruppe', 4806, 3734, 674, 42, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Schweinfurt-Haßberge', 'Germany', 'DE', 'Schweinfurt', 50.0499318, 10.2335087, 'Sparkassen-Finanzgruppe', 4806, 3734, 2919, 674, 42, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3075,9 +3075,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 171. Sparkasse Siegen — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Siegen', 'Germany', 'DE', 'Siegen', 50.8751175, 8.0256131, 'Sparkassen-Finanzgruppe', 1842, 4933, 3746, 766, 41, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Siegen', 'Germany', 'DE', 'Siegen', 50.8751175, 8.0256131, 'Sparkassen-Finanzgruppe', 1842, 4933, 3746, 3644, 766, 41, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3093,9 +3093,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 172. Sparkasse Sonneberg — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Sonneberg', 'Germany', 'DE', 'Sonneberg', 50.3575412, 11.1691714, 'Sparkassen-Finanzgruppe', 793, 145, 12, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Sonneberg', 'Germany', 'DE', 'Sonneberg', 50.3575412, 11.1691714, 'Sparkassen-Finanzgruppe', 793, 642, 328, 145, 12, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3111,9 +3111,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 173. Sparkasse Trier — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Trier', 'Germany', 'DE', 'Trier', 49.7596208, 6.6441878, 'Sparkassen-Finanzgruppe', 1825, 5408, 724, 35, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Trier', 'Germany', 'DE', 'Trier', 49.7596208, 6.6441878, 'Sparkassen-Finanzgruppe', 1825, 5408, 4018, 4326, 724, 35, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3129,9 +3129,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 174. Sparkasse Uckermark — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Uckermark', 'Germany', 'DE', 'Prenzlau', 53.3167, 13.866575, 'Sparkassen-Finanzgruppe', 1397, 202, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Uckermark', 'Germany', 'DE', 'Prenzlau', 53.3167, 13.866575, 'Sparkassen-Finanzgruppe', 1397, 1191, 556, 202, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3147,9 +3147,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 175. Sparkasse Ulm — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Ulm', 'Germany', 'DE', 'Ulm', 48.3984968, 9.9912458, 'Sparkassen-Finanzgruppe', 1847, 7203, 5480, 914, 77, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Ulm', 'Germany', 'DE', 'Ulm', 48.3984968, 9.9912458, 'Sparkassen-Finanzgruppe', 1847, 7203, 5480, 4780, 914, 77, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3165,9 +3165,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 176. Sparkasse Westerwald-Sieg — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Westerwald-Sieg', 'Germany', 'DE', 'Bad Marienberg', 50.6500761, 7.948217, 'Sparkassen-Finanzgruppe', 2015, 4220, 574, 35, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Westerwald-Sieg', 'Germany', 'DE', 'Bad Marienberg', 50.6500761, 7.948217, 'Sparkassen-Finanzgruppe', 2015, 4220, 3356, 2785, 574, 35, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3183,9 +3183,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 177. Sparkasse Westmünsterland — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Westmünsterland', 'Germany', 'DE', 'Ahaus', 52.0761541, 7.004876, 'Sparkassen-Finanzgruppe', 1841, 11496, 8462, 1377, 79, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Westmünsterland', 'Germany', 'DE', 'Ahaus', 52.0761541, 7.004876, 'Sparkassen-Finanzgruppe', 1841, 11496, 8462, 8349, 1377, 79, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3201,9 +3201,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 178. Sparkasse Zwickau — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparkasse Zwickau', 'Germany', 'DE', 'Zwickau', 50.7185043, 12.4939267, 'Sparkassen-Finanzgruppe', 1845, 3222, 2796, 433, 23, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparkasse Zwickau', 'Germany', 'DE', 'Zwickau', 50.7185043, 12.4939267, 'Sparkassen-Finanzgruppe', 1845, 3222, 2796, 1792, 433, 23, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3237,9 +3237,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 180. Stadt-Sparkasse Solingen — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Stadt-Sparkasse Solingen', 'Germany', 'DE', 'Solingen', 51.1721629, 7.0845893, 'Sparkassen-Finanzgruppe', 1836, 3730, 494, 17, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Stadt-Sparkasse Solingen', 'Germany', 'DE', 'Solingen', 51.1721629, 7.0845893, 'Sparkassen-Finanzgruppe', 1836, 3730, 2519, 2987, 494, 17, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3255,9 +3255,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 181. Stadtsparkasse Augsburg — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Stadtsparkasse Augsburg', 'Germany', 'DE', 'Augsburg', 48.3690341, 10.8979522, 'Sparkassen-Finanzgruppe', 1822, 8400, 6900, 1040, 42, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Stadtsparkasse Augsburg', 'Germany', 'DE', 'Augsburg', 48.3690341, 10.8979522, 'Sparkassen-Finanzgruppe', 1822, 8400, 6900, 5466, 1040, 42, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3273,9 +3273,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 182. Stadtsparkasse Bad Pyrmont — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Stadtsparkasse Bad Pyrmont', 'Germany', 'DE', 'Bad Pyrmont', 51.9850503, 9.2434635, 'Sparkassen-Finanzgruppe', 425, 74, 3, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Stadtsparkasse Bad Pyrmont', 'Germany', 'DE', 'Bad Pyrmont', 51.9850503, 9.2434635, 'Sparkassen-Finanzgruppe', 425, 295, 188, 74, 3, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3309,9 +3309,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 184. Stadtsparkasse Düsseldorf — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Stadtsparkasse Düsseldorf', 'Germany', 'DE', 'Düsseldorf', 51.2254018, 6.7763137, 'Sparkassen-Finanzgruppe', 1825, 15666, 397, 12056, 1599, 52, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, customer_count, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Stadtsparkasse Düsseldorf', 'Germany', 'DE', 'Düsseldorf', 51.2254018, 6.7763137, 'Sparkassen-Finanzgruppe', 1825, 15666, 397, 12056, 10675, 1599, 52, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3345,9 +3345,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 186. Stadtsparkasse Schwedt — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Stadtsparkasse Schwedt', 'Germany', 'DE', 'Schwedt/Oder', 53.0586366, 14.2840858, 'Sparkassen-Finanzgruppe', 753, 99, 4, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Stadtsparkasse Schwedt', 'Germany', 'DE', 'Schwedt/Oder', 53.0586366, 14.2840858, 'Sparkassen-Finanzgruppe', 753, 669, 240, 99, 4, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3363,9 +3363,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 187. Stadtsparkasse Wuppertal — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Stadtsparkasse Wuppertal', 'Germany', 'DE', 'Wuppertal', 51.264018, 7.1780374, 'Sparkassen-Finanzgruppe', 1822, 8457, 1182, 44, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Stadtsparkasse Wuppertal', 'Germany', 'DE', 'Wuppertal', 51.264018, 7.1780374, 'Sparkassen-Finanzgruppe', 1822, 8457, 6698, 6113, 1182, 44, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -3381,9 +3381,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 188. Taunus Sparkasse — score 0
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Taunus Sparkasse', 'Germany', 'DE', 'Bad Homburg vor der Höhe', 50.2283803, 8.6130128, 'Sparkassen-Finanzgruppe', 1825, 7746, 5718, 780, 50, 2024, 0, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Taunus Sparkasse', 'Germany', 'DE', 'Bad Homburg vor der Höhe', 50.2283803, 8.6130128, 'Sparkassen-Finanzgruppe', 1825, 7746, 5718, 5618, 780, 50, 2024, 0, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -4173,9 +4173,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 232. Credito Emiliano (CREDEM) — score 33
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, website, founded_year, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Credito Emiliano (CREDEM)', 'Italy', 'IT', 'Reggio Emilia', 44.6086674, 10.5940667, 'https://www.credem.it', 1910, 57023, 5153, 2023, 33, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, website, founded_year, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Credito Emiliano (CREDEM)', 'Italy', 'IT', 'Reggio Emilia', 44.6086674, 10.5940667, 'https://www.credem.it', 1910, 57023, 36800, 35700, 5153, 2023, 33, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -4875,9 +4875,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 271. Sandnes Sparebank — score 40
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, employee_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sandnes Sparebank', 'Norway', 'NO', 'Sandnes', 58.983132, 6.394641, 'Eika Gruppen', 'https://www.sandnes-sparebank.no', 1875, 2014, 130, 2023, 40, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, deposit_volume, loan_volume, employee_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sandnes Sparebank', 'Norway', 'NO', 'Sandnes', 58.983132, 6.394641, 'Eika Gruppen', 'https://www.sandnes-sparebank.no', 1875, 2014, 1304, 2634, 130, 2023, 40, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -6441,9 +6441,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 358. Sörmlands Sparbank — score 7
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sörmlands Sparbank', 'Sweden', 'SE', NULL, 60.1282, 18.6435, 'Sparbankernas Riksförbund', 'https://www.sormlandssparbank.se', 1832, 1848, 130, 5, 2023, 7, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sörmlands Sparbank', 'Sweden', 'SE', NULL, 60.1282, 18.6435, 'Sparbankernas Riksförbund', 'https://www.sormlandssparbank.se', 1832, 1848, 1341, 1316, 130, 5, 2023, 7, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -6657,9 +6657,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 370. Sparbanken Sjuhärad — score 7
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparbanken Sjuhärad', 'Sweden', 'SE', NULL, 60.1282, 18.6435, 'Sparbankernas Riksförbund', 'https://sparbankensjuharad.se', 1831, 2799, 160, 8, 2023, 7, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparbanken Sjuhärad', 'Sweden', 'SE', NULL, 60.1282, 18.6435, 'Sparbankernas Riksförbund', 'https://sparbankensjuharad.se', 1831, 2799, 2072, 2115, 160, 8, 2023, 7, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
@@ -6693,9 +6693,9 @@ ON CONFLICT (bank_id, category) DO UPDATE SET
 
 -- 372. Sparbanken Skaraborg — score 7
 WITH b AS (
-  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, employee_count, branch_count, reporting_year, digital_score, status, featured)
-  VALUES ('Sparbanken Skaraborg', 'Sweden', 'SE', NULL, 60.1282, 18.6435, 'Sparbankernas Riksförbund', 'https://www.sparbankenskaraborg.se', 1847, 1483, 109, 4, 2023, 7, 'published', false)
-  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
+  INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, founded_year, total_assets, deposit_volume, loan_volume, employee_count, branch_count, reporting_year, digital_score, status, featured)
+  VALUES ('Sparbanken Skaraborg', 'Sweden', 'SE', NULL, 60.1282, 18.6435, 'Sparbankernas Riksförbund', 'https://www.sparbankenskaraborg.se', 1847, 1483, 1080, 1046, 109, 4, 2023, 7, 'published', false)
+  ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
