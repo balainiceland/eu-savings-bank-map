@@ -576,6 +576,18 @@ function generateUpsertSQL(banks) {
   lines.push(`  END IF;`);
   lines.push(`END $$;`);
   lines.push('');
+  lines.push(`-- Ensure unique constraint on digital_features (idempotent)`);
+  lines.push(`DO $$ BEGIN`);
+  lines.push(`  IF NOT EXISTS (`);
+  lines.push(`    SELECT 1 FROM pg_constraint WHERE conname = 'digital_features_bank_id_category_key'`);
+  lines.push(`  ) THEN`);
+  lines.push(`    -- Remove any duplicate rows first so constraint can be added`);
+  lines.push(`    DELETE FROM digital_features a USING digital_features b`);
+  lines.push(`      WHERE a.id > b.id AND a.bank_id = b.bank_id AND a.category = b.category;`);
+  lines.push(`    ALTER TABLE digital_features ADD CONSTRAINT digital_features_bank_id_category_key UNIQUE (bank_id, category);`);
+  lines.push(`  END IF;`);
+  lines.push(`END $$;`);
+  lines.push('');
 
   const CATEGORIES = ['mobile_banking', 'open_banking', 'digital_onboarding', 'ai_chatbot', 'devops_cloud'];
 
@@ -618,7 +630,11 @@ function generateUpsertSQL(banks) {
     lines.push(`  RETURNING id`);
     lines.push(`)`);
 
-    // Digital features with ON CONFLICT on (bank_id, category)
+    // Chain DELETE + INSERT in one statement using CTEs so 'b' stays in scope
+    lines.push(`, d AS (`);
+    lines.push(`  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)`);
+    lines.push(`)`);
+
     const featureLines = CATEGORIES.map((cat, ci) => {
       const level = bank.levels[ci];
       const present = level !== 'none';
@@ -635,10 +651,7 @@ function generateUpsertSQL(banks) {
 
     lines.push(`INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES`);
     lines.push(featureLines.join(',\n'));
-    lines.push(`ON CONFLICT (bank_id, category) DO UPDATE SET`);
-    lines.push(`  present = EXCLUDED.present,`);
-    lines.push(`  maturity_level = EXCLUDED.maturity_level,`);
-    lines.push(`  evidence_url = EXCLUDED.evidence_url;`);
+    lines.push(`;`);
     lines.push('');
   }
 

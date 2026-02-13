@@ -13,6 +13,18 @@ DO $$ BEGIN
   END IF;
 END $$;
 
+-- Ensure unique constraint on digital_features (idempotent)
+DO $$ BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'digital_features_bank_id_category_key'
+  ) THEN
+    -- Remove any duplicate rows first so constraint can be added
+    DELETE FROM digital_features a USING digital_features b
+      WHERE a.id > b.id AND a.bank_id = b.bank_id AND a.category = b.category;
+    ALTER TABLE digital_features ADD CONSTRAINT digital_features_bank_id_category_key UNIQUE (bank_id, category);
+  END IF;
+END $$;
+
 -- 1. Raiffeisen Bank Albania — score 20
 WITH b AS (
   INSERT INTO banks (name, country, country_code, city, latitude, longitude, parent_group, website, total_assets, customer_count, employee_count, branch_count, reporting_year, digital_score, status, featured)
@@ -20,16 +32,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/al/app/raiffeisen-on/id1194478857?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.raiffeisen.al'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 2. Allgemeine Sparkasse Oberosterreich — score 13
 WITH b AS (
@@ -38,16 +50,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/oberoesterreich'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/oberoesterreich'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 3. Dornbirner Sparkasse — score 20
 WITH b AS (
@@ -56,16 +68,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/dornbirn'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/dornbirn'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/dornbirn'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 4. Erste Group (Sparkassen) — score 87
 WITH b AS (
@@ -74,16 +86,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparkasse.at/erstebank/privatkunden/digitales-banking/apps/george-go-app'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://api.sparkasse.at'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/erstebank/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.erstedigital.com/en')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 5. Karntner Sparkasse — score 20
 WITH b AS (
@@ -92,16 +104,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/kaernten'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/kaernten'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/kaernten'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 6. Kremser Bank und Sparkassen — score 73
 WITH b AS (
@@ -110,16 +122,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 7. Lienzer Sparkasse — score 13
 WITH b AS (
@@ -128,16 +140,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/lienz'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/lienz'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 8. Raiffeisen Bank International — score 53
 WITH b AS (
@@ -146,16 +158,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.rbinternational.com/en/raiffeisen/blog/technology/digital-banking-experience.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.rbinternational.com/en/raiffeisen/rbi-group/about-us/innovation/api-marketplace.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.raiffeisen.at/de/privatkunden/konto/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.rbinternational.com/en/raiffeisen/career/it-career.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 9. Raiffeisen-Landesbank Steiermark — score 40
 WITH b AS (
@@ -164,16 +176,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.raiffeisen.at/stmk/rlb/de/online-banking.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://developer.raiffeisen.at/en/home.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.raiffeisen.at/stmk/rlb/de/privatkunden/konto/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.raiffeisen.at/stmk/rlb/de/meine-bank/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 10. Raiffeisenlandesbank NO-Wien — score 47
 WITH b AS (
@@ -182,16 +194,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.raiffeisen.at/noew/rlb/de/privatkunden/online-banking/apps/mein-elba-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://developer.raiffeisen.at/en/home.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.raiffeisen.at/noew/de/privatkunden/konto/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.raiffeisen.at/noew/rlb/de/meine-bank/karriere/jobangebote.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 11. Raiffeisenlandesbank Oberosterreich — score 47
 WITH b AS (
@@ -200,16 +212,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.raiffeisen.at/ooe/de/online-banking/apps/mein-elba-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://developer.raiffeisen.at/en/home.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.raiffeisen.at/ooe/de/privatkunden/konto/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.rlbooe.at/karriere')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 12. Salzburger Sparkasse — score 20
 WITH b AS (
@@ -218,16 +230,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/salzburg'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/salzburg'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/salzburg'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 13. Sparkasse Baden — score 20
 WITH b AS (
@@ -236,16 +248,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/baden'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/baden'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/baden'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 14. Sparkasse Bludenz — score 20
 WITH b AS (
@@ -254,16 +266,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/bludenz'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/bludenz'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/bludenz'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 15. Sparkasse Bregenz — score 20
 WITH b AS (
@@ -272,16 +284,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/bregenz'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/bregenz'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/bregenz'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 16. Sparkasse der Stadt Amstetten — score 27
 WITH b AS (
@@ -290,16 +302,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/amstetten'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/amstetten'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/amstetten'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 17. Sparkasse der Stadt Feldkirch — score 27
 WITH b AS (
@@ -308,16 +320,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/feldkirch'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/feldkirch'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/feldkirch'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 18. Sparkasse der Stadt Kitzbuhel — score 27
 WITH b AS (
@@ -326,16 +338,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/us/app/s-immo-rnn/id1611184658?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/kitzbuehel'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/kitzbuehel'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/kitzbuehel'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 19. Sparkasse Eferding-Peuerbach-Waizenkirchen — score 73
 WITH b AS (
@@ -344,16 +356,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 20. Sparkasse Hainburg-Bruck-Neusiedl — score 20
 WITH b AS (
@@ -362,16 +374,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/hainburg'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/hainburg'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/hainburg'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 21. Sparkasse Hartberg-Vorau — score 73
 WITH b AS (
@@ -380,16 +392,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 22. Sparkasse Horn-Ravelsbach-Kirchberg — score 20
 WITH b AS (
@@ -398,16 +410,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/horn'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/horn'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/horn'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 23. Sparkasse Imst — score 13
 WITH b AS (
@@ -416,16 +428,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/imst'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/imst'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 24. Sparkasse Korneuburg — score 13
 WITH b AS (
@@ -434,16 +446,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/korneuburg'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/korneuburg'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 25. Sparkasse Kremstal-Pyhrn — score 73
 WITH b AS (
@@ -452,16 +464,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 26. Sparkasse Kufstein — score 20
 WITH b AS (
@@ -470,16 +482,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/kufstein'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/kufstein'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/kufstein'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 27. Sparkasse Muhlviertel-West — score 73
 WITH b AS (
@@ -488,16 +500,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 28. Sparkasse Neunkirchen — score 20
 WITH b AS (
@@ -506,16 +518,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/neunkirchen'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/neunkirchen'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/neunkirchen'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 29. Sparkasse Niederosterreich Mitte West — score 73
 WITH b AS (
@@ -524,16 +536,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 30. Sparkasse Reutte — score 13
 WITH b AS (
@@ -542,16 +554,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/reutte'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/reutte'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 31. Sparkasse Salzkammergut — score 20
 WITH b AS (
@@ -560,16 +572,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/salzkammergut'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/salzkammergut'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/salzkammergut'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 32. Sparkasse Schwaz — score 20
 WITH b AS (
@@ -578,16 +590,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/schwaz'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/schwaz'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/schwaz'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 33. Steiermarkische Sparkasse — score 20
 WITH b AS (
@@ -596,16 +608,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/steiermaerkische'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/steiermaerkische'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/steiermaerkische'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 34. Tiroler Sparkasse — score 20
 WITH b AS (
@@ -614,16 +626,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.at/tirol'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.at/tirol'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.at/tirol'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 35. Waldviertler Sparkasse von 1842 — score 73
 WITH b AS (
@@ -632,16 +644,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 36. Wiener Neustadter Sparkasse — score 73
 WITH b AS (
@@ -650,16 +662,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://play.google.com/store/apps/details?id=at.erstebank.george'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developers.erstegroup.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse.at/sgruppe/privatkunden/konto-karten/onlinekonto'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.erstegroup.com/en/news-media/press-releases/2023/10/05/erste-bank-launches-austrias-first-financial-ai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.it-finanzmagazin.de/sdg-ibm-unterstuetzt-erste-bank-mit-ki-und-cloud-technologie-122737/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 37. Argenta — score 27
 WITH b AS (
@@ -668,16 +680,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/be/app/argenta-banking/id893585833?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.argenta.be'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 38. Belfius Bank — score 67
 WITH b AS (
@@ -686,16 +698,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.belfius.be/about-us/en/who-we-are/what-we-do/mobile'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://developer.belfius.be/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.belfius.be/retail/nl/producten/betalen/zichtrekeningen/index.aspx'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.belfius.be/retail/nl/contact/chatbot/index.aspx'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.belfius.be/about-us/en/working-at-belfius')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 39. Crelan — score 13
 WITH b AS (
@@ -704,16 +716,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/be/app/crelan-mobile-app/id893189359?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 40. KBC Brussels — score 87
 WITH b AS (
@@ -722,16 +734,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.kbcbrussels.be/retail/en/products/payments/self-banking/on-your-smartphone/mobile-banking.html'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developer.kbc.be/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.kbcbrussels.be/retail/en/products/payments/current-accounts/open-plus-account-for-expats.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.kbcbrussels.be/retail/en/processes/digital-assistant-kate.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://newsroom.kbc.com/en')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 41. Ceska sporitelna — score 73
 WITH b AS (
@@ -740,16 +752,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.csas.cz/cs/internetove-bankovnictvi/george'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://developers.csas.cz/?lang=en'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.csas.cz/cs/osobni-finance/ucty-karty/ucet-plus'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.databricks.com/blog/ceska-erste-genai'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.microsoft.com/en/customers/story/1442614428349876804-csas-banking-capital-markets-azure-en-czech')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 42. Fio banka — score 20
 WITH b AS (
@@ -758,16 +770,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/cz/app/fio-smartbanking-cz/id1451236597?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 43. MONETA Money Bank — score 20
 WITH b AS (
@@ -776,16 +788,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/cz/app/moneta-smart-banka/id1122443334?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 44. Arbejdernes Landsbank — score 27
 WITH b AS (
@@ -794,16 +806,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/dk/app/al-bank/id421357586?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.al-bank.dk'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 45. Danske Andelskassers Bank — score 27
 WITH b AS (
@@ -812,16 +824,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/dk/app/andelskassen/id421361046?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.dab.dk'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.dab.dk'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 46. Middelfart Sparekasse — score 20
 WITH b AS (
@@ -830,16 +842,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/dk/app/mobilbank-middelfartsparekasse/id1466762662?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 47. Nykredit — score 53
 WITH b AS (
@@ -848,16 +860,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.nykredit.dk/dit-liv/daglig-okonomi/mitnykredit-netbank/mitnykredit-pa-mobil-og-tablet/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.nykredit.dk/personoplysninger-og-cookies/payment-service-directive-ii-psd2/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.nykredit.dk/dit-liv/nykredit-bank/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.nykredit.com/en-gb/career/nykredit-dci/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 48. Spar Nord — score 67
 WITH b AS (
@@ -866,16 +878,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 49. Sparekassen Kronjylland — score 20
 WITH b AS (
@@ -884,16 +896,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/dk/app/sparkron-mobilbank/id1512972558?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 50. Aito Saastopankki — score 7
 WITH b AS (
@@ -902,16 +914,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/aito-saastopankki'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 51. Aktia Bank — score 47
 WITH b AS (
@@ -920,16 +932,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.aktia.fi/fi/paivittaiset-raha-asiat/mobiilipankki'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.aktia.fi/fi/open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.aktia.fi/fi/tule-asiakkaaksi'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.aktia.com/en/careers')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 52. Avain Saastopankki — score 7
 WITH b AS (
@@ -938,16 +950,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/avain-saastopankki'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 53. Helmi Saastopankki — score 7
 WITH b AS (
@@ -956,16 +968,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/helmi-saastopankki'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 54. Lammin Saastopankki — score 7
 WITH b AS (
@@ -974,16 +986,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lammin-saastopankki'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 55. Lansi-Uudenmaan Saastopankki — score 7
 WITH b AS (
@@ -992,16 +1004,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lansi-uudenmaan-saastopankki'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 56. Myrskyla Saastopankki — score 0
 WITH b AS (
@@ -1010,16 +1022,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 57. Nooa Saastopankki — score 7
 WITH b AS (
@@ -1028,16 +1040,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/nooa-saastopankki'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 58. OP Financial Group — score 60
 WITH b AS (
@@ -1046,16 +1058,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.op.fi/en/private-customers/digital-services/op-mobile'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.op.fi/en/private-customers/daily-banking/payment/psd2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.op.fi/en/private-customers/customerinfo/become-op-customer'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.op.fi/en/about-op-pohjola/career/career-opportunities/development-and-technologies/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 59. Saastopankki Optia — score 7
 WITH b AS (
@@ -1064,16 +1076,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/saastopankki-optia'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 60. Saastopankki Sinetti — score 0
 WITH b AS (
@@ -1082,16 +1094,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 61. Savings Banks Group (Saastopankki) — score 60
 WITH b AS (
@@ -1100,16 +1112,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.saastopankki.fi/fi-fi/asiakaspalvelu/yhteydenottokanavat/saastopankki-mobiili'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.saastopankki.fi/fi-fi/asiakaspalvelu/verkkopalvelut/psd2-ja-open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.saastopankki.fi/en/support/become-our-customer'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.saastopankki.fi/fi-fi/asiakaspalvelu/yhteydenottokanavat/chat'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.saastopankki.fi/en/savingsbanksgroup')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 62. Someron Saastopankki — score 0
 WITH b AS (
@@ -1118,16 +1130,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 63. Caisse d'Epargne Aquitaine Poitou-Charentes — score 13
 WITH b AS (
@@ -1136,16 +1148,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/aquitaine-poitou-charentes/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/aquitaine-poitou-charentes/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 64. Caisse d'Epargne Auvergne et Limousin — score 13
 WITH b AS (
@@ -1154,16 +1166,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/auvergne-limousin/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/auvergne-limousin/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 65. Caisse d'Epargne Bourgogne Franche-Comte — score 13
 WITH b AS (
@@ -1172,16 +1184,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/bourgogne-franche-comte/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/bourgogne-franche-comte/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 66. Caisse d'Epargne Bretagne Pays de Loire — score 33
 WITH b AS (
@@ -1190,16 +1202,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/bretagne-pays-de-loire/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/bretagne-pays-de-loire/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 67. Caisse d'Epargne CEPAC — score 33
 WITH b AS (
@@ -1208,16 +1220,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/cepac/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/cepac/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 68. Caisse d'Epargne Cote d'Azur — score 33
 WITH b AS (
@@ -1226,16 +1238,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/cote-d-azur/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/cote-d-azur/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 69. Caisse d'Epargne Grand Est Europe — score 13
 WITH b AS (
@@ -1244,16 +1256,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/grand-est-europe/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/grand-est-europe/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 70. Caisse d'Epargne Hauts de France — score 13
 WITH b AS (
@@ -1262,16 +1274,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/hauts-de-france/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/hauts-de-france/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 71. Caisse d'Epargne Ile-de-France — score 33
 WITH b AS (
@@ -1280,16 +1292,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/ile-de-france/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/ile-de-france/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 72. Caisse d'Epargne Languedoc Roussillon — score 33
 WITH b AS (
@@ -1298,16 +1310,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/languedoc-roussillon/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/languedoc-roussillon/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 73. Caisse d'Epargne Loire Centre — score 33
 WITH b AS (
@@ -1316,16 +1328,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/loire-centre/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/loire-centre/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 74. Caisse d'Epargne Loire Drome Ardeche — score 33
 WITH b AS (
@@ -1334,16 +1346,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/loire-drome-ardeche/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/loire-drome-ardeche/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 75. Caisse d'Epargne Midi-Pyrenees — score 33
 WITH b AS (
@@ -1352,16 +1364,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/midi-pyrenees/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/midi-pyrenees/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 76. Caisse d'Epargne Normandie — score 33
 WITH b AS (
@@ -1370,16 +1382,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/normandie/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/normandie/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 77. Caisse d'Epargne Rhone Alpes — score 33
 WITH b AS (
@@ -1388,16 +1400,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/fr/app/banxo-caisse-depargne/id402753249?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caisse-epargne.fr/rhone-alpes/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.caisse-epargne.fr/rhone-alpes/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 78. Credit Agricole Group — score 67
 WITH b AS (
@@ -1406,16 +1418,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.credit-agricole.fr/particulier/applications/ma-banque.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://developer.ca-cib.com/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.credit-agricole.fr/particulier/ouvrir-un-compte.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.credit-agricole.fr/particulier/faq.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.credit-agricole.com/en/finance/financial-publications')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 79. Credit Mutuel Alliance Federale — score 73
 WITH b AS (
@@ -1424,16 +1436,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.creditmutuel.fr/fr/particuliers/comptes/application-mobile-credit-mutuel.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.creditmutuel.fr/oauth2/en/devportal/open-banking-api.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.creditmutuel.fr/fr/particuliers/comptes/ouvrir-un-compte.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.creditmutuel.fr/fr/particuliers/mobile/obtenez-des-reponses-a-vos-questions.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.creditmutuelalliancefederale.fr/en/who-are-we/our-business-lines-and-subsidiaries.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 80. Groupe BPCE (Caisse d'Epargne network) — score 60
 WITH b AS (
@@ -1442,16 +1454,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.caisse-epargne.fr/banque-a-distance/applications-smartphone/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.groupebpce.com/en'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.caisse-epargne.fr/comptes-cartes/ouvrir-compte/'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.caisse-epargne.fr/'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.groupebpce.com/en/all-the-latest-news/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 81. Berliner Sparkasse — score 53
 WITH b AS (
@@ -1460,16 +1472,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.berliner-sparkasse.de/de/home/service/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.berliner-sparkasse.de/de/home/service/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.berliner-sparkasse.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.berliner-sparkasse.de/de/home/toolbar/kontakt/whatsapp.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.berliner-sparkasse.de/de/home/ihre-sparkasse/dein-job.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 82. Berliner Volksbank — score 47
 WITH b AS (
@@ -1478,16 +1490,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.berliner-volksbank.de/privatkunden/banking-apps/vr-banking-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.berliner-volksbank.de/rechtliche-hinweise/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.berliner-volksbank.de/privatkunden/girokonten-und-karten/private-girokonten/privat-girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.berliner-volksbank.de/meine-bank/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 83. DZ Bank Group — score 47
 WITH b AS (
@@ -1496,16 +1508,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.vr.de/privatkunden/produkte/konten-karten/mobile-banking.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.dzbank.com/disclosures'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.vr.de/privatkunden/produkte/konten-karten/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.dzbank.com/content/dzbank/en/home/we-are-dz-bank/careers.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 84. Erzgebirgssparkasse — score 33
 WITH b AS (
@@ -1514,16 +1526,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 85. Förde Sparkasse — score 33
 WITH b AS (
@@ -1532,16 +1544,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 86. Frankfurter Sparkasse — score 53
 WITH b AS (
@@ -1550,16 +1562,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.frankfurter-sparkasse.de/de/home/service/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.frankfurter-sparkasse.de/de/home/service/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.frankfurter-sparkasse.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.frankfurter-sparkasse.de/de/home/toolbar/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.frankfurter-sparkasse.de/de/home/ihre-sparkasse/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 87. GLS Bank — score 47
 WITH b AS (
@@ -1568,16 +1580,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.gls.de/konten-karten/banking/banking-app/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.gls.de/gls-bank/service/fragen-antworten/allgemeines-finanz-glossar/was-ist-psd2/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.gls.de/privatkunden/konto-karten/gls-girokonto/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.gls.de/karriere/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 88. Hamburger Sparkasse (Haspa) — score 53
 WITH b AS (
@@ -1586,16 +1598,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.haspa.de/de/home/privatkunden/online-services/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.haspa.de/de/home/service/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.haspa.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.haspa.de/de/home/services-und-hilfe/die-top-links/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.haspa.de/de/home/unternehmen-haspa/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 89. Hohenzollerische Landesbank Kreissparkasse Sigmaringen — score 33
 WITH b AS (
@@ -1604,16 +1616,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 90. Kasseler Sparkasse — score 33
 WITH b AS (
@@ -1622,16 +1634,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 91. Kreissparkasse Ahrweiler — score 33
 WITH b AS (
@@ -1640,16 +1652,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 92. Kreissparkasse Diepholz — score 33
 WITH b AS (
@@ -1658,16 +1670,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 93. Kreissparkasse Düsseldorf — score 33
 WITH b AS (
@@ -1676,16 +1688,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 94. Kreissparkasse Freudenstadt — score 33
 WITH b AS (
@@ -1694,16 +1706,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 95. Kreissparkasse Koeln — score 53
 WITH b AS (
@@ -1712,16 +1724,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.ksk-koeln.de/de/home/service/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ksk-koeln.de/de/home/service/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.ksk-koeln.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.ksk-koeln.de/de/home/toolbar/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.ksk-koeln.de/de/home/ihre-sparkasse/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 96. Kreissparkasse Köln — score 33
 WITH b AS (
@@ -1730,16 +1742,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 97. Kreissparkasse Limburg — score 33
 WITH b AS (
@@ -1748,16 +1760,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 98. Kreissparkasse Ludwigsburg — score 33
 WITH b AS (
@@ -1766,16 +1778,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 99. Kreissparkasse Ostalb — score 47
 WITH b AS (
@@ -1784,16 +1796,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.ksk-ostalb.de/de/home/sofa-banking/chatbot-linda.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 100. Kreissparkasse Saarlouis — score 33
 WITH b AS (
@@ -1802,16 +1814,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 101. Kreissparkasse Stade — score 33
 WITH b AS (
@@ -1820,16 +1832,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 102. Kreissparkasse Traunstein-Trostberg — score 33
 WITH b AS (
@@ -1838,16 +1850,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 103. Kreissparkasse Tübingen — score 33
 WITH b AS (
@@ -1856,16 +1868,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 104. Kreissparkasse Verden — score 33
 WITH b AS (
@@ -1874,16 +1886,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 105. Kreissparkasse Waiblingen — score 33
 WITH b AS (
@@ -1892,16 +1904,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 106. Mittelbrandenburgische Sparkasse in Potsdam — score 33
 WITH b AS (
@@ -1910,16 +1922,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 107. Müritz-Sparkasse — score 33
 WITH b AS (
@@ -1928,16 +1940,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 108. Nassauische Sparkasse — score 33
 WITH b AS (
@@ -1946,16 +1958,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 109. Nassauische Sparkasse — score 60
 WITH b AS (
@@ -1964,16 +1976,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 110. Ostsächsische Sparkasse Dresden — score 33
 WITH b AS (
@@ -1982,16 +1994,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 111. Rheinhessen Sparkasse — score 33
 WITH b AS (
@@ -2000,16 +2012,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 112. Sparkasse Aachen — score 33
 WITH b AS (
@@ -2018,16 +2030,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 113. Sparkasse Altbayern — score 33
 WITH b AS (
@@ -2036,16 +2048,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 114. Sparkasse Altenburger Land — score 33
 WITH b AS (
@@ -2054,16 +2066,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 115. Sparkasse Amberg-Sulzbach — score 33
 WITH b AS (
@@ -2072,16 +2084,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 116. Sparkasse an Ennepe und Ruhr — score 33
 WITH b AS (
@@ -2090,16 +2102,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 117. Sparkasse Ansbach — score 33
 WITH b AS (
@@ -2108,16 +2120,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 118. Sparkasse Aschaffenburg Miltenberg — score 33
 WITH b AS (
@@ -2126,16 +2138,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 119. Sparkasse Attendorn-Lennestadt-Kirchhundem — score 33
 WITH b AS (
@@ -2144,16 +2156,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 120. Sparkasse Aurich-Norden — score 33
 WITH b AS (
@@ -2162,16 +2174,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 121. Sparkasse Bad Hersfeld-Rotenburg — score 33
 WITH b AS (
@@ -2180,16 +2192,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 122. Sparkasse Bad Kissingen — score 33
 WITH b AS (
@@ -2198,16 +2210,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 123. Sparkasse Bad Neustadt a. d. Saale — score 33
 WITH b AS (
@@ -2216,16 +2228,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 124. Sparkasse Bad Oeynhausen - Porta Westfalica — score 33
 WITH b AS (
@@ -2234,16 +2246,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 125. Sparkasse Bad Tölz-Wolfratshausen — score 33
 WITH b AS (
@@ -2252,16 +2264,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 126. Sparkasse Baden-Baden Gaggenau — score 33
 WITH b AS (
@@ -2270,16 +2282,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 127. Sparkasse Berchtesgadener Land — score 33
 WITH b AS (
@@ -2288,16 +2300,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 128. Sparkasse Bremen — score 53
 WITH b AS (
@@ -2306,16 +2318,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparkasse-bremen.de/de/home/service/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse-bremen.de/de/home/service/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparkasse-bremen.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse-bremen.de/de/home/toolbar/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse-bremen.de/de/home/ihre-sparkasse/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 129. Sparkasse Burgenlandkreis — score 33
 WITH b AS (
@@ -2324,16 +2336,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 130. Sparkasse Dortmund — score 33
 WITH b AS (
@@ -2342,16 +2354,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 131. Sparkasse Duisburg — score 33
 WITH b AS (
@@ -2360,16 +2372,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 132. Sparkasse Freiburg-Nördlicher Breisgau — score 33
 WITH b AS (
@@ -2378,16 +2390,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 133. Sparkasse Freising Moosburg — score 33
 WITH b AS (
@@ -2396,16 +2408,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 134. Sparkasse Fulda — score 33
 WITH b AS (
@@ -2414,16 +2426,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 135. Sparkasse Fürth — score 33
 WITH b AS (
@@ -2432,16 +2444,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 136. Sparkasse Gelsenkirchen — score 33
 WITH b AS (
@@ -2450,16 +2462,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 137. Sparkasse Hannover — score 53
 WITH b AS (
@@ -2468,16 +2480,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparkasse-hannover.de/de/home/privatkunden/banking-und-bezahlen/banking-angebot/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse-hannover.de/de/home/ihre-sparkasse/dialogcenter.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparkasse-hannover.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse-hannover.de/de/home/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse-hannover.de/de/home/ihre-sparkasse/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 138. Sparkasse Hegau-Bodensee — score 47
 WITH b AS (
@@ -2486,16 +2498,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-bodensee.de/de/home/service/chatbot-linda.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 139. Sparkasse Hilden-Ratingen-Velbert — score 33
 WITH b AS (
@@ -2504,16 +2516,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 140. Sparkasse Hochrhein — score 33
 WITH b AS (
@@ -2522,16 +2534,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 141. Sparkasse Holstein — score 33
 WITH b AS (
@@ -2540,16 +2552,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 142. Sparkasse Kaiserslautern — score 33
 WITH b AS (
@@ -2558,16 +2570,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 143. Sparkasse Karlsruhe — score 47
 WITH b AS (
@@ -2576,16 +2588,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://www.sparkasse-karlsruhe.de/de/home/aktionen/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 144. Sparkasse KoelnBonn — score 53
 WITH b AS (
@@ -2594,16 +2606,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparkasse-koelnbonn.de/de/home/service/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse-koelnbonn.de/de/home/service/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparkasse-koelnbonn.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse-koelnbonn.de/de/home/service/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse-koelnbonn.de/de/home/ihre-sparkasse/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 145. Sparkasse KölnBonn — score 33
 WITH b AS (
@@ -2612,16 +2624,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 146. Sparkasse Krefeld — score 33
 WITH b AS (
@@ -2630,16 +2642,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 147. Sparkasse Leverkusen — score 33
 WITH b AS (
@@ -2648,16 +2660,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 148. Sparkasse Lörrach-Rheinfelden — score 33
 WITH b AS (
@@ -2666,16 +2678,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 149. Sparkasse Lüneburg — score 33
 WITH b AS (
@@ -2684,16 +2696,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 150. Sparkasse Magdeburg — score 47
 WITH b AS (
@@ -2702,16 +2714,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.sparkasse-magdeburg.de/de/home/privatkunden/girokonto/girokonto-online.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 151. Sparkasse Mainfranken Würzburg — score 47
 WITH b AS (
@@ -2720,16 +2732,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.sparkasse-mainfranken.de/de/home/service/chatbot-linda.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 152. Sparkasse Marburg-Biedenkopf — score 47
 WITH b AS (
@@ -2738,16 +2750,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', 'https://www.skmb.de/de/home/service/linda.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 153. Sparkasse Märkisch-Oderland — score 33
 WITH b AS (
@@ -2756,16 +2768,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 154. Sparkasse Mecklenburg-Nordwest — score 33
 WITH b AS (
@@ -2774,16 +2786,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 155. Sparkasse Mecklenburg-Schwerin — score 33
 WITH b AS (
@@ -2792,16 +2804,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 156. Sparkasse Mittelsachsen — score 33
 WITH b AS (
@@ -2810,16 +2822,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 157. Sparkasse Niederbayern-Mitte — score 33
 WITH b AS (
@@ -2828,16 +2840,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 158. Sparkasse Oberhessen — score 33
 WITH b AS (
@@ -2846,16 +2858,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 159. Sparkasse Oberlausitz-Niederschlesien — score 33
 WITH b AS (
@@ -2864,16 +2876,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 160. Sparkasse Oberpfalz Nord — score 33
 WITH b AS (
@@ -2882,16 +2894,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 161. Sparkasse Oder-Spree — score 33
 WITH b AS (
@@ -2900,16 +2912,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 162. Sparkasse Passau — score 33
 WITH b AS (
@@ -2918,16 +2930,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 163. Sparkasse Pforzheim Calw — score 33
 WITH b AS (
@@ -2936,16 +2948,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 164. Sparkasse Rhein Neckar Nord — score 33
 WITH b AS (
@@ -2954,16 +2966,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sparkasse.de (platform-level)')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 165. Sparkasse Rhein-Haardt — score 0
 WITH b AS (
@@ -2972,16 +2984,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 166. Sparkasse Rhein-Nahe — score 0
 WITH b AS (
@@ -2990,16 +3002,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 167. Sparkasse Rotenburg Osterholz — score 0
 WITH b AS (
@@ -3008,16 +3020,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 168. Sparkasse Saarbrücken — score 0
 WITH b AS (
@@ -3026,16 +3038,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 169. Sparkasse Schwarzwald-Baar — score 0
 WITH b AS (
@@ -3044,16 +3056,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 170. Sparkasse Schweinfurt-Haßberge — score 0
 WITH b AS (
@@ -3062,16 +3074,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 171. Sparkasse Siegen — score 0
 WITH b AS (
@@ -3080,16 +3092,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 172. Sparkasse Sonneberg — score 0
 WITH b AS (
@@ -3098,16 +3110,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 173. Sparkasse Trier — score 0
 WITH b AS (
@@ -3116,16 +3128,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 174. Sparkasse Uckermark — score 0
 WITH b AS (
@@ -3134,16 +3146,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 175. Sparkasse Ulm — score 0
 WITH b AS (
@@ -3152,16 +3164,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 176. Sparkasse Westerwald-Sieg — score 0
 WITH b AS (
@@ -3170,16 +3182,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 177. Sparkasse Westmünsterland — score 0
 WITH b AS (
@@ -3188,16 +3200,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 178. Sparkasse Zwickau — score 0
 WITH b AS (
@@ -3206,16 +3218,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 179. Sparkassen-Finanzgruppe — score 53
 WITH b AS (
@@ -3224,16 +3236,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/finanzen-apps/s-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.de (platform-level)'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparkasse.de/pk/produkte/konten-und-karten/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparkasse.de/pk/ratgeber/finanzplanung/banking-tipps.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.dsv-gruppe.de/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 180. Stadt-Sparkasse Solingen — score 0
 WITH b AS (
@@ -3242,16 +3254,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 181. Stadtsparkasse Augsburg — score 0
 WITH b AS (
@@ -3260,16 +3272,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 182. Stadtsparkasse Bad Pyrmont — score 0
 WITH b AS (
@@ -3278,16 +3290,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 183. Stadtsparkasse Duesseldorf — score 53
 WITH b AS (
@@ -3296,16 +3308,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sskduesseldorf.de/de/home/service/sparkassen-app.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sskduesseldorf.de/de/home/aktionen/psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sskduesseldorf.de/de/home/privatkunden/girokonto.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sskduesseldorf.de/de/home/toolbar/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sskduesseldorf.de/de/home/ihre-sparkasse/karriere.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 184. Stadtsparkasse Düsseldorf — score 0
 WITH b AS (
@@ -3314,16 +3326,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 185. Stadtsparkasse München — score 60
 WITH b AS (
@@ -3332,16 +3344,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 186. Stadtsparkasse Schwedt — score 0
 WITH b AS (
@@ -3350,16 +3362,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 187. Stadtsparkasse Wuppertal — score 0
 WITH b AS (
@@ -3368,16 +3380,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 188. Taunus Sparkasse — score 0
 WITH b AS (
@@ -3386,16 +3398,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 189. MagNet Bank — score 20
 WITH b AS (
@@ -3404,16 +3416,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/hu/app/magnet-bank/id807556458?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 190. OTP Bank — score 47
 WITH b AS (
@@ -3422,16 +3434,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.otpbank.hu/portal/en/online-services/mobilebank'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.otpbank.hu/portal/en/PSD2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.otpbank.hu/portal/en/Bank_Account/basic'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.otpbank.hu/portal/en/Aboutus')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 191. Arion banki — score 20
 WITH b AS (
@@ -3440,16 +3452,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/is/app/arion-banki/id542642049?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.arionbanki.is'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 192. Islandsbanki — score 20
 WITH b AS (
@@ -3458,16 +3470,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/is/app/%C3%ADslandsbanki/id1316447943?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.islandsbanki.is'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 193. Landsbankinn — score 20
 WITH b AS (
@@ -3476,16 +3488,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/is/app/landsbankinn/id1235523584?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.landsbankinn.is'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 194. Banca Agricola Popolare di Ragusa — score 20
 WITH b AS (
@@ -3494,16 +3506,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/baps-mobile/id1513956933?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 195. Banca Cassa di Risparmio di Savigliano — score 13
 WITH b AS (
@@ -3512,16 +3524,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.bancacrs.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 196. Banca Centro Credito Cooperativo Toscana-Umbria — score 0
 WITH b AS (
@@ -3530,16 +3542,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 197. Banca d'Alba — score 33
 WITH b AS (
@@ -3548,16 +3560,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=it.relaxbanking'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.bancadalba.it/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.bancadalba.it/conto-corrente/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.board.com/customer/digital-banking-transformation-banca-dalba')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 198. Banca del Piemonte — score 20
 WITH b AS (
@@ -3566,16 +3578,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/bpnow-mobile/id1589265077?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 199. Banca del Territorio Lombardo — score 0
 WITH b AS (
@@ -3584,16 +3596,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 200. Banca della Marca — score 0
 WITH b AS (
@@ -3602,16 +3614,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 201. Banca delle Terre Venete — score 0
 WITH b AS (
@@ -3620,16 +3632,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 202. Banca di Asti — score 27
 WITH b AS (
@@ -3638,16 +3650,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.bancadiasti.it/privati/canali-digitali'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.bancadiasti.it/privati/conti'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.bancadiasti.it/chi-siamo/lavora-con-noi')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 203. Banca di Cividale — score 27
 WITH b AS (
@@ -3656,16 +3668,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/civibank-on/id1517868418?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.civibank.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 204. Banca di Credito Popolare — score 20
 WITH b AS (
@@ -3674,16 +3686,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/you-bcp/id1517871126?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 205. Banca di Piacenza — score 20
 WITH b AS (
@@ -3692,16 +3704,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/it/app/banca-di-piacenza/id1536421231?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.bancadipiacenza.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 206. Banca Monte dei Paschi di Siena — score 60
 WITH b AS (
@@ -3710,16 +3722,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 207. Banca Popolare del Frusinate — score 0
 WITH b AS (
@@ -3728,16 +3740,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 208. Banca Popolare del Lazio — score 13
 WITH b AS (
@@ -3746,16 +3758,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/it/app/bplazio/id1513133871?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 209. Banca Popolare di Bari — score 27
 WITH b AS (
@@ -3764,16 +3776,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.bdmbanca.it/privati/canali-digitali/'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.bdmbanca.it/privati/conti/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.bdmbanca.it/istituzionale/lavora-con-noi/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 210. Banca Popolare di Cortona — score 0
 WITH b AS (
@@ -3782,16 +3794,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 211. Banca Popolare di Lajatico — score 0
 WITH b AS (
@@ -3800,16 +3812,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 212. Banca Popolare di Puglia e Basilicata — score 13
 WITH b AS (
@@ -3818,16 +3830,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/it/app/bppb-privati/id6444260930?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 213. Banca Popolare di Sondrio — score 40
 WITH b AS (
@@ -3836,16 +3848,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.popso.it/un-nuovo-inizio'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.popso.it/un-nuovo-inizio'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.popso.it/un-nuovo-inizio')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 214. Banca Popolare Pugliese — score 20
 WITH b AS (
@@ -3854,16 +3866,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/bpp/id1509923984?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 215. Banca Prealpi SanBiagio — score 0
 WITH b AS (
@@ -3872,16 +3884,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 216. Banca Valsabbina — score 13
 WITH b AS (
@@ -3890,16 +3902,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/it/app/la-valsabbinapp/id904977013?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 217. Banco di Sardegna — score 7
 WITH b AS (
@@ -3908,16 +3920,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.bancosardegna.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 218. BCC di Roma — score 7
 WITH b AS (
@@ -3926,16 +3938,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/us/app/noisoci-bcc-roma/id6740815874?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 219. BCC Iccrea Group — score 47
 WITH b AS (
@@ -3944,16 +3956,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.gruppobcciccrea.it/Pagine/Default.aspx'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.gruppobcciccrea.it/Pagine/Default.aspx'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.gruppobcciccrea.it/Pagine/Default.aspx'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.gruppobcciccrea.it/Pagine/Default.aspx')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 220. BCC Milano — score 0
 WITH b AS (
@@ -3962,16 +3974,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 221. BCC Pordenonese e Monsile — score 0
 WITH b AS (
@@ -3980,16 +3992,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 222. BCC Veneta — score 0
 WITH b AS (
@@ -3998,16 +4010,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 223. Cassa Centrale Banca Group — score 47
 WITH b AS (
@@ -4016,16 +4028,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.cassacentrale.it/en/products-and-services/our-offer/digital-banking-solutions'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cassacentrale.it/en/products-and-services/our-offer/digital-banking-solutions'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.cassacentrale.it/en/products-and-services/our-offer/digital-banking-solutions'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.cassacentrale.it/it/lavora-con-noi')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 224. Cassa di Risparmio di Cento — score 27
 WITH b AS (
@@ -4034,16 +4046,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/us/app/bee-bank-crcento/id1456258851'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.crcento.it/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.crcento.it/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 225. Cassa di Risparmio di Fermo — score 27
 WITH b AS (
@@ -4052,16 +4064,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/carifermo-mobile/id1513132799?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.carifermo.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 226. Cassa di Risparmio di Fossano — score 0
 WITH b AS (
@@ -4070,16 +4082,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 227. Cassa di Risparmio di Orvieto — score 27
 WITH b AS (
@@ -4088,16 +4100,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=it.cedacri.hb2.bpbari'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cariorvieto.it/content/cro/it/servizi/psd-2.home.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.cariorvieto.it/content/cro/it/home/privati/famiglie/conti.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 228. Cassa di Risparmio di Volterra — score 20
 WITH b AS (
@@ -4106,16 +4118,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/crv-mobile-banking/id811245816?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 229. Cassa Padana BCC — score 0
 WITH b AS (
@@ -4124,16 +4136,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 230. CDP (Cassa Depositi e Prestiti) — score 7
 WITH b AS (
@@ -4142,16 +4154,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 231. Credito Cooperativo Ravennate Forlivese e Imolese — score 0
 WITH b AS (
@@ -4160,16 +4172,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 232. Credito Emiliano (CREDEM) — score 33
 WITH b AS (
@@ -4178,16 +4190,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/credem-banca-per-privati/id441187556?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.credem.it'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.credem.it'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 233. Emil Banca Credito Cooperativo — score 27
 WITH b AS (
@@ -4196,16 +4208,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/it/app/per-te-emil-banca/id1452589017?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.emilbanca.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 234. La Cassa di Ravenna — score 33
 WITH b AS (
@@ -4214,16 +4226,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/la-cassa-di-ravenna-s-p-a/id1536426526?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.lacassa.com'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 235. Raiffeisen Landesbank Sudtirol — score 7
 WITH b AS (
@@ -4232,16 +4244,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.raiffeisen.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 236. Raiffeisenkasse Bruneck — score 0
 WITH b AS (
@@ -4250,16 +4262,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 237. Raiffeisenkasse Eisacktal — score 0
 WITH b AS (
@@ -4268,16 +4280,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 238. Raiffeisenkasse Meran — score 0
 WITH b AS (
@@ -4286,16 +4298,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 239. Sparkasse - Cassa di Risparmio di Bolzano — score 27
 WITH b AS (
@@ -4304,16 +4316,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/it/app/sparkasse-on/id1552230892?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparkasse.it'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 240. Banque et Caisse d'Epargne de l'Etat (Spuerkeess) — score 53
 WITH b AS (
@@ -4322,16 +4334,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.spuerkeess.lu/en/mobile/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.spuerkeess.lu/en/blog/experts-corner/open-banking-revolut-and-n26-enter-s-net/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.spuerkeess.lu/en/private-customers/tools/application-to-set-up-a-business-relationship/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.spuerkeess.lu/en/about-us/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 241. Banque Raiffeisen — score 47
 WITH b AS (
@@ -4340,16 +4352,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.raiffeisen.lu/en/private/daily-banking/online-services/online-banking-r-net'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.raiffeisen.lu/en/psd2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.raiffeisen.lu/en/open-account'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.raiffeisen.lu/en/banque/career')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 242. Bank of Valletta — score 60
 WITH b AS (
@@ -4358,16 +4370,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.bov.com/mobile-banking-0'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://openbanking.bov.com/docs/berlingroup/bov_mt/ais'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://join.bov.com/'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.bov.com/help-support'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.bov.com/careers')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 243. de Volksbank — score 53
 WITH b AS (
@@ -4376,16 +4388,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.asnbank.nl/asn-app-en-asn-online-bankieren.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://openbanking.devolksbank.nl/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.regiobank.nl/particulier/bankrekening/openen.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.devolksbank.nl/werken-bij.html')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 244. Rabobank — score 67
 WITH b AS (
@@ -4394,16 +4406,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.rabobank.nl/particulieren/online-bankieren'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://developer.rabobank.nl'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.rabobank.nl/particulieren/klant-worden/online-betaalrekening-openen'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.rabobank.nl/particulieren/contact/chatbot'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.rabobank.nl/en/about-us/vacatures')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 245. Triodos Bank — score 53
 WITH b AS (
@@ -4412,16 +4424,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.triodos.nl/mobiel-bankieren'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.triodos.com/en/open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.triodos.nl/betalen'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.triodos.com/en/careers')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 246. Aurskog Sparebank — score 7
 WITH b AS (
@@ -4430,16 +4442,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.aurskog-sparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 247. Bank Norwegian (Nordax Group) — score 53
 WITH b AS (
@@ -4448,16 +4460,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.banknorwegian.no/'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.banknorwegian.no/kundeservice/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://careers.noba.bank/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 248. Bien Sparebank — score 7
 WITH b AS (
@@ -4466,16 +4478,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.bien.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 249. Cultura Sparebank — score 13
 WITH b AS (
@@ -4484,16 +4496,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/culturabank/id1599145758?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 250. Drangedal Sparebank — score 27
 WITH b AS (
@@ -4502,16 +4514,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/drangedal-mobilbank/id1566086393?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.drangedalsparebank.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.drangedalsparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 251. Eidsberg Sparebank — score 40
 WITH b AS (
@@ -4520,16 +4532,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/eika-mobilbank/id1632814257'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://psd2.eika.no/developer/enrollment/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.eidsbergsparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.eidsbergsparebank.no/kontakt-oss'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 252. Etne Sparebank — score 33
 WITH b AS (
@@ -4538,16 +4550,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/etne-sparebank/id1250056290'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://etne-sparebank.r2.openbanking.edb.com/developer/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.etnesparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 253. Fana Sparebank — score 20
 WITH b AS (
@@ -4556,16 +4568,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/no/app/fana-sparebank-mobilbank/id1311411778?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 254. Flekkefjord Sparebank — score 33
 WITH b AS (
@@ -4574,16 +4586,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/flekkefjord-sparebank/id1250056275?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.flekkefjordsparebank.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.flekkefjordsparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 255. Grue Sparebank — score 7
 WITH b AS (
@@ -4592,16 +4604,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.gruesparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 256. Haltdalen Sparebank — score 7
 WITH b AS (
@@ -4610,16 +4622,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.haltdalensparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 257. Haugesund Sparebank — score 7
 WITH b AS (
@@ -4628,16 +4640,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.haugesund-sparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 258. Helgeland Sparebank — score 40
 WITH b AS (
@@ -4646,16 +4658,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/helgeland-sparebank/id1250056290'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.bits.no/bank/developer-portals-psd2/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.helgeland-sparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.helgeland-sparebank.no/kontakt-oss'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 259. Hjartdal og Gransherad Sparebank — score 33
 WITH b AS (
@@ -4664,16 +4676,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/eika-mobilbank/id1632814257'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://psd2.eika.no/developer/enrollment/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.hjartdalsparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 260. Indre Sogn Sparebank — score 33
 WITH b AS (
@@ -4682,16 +4694,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/eika-mobilbank/id1632814257'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://psd2.eika.no/developer/enrollment/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.issb.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 261. Jaeren Sparebank — score 7
 WITH b AS (
@@ -4700,16 +4712,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.jaerensparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 262. Kvinesdal Sparebank — score 7
 WITH b AS (
@@ -4718,16 +4730,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.kvinesdalsparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 263. Lillesands Sparebank — score 13
 WITH b AS (
@@ -4736,16 +4748,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/lillesands-sparebank-mobilbank/id1250056474?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 264. Luster Sparebank — score 27
 WITH b AS (
@@ -4754,16 +4766,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/luster-sparebank-mobilbank/id1250056635?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.lustersparebank.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.lustersparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 265. Marker Sparebank — score 33
 WITH b AS (
@@ -4772,16 +4784,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/eika-mobilbank/id1632814257'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.openbankingtracker.com/provider/marker-sparebank-no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.markersparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 266. Melhus Sparebank — score 33
 WITH b AS (
@@ -4790,16 +4802,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/eika-mobilbank/id1632814257'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://psd2.eika.no/developer/enrollment/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.melhussparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 267. Odal Sparebank — score 33
 WITH b AS (
@@ -4808,16 +4820,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/eika-mobilbank/id1632814257'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://psd2.eika.no/developer/enrollment/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.odalsparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 268. Ofoten Sparebank — score 7
 WITH b AS (
@@ -4826,16 +4838,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ofotensparebank.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 269. Orkla Sparebank — score 7
 WITH b AS (
@@ -4844,16 +4856,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.orklasparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 270. Romsdals Budstikke Sparebank — score 0
 WITH b AS (
@@ -4862,16 +4874,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 271. Sandnes Sparebank — score 40
 WITH b AS (
@@ -4880,16 +4892,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=dk.sdc.a.mobilbank.sandnessparebank'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.openbankingtracker.com/provider/sandnes-sparebank'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.rogalandsparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://news.microsoft.com/2010/09/13/skandinavisk-data-center-greatly-reduces-costs-by-migrating-core-banking-systems-to-microsoft-platform/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 272. Selbu Sparebank — score 33
 WITH b AS (
@@ -4898,16 +4910,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/no/app/selbu-mobilbank/id1566086560?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.selbusparebank.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.selbusparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 273. Skagerrak Sparebank — score 7
 WITH b AS (
@@ -4916,16 +4928,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.skagerraksparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 274. Skudenes og Aakra Sparebank — score 40
 WITH b AS (
@@ -4934,16 +4946,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/us/app/skudenes-aakra-mobilbank/id1250056290'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://openbanking.skudeaakra.no/developer/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sassparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 275. SpareBank 1 Alliance — score 67
 WITH b AS (
@@ -4952,16 +4964,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparebank1.no/nb/bank/privat/daglig-bruk/mobilbank.html'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://developer.sparebank1.no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparebank1.no/nb/bank/privat/daglig-bruk/mobilbank.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/nb/smn/om-oss/nyheter/den-digitale-assistenten-har-flyttet-inn.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://sparebank1.dev/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 276. SpareBank 1 BV — score 33
 WITH b AS (
@@ -4970,16 +4982,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/no/app/sparebank-1-bedrift/id522078287?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/bv'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/bv'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 277. SpareBank 1 Gudbrandsdal — score 13
 WITH b AS (
@@ -4988,16 +5000,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/gudbrandsdal'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/gudbrandsdal'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 278. SpareBank 1 Hallingdal Valdres — score 13
 WITH b AS (
@@ -5006,16 +5018,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/hallingdal-valdres'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/hallingdal-valdres'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 279. SpareBank 1 Helgeland — score 13
 WITH b AS (
@@ -5024,16 +5036,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/helgeland'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/helgeland'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 280. SpareBank 1 Lom og Skjak — score 13
 WITH b AS (
@@ -5042,16 +5054,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/lom-og-skjaak'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/lom-og-skjaak'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 281. SpareBank 1 Modum — score 13
 WITH b AS (
@@ -5060,16 +5072,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/modum'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/modum'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 282. SpareBank 1 Nord-Norge — score 67
 WITH b AS (
@@ -5078,16 +5090,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparebank1.no/nb/nord-norge/privat/daglig-bruk/mobil-og-nettbank.html'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://developer.sparebank1.no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparebank1.no/nb/nord-norge/privat/kundeservice/bestill/bli-kunde.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/nb/nord-norge/privat/kundeservice.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://sparebank1.dev/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 283. SpareBank 1 Nordmore — score 13
 WITH b AS (
@@ -5096,16 +5108,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/nordmore'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/nordmore'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 284. SpareBank 1 Østlandet — score 80
 WITH b AS (
@@ -5114,16 +5126,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 285. SpareBank 1 Ringerike Hadeland — score 13
 WITH b AS (
@@ -5132,16 +5144,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/ringerike-hadeland'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/ringerike-hadeland'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 286. SpareBank 1 SMN — score 67
 WITH b AS (
@@ -5150,16 +5162,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparebank1.no/nb/smn/privat/daglig-bruk/mobil-og-nettbank.html'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://developer.sparebank1.no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparebank1.no/nb/smn/privat/kundeservice/bestill/bli-kunde.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/nb/smn/privat/kundeservice/kontakt.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://sparebank1.dev/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 287. SpareBank 1 Sorost-Norge — score 13
 WITH b AS (
@@ -5168,16 +5180,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/sorost-norge'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/sorost-norge'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 288. SpareBank 1 SR-Bank — score 67
 WITH b AS (
@@ -5186,16 +5198,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sparebank1.no/nb/sor-norge/privat/daglig-bruk/mobil-og-nettbank.html'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://developer.sparebank1.no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sparebank1.no/nb/sor-norge/privat/kundeservice/bestill/bli-kunde.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/nb/sor-norge/privat/kundeservice.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://sparebank1.dev/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 289. SpareBank 1 Telemark — score 13
 WITH b AS (
@@ -5204,16 +5216,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebank1.no/telemark'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebank1.no/telemark'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 290. Sparebanken Din — score 20
 WITH b AS (
@@ -5222,16 +5234,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/no/app/din-mobilbank/id1566086500?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparebankendin.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparebankendin.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 291. Sparebanken More — score 13
 WITH b AS (
@@ -5240,16 +5252,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sbmore.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sbmore.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 292. Sparebanken Narvik — score 40
 WITH b AS (
@@ -5258,16 +5270,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=dk.sdc.a.mobilbank.sparebankennarvik'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.openbankingtracker.com/provider/sparebanken-narvik-no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sn.no/dagligbank/nett-og-mobilbank/bankid'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://news.microsoft.com/2010/09/13/skandinavisk-data-center-greatly-reduces-costs-by-migrating-core-banking-systems-to-microsoft-platform/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 293. Sparebanken Sogn og Fjordane — score 13
 WITH b AS (
@@ -5276,16 +5288,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ssf.no'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.ssf.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 294. Sparebanken Sor — score 47
 WITH b AS (
@@ -5294,16 +5306,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.sor.no/kort-og-betaling/mobil-og-nettbank/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sor.no/felles/info/open-banking/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sor.no/privat/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.sor.no/felles/karriere/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 295. Sparebanken Vest — score 47
 WITH b AS (
@@ -5312,16 +5324,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.spv.no/dagligbank/nett-og-mobilbank'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.spv.no/kundeservice/psd2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.spv.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.spv.no/om-oss/jobb')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 296. Stadsbygd Sparebank — score 7
 WITH b AS (
@@ -5330,16 +5342,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/no/app/stbank/id1566086483?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 297. Sunndal Sparebank — score 40
 WITH b AS (
@@ -5348,16 +5360,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=dk.sdc.a.mobilbank.sunndalsparebank'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.openbankingtracker.com/provider/sunndal-sparebank'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.sunndal-sparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://news.microsoft.com/2010/09/13/skandinavisk-data-center-greatly-reduces-costs-by-migrating-core-banking-systems-to-microsoft-platform/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 298. Tolga-Os Sparebank — score 7
 WITH b AS (
@@ -5366,16 +5378,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/no/app/tosbank/id1566086496?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 299. Totens Sparebank — score 40
 WITH b AS (
@@ -5384,16 +5396,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=dk.sdc.a.mobilbank.totenssparebank.bedrift'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.openbankingtracker.com/provider/totens-sparebank-no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.totenbanken.no/ordne-pa-nett'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://news.microsoft.com/2010/09/13/skandinavisk-data-center-greatly-reduces-costs-by-migrating-core-banking-systems-to-microsoft-platform/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 300. Trøgstad Sparebank — score 27
 WITH b AS (
@@ -5402,16 +5414,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/us/app/tr%C3%B8gstad-sparebank-bedrift/id1417912049'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.openbankingtracker.com/provider/trogstad-sparebank-no'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.tsbank.no/bytte-bank'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 301. Tysnes Sparebank — score 7
 WITH b AS (
@@ -5420,16 +5432,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.tysnes-sparebank.no'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 302. Valle Sparebank — score 33
 WITH b AS (
@@ -5438,16 +5450,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://play.google.com/store/apps/details?id=dk.sdc.a.mobilbank.vallesparebank.bm'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.valle-sparebank.no/bedrift/psd2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.valle-sparebank.no/bli-kunde'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 303. Voss Sparebank — score 13
 WITH b AS (
@@ -5456,16 +5468,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/no/app/voss-sparebank-mobilbank/id1250065379?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 304. Bank Pocztowy — score 33
 WITH b AS (
@@ -5474,16 +5486,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 305. PKO Bank Polski — score 93
 WITH b AS (
@@ -5492,16 +5504,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'advanced', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 306. Banco BPI — score 87
 WITH b AS (
@@ -5510,16 +5522,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 307. Banco Montepio — score 47
 WITH b AS (
@@ -5528,16 +5540,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.bancomontepio.pt/en/individuals/everyday-banking/digital-banking'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.bancomontepio.pt/en/open-banking-apis'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.bancomontepio.pt/en/individuals/everyday-banking/open-account-online'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.bancomontepio.pt/institucional/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 308. Caixa Geral de Depositos — score 53
 WITH b AS (
@@ -5546,16 +5558,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.cgd.pt/Particulares/Contas/Caixadirecta/Pages/refresh-app-caixadirecta.aspx'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cgd.pt/Institucional/Noticias/Pages/Open-Banking-SIBS-API-Market.aspx'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.cgd.pt/Particulares/Contas/Contas-a-Ordem/Pages/Conta-Caixa-S.aspx'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.cgd.pt/Particulares/Apoio-Cliente/Pages/default.aspx'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.cgd.pt/Institucional/Pages/default.aspx')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 309. Banca Transilvania — score 67
 WITH b AS (
@@ -5564,16 +5576,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://en.bancatransilvania.ro/wallet-bt-pay/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://en.bancatransilvania.ro/developer-support'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://en.bancatransilvania.ro/accounts-and-operations/conturi'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.bancatransilvania.ro/en/contact'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.bancatransilvania.ro/en/about-us/careers')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 310. BCR (Banca Comerciala Romana) — score 20
 WITH b AS (
@@ -5582,16 +5594,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/ro/app/etoken-bcr/id691867429?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.bcr.ro'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 311. BRD - Groupe Societe Generale — score 27
 WITH b AS (
@@ -5600,16 +5612,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/ro/app/you-brd/id1484062157?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.brd.ro'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 312. CEC Bank — score 33
 WITH b AS (
@@ -5618,16 +5630,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.cec.ro/mobile-banking'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cec.ro/open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.cec.ro/persoane-fizice/conturi-si-pachete'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.cec.ro/despre-cec-bank/cariere')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 313. Raiffeisen Bank Romania — score 27
 WITH b AS (
@@ -5636,16 +5648,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/ro/app/raiffeisen-smart-mobile/id1255136212?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.raiffeisen.ro'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 314. Prima banka Slovensko — score 20
 WITH b AS (
@@ -5654,16 +5666,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://apps.apple.com/sk/app/pe%C5%88a%C5%BEenka/id522958758?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 315. Slovenska sporitelna — score 60
 WITH b AS (
@@ -5672,16 +5684,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.slsp.sk/sk/george'),
   ((SELECT id FROM b), 'open_banking', true, 'intermediate', 'https://www.slsp.sk/en/business/online-banking/psd2-api-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.slsp.sk/en/personal/faq/how-to-open-an-account'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.slsp.sk/sk/ludia/vesna'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.erstedigital.com/en')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 316. Delavska hranilnica — score 13
 WITH b AS (
@@ -5690,16 +5702,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/si/app/dh-denarnik/id1490853552?uo=4'),
   ((SELECT id FROM b), 'open_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 317. Nova Ljubljanska Banka (NLB) — score 60
 WITH b AS (
@@ -5708,16 +5720,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.nlb.si/en/osebno/digitalne-storitve/nlb-klik'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.nlb.si/open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.nlb.si/en/osebno/accounts-and-packages'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.nlb.si/contact'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.nlb.si/careers')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 318. ABANCA — score 60
 WITH b AS (
@@ -5726,16 +5738,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.abanca.com/en/banca-a-distancia/banca-movil/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.abanca.com/es/legal/servicios-pago/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.abanca.com/en/cuentas/cuenta-online/'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.abanca.com/es/ayuda/'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://empleo.abanca.com/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 319. Caixa Ontinyent — score 20
 WITH b AS (
@@ -5744,16 +5756,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://apps.apple.com/es/app/caixa-ontinyent/id891691116?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.caixaontinyent.es'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 320. Caixa Pollença (Colonya) — score 7
 WITH b AS (
@@ -5762,16 +5774,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.colonya.es'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 321. CaixaBank — score 93
 WITH b AS (
@@ -5780,16 +5792,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.caixabank.es/particular/tarjetas/google-pay_en.html'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://apistore.caixabank.com/home_en.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'advanced', 'https://www.caixabank.es/particular/cuentas/cuenta-sin-comisiones.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'intermediate', 'https://www.caixabank.com/comunicacion/noticia/caixabank-crea-un-asistente-virtual-basado-en-inteligencia-artificial-para-dar-apoyo-a-todos-los-empleados-de-su-red_es.html?id=40809'),
   ((SELECT id FROM b), 'devops_cloud', true, 'advanced', 'https://www.caixabanktech.com/en/join-us/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 322. Caja Rural de Navarra — score 47
 WITH b AS (
@@ -5798,16 +5810,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.cajaruraldenavarra.com/en/node/4431'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cajaruraldenavarra.com/es/informacion-psd2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.cajaruraldenavarra.com/es/particulares/cuentas'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.cajaruraldenavarra.com/es/recomienda-talento')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 323. Cajamar Caja Rural — score 47
 WITH b AS (
@@ -5816,16 +5828,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.cajamar.es/en/particulares/productos-y-servicios/banca-a-distancia/banca-movil/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cajamar.es/en/comun/psd2/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.cajamar.es/en/particulares/productos-y-servicios/cuentas/pack-wefferent/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.cajamar.es/es/comun/informacion-corporativa/empleo/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 324. Cecabank — score 13
 WITH b AS (
@@ -5834,16 +5846,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'basic', 'https://apps.apple.com/es/app/cecabank/id592430215?uo=4'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.cecabank.es'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 325. Ibercaja Banco — score 53
 WITH b AS (
@@ -5852,16 +5864,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.ibercaja.es/particulares/banca-digital/servicios/app-ibercaja/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ibercaja.es/particulares/corner-del-especialista/informacion-psd2/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.ibercaja.es/particulares/cuentas-tarjetas/cuentas-ahorro/cuenta-com/'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.ibercaja.es/particulares/atencion-cliente/'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://empleo.ibercaja.es/ofertas-de-empleo/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 326. Kutxabank — score 60
 WITH b AS (
@@ -5870,16 +5882,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/productos/banca-omnicanal/banca-movil-/pys'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/sobre-kutxabank/psd2/generico'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/cuentas-y-planes-0/cuenta-corriente/pys'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/servicio-atencion-al-cliente-/generico'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://portal.kutxabank.es/cs/Satellite/kb/es/particulares/sobre-kutxa/quienes-somos-3')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 327. Laboral Kutxa — score 47
 WITH b AS (
@@ -5888,16 +5900,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.laboralkutxa.com/es/personas/servicios/banca-online/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.laboralkutxa.com/es/informacion-legal/informacion-apis/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.laboralkutxa.com/es/particulares/ahorro/cuentas-y-depositos'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.laboralkutxa.com/es/personas/trabaja-con-nosotros/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 328. Unicaja Banco — score 53
 WITH b AS (
@@ -5906,16 +5918,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.unicajabanco.es/en/banca-digital'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.unicajabanco.es/es/faqs/banca-digital/psd2'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.unicajabanco.es/en/cuenta-online'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.unicajabanco.es/en/atencion-al-cliente'),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://joven.unicajabanco.es/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 329. Ålems Sparbank — score 7
 WITH b AS (
@@ -5924,16 +5936,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.alemssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 330. Åse Viste Sparbank — score 40
 WITH b AS (
@@ -5942,16 +5954,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'intermediate', 'https://www.avsparbank.se/privat/digitala-tjanster/vara-appar.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.aseochvisteharadssparbank.se/privat/kort-och-betala/psd2/vanliga-fragor-och-svar-psd2.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.aseochvisteharadssparbank.se/privat/bli-kund.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.avsparbank.se/privat/kundservice-privat.html'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 331. Bjursås Sparbank — score 7
 WITH b AS (
@@ -5960,16 +5972,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.bjursassparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 332. Dalslands Sparbank — score 7
 WITH b AS (
@@ -5978,16 +5990,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.dalsbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 333. Ekeby Sparbank — score 7
 WITH b AS (
@@ -5996,16 +6008,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ekebysparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 334. Falkenbergs Sparbank — score 7
 WITH b AS (
@@ -6014,16 +6026,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.falkenbergssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 335. Fryksdalens Sparbank — score 7
 WITH b AS (
@@ -6032,16 +6044,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.fryksdalenssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 336. Hälsinglands Sparbank — score 7
 WITH b AS (
@@ -6050,16 +6062,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.halsinglandssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 337. Häradssparbanken Mönsterås — score 7
 WITH b AS (
@@ -6068,16 +6080,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.haradssparbanken.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 338. Högsby Sparbank — score 7
 WITH b AS (
@@ -6086,16 +6098,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.hogsbysparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 339. Ivetofta Sparbank i Bromölla — score 7
 WITH b AS (
@@ -6104,16 +6116,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ivetoftasparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 340. Kinda Ydre Sparbank — score 7
 WITH b AS (
@@ -6122,16 +6134,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.kindaydresparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 341. Laholms Sparbank — score 7
 WITH b AS (
@@ -6140,16 +6152,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.laholmssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 342. Lansforsakringar Bank — score 47
 WITH b AS (
@@ -6158,16 +6170,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.lansforsakringar.se/stockholm/privat/bank/appen/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.lansforsakringar.se/stockholm/om-oss/psd2/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.lansforsakringar.se/stockholm/privat/bank/bli-bankkund/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.lansforsakringar.se/stockholm/om-oss/jobba-hos-oss/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 343. Lekebergs Sparbank — score 7
 WITH b AS (
@@ -6176,16 +6188,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.lekebergssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 344. Leksands Sparbank — score 13
 WITH b AS (
@@ -6194,16 +6206,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.leksandssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'basic', 'https://www.leksandssparbank.se'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 345. Lönneberga-Tuna-Vena Sparbank — score 7
 WITH b AS (
@@ -6212,16 +6224,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ltvsparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 346. Markaryds Sparbank — score 7
 WITH b AS (
@@ -6230,16 +6242,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.markarydssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 347. Mjöbäcks Sparbank — score 7
 WITH b AS (
@@ -6248,16 +6260,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.mjobackssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 348. Norrbärke Sparbank — score 7
 WITH b AS (
@@ -6266,16 +6278,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.norrbarke-sparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 349. Ölands Bank — score 7
 WITH b AS (
@@ -6284,16 +6296,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.olandsbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 350. Orusts Sparbank — score 7
 WITH b AS (
@@ -6302,16 +6314,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.orustsparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 351. Roslagens Sparbank — score 7
 WITH b AS (
@@ -6320,16 +6332,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.roslagenssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 352. Sala Sparbank — score 7
 WITH b AS (
@@ -6338,16 +6350,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.salasparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 353. Sidensjö Sparbank — score 7
 WITH b AS (
@@ -6356,16 +6368,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sidensjosparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 354. Skurups Sparbank — score 7
 WITH b AS (
@@ -6374,16 +6386,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.skurupssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 355. Snapphanebygdens Sparbank — score 7
 WITH b AS (
@@ -6392,16 +6404,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.snapphanebygdenssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 356. Södra Hestra Sparbank — score 7
 WITH b AS (
@@ -6410,16 +6422,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sodrahestrasparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 357. Sölvesborg-Mjällby Sparbank — score 7
 WITH b AS (
@@ -6428,16 +6440,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.smsparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 358. Sörmlands Sparbank — score 7
 WITH b AS (
@@ -6446,16 +6458,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sormlandssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 359. Sparbanken Alingsås — score 7
 WITH b AS (
@@ -6464,16 +6476,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenalingsas.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 360. Sparbanken Bergslagen — score 7
 WITH b AS (
@@ -6482,16 +6494,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenbergslagen.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 361. Sparbanken Boken — score 7
 WITH b AS (
@@ -6500,16 +6512,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenboken.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 362. Sparbanken Eken — score 7
 WITH b AS (
@@ -6518,16 +6530,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankeneken.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 363. Sparbanken Göinge — score 13
 WITH b AS (
@@ -6536,16 +6548,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankengoinge.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.sparbankengoinge.se'),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 364. Sparbanken Gotland — score 7
 WITH b AS (
@@ -6554,16 +6566,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankengotland.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 365. Sparbanken i Enköping — score 7
 WITH b AS (
@@ -6572,16 +6584,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenenkoping.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 366. Sparbanken i Karlshamn — score 7
 WITH b AS (
@@ -6590,16 +6602,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenikarlshamn.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 367. Sparbanken Lidköping — score 7
 WITH b AS (
@@ -6608,16 +6620,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenlidkoping.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 368. Sparbanken Mälardalen — score 7
 WITH b AS (
@@ -6626,16 +6638,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenmalardalen.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 369. Sparbanken Nord — score 7
 WITH b AS (
@@ -6644,16 +6656,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankennord.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 370. Sparbanken Sjuhärad — score 7
 WITH b AS (
@@ -6662,16 +6674,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://sparbankensjuharad.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 371. Sparbanken Skåne — score 7
 WITH b AS (
@@ -6680,16 +6692,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenskane.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 372. Sparbanken Skaraborg — score 7
 WITH b AS (
@@ -6698,16 +6710,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankenskaraborg.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 373. Sparbanken Spira — score 7
 WITH b AS (
@@ -6716,16 +6728,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.tjustbanken.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 374. Sparbanken Tanum — score 7
 WITH b AS (
@@ -6734,16 +6746,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankentanum.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 375. Sparbanken Tranemo — score 7
 WITH b AS (
@@ -6752,16 +6764,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.sparbankentranemo.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 376. Swedbank and Savings Banks — score 73
 WITH b AS (
@@ -6770,16 +6782,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.swedbank.se/privat/digitala-tjanster/vara-appar.html'),
   ((SELECT id FROM b), 'open_banking', true, 'advanced', 'https://developer.swedbank.com'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.swedbank.se/privat/bli-kund.html'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.swedbank.se/privat/kundservice-privat.html'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://developer.swedbank.com')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 377. Tidaholms Sparbank — score 7
 WITH b AS (
@@ -6788,16 +6800,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.tidaholms-sparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 378. Tjörns Sparbank — score 7
 WITH b AS (
@@ -6806,16 +6818,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.tjorns-sparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 379. Ulricehamns Sparbank — score 7
 WITH b AS (
@@ -6824,16 +6836,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ulricehamnssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 380. Vadstena Sparbank — score 7
 WITH b AS (
@@ -6842,16 +6854,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.vadstenasparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 381. Valdemarsviks Sparbank — score 7
 WITH b AS (
@@ -6860,16 +6872,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.valdemarsvikssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 382. Varbergs Sparbank — score 7
 WITH b AS (
@@ -6878,16 +6890,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.varbergssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 383. Vimmerby Sparbank — score 7
 WITH b AS (
@@ -6896,16 +6908,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.vimmerbysparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 384. Virserums Sparbank — score 7
 WITH b AS (
@@ -6914,16 +6926,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.virserumssparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 385. Westra Wermlands Sparbank — score 7
 WITH b AS (
@@ -6932,16 +6944,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', false, 'none', NULL),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.wwsparbank.se'),
   ((SELECT id FROM b), 'digital_onboarding', false, 'none', NULL),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', false, 'none', NULL)
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 386. Raiffeisen Switzerland — score 47
 WITH b AS (
@@ -6950,16 +6962,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, parent_group = EXCLUDED.parent_group, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://ebanking.raiffeisen.ch/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.raiffeisen.ch/rch/en/about-raiffeisen/downloads/legal-notices.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.raiffeisen.ch/rch/en/private-customers/accounts-and-packages.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://jobs.raiffeisen.ch/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 387. Coventry Building Society — score 47
 WITH b AS (
@@ -6968,16 +6980,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.coventrybuildingsociety.co.uk/member/help/managing-your-money/app/features.html'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.coventrybuildingsociety.co.uk/member/help/savings/open-banking.html'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.coventrybuildingsociety.co.uk/member/help/savings/opening-an-account.html'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.coventrycareers.co.uk/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 388. Leeds Building Society — score 47
 WITH b AS (
@@ -6986,16 +6998,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.leedsbuildingsociety.co.uk/online-services/registering-for-online-services/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.leedsbuildingsociety.co.uk/legal/open-banking/'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.leedsbuildingsociety.co.uk/savings/online-savings-accounts/'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.leedsbuildingsocietyjobs.co.uk/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 389. Nationwide Building Society — score 60
 WITH b AS (
@@ -7004,16 +7016,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.nationwide.co.uk/ways-to-bank/banking-app/'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://developer.nationwide.co.uk/open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.nationwide.co.uk/current-accounts/flexaccount/'),
   ((SELECT id FROM b), 'ai_chatbot', true, 'basic', 'https://www.nationwide.co.uk/contact-us/how-arti-can-help-you'),
   ((SELECT id FROM b), 'devops_cloud', true, 'intermediate', 'https://www.nationwide-jobs.co.uk/technology')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 390. Principality Building Society — score 47
 WITH b AS (
@@ -7022,16 +7034,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.principality.co.uk/home/your-account'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.principality.co.uk/home/open-banking-policy'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.principality.co.uk/home/savings/savings-accounts/online-easy-access'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://www.principality.co.uk/home/about-us/working-for-principality')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 391. Skipton Building Society — score 47
 WITH b AS (
@@ -7040,16 +7052,16 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.skipton.co.uk/help-and-support/our-app-and-skipton-online'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.skipton.co.uk/open-banking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.skipton.co.uk/mortgages/first-time-buyers/track-record-mortgage'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://careers.skipton.co.uk/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
 
 -- 392. Yorkshire Building Society — score 47
 WITH b AS (
@@ -7058,13 +7070,13 @@ WITH b AS (
   ON CONFLICT (name) DO UPDATE SET country = EXCLUDED.country, country_code = EXCLUDED.country_code, city = EXCLUDED.city, address = EXCLUDED.address, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, website = EXCLUDED.website, founded_year = EXCLUDED.founded_year, total_assets = EXCLUDED.total_assets, customer_count = EXCLUDED.customer_count, deposit_volume = EXCLUDED.deposit_volume, loan_volume = EXCLUDED.loan_volume, employee_count = EXCLUDED.employee_count, branch_count = EXCLUDED.branch_count, reporting_year = EXCLUDED.reporting_year, digital_score = EXCLUDED.digital_score, status = EXCLUDED.status, featured = EXCLUDED.featured
   RETURNING id
 )
+, d AS (
+  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)
+)
 INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES
   ((SELECT id FROM b), 'mobile_banking', true, 'advanced', 'https://www.ybs.co.uk/app'),
   ((SELECT id FROM b), 'open_banking', true, 'basic', 'https://www.ybs.co.uk/openbanking'),
   ((SELECT id FROM b), 'digital_onboarding', true, 'intermediate', 'https://www.ybs.co.uk/my-money/current-account-vs-savings-account'),
   ((SELECT id FROM b), 'ai_chatbot', false, 'none', NULL),
   ((SELECT id FROM b), 'devops_cloud', true, 'basic', 'https://ybscareers.co.uk/')
-ON CONFLICT (bank_id, category) DO UPDATE SET
-  present = EXCLUDED.present,
-  maturity_level = EXCLUDED.maturity_level,
-  evidence_url = EXCLUDED.evidence_url;
+;
