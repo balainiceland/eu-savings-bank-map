@@ -133,6 +133,20 @@ const ID_MAP = {
 // Skip duplicate entries
 const SKIP_NAMES = new Set(['de Volksbank (SNS)']);
 
+// ─── Auto-ID Generation ──────────────────────────────────────────────────
+function generateBankId(name, countryCode) {
+  // Check ID_MAP first for backward compat
+  if (ID_MAP[name]) return ID_MAP[name];
+
+  // Strip diacritics, lowercase, replace non-alnum with hyphens, prepend country code
+  const slug = name
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return `${countryCode.toLowerCase()}-${slug}`;
+}
+
 // ─── Retained banks (in existing data but NOT in CSV) ──────────────────────
 const RETAINED_BANKS = [
   {
@@ -232,11 +246,7 @@ function main() {
       continue;
     }
 
-    const id = ID_MAP[row.name];
-    if (!id) {
-      console.warn(`  WARNING: No ID mapping for "${row.name}" — skipping`);
-      continue;
-    }
+    const id = generateBankId(row.name, row.country_code);
 
     const levels = [
       row.mobile_banking || 'none',

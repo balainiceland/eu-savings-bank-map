@@ -1,0 +1,998 @@
+{
+  "aachen, germany": {
+    "lat": 50.776351,
+    "lng": 6.083862
+  },
+  "aalen, germany": {
+    "lat": 48.8375607,
+    "lng": 10.0929593
+  },
+  "ahaus, germany": {
+    "lat": 52.0761541,
+    "lng": 7.004876
+  },
+  "aichach, germany": {
+    "lat": 48.4591478,
+    "lng": 11.1309953
+  },
+  "altenburg, germany": {
+    "lat": 50.9852411,
+    "lng": 12.4340988
+  },
+  "amberg, germany": {
+    "lat": 49.4543662,
+    "lng": 11.8474021
+  },
+  "annaberg-buchholz, germany": {
+    "lat": 50.5788781,
+    "lng": 13.0106108
+  },
+  "ansbach, germany": {
+    "lat": 49.2888745,
+    "lng": 10.5597693
+  },
+  "aschaffenburg/miltenberg, germany": {
+    "lat": 49.9794964,
+    "lng": 9.145168
+  },
+  "attendorn, germany": {
+    "lat": 51.1250541,
+    "lng": 7.9010992
+  },
+  "augsburg, germany": {
+    "lat": 48.3690341,
+    "lng": 10.8979522
+  },
+  "aurich/norden, germany": {
+    "lat": 53.6270653,
+    "lng": 7.1629737
+  },
+  "bad dürkheim, germany": {
+    "lat": 49.4632944,
+    "lng": 8.1705063
+  },
+  "bad hersfeld, germany": {
+    "lat": 50.8604177,
+    "lng": 9.6767709
+  },
+  "bad homburg vor der höhe, germany": {
+    "lat": 50.2283803,
+    "lng": 8.6130128
+  },
+  "bad kissingen, germany": {
+    "lat": 50.1999412,
+    "lng": 10.0767379
+  },
+  "bad kreuznach, germany": {
+    "lat": 49.8152421,
+    "lng": 7.9123692
+  },
+  "bad marienberg, germany": {
+    "lat": 50.6500761,
+    "lng": 7.948217
+  },
+  "bad neuenahr-ahrweiler, germany": {
+    "lat": 50.5444551,
+    "lng": 7.1186671
+  },
+  "bad neustadt an der saale, germany": {
+    "lat": 50.322637,
+    "lng": 10.2164873
+  },
+  "bad oeynhausen, germany": {
+    "lat": 52.2014399,
+    "lng": 8.7981244
+  },
+  "bad oldesloe, germany": {
+    "lat": 53.8096562,
+    "lng": 10.3733692
+  },
+  "bad pyrmont, germany": {
+    "lat": 51.9850503,
+    "lng": 9.2434635
+  },
+  "bad reichenhall, germany": {
+    "lat": 47.7222676,
+    "lng": 12.8760923
+  },
+  "bad tölz, germany": {
+    "lat": 47.7610013,
+    "lng": 11.559607
+  },
+  "baden-baden, germany": {
+    "lat": 48.7610716,
+    "lng": 8.239959
+  },
+  "dresden, germany": {
+    "lat": 51.0493286,
+    "lng": 13.7381437
+  },
+  "dortmund, germany": {
+    "lat": 51.5142273,
+    "lng": 7.4652789
+  },
+  "duisburg, germany": {
+    "lat": 51.434999,
+    "lng": 6.759562
+  },
+  "düsseldorf, germany": {
+    "lat": 51.2254018,
+    "lng": 6.7763137
+  },
+  "frankfurt (oder), germany": {
+    "lat": 52.3412273,
+    "lng": 14.549452
+  },
+  "freiberg, germany": {
+    "lat": 50.9169415,
+    "lng": 13.3428889
+  },
+  "freiburg im breisgau, germany": {
+    "lat": 47.9960901,
+    "lng": 7.8494005
+  },
+  "freising, germany": {
+    "lat": 48.4008273,
+    "lng": 11.7439565
+  },
+  "freudenstadt, germany": {
+    "lat": 48.4637727,
+    "lng": 8.4111727
+  },
+  "friedberg (hessen), germany": {
+    "lat": 50.328272,
+    "lng": 8.747636
+  },
+  "fulda, germany": {
+    "lat": 50.5542328,
+    "lng": 9.6770448
+  },
+  "fürth, germany": {
+    "lat": 49.4885711,
+    "lng": 10.9587203
+  },
+  "gelsenkirchen, germany": {
+    "lat": 51.5110321,
+    "lng": 7.0960124
+  },
+  "gevelsberg, germany": {
+    "lat": 51.3207417,
+    "lng": 7.3404792
+  },
+  "kaiserslautern, germany": {
+    "lat": 49.4432174,
+    "lng": 7.7689951
+  },
+  "karlsruhe, germany": {
+    "lat": 49.0068705,
+    "lng": 8.4034195
+  },
+  "kassel, germany": {
+    "lat": 51.3157833,
+    "lng": 9.4978479
+  },
+  "kiel, germany": {
+    "lat": 54.3227085,
+    "lng": 10.135555
+  },
+  "köln, germany": {
+    "lat": 50.938361,
+    "lng": 6.959974
+  },
+  "krefeld, germany": {
+    "lat": 51.3331205,
+    "lng": 6.5623343
+  },
+  "leverkusen, germany": {
+    "lat": 51.0324743,
+    "lng": 6.9881194
+  },
+  "limburg an der lahn, germany": {
+    "lat": 50.3880447,
+    "lng": 8.063531
+  },
+  "lörrach, germany": {
+    "lat": 47.6120896,
+    "lng": 7.6607218
+  },
+  "ludwigsburg, germany": {
+    "lat": 48.8953937,
+    "lng": 9.1895147
+  },
+  "lüneburg, germany": {
+    "lat": 53.248706,
+    "lng": 10.407855
+  },
+  "magdeburg, germany": {
+    "lat": 52.1314783,
+    "lng": 11.6400789
+  },
+  "mainz, germany": {
+    "lat": 49.9995205,
+    "lng": 8.2736253
+  },
+  "mannheim, germany": {
+    "lat": 49.4892913,
+    "lng": 8.4673098
+  },
+  "marburg, germany": {
+    "lat": 50.8090106,
+    "lng": 8.7704695
+  },
+  "passau, germany": {
+    "lat": 48.5748229,
+    "lng": 13.4609744
+  },
+  "pforzheim, germany": {
+    "lat": 48.890934,
+    "lng": 8.7025509
+  },
+  "prenzlau, germany": {
+    "lat": 53.3167,
+    "lng": 13.866575
+  },
+  "potsdam, germany": {
+    "lat": 52.4009309,
+    "lng": 13.0591397
+  },
+  "saarbrücken, germany": {
+    "lat": 49.234362,
+    "lng": 6.996379
+  },
+  "saarlouis, germany": {
+    "lat": 49.3164661,
+    "lng": 6.749846
+  },
+  "schwedt/oder, germany": {
+    "lat": 53.0586366,
+    "lng": 14.2840858
+  },
+  "schweinfurt, germany": {
+    "lat": 50.0499318,
+    "lng": 10.2335087
+  },
+  "schwerin, germany": {
+    "lat": 53.6288297,
+    "lng": 11.4148038
+  },
+  "siegen, germany": {
+    "lat": 50.8751175,
+    "lng": 8.0256131
+  },
+  "sigmaringen, germany": {
+    "lat": 48.0869139,
+    "lng": 9.2165039
+  },
+  "singen, germany": {
+    "lat": 47.7617515,
+    "lng": 8.8348709
+  },
+  "solingen, germany": {
+    "lat": 51.1721629,
+    "lng": 7.0845893
+  },
+  "sonneberg, germany": {
+    "lat": 50.3575412,
+    "lng": 11.1691714
+  },
+  "stade, germany": {
+    "lat": 53.599794,
+    "lng": 9.475438
+  },
+  "straubing, germany": {
+    "lat": 48.8839157,
+    "lng": 12.5955773
+  },
+  "strausberg, germany": {
+    "lat": 52.5588942,
+    "lng": 13.9042481
+  },
+  "syke, germany": {
+    "lat": 52.9131332,
+    "lng": 8.8198737
+  },
+  "traunstein, germany": {
+    "lat": 47.8695272,
+    "lng": 12.6484621
+  },
+  "trier, germany": {
+    "lat": 49.7596208,
+    "lng": 6.6441878
+  },
+  "tübingen, germany": {
+    "lat": 48.5203263,
+    "lng": 9.053596
+  },
+  "ulm, germany": {
+    "lat": 48.3984968,
+    "lng": 9.9912458
+  },
+  "velbert, germany": {
+    "lat": 51.3406713,
+    "lng": 7.0439912
+  },
+  "verden (aller), germany": {
+    "lat": 52.9410676,
+    "lng": 9.2354716
+  },
+  "villingen-schwenningen, germany": {
+    "lat": 48.063152,
+    "lng": 8.4929618
+  },
+  "waiblingen, germany": {
+    "lat": 48.8325659,
+    "lng": 9.3163822
+  },
+  "waldshut-tiengen, germany": {
+    "lat": 47.6281754,
+    "lng": 8.2408579
+  },
+  "waren (müritz), germany": {
+    "lat": 53.5156249,
+    "lng": 12.6850606
+  },
+  "weiden in der oberpfalz, germany": {
+    "lat": 49.6752749,
+    "lng": 12.1631636
+  },
+  "wiesbaden, germany": {
+    "lat": 50.0820384,
+    "lng": 8.2416556
+  },
+  "wismar, germany": {
+    "lat": 53.8909832,
+    "lng": 11.4647932
+  },
+  "wuppertal, germany": {
+    "lat": 51.264018,
+    "lng": 7.1780374
+  },
+  "würzburg, germany": {
+    "lat": 49.7933723,
+    "lng": 9.9309779
+  },
+  "zeitz, germany": {
+    "lat": 51.0491637,
+    "lng": 12.1349991
+  },
+  "zeven, germany": {
+    "lat": 53.2954396,
+    "lng": 9.2816165
+  },
+  "zittau, germany": {
+    "lat": 50.8960964,
+    "lng": 14.8064807
+  },
+  "zwickau, germany": {
+    "lat": 50.7185043,
+    "lng": 12.4939267
+  },
+  "ontinyent, spain": {
+    "lat": 38.8208523,
+    "lng": -0.6099929
+  },
+  "pollença, spain": {
+    "lat": 39.8792073,
+    "lng": 3.0157098
+  },
+  "madrid, spain": {
+    "lat": 40.416782,
+    "lng": -3.703507
+  },
+  "tonsberg, norway": {
+    "lat": 59.3549795,
+    "lng": 10.2820491
+  },
+  "honefoss, norway": {
+    "lat": 60.1662082,
+    "lng": 10.255486
+  },
+  "gol, norway": {
+    "lat": 60.7513391,
+    "lng": 9.0123018
+  },
+  "vikersund, norway": {
+    "lat": 59.9660881,
+    "lng": 9.994865
+  },
+  "arendal, norway": {
+    "lat": 58.4267301,
+    "lng": 8.9469491
+  },
+  "skien, norway": {
+    "lat": 59.2662883,
+    "lng": 9.5311354
+  },
+  "kristiansund, norway": {
+    "lat": 63.2168194,
+    "lng": 7.545259
+  },
+  "mo i rana, norway": {
+    "lat": 66.3110969,
+    "lng": 14.1386991
+  },
+  "lom, norway": {
+    "lat": 61.7142578,
+    "lng": 8.4258977
+  },
+  "lillehammer, norway": {
+    "lat": 61.1333408,
+    "lng": 10.4265855
+  },
+  "notodden, norway": {
+    "lat": 59.6871024,
+    "lng": 9.1508082
+  },
+  "aurskog, norway": {
+    "lat": 59.9270067,
+    "lng": 11.4681016
+  },
+  "drammen, norway": {
+    "lat": 59.6964936,
+    "lng": 10.175642
+  },
+  "oslo, norway": {
+    "lat": 59.9133301,
+    "lng": 10.7389701
+  },
+  "drangedal, norway": {
+    "lat": 59.0908937,
+    "lng": 8.9687835
+  },
+  "mysen, norway": {
+    "lat": 59.5537833,
+    "lng": 11.3240316
+  },
+  "etne, norway": {
+    "lat": 59.7985899,
+    "lng": 6.294995
+  },
+  "flekkefjord, norway": {
+    "lat": 58.2949357,
+    "lng": 6.6129626
+  },
+  "kirkenær, norway": {
+    "lat": 60.4563259,
+    "lng": 12.0607394
+  },
+  "haltdalen, norway": {
+    "lat": 62.926567,
+    "lng": 11.1409006
+  },
+  "hjartdal, norway": {
+    "lat": 59.6930294,
+    "lng": 8.690956
+  },
+  "laerdal, norway": {
+    "lat": 61.0386134,
+    "lng": 7.8032867
+  },
+  "bryne, norway": {
+    "lat": 58.735525,
+    "lng": 5.6478183
+  },
+  "kvinesdal, norway": {
+    "lat": 58.5181307,
+    "lng": 6.953961
+  },
+  "lillesand, norway": {
+    "lat": 58.1161123,
+    "lng": 8.4403257
+  },
+  "gaupne, norway": {
+    "lat": 61.4046801,
+    "lng": 7.2945685
+  },
+  "orje, norway": {
+    "lat": 59.480231,
+    "lng": 11.6601637
+  },
+  "melhus, norway": {
+    "lat": 63.1814332,
+    "lng": 10.3081345
+  },
+  "sand, norway": {
+    "lat": 60.3921461,
+    "lng": 11.5402005
+  },
+  "narvik, norway": {
+    "lat": 68.4383796,
+    "lng": 17.4271978
+  },
+  "orkanger, norway": {
+    "lat": 63.304819,
+    "lng": 9.8496676
+  },
+  "molde, norway": {
+    "lat": 62.6016257,
+    "lng": 8.1386208
+  },
+  "sandnes, norway": {
+    "lat": 58.983132,
+    "lng": 6.394641
+  },
+  "selbu, norway": {
+    "lat": 63.1754254,
+    "lng": 11.1596265
+  },
+  "kragero, norway": {
+    "lat": 58.8696217,
+    "lng": 9.4142145
+  },
+  "skudeneshavn, norway": {
+    "lat": 59.1497472,
+    "lng": 5.2581715
+  },
+  "stadsbygd, norway": {
+    "lat": 63.5106988,
+    "lng": 10.0168051
+  },
+  "sunndalsora, norway": {
+    "lat": 62.6565786,
+    "lng": 8.6853825
+  },
+  "tolga, norway": {
+    "lat": 62.3718777,
+    "lng": 11.0704637
+  },
+  "lena, norway": {
+    "lat": 60.6739717,
+    "lng": 10.8134458
+  },
+  "tysnes, norway": {
+    "lat": 59.9840352,
+    "lng": 5.5580336
+  },
+  "valle, norway": {
+    "lat": 59.1690716,
+    "lng": 7.4247694
+  },
+  "voss, norway": {
+    "lat": 60.6837067,
+    "lng": 6.4079051
+  },
+  "mosjoen, norway": {
+    "lat": 65.8375342,
+    "lng": 13.1892098
+  },
+  "forde, norway": {
+    "lat": 61.4521759,
+    "lng": 5.8571725
+  },
+  "aalesund, norway": {
+    "lat": 62.465599,
+    "lng": 6.250846
+  },
+  "bergen, norway": {
+    "lat": 60.3943055,
+    "lng": 5.3259192
+  },
+  "haugesund, norway": {
+    "lat": 59.4682479,
+    "lng": 5.0827612
+  },
+  "klagenfurt, austria": {
+    "lat": 46.623943,
+    "lng": 14.3075976
+  },
+  "amstetten, austria": {
+    "lat": 48.1203262,
+    "lng": 14.8752424
+  },
+  "baden, austria": {
+    "lat": 48.0076713,
+    "lng": 16.2343693
+  },
+  "hainburg an der donau, austria": {
+    "lat": 48.1466103,
+    "lng": 16.9422459
+  },
+  "horn, austria": {
+    "lat": 48.6636596,
+    "lng": 15.6563147
+  },
+  "korneuburg, austria": {
+    "lat": 48.3440605,
+    "lng": 16.3334321
+  },
+  "krems an der donau, austria": {
+    "lat": 48.4108382,
+    "lng": 15.6003717
+  },
+  "neunkirchen, austria": {
+    "lat": 47.7221147,
+    "lng": 16.081602
+  },
+  "sankt polten, austria": {
+    "lat": 48.2043985,
+    "lng": 15.6229118
+  },
+  "waidhofen an der thaya, austria": {
+    "lat": 48.8146165,
+    "lng": 15.284518
+  },
+  "wiener neustadt, austria": {
+    "lat": 47.8131847,
+    "lng": 16.2441166
+  },
+  "linz, austria": {
+    "lat": 48.3059078,
+    "lng": 14.286198
+  },
+  "bad ischl, austria": {
+    "lat": 47.7115299,
+    "lng": 13.6239333
+  },
+  "eferding, austria": {
+    "lat": 48.3082607,
+    "lng": 14.0203999
+  },
+  "kirchdorf an der krems, austria": {
+    "lat": 47.905194,
+    "lng": 14.1244169
+  },
+  "rohrbach, austria": {
+    "lat": 48.5723052,
+    "lng": 13.9908156
+  },
+  "salzburg, austria": {
+    "lat": 47.7981346,
+    "lng": 13.0464806
+  },
+  "graz, austria": {
+    "lat": 47.0708678,
+    "lng": 15.4382786
+  },
+  "hartberg, austria": {
+    "lat": 47.2809371,
+    "lng": 15.9691769
+  },
+  "innsbruck, austria": {
+    "lat": 47.2654296,
+    "lng": 11.3927685
+  },
+  "imst, austria": {
+    "lat": 47.2381536,
+    "lng": 10.7406982
+  },
+  "kitzbuhel, austria": {
+    "lat": 47.4463585,
+    "lng": 12.3911473
+  },
+  "kufstein, austria": {
+    "lat": 47.582996,
+    "lng": 12.1692134
+  },
+  "lienz, austria": {
+    "lat": 46.8298662,
+    "lng": 12.7681269
+  },
+  "schwaz, austria": {
+    "lat": 47.3449529,
+    "lng": 11.7084253
+  },
+  "reutte, austria": {
+    "lat": 47.4891092,
+    "lng": 10.7187955
+  },
+  "bludenz, austria": {
+    "lat": 47.153037,
+    "lng": 9.8219314
+  },
+  "bregenz, austria": {
+    "lat": 47.5025779,
+    "lng": 9.7472924
+  },
+  "dornbirn, austria": {
+    "lat": 47.4136351,
+    "lng": 9.7423762
+  },
+  "feldkirch, austria": {
+    "lat": 47.2375671,
+    "lng": 9.5981724
+  },
+  "paris, france": {
+    "lat": 48.8588897,
+    "lng": 2.320041
+  },
+  "saint-etienne, france": {
+    "lat": 45.4401467,
+    "lng": 4.3873058
+  },
+  "lyon, france": {
+    "lat": 45.7578137,
+    "lng": 4.8320114
+  },
+  "nice, france": {
+    "lat": 43.7009358,
+    "lng": 7.2683912
+  },
+  "bordeaux, france": {
+    "lat": 44.841225,
+    "lng": -0.5800364
+  },
+  "strasbourg, france": {
+    "lat": 48.584614,
+    "lng": 7.7507127
+  },
+  "lille, france": {
+    "lat": 50.6365654,
+    "lng": 3.0635282
+  },
+  "rouen, france": {
+    "lat": 49.4404591,
+    "lng": 1.0939658
+  },
+  "toulouse, france": {
+    "lat": 43.6044638,
+    "lng": 1.4442433
+  },
+  "marseille, france": {
+    "lat": 43.2961743,
+    "lng": 5.3699525
+  },
+  "montpellier, france": {
+    "lat": 43.6112422,
+    "lng": 3.8767337
+  },
+  "rennes, france": {
+    "lat": 48.1113387,
+    "lng": -1.6800198
+  },
+  "dijon, france": {
+    "lat": 47.3215806,
+    "lng": 5.0414701
+  },
+  "clermont-ferrand, france": {
+    "lat": 45.7774551,
+    "lng": 3.0819427
+  },
+  "orleans, france": {
+    "lat": 47.9027336,
+    "lng": 1.9086066
+  },
+  "tampere, finland": {
+    "lat": 61.4977929,
+    "lng": 23.7616372
+  },
+  "kauhava, finland": {
+    "lat": 63.0993728,
+    "lng": 23.0569547
+  },
+  "lahti, finland": {
+    "lat": 60.982628,
+    "lng": 25.6613418
+  },
+  "hameenlinna, finland": {
+    "lat": 60.9966192,
+    "lng": 24.465141
+  },
+  "lohja, finland": {
+    "lat": 60.2512041,
+    "lng": 24.0676953
+  },
+  "myrskyla, finland": {
+    "lat": 60.6702833,
+    "lng": 25.8513925
+  },
+  "helsinki, finland": {
+    "lat": 60.1666204,
+    "lng": 24.9435408
+  },
+  "somero, finland": {
+    "lat": 60.6299165,
+    "lng": 23.5139982
+  },
+  "iisalmi, finland": {
+    "lat": 63.5588594,
+    "lng": 27.1909622
+  },
+  "orivesi, finland": {
+    "lat": 61.6775495,
+    "lng": 24.3587506
+  },
+  "bolzano, italy": {
+    "lat": 46.6559455,
+    "lng": 11.2302129
+  },
+  "ravenna, italy": {
+    "lat": 44.3640607,
+    "lng": 12.0590095
+  },
+  "volterra, italy": {
+    "lat": 43.400337,
+    "lng": 10.860019
+  },
+  "cento, italy": {
+    "lat": 44.7274395,
+    "lng": 11.2903029
+  },
+  "fermo, italy": {
+    "lat": 43.0922489,
+    "lng": 13.6387681
+  },
+  "fossano, italy": {
+    "lat": 44.5493489,
+    "lng": 7.7250155
+  },
+  "savigliano, italy": {
+    "lat": 44.644037,
+    "lng": 7.655929
+  },
+  "orvieto, italy": {
+    "lat": 42.7186152,
+    "lng": 12.1087907
+  },
+  "sassari, italy": {
+    "lat": 40.7234746,
+    "lng": 8.5612674
+  },
+  "matino, italy": {
+    "lat": 40.0325103,
+    "lng": 18.1338533
+  },
+  "lajatico, italy": {
+    "lat": 43.4754178,
+    "lng": 10.7282838
+  },
+  "cortona, italy": {
+    "lat": 43.2752976,
+    "lng": 11.9850623
+  },
+  "frosinone, italy": {
+    "lat": 41.6285468,
+    "lng": 13.5758498
+  },
+  "torre del greco, italy": {
+    "lat": 40.7879211,
+    "lng": 14.3682813
+  },
+  "velletri, italy": {
+    "lat": 41.6867015,
+    "lng": 12.7770433
+  },
+  "vestone, italy": {
+    "lat": 45.7106124,
+    "lng": 10.4042112
+  },
+  "piacenza, italy": {
+    "lat": 44.8476352,
+    "lng": 9.6665313
+  },
+  "ragusa, italy": {
+    "lat": 36.9256833,
+    "lng": 14.7307456
+  },
+  "altamura, italy": {
+    "lat": 40.8543354,
+    "lng": 16.566605
+  },
+  "rome, italy": {
+    "lat": 41.8933203,
+    "lng": 12.4829321
+  },
+  "arezzo, italy": {
+    "lat": 43.5171442,
+    "lng": 11.7639282
+  },
+  "orsago, italy": {
+    "lat": 45.9308608,
+    "lng": 12.4235873
+  },
+  "castelfranco veneto, italy": {
+    "lat": 45.6712889,
+    "lng": 11.926151
+  },
+  "milan, italy": {
+    "lat": 45.4641943,
+    "lng": 9.1896346
+  },
+  "azzano decimo, italy": {
+    "lat": 45.8774201,
+    "lng": 12.7065784
+  },
+  "bologna, italy": {
+    "lat": 44.4938203,
+    "lng": 11.3426327
+  },
+  "padova, italy": {
+    "lat": 45.391408,
+    "lng": 11.8058487
+  },
+  "brescia, italy": {
+    "lat": 45.7795805,
+    "lng": 10.425873
+  },
+  "alba, italy": {
+    "lat": 44.7007236,
+    "lng": 8.0357786
+  },
+  "faenza, italy": {
+    "lat": 44.2855555,
+    "lng": 11.8832055
+  },
+  "leno, italy": {
+    "lat": 45.3670119,
+    "lng": 10.2184518
+  },
+  "tarzo, italy": {
+    "lat": 45.9735216,
+    "lng": 12.2316099
+  },
+  "merano, italy": {
+    "lat": 46.6713536,
+    "lng": 11.1646348
+  },
+  "brunico, italy": {
+    "lat": 46.7963194,
+    "lng": 11.9355121
+  },
+  "bressanone, italy": {
+    "lat": 46.716413,
+    "lng": 11.657792
+  },
+  "reggio emilia, italy": {
+    "lat": 44.6086674,
+    "lng": 10.5940667
+  },
+  "turin, italy": {
+    "lat": 45.0677551,
+    "lng": 7.6824892
+  },
+  "cividale del friuli, italy": {
+    "lat": 46.0936233,
+    "lng": 13.4303277
+  },
+  "copenhagen, denmark": {
+    "lat": 55.6867243,
+    "lng": 12.5700724
+  },
+  "randers, denmark": {
+    "lat": 56.4617545,
+    "lng": 10.0371476
+  },
+  "aarhus, denmark": {
+    "lat": 56.1496278,
+    "lng": 10.2134046
+  },
+  "middelfart, denmark": {
+    "lat": 55.4993014,
+    "lng": 9.7392181
+  },
+  "antwerp, belgium": {
+    "lat": 51.2211097,
+    "lng": 4.3997081
+  },
+  "brussels, belgium": {
+    "lat": 50.8467372,
+    "lng": 4.352493
+  },
+  "budapest, hungary": {
+    "lat": 47.4978789,
+    "lng": 19.0402383
+  },
+  "prague, czech republic": {
+    "lat": 50.0874654,
+    "lng": 14.4212535
+  },
+  "bratislava, slovakia": {
+    "lat": 48.1559178,
+    "lng": 17.1313541
+  },
+  "bucharest, romania": {
+    "lat": 44.4361414,
+    "lng": 26.102684
+  },
+  "ljubljana, slovenia": {
+    "lat": 46.0500268,
+    "lng": 14.5069289
+  },
+  "tirana, albania": {
+    "lat": 41.3281482,
+    "lng": 19.8184435
+  },
+  "reykjavik, iceland": {
+    "lat": 64.145981,
+    "lng": -21.9422367
+  }
+}

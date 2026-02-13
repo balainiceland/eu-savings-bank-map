@@ -1,0 +1,315 @@
+name,country,country_code,city,address,latitude,longitude,parent_group,website,founded_year,total_assets_millions_eur,customer_count_thousands,deposit_volume_millions_eur,loan_volume_millions_eur,employee_count,branch_count,reporting_year,mobile_banking,mobile_banking_evidence,open_banking,open_banking_evidence,digital_onboarding,digital_onboarding_evidence,ai_chatbot,ai_chatbot_evidence,devops_cloud,devops_cloud_evidence,featured
+Bjursås Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.bjursassparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Dalslands Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.dalsbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Ekeby Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.ekebysparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Falkenbergs Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.falkenbergssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Fryksdalens Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.fryksdalenssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Hälsinglands Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.halsinglandssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Häradssparbanken Mönsterås,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.haradssparbanken.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Högsby Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.hogsbysparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Ivetofta Sparbank i Bromölla,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.ivetoftasparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Kinda Ydre Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.kindaydresparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Laholms Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.laholmssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Lekebergs Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.lekebergssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Leksands Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.leksandssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Lönneberga-Tuna-Vena Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.ltvsparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Markaryds Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.markarydssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Mjöbäcks Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.mjobackssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Norrbärke Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.norrbarke-sparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Orusts Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.orustsparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Roslagens Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.roslagenssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sala Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.salasparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sidensjö Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sidensjosparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Skurups Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.skurupssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Snapphanebygdens Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.snapphanebygdenssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Bergslagen,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenbergslagen.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Boken,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenboken.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Alingsås,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenalingsas.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Eken,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankeneken.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Gotland,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankengotland.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Göinge,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankengoinge.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken i Enköping,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenenkoping.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken i Karlshamn,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenikarlshamn.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Lidköping,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenlidkoping.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Nord,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankennord.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Skaraborg,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenskaraborg.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Skåne,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenskane.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Spira,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.tjustbanken.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Tranemo,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankentranemo.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Tanum,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankentanum.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Sjuhärad,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://sparbankensjuharad.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparbanken Mälardalen,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sparbankenmalardalen.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sörmlands Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sormlandssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Södra Hestra Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.sodrahestrasparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sölvesborg-Mjällby Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.smsparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Tidaholms Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.tidaholms-sparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Tjörns Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.tjorns-sparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Ulricehamns Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.ulricehamnssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Valdemarsviks Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.valdemarsvikssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Vadstena Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.vadstenasparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Westra Wermlands Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.wwsparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Varbergs Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.varbergssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Vimmerby Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.vimmerbysparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Virserums Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.virserumssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Ålems Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.alemssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Åse Viste Sparbank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.aseochvisteharadssparbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Ölands Bank,Sweden,SE,,,0,0,Sparbankernas Riksförbund,https://www.olandsbank.se,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Aachen,Germany,DE,Aachen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Ostalb,Germany,DE,Aalen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Westmünsterland,Germany,DE,Ahaus,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Altbayern,Germany,DE,Aichach,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Altenburger Land,Germany,DE,Altenburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Amberg-Sulzbach,Germany,DE,Amberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Erzgebirgssparkasse,Germany,DE,Annaberg-Buchholz,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Ansbach,Germany,DE,Ansbach,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Aschaffenburg Miltenberg,Germany,DE,Aschaffenburg/Miltenberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Attendorn-Lennestadt-Kirchhundem,Germany,DE,Attendorn,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadtsparkasse Augsburg,Germany,DE,Augsburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Aurich-Norden,Germany,DE,Aurich/Norden,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Rhein-Haardt,Germany,DE,Bad Dürkheim,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bad Hersfeld-Rotenburg,Germany,DE,Bad Hersfeld,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Taunus Sparkasse,Germany,DE,Bad Homburg vor der Höhe,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bad Kissingen,Germany,DE,Bad Kissingen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Rhein-Nahe,Germany,DE,Bad Kreuznach,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Westerwald-Sieg,Germany,DE,Bad Marienberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Ahrweiler,Germany,DE,Bad Neuenahr-Ahrweiler,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bad Neustadt a. d. Saale,Germany,DE,Bad Neustadt an der Saale,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bad Oeynhausen - Porta Westfalica,Germany,DE,Bad Oeynhausen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Holstein,Germany,DE,Bad Oldesloe,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadtsparkasse Bad Pyrmont,Germany,DE,Bad Pyrmont,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Berchtesgadener Land,Germany,DE,Bad Reichenhall,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bad Tölz-Wolfratshausen,Germany,DE,Bad Tölz,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Baden-Baden Gaggenau,Germany,DE,Baden-Baden,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Ostsächsische Sparkasse Dresden,Germany,DE,Dresden,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Dortmund,Germany,DE,Dortmund,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Duisburg,Germany,DE,Duisburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadtsparkasse Düsseldorf,Germany,DE,Düsseldorf,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Düsseldorf,Germany,DE,Düsseldorf,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Oder-Spree,Germany,DE,Frankfurt (Oder),,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Mittelsachsen,Germany,DE,Freiberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Freiburg-Nördlicher Breisgau,Germany,DE,Freiburg im Breisgau,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Freising Moosburg,Germany,DE,Freising,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Freudenstadt,Germany,DE,Freudenstadt,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Oberhessen,Germany,DE,Friedberg (Hessen),,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Fulda,Germany,DE,Fulda,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Fürth,Germany,DE,Fürth,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Gelsenkirchen,Germany,DE,Gelsenkirchen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse an Ennepe und Ruhr,Germany,DE,Gevelsberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Kaiserslautern,Germany,DE,Kaiserslautern,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Karlsruhe,Germany,DE,Karlsruhe,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kasseler Sparkasse,Germany,DE,Kassel,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Förde Sparkasse,Germany,DE,Kiel,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Köln,Germany,DE,Köln,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse KölnBonn,Germany,DE,Köln,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Krefeld,Germany,DE,Krefeld,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Leverkusen,Germany,DE,Leverkusen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Limburg,Germany,DE,Limburg an der Lahn,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Lörrach-Rheinfelden,Germany,DE,Lörrach,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Ludwigsburg,Germany,DE,Ludwigsburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Lüneburg,Germany,DE,Lüneburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Magdeburg,Germany,DE,Magdeburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Rheinhessen Sparkasse,Germany,DE,Mainz,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Rhein Neckar Nord,Germany,DE,Mannheim,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Marburg-Biedenkopf,Germany,DE,Marburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Passau,Germany,DE,Passau,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Pforzheim Calw,Germany,DE,Pforzheim,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Uckermark,Germany,DE,Prenzlau,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Mittelbrandenburgische Sparkasse in Potsdam,Germany,DE,Potsdam,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Saarbrücken,Germany,DE,Saarbrücken,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Saarlouis,Germany,DE,Saarlouis,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadtsparkasse Schwedt,Germany,DE,Schwedt/Oder,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Schweinfurt-Haßberge,Germany,DE,Schweinfurt,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Mecklenburg-Schwerin,Germany,DE,Schwerin,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Siegen,Germany,DE,Siegen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Hohenzollerische Landesbank Kreissparkasse Sigmaringen,Germany,DE,Sigmaringen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Hegau-Bodensee,Germany,DE,Singen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadt-Sparkasse Solingen,Germany,DE,Solingen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Sonneberg,Germany,DE,Sonneberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Stade,Germany,DE,Stade,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Niederbayern-Mitte,Germany,DE,Straubing,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Märkisch-Oderland,Germany,DE,Strausberg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Diepholz,Germany,DE,Syke,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Traunstein-Trostberg,Germany,DE,Traunstein,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Trier,Germany,DE,Trier,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Tübingen,Germany,DE,Tübingen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Ulm,Germany,DE,Ulm,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Hilden-Ratingen-Velbert,Germany,DE,Velbert,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Verden,Germany,DE,Verden (Aller),,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Schwarzwald-Baar,Germany,DE,Villingen-Schwenningen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Kreissparkasse Waiblingen,Germany,DE,Waiblingen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Hochrhein,Germany,DE,Waldshut-Tiengen,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Müritz-Sparkasse,Germany,DE,Waren (Müritz),,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Oberpfalz Nord,Germany,DE,Weiden in der Oberpfalz,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Nassauische Sparkasse,Germany,DE,Wiesbaden,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Mecklenburg-Nordwest,Germany,DE,Wismar,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadtsparkasse Wuppertal,Germany,DE,Wuppertal,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Mainfranken Würzburg,Germany,DE,Würzburg,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Burgenlandkreis,Germany,DE,Zeitz,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Rotenburg Osterholz,Germany,DE,Zeven,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Oberlausitz-Niederschlesien,Germany,DE,Zittau,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Zwickau,Germany,DE,Zwickau,,0,0,Sparkassen-Finanzgruppe,,,,,,,,,,none,,none,,none,,none,,none,,false
+Caixa Ontinyent,Spain,ES,Ontinyent,,0,0,CECA,https://www.caixaontinyent.es,,,,,,,,,none,,none,,none,,none,,none,,false
+Caixa Pollença (Colonya),Spain,ES,Pollença,,0,0,CECA,https://www.colonya.es,,,,,,,,,none,,none,,none,,none,,none,,false
+Cecabank,Spain,ES,Madrid,,0,0,CECA,https://www.cecabank.es,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 BV,Norway,NO,Tonsberg,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/bv,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Ringerike Hadeland,Norway,NO,Honefoss,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/ringerike-hadeland,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Hallingdal Valdres,Norway,NO,Gol,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/hallingdal-valdres,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Modum,Norway,NO,Vikersund,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/modum,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Sorost-Norge,Norway,NO,Arendal,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/sorost-norge,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Telemark,Norway,NO,Skien,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/telemark,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Nordmore,Norway,NO,Kristiansund,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/nordmore,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Helgeland,Norway,NO,Mo i Rana,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/helgeland,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Lom og Skjak,Norway,NO,Lom,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/lom-og-skjaak,,,,,,,,,none,,none,,none,,none,,none,,false
+SpareBank 1 Gudbrandsdal,Norway,NO,Lillehammer,,0,0,SpareBank 1 Alliance,https://www.sparebank1.no/gudbrandsdal,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparebanken Din,Norway,NO,Notodden,,0,0,Eika Gruppen,https://www.sparebankendin.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Aurskog Sparebank,Norway,NO,Aurskog,,0,0,Eika Gruppen,https://www.aurskog-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Bien Sparebank,Norway,NO,Drammen,,0,0,Eika Gruppen,https://www.bien.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Cultura Sparebank,Norway,NO,Oslo,,0,0,Eika Gruppen,https://www.markup.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Drangedal Sparebank,Norway,NO,Drangedal,,0,0,Eika Gruppen,https://www.drangedalsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Eidsberg Sparebank,Norway,NO,Mysen,,0,0,Eika Gruppen,https://www.eidsbergsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Etne Sparebank,Norway,NO,Etne,,0,0,Eika Gruppen,https://www.etnesparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Flekkefjord Sparebank,Norway,NO,Flekkefjord,,0,0,Eika Gruppen,https://www.flekkefjordsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Grue Sparebank,Norway,NO,Kirkenær,,0,0,Eika Gruppen,https://www.gruesparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Haltdalen Sparebank,Norway,NO,Haltdalen,,0,0,Eika Gruppen,https://www.haltdalensparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Hjartdal og Gransherad Sparebank,Norway,NO,Hjartdal,,0,0,Eika Gruppen,https://www.hjartdalsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Indre Sogn Sparebank,Norway,NO,Laerdal,,0,0,Eika Gruppen,https://www.issb.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Jaeren Sparebank,Norway,NO,Bryne,,0,0,Eika Gruppen,https://www.jaerensparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Kvinesdal Sparebank,Norway,NO,Kvinesdal,,0,0,Eika Gruppen,https://www.kvinesdalsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Lillesands Sparebank,Norway,NO,Lillesand,,0,0,Eika Gruppen,https://www.lillesandssparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Luster Sparebank,Norway,NO,Gaupne,,0,0,Eika Gruppen,https://www.lustersparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Marker Sparebank,Norway,NO,Orje,,0,0,Eika Gruppen,https://www.markersparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Melhus Sparebank,Norway,NO,Melhus,,0,0,Eika Gruppen,https://www.melhussparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Odal Sparebank,Norway,NO,Sand,,0,0,Eika Gruppen,https://www.odalsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Ofoten Sparebank,Norway,NO,Narvik,,0,0,Eika Gruppen,https://www.ofotensparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Orkla Sparebank,Norway,NO,Orkanger,,0,0,Eika Gruppen,https://www.orklasparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Romsdals Budstikke Sparebank,Norway,NO,Molde,,0,0,Eika Gruppen,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sandnes Sparebank,Norway,NO,Sandnes,,0,0,Eika Gruppen,https://www.sandnes-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Selbu Sparebank,Norway,NO,Selbu,,0,0,Eika Gruppen,https://www.selbusparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Skagerrak Sparebank,Norway,NO,Kragero,,0,0,Eika Gruppen,https://www.skagerraksparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Skudenes og Aakra Sparebank,Norway,NO,Skudeneshavn,,0,0,Eika Gruppen,https://www.sassparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparebanken Narvik,Norway,NO,Narvik,,0,0,Eika Gruppen,https://www.sbnarvik.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Stadsbygd Sparebank,Norway,NO,Stadsbygd,,0,0,Eika Gruppen,https://www.stadsbygdsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Sunndal Sparebank,Norway,NO,Sunndalsora,,0,0,Eika Gruppen,https://www.sunndal-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Tolga-Os Sparebank,Norway,NO,Tolga,,0,0,Eika Gruppen,https://www.tolga-os.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Totens Sparebank,Norway,NO,Lena,,0,0,Eika Gruppen,https://www.totenssparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Trøgstad Sparebank,Norway,NO,Mysen,,0,0,Eika Gruppen,https://www.trogstadsparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Tysnes Sparebank,Norway,NO,Tysnes,,0,0,Eika Gruppen,https://www.tysnes-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Valle Sparebank,Norway,NO,Valle,,0,0,Eika Gruppen,https://www.vallesparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Voss Sparebank,Norway,NO,Voss,,0,0,Eika Gruppen,https://www.vfrb.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Helgeland Sparebank,Norway,NO,Mosjoen,,0,0,,https://www.helgeland-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparebanken Sogn og Fjordane,Norway,NO,Forde,,0,0,,https://www.ssf.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparebanken More,Norway,NO,Aalesund,,0,0,,https://www.sbmore.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Fana Sparebank,Norway,NO,Bergen,,0,0,,https://www.fana-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Haugesund Sparebank,Norway,NO,Haugesund,,0,0,,https://www.haugesund-sparebank.no,,,,,,,,,none,,none,,none,,none,,none,,false
+Karntner Sparkasse,Austria,AT,Klagenfurt,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/kaernten,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse der Stadt Amstetten,Austria,AT,Amstetten,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/amstetten,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Baden,Austria,AT,Baden,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/baden,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Hainburg-Bruck-Neusiedl,Austria,AT,Hainburg an der Donau,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/hainburg,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Horn-Ravelsbach-Kirchberg,Austria,AT,Horn,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/horn,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Korneuburg,Austria,AT,Korneuburg,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/korneuburg,,,,,,,,,none,,none,,none,,none,,none,,false
+Kremser Bank und Sparkassen,Austria,AT,Krems an der Donau,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/kremsersparkasse,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Neunkirchen,Austria,AT,Neunkirchen,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/neunkirchen,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Niederosterreich Mitte West,Austria,AT,Sankt Polten,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/noe-mitte-west,,,,,,,,,none,,none,,none,,none,,none,,false
+Waldviertler Sparkasse von 1842,Austria,AT,Waidhofen an der Thaya,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/waldviertler,,,,,,,,,none,,none,,none,,none,,none,,false
+Wiener Neustadter Sparkasse,Austria,AT,Wiener Neustadt,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/wiener-neustaedter,,,,,,,,,none,,none,,none,,none,,none,,false
+Allgemeine Sparkasse Oberosterreich,Austria,AT,Linz,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/oberoesterreich,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Salzkammergut,Austria,AT,Bad Ischl,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/salzkammergut,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Eferding-Peuerbach-Waizenkirchen,Austria,AT,Eferding,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/eferding,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Kremstal-Pyhrn,Austria,AT,Kirchdorf an der Krems,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/kremstal-pyhrn,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Muhlviertel-West,Austria,AT,Rohrbach,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/muehlviertel-west,,,,,,,,,none,,none,,none,,none,,none,,false
+Salzburger Sparkasse,Austria,AT,Salzburg,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/salzburg,,,,,,,,,none,,none,,none,,none,,none,,false
+Steiermarkische Sparkasse,Austria,AT,Graz,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/steiermaerkische,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Hartberg-Vorau,Austria,AT,Hartberg,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/hartberg-vorau,,,,,,,,,none,,none,,none,,none,,none,,false
+Tiroler Sparkasse,Austria,AT,Innsbruck,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/tirol,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Imst,Austria,AT,Imst,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/imst,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse der Stadt Kitzbuhel,Austria,AT,Kitzbuhel,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/kitzbuehel,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Kufstein,Austria,AT,Kufstein,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/kufstein,,,,,,,,,none,,none,,none,,none,,none,,false
+Lienzer Sparkasse,Austria,AT,Lienz,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/lienz,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Schwaz,Austria,AT,Schwaz,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/schwaz,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Reutte,Austria,AT,Reutte,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/reutte,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bludenz,Austria,AT,Bludenz,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/bludenz,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse Bregenz,Austria,AT,Bregenz,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/bregenz,,,,,,,,,none,,none,,none,,none,,none,,false
+Dornbirner Sparkasse,Austria,AT,Dornbirn,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/dornbirn,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse der Stadt Feldkirch,Austria,AT,Feldkirch,,0,0,Erste Group / Sparkassen,https://www.sparkasse.at/feldkirch,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Ile-de-France,France,FR,Paris,,0,0,BPCE,https://www.caisse-epargne.fr/ile-de-france/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Loire Drome Ardeche,France,FR,Saint-Etienne,,0,0,BPCE,https://www.caisse-epargne.fr/loire-drome-ardeche/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Rhone Alpes,France,FR,Lyon,,0,0,BPCE,https://www.caisse-epargne.fr/rhone-alpes/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Cote d'Azur,France,FR,Nice,,0,0,BPCE,https://www.caisse-epargne.fr/cote-d-azur/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Aquitaine Poitou-Charentes,France,FR,Bordeaux,,0,0,BPCE,https://www.caisse-epargne.fr/aquitaine-poitou-charentes/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Grand Est Europe,France,FR,Strasbourg,,0,0,BPCE,https://www.caisse-epargne.fr/grand-est-europe/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Hauts de France,France,FR,Lille,,0,0,BPCE,https://www.caisse-epargne.fr/hauts-de-france/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Normandie,France,FR,Rouen,,0,0,BPCE,https://www.caisse-epargne.fr/normandie/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Midi-Pyrenees,France,FR,Toulouse,,0,0,BPCE,https://www.caisse-epargne.fr/midi-pyrenees/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne CEPAC,France,FR,Marseille,,0,0,BPCE,https://www.caisse-epargne.fr/cepac/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Languedoc Roussillon,France,FR,Montpellier,,0,0,BPCE,https://www.caisse-epargne.fr/languedoc-roussillon/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Bretagne Pays de Loire,France,FR,Rennes,,0,0,BPCE,https://www.caisse-epargne.fr/bretagne-pays-de-loire/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Bourgogne Franche-Comte,France,FR,Dijon,,0,0,BPCE,https://www.caisse-epargne.fr/bourgogne-franche-comte/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Auvergne et Limousin,France,FR,Clermont-Ferrand,,0,0,BPCE,https://www.caisse-epargne.fr/auvergne-limousin/,,,,,,,,,none,,none,,none,,none,,none,,false
+Caisse d'Epargne Loire Centre,France,FR,Orleans,,0,0,BPCE,https://www.caisse-epargne.fr/loire-centre/,,,,,,,,,none,,none,,none,,none,,none,,false
+Aito Saastopankki,Finland,FI,Tampere,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/aito-saastopankki,,,,,,,,,none,,none,,none,,none,,none,,false
+Avain Saastopankki,Finland,FI,Kauhava,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/avain-saastopankki,,,,,,,,,none,,none,,none,,none,,none,,false
+Helmi Saastopankki,Finland,FI,Lahti,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/helmi-saastopankki,,,,,,,,,none,,none,,none,,none,,none,,false
+Lammin Saastopankki,Finland,FI,Hameenlinna,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lammin-saastopankki,,,,,,,,,none,,none,,none,,none,,none,,false
+Lansi-Uudenmaan Saastopankki,Finland,FI,Lohja,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/lansi-uudenmaan-saastopankki,,,,,,,,,none,,none,,none,,none,,none,,false
+Myrskyla Saastopankki,Finland,FI,Myrskyla,,0,0,Savings Banks Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Nooa Saastopankki,Finland,FI,Helsinki,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/nooa-saastopankki,,,,,,,,,none,,none,,none,,none,,none,,false
+Someron Saastopankki,Finland,FI,Somero,,0,0,Savings Banks Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Saastopankki Optia,Finland,FI,Iisalmi,,0,0,Savings Banks Group,https://www.saastopankki.fi/fi-fi/pankit-ja-konttorit/saastopankki-optia,,,,,,,,,none,,none,,none,,none,,none,,false
+Saastopankki Sinetti,Finland,FI,Orivesi,,0,0,Savings Banks Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparkasse - Cassa di Risparmio di Bolzano,Italy,IT,Bolzano,,0,0,,https://www.sparkasse.it,,,,,,,,,none,,none,,none,,none,,none,,false
+La Cassa di Ravenna,Italy,IT,Ravenna,,0,0,,https://www.lacassa.com,,,,,,,,,none,,none,,none,,none,,none,,false
+Cassa di Risparmio di Volterra,Italy,IT,Volterra,,0,0,,https://www.cfrv.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Cassa di Risparmio di Cento,Italy,IT,Cento,,0,0,,https://www.cfrcentro.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Cassa di Risparmio di Fermo,Italy,IT,Fermo,,0,0,,https://www.carifermo.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Cassa di Risparmio di Fossano,Italy,IT,Fossano,,0,0,,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Cassa di Risparmio di Savigliano,Italy,IT,Savigliano,,0,0,,https://www.bancacrs.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Cassa di Risparmio di Orvieto,Italy,IT,Orvieto,,0,0,,https://www.crorvieto.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banco di Sardegna,Italy,IT,Sassari,,0,0,BPER Banca,https://www.bancosardegna.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Popolare Pugliese,Italy,IT,Matino,,0,0,,https://www.bfrfrancese.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Popolare di Lajatico,Italy,IT,Lajatico,,0,0,,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Popolare di Cortona,Italy,IT,Cortona,,0,0,,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Popolare del Frusinate,Italy,IT,Frosinone,,0,0,,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca di Credito Popolare,Italy,IT,Torre del Greco,,0,0,,https://www.bfrp.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Popolare del Lazio,Italy,IT,Velletri,,0,0,,https://www.bfrfrancese.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Valsabbina,Italy,IT,Vestone,,0,0,,https://www.bfrfrancese.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca di Piacenza,Italy,IT,Piacenza,,0,0,,https://www.bancadipiacenza.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Agricola Popolare di Ragusa,Italy,IT,Ragusa,,0,0,,https://www.bafrr.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Popolare di Puglia e Basilicata,Italy,IT,Altamura,,0,0,,https://www.bfrs.it,,,,,,,,,none,,none,,none,,none,,none,,false
+BCC di Roma,Italy,IT,Rome,,0,0,BCC Iccrea Group,https://www.bfrfrancese.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Centro Credito Cooperativo Toscana-Umbria,Italy,IT,Arezzo,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca della Marca,Italy,IT,Orsago,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca delle Terre Venete,Italy,IT,Castelfranco Veneto,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+BCC Milano,Italy,IT,Milan,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+BCC Pordenonese e Monsile,Italy,IT,Azzano Decimo,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Emil Banca Credito Cooperativo,Italy,IT,Bologna,,0,0,BCC Iccrea Group,https://www.emilbanca.it,,,,,,,,,none,,none,,none,,none,,none,,false
+BCC Veneta,Italy,IT,Padova,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca del Territorio Lombardo,Italy,IT,Brescia,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca d'Alba,Italy,IT,Alba,,0,0,BCC Iccrea Group,https://www.bancadalba.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Credito Cooperativo Ravennate Forlivese e Imolese,Italy,IT,Faenza,,0,0,BCC Iccrea Group,,,,,,,,,,none,,none,,none,,none,,none,,false
+Cassa Padana BCC,Italy,IT,Leno,,0,0,Cassa Centrale Banca,,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca Prealpi SanBiagio,Italy,IT,Tarzo,,0,0,Cassa Centrale Banca,,,,,,,,,,none,,none,,none,,none,,none,,false
+Raiffeisen Landesbank Sudtirol,Italy,IT,Bolzano,,0,0,Raiffeisen Sudtirol,https://www.raiffeisen.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Raiffeisenkasse Meran,Italy,IT,Merano,,0,0,Raiffeisen Sudtirol,,,,,,,,,,none,,none,,none,,none,,none,,false
+Raiffeisenkasse Bruneck,Italy,IT,Brunico,,0,0,Raiffeisen Sudtirol,,,,,,,,,,none,,none,,none,,none,,none,,false
+Raiffeisenkasse Eisacktal,Italy,IT,Bressanone,,0,0,Raiffeisen Sudtirol,,,,,,,,,,none,,none,,none,,none,,none,,false
+Credito Emiliano (CREDEM),Italy,IT,Reggio Emilia,,0,0,,https://www.credem.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca del Piemonte,Italy,IT,Turin,,0,0,,https://www.bfrfrancese.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Banca di Cividale,Italy,IT,Cividale del Friuli,,0,0,,https://www.civibank.it,,,,,,,,,none,,none,,none,,none,,none,,false
+Arbejdernes Landsbank,Denmark,DK,Copenhagen,,0,0,,https://www.al-bank.dk,,,,,,,,,none,,none,,none,,none,,none,,false
+Sparekassen Kronjylland,Denmark,DK,Randers,,0,0,,https://www.sparekassenkronjylland.dk,,,,,,,,,none,,none,,none,,none,,none,,false
+Danske Andelskassers Bank,Denmark,DK,Aarhus,,0,0,,https://www.dab.dk,,,,,,,,,none,,none,,none,,none,,none,,false
+Middelfart Sparekasse,Denmark,DK,Middelfart,,0,0,,https://www.middelfart-sparekasse.dk,,,,,,,,,none,,none,,none,,none,,none,,false
+Argenta,Belgium,BE,Antwerp,,0,0,,https://www.argenta.be,,,,,,,,,none,,none,,none,,none,,none,,false
+Crelan,Belgium,BE,Brussels,,0,0,,https://www.crelan.be,,,,,,,,,none,,none,,none,,none,,none,,false
+MagNet Bank,Hungary,HU,Budapest,,0,0,,https://www.magnetbank.hu,,,,,,,,,none,,none,,none,,none,,none,,false
+MONETA Money Bank,Czech Republic,CZ,Prague,,0,0,,https://www.moneta.cz,,,,,,,,,none,,none,,none,,none,,none,,false
+Fio banka,Czech Republic,CZ,Prague,,0,0,,https://www.fio.cz,,,,,,,,,none,,none,,none,,none,,none,,false
+Prima banka Slovensko,Slovakia,SK,Bratislava,,0,0,,https://www.primabanka.sk,,,,,,,,,none,,none,,none,,none,,none,,false
+BCR (Banca Comerciala Romana),Romania,RO,Bucharest,,0,0,Erste Group,https://www.bcr.ro,,,,,,,,,none,,none,,none,,none,,none,,false
+BRD - Groupe Societe Generale,Romania,RO,Bucharest,,0,0,Societe Generale,https://www.brd.ro,,,,,,,,,none,,none,,none,,none,,none,,false
+Raiffeisen Bank Romania,Romania,RO,Bucharest,,0,0,Raiffeisen Bank International,https://www.raiffeisen.ro,,,,,,,,,none,,none,,none,,none,,none,,false
+Delavska hranilnica,Slovenia,SI,Ljubljana,,0,0,,https://www.defrfrancesea.si,,,,,,,,,none,,none,,none,,none,,none,,false
+Raiffeisen Bank Albania,Albania,AL,Tirana,,0,0,Raiffeisen Bank International,https://www.raiffeisen.al,,,,,,,,,none,,none,,none,,none,,none,,false
+Islandsbanki,Iceland,IS,Reykjavik,,0,0,,https://www.islandsbanki.is,,,,,,,,,none,,none,,none,,none,,none,,false
+Landsbankinn,Iceland,IS,Reykjavik,,0,0,,https://www.landsbankinn.is,,,,,,,,,none,,none,,none,,none,,none,,false
+Arion banki,Iceland,IS,Reykjavik,,0,0,,https://www.arionbanki.is,,,,,,,,,none,,none,,none,,none,,none,,false
