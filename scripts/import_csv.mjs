@@ -630,11 +630,6 @@ function generateUpsertSQL(banks) {
     lines.push(`  RETURNING id`);
     lines.push(`)`);
 
-    // Chain DELETE + INSERT in one statement using CTEs so 'b' stays in scope
-    lines.push(`, d AS (`);
-    lines.push(`  DELETE FROM digital_features WHERE bank_id = (SELECT id FROM b)`);
-    lines.push(`)`);
-
     const featureLines = CATEGORIES.map((cat, ci) => {
       const level = bank.levels[ci];
       const present = level !== 'none';
@@ -651,7 +646,10 @@ function generateUpsertSQL(banks) {
 
     lines.push(`INSERT INTO digital_features (bank_id, category, present, maturity_level, evidence_url) VALUES`);
     lines.push(featureLines.join(',\n'));
-    lines.push(`;`);
+    lines.push(`ON CONFLICT (bank_id, category) DO UPDATE SET`);
+    lines.push(`  present = EXCLUDED.present,`);
+    lines.push(`  maturity_level = EXCLUDED.maturity_level,`);
+    lines.push(`  evidence_url = EXCLUDED.evidence_url;`);
     lines.push('');
   }
 
