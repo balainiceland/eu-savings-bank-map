@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { Bank, FilterState, DigitalFeature, DigitalCategory, MaturityLevel } from '../types';
+import { DIGITAL_CATEGORY_LABELS } from '../types';
 import { sampleBanks } from '../data/sampleBanks';
 import { fetchPublishedBanks, type BankFromDB, type DigitalFeatureFromDB, isSupabaseConfigured } from '../lib/supabase';
 
@@ -23,6 +24,9 @@ interface StoreState {
   isRankingsPanelOpen: boolean;
   isComparePanelOpen: boolean;
   isBenchmarksPanelOpen: boolean;
+  isHeatmapEnabled: boolean;
+  isScatterPanelOpen: boolean;
+  isDistributionPanelOpen: boolean;
   compareBanks: Bank[];
 
   // Actions
@@ -35,6 +39,9 @@ interface StoreState {
   toggleRankingsPanel: () => void;
   toggleComparePanel: () => void;
   toggleBenchmarksPanel: () => void;
+  toggleHeatmap: () => void;
+  toggleScatterPanel: () => void;
+  toggleDistributionPanel: () => void;
   closeDetailPanel: () => void;
   addToCompare: (bank: Bank) => void;
   removeFromCompare: (bankId: string) => void;
@@ -128,6 +135,9 @@ export const useStore = create<StoreState>((set, get) => ({
   isRankingsPanelOpen: false,
   isComparePanelOpen: false,
   isBenchmarksPanelOpen: false,
+  isHeatmapEnabled: false,
+  isScatterPanelOpen: false,
+  isDistributionPanelOpen: false,
   compareBanks: [],
 
   loadBanks: async () => {
@@ -175,6 +185,9 @@ export const useStore = create<StoreState>((set, get) => ({
   toggleRankingsPanel: () => set({ isRankingsPanelOpen: !get().isRankingsPanelOpen }),
   toggleComparePanel: () => set({ isComparePanelOpen: !get().isComparePanelOpen }),
   toggleBenchmarksPanel: () => set({ isBenchmarksPanelOpen: !get().isBenchmarksPanelOpen }),
+  toggleHeatmap: () => set({ isHeatmapEnabled: !get().isHeatmapEnabled }),
+  toggleScatterPanel: () => set({ isScatterPanelOpen: !get().isScatterPanelOpen }),
+  toggleDistributionPanel: () => set({ isDistributionPanelOpen: !get().isDistributionPanelOpen }),
 
   closeDetailPanel: () => set({ isDetailPanelOpen: false, selectedBank: null }),
 
@@ -266,4 +279,32 @@ export const useBenchmarks = () => {
     totalBanks: banks.length,
     totalCountries: countryMap.size,
   };
+};
+
+export const useDistributionData = () => {
+  const banks = useStore(state => state.banks);
+
+  const scoreHistogram = Array.from({ length: 10 }, (_, i) => {
+    const min = i * 10;
+    const max = min + 10;
+    const count = banks.filter(b => b.digitalScore >= min && (i === 9 ? b.digitalScore <= max : b.digitalScore < max)).length;
+    return { bin: `${min}-${max}`, midpoint: min + 5, count };
+  });
+
+  const categories = Object.keys(DIGITAL_CATEGORY_LABELS) as DigitalCategory[];
+  const maturityDistribution = categories.map(cat => {
+    const label = DIGITAL_CATEGORY_LABELS[cat];
+    let none = 0, basic = 0, intermediate = 0, advanced = 0;
+    banks.forEach(bank => {
+      const feature = bank.digitalFeatures.find(f => f.category === cat);
+      const level: MaturityLevel = feature?.maturityLevel || 'none';
+      if (level === 'none') none++;
+      else if (level === 'basic') basic++;
+      else if (level === 'intermediate') intermediate++;
+      else if (level === 'advanced') advanced++;
+    });
+    return { category: label, none, basic, intermediate, advanced };
+  });
+
+  return { scoreHistogram, maturityDistribution };
 };

@@ -7,6 +7,8 @@ import BankDetail from './components/Bank/BankDetail';
 import RankingsPanel from './components/Rankings/RankingsPanel';
 import ComparePanel from './components/Compare/ComparePanel';
 import BenchmarksPanel from './components/Benchmarks/BenchmarksPanel';
+import ScatterPanel from './components/Scatter/ScatterPanel';
+import DistributionPanel from './components/Distribution/DistributionPanel';
 import AdminPage from './components/Admin/AdminPage';
 import { useStore } from './hooks/useStore';
 
@@ -38,6 +40,8 @@ function MapPage() {
         <RankingsPanel />
         <ComparePanel />
         <BenchmarksPanel />
+        <ScatterPanel />
+        <DistributionPanel />
       </main>
     </div>
   );

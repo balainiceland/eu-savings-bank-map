@@ -1,4 +1,4 @@
-import { BarChart3, GitCompareArrows, Trophy, Filter, Landmark } from 'lucide-react';
+import { BarChart3, BarChart2, GitCompareArrows, Trophy, Filter, Landmark, Globe, Crosshair } from 'lucide-react';
 import { useStore, useStatistics } from '../hooks/useStore';
 
 export default function Header() {
@@ -6,6 +6,10 @@ export default function Header() {
   const toggleRankingsPanel = useStore(state => state.toggleRankingsPanel);
   const toggleComparePanel = useStore(state => state.toggleComparePanel);
   const toggleBenchmarksPanel = useStore(state => state.toggleBenchmarksPanel);
+  const toggleHeatmap = useStore(state => state.toggleHeatmap);
+  const toggleScatterPanel = useStore(state => state.toggleScatterPanel);
+  const toggleDistributionPanel = useStore(state => state.toggleDistributionPanel);
+  const isHeatmapEnabled = useStore(state => state.isHeatmapEnabled);
   const compareBanks = useStore(state => state.compareBanks);
   const { totalBanks, totalCountries, averageScore, banksWithDeposits, totalDepositsTrillion } = useStatistics();
 
@@ -65,6 +69,27 @@ export default function Header() {
           aria-label="Toggle benchmarks"
         >
           <BarChart3 className="w-5 h-5" />
+        </button>
+        <button
+          onClick={toggleHeatmap}
+          className={`p-2 rounded-lg border-2 transition-colors ${isHeatmapEnabled ? 'bg-esb-royal border-black text-white' : 'border-transparent hover:bg-esb-mint hover:border-black'}`}
+          aria-label="Toggle heatmap"
+        >
+          <Globe className="w-5 h-5" />
+        </button>
+        <button
+          onClick={toggleScatterPanel}
+          className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors"
+          aria-label="Toggle scatter plots"
+        >
+          <Crosshair className="w-5 h-5" />
+        </button>
+        <button
+          onClick={toggleDistributionPanel}
+          className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors"
+          aria-label="Toggle distribution charts"
+        >
+          <BarChart2 className="w-5 h-5" />
         </button>
         <button
           onClick={toggleComparePanel}

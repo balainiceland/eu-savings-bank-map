@@ -54,12 +54,15 @@ export default function MapContainer() {
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletMapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<L.MarkerClusterGroup | null>(null);
+  const heatmapLayerRef = useRef<L.GeoJSON | null>(null);
 
   const filteredBanks = useStore(state => state.filteredBanks);
+  const banks = useStore(state => state.banks);
   const setSelectedBank = useStore(state => state.setSelectedBank);
   const isLoading = useStore(state => state.isLoading);
   const error = useStore(state => state.error);
   const dataSource = useStore(state => state.dataSource);
+  const isHeatmapEnabled = useStore(state => state.isHeatmapEnabled);
 
   // Initialize map
   useEffect(() => {
@@ -71,6 +74,10 @@ export default function MapContainer() {
       minZoom: 3,
       maxZoom: 18,
     });
+
+    // Custom pane for heatmap (below markers at z-index 400, above tiles at 200)
+    map.createPane('heatmapPane');
+    map.getPane('heatmapPane')!.style.zIndex = '350';
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -159,6 +166,36 @@ export default function MapContainer() {
         markersRef.current?.addLayer(marker);
       });
   }, [filteredBanks]);
+
+  // Heatmap layer
+  useEffect(() => {
+    const map = leafletMapRef.current;
+    if (!map) return;
+
+    // Remove existing layer
+    if (heatmapLayerRef.current) {
+      map.removeLayer(heatmapLayerRef.current);
+      heatmapLayerRef.current = null;
+    }
+
+    if (!isHeatmapEnabled) return;
+
+    // Lazy-load GeoJSON data
+    import('../../data/europeGeoJSON').then(({ default: geojson }) => {
+      // Guard: map or toggle state may have changed
+      if (!leafletMapRef.current || !useStore.getState().isHeatmapEnabled) return;
+
+      import('./CountryHeatmap').then(({ createHeatmapLayer }) => {
+        if (!leafletMapRef.current || !useStore.getState().isHeatmapEnabled) return;
+        heatmapLayerRef.current = createHeatmapLayer(
+          leafletMapRef.current,
+          geojson,
+          banks,
+          'heatmapPane'
+        );
+      });
+    });
+  }, [isHeatmapEnabled, banks]);
 
   // Listen for bank selection from popup
   useEffect(() => {
