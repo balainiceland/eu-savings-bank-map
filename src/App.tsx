@@ -10,6 +10,7 @@ import BenchmarksPanel from './components/Benchmarks/BenchmarksPanel';
 import ScatterPanel from './components/Scatter/ScatterPanel';
 import DistributionPanel from './components/Distribution/DistributionPanel';
 import AdminPage from './components/Admin/AdminPage';
+import LoginGate from './components/Auth/LoginGate';
 import { useStore } from './hooks/useStore';
 
 function MapPage() {
@@ -51,7 +52,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MapPage />} />
+        <Route path="/" element={<LoginGate><MapPage /></LoginGate>} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>

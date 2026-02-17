@@ -1,5 +1,6 @@
-import { BarChart3, BarChart2, GitCompareArrows, Trophy, Filter, Landmark, Globe, Crosshair } from 'lucide-react';
+import { BarChart3, BarChart2, GitCompareArrows, Trophy, Filter, Landmark, Globe, Crosshair, LogOut } from 'lucide-react';
 import { useStore, useStatistics } from '../hooks/useStore';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Header() {
   const toggleFilterPanel = useStore(state => state.toggleFilterPanel);
@@ -12,6 +13,7 @@ export default function Header() {
   const isHeatmapEnabled = useStore(state => state.isHeatmapEnabled);
   const compareBanks = useStore(state => state.compareBanks);
   const { totalBanks, totalCountries, averageScore, banksWithDeposits, totalDepositsTrillion } = useStatistics();
+  const { user, isAuthenticated, signOut } = useAuth();
 
   return (
     <header className="bg-white text-black px-4 py-3 flex items-center justify-between z-50 relative border-b-2 border-black">
@@ -103,6 +105,21 @@ export default function Header() {
             </span>
           )}
         </button>
+
+        {isAuthenticated && user && (
+          <>
+            <span className="text-xs text-gray-400 hidden lg:block max-w-[140px] truncate" title={user.email || ''}>
+              {user.email}
+            </span>
+            <button
+              onClick={signOut}
+              className="p-2 hover:bg-esb-mint rounded-lg border-2 border-transparent hover:border-black transition-colors"
+              aria-label="Sign out"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </>
+        )}
       </div>
     </header>
   );
