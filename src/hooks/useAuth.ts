@@ -10,6 +10,7 @@ interface AuthState {
 
   initialize: () => Promise<void>;
   sendMagicLink: (email: string) => Promise<{ success: boolean; error?: string }>;
+  signInWithProvider: (provider: 'google' | 'linkedin_oidc' | 'twitter') => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -73,6 +74,14 @@ export const useAuth = create<AuthState>((set) => ({
         error: error instanceof Error ? error.message : 'An error occurred',
       };
     }
+  },
+
+  signInWithProvider: async (provider: 'google' | 'linkedin_oidc' | 'twitter') => {
+    if (!isSupabaseConfigured() || !supabase) return;
+    await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: window.location.origin },
+    });
   },
 
   signOut: async () => {
