@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-lg font-semibold text-black mb-2">Contact</h2>
             <p>
               For questions or data removal requests, contact the site administrator
-              at <strong className="text-black">info@savingsbanks.eu</strong>.
+              at <strong className="text-black">bala@startupiceland.com</strong>.
             </p>
           </section>
         </div>
