@@ -11,6 +11,7 @@ import ScatterPanel from './components/Scatter/ScatterPanel';
 import DistributionPanel from './components/Distribution/DistributionPanel';
 import AdminPage from './components/Admin/AdminPage';
 import LoginGate from './components/Auth/LoginGate';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import { useStore } from './hooks/useStore';
 
 function MapPage() {
@@ -54,6 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginGate><MapPage /></LoginGate>} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
       </Routes>
     </BrowserRouter>
   );
