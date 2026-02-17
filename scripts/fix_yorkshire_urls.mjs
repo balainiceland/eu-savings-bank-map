@@ -4,11 +4,11 @@
  */
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://gmogahicbavkydshgmwe.supabase.co';
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
 
-if (!SUPABASE_KEY) {
-  console.error('Set SUPABASE_SERVICE_KEY env var (service_role key from Supabase dashboard > Settings > API)');
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+  console.error('Set SUPABASE_URL and SUPABASE_SERVICE_KEY env vars');
   process.exit(1);
 }
 

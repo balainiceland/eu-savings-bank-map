@@ -8,6 +8,11 @@ import { useStore } from '../../hooks/useStore';
 import { getScoreColor, getScoreTierLabel, formatAssets, formatCustomers } from '../../types';
 import type { Bank } from '../../types';
 
+function escapeHtml(str: string | undefined | null): string {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 declare module 'leaflet' {
   export function markerClusterGroup(options?: unknown): MarkerClusterGroup;
   export interface MarkerClusterGroup extends L.FeatureGroup {
@@ -126,11 +131,15 @@ export default function MapContainer() {
           icon: createMarkerIcon(bank.digitalScore, bank.featured),
         });
 
+        const safeId = escapeHtml(bank.id);
+        const safeName = escapeHtml(bank.name);
+        const safeCity = escapeHtml(bank.city);
+        const safeCountry = escapeHtml(bank.country);
         const popupContent = `
           <div style="width: 260px; padding: 16px; font-family: 'Space Grotesk', system-ui, sans-serif; box-sizing: border-box;">
-            <h3 style="margin: 0 0 4px 0; font-size: 14px; color: #000; font-weight: 800; word-wrap: break-word; line-height: 1.3;">${bank.name}</h3>
+            <h3 style="margin: 0 0 4px 0; font-size: 14px; color: #000; font-weight: 800; word-wrap: break-word; line-height: 1.3;">${safeName}</h3>
             <p style="margin: 0 0 12px 0; font-size: 12px; color: #666;">
-              ${bank.city ? bank.city + ', ' : ''}${bank.country}
+              ${safeCity ? safeCity + ', ' : ''}${safeCountry}
             </p>
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
               <div style="
@@ -150,7 +159,7 @@ export default function MapContainer() {
               <div><strong>Customers:</strong> ${formatCustomers(bank.customerCount)}</div>
             </div>
             <button
-              onclick="window.dispatchEvent(new CustomEvent('selectBank', { detail: '${bank.id}' }))"
+              onclick="window.dispatchEvent(new CustomEvent('selectBank', { detail: '${safeId}' }))"
               style="
                 width: 100%; padding: 8px;
                 background-color: #21e9c5; color: #000;

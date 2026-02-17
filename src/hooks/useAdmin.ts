@@ -89,11 +89,8 @@ export const useAdmin = create<AdminState>((set, get) => ({
     if (!supabase || !email) return false;
     try {
       const { data, error } = await supabase
-        .from('admin_users')
-        .select('email')
-        .eq('email', email.toLowerCase())
-        .single();
-      return !error && !!data;
+        .rpc('check_admin_status', { check_email: email });
+      return !error && data === true;
     } catch {
       return false;
     }
